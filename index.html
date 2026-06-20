@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POTATO English - Marketing Dashboard</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <div class="logo-icon">🥔</div>
+                <h2>POTATO<br><span>English</span></h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="active" id="nav-overview"><a href="#" onclick="switchTab('overview')"><i class="fas fa-home"></i> Tổng Quan Nội Dung</a></li>
+                <li id="nav-ads"><a href="#" onclick="switchTab('ads')"><i class="fas fa-chart-line"></i> Phân Tích Ads</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                <div class="header-title">
+                    <h1 id="page-title">Tổng Quan Nội Dung</h1>
+                    <p>Quản lý chiến dịch đa nền tảng theo thời gian thực</p>
+                </div>
+                <div class="header-action">
+                    <button class="btn-refresh" id="refresh-btn">
+                        <i class="fas fa-sync-alt"></i> Làm mới dữ liệu
+                    </button>
+                </div>
+            </header>
+
+            <!-- Loading Indicator -->
+            <div id="loader" class="loader-container hidden">
+                <div class="spinner"></div>
+                <p>Đang tải dữ liệu...</p>
+            </div>
+
+            <!-- TAB 1: OVERVIEW -->
+            <div id="overview-body" class="dashboard-body">
+                <!-- Scorecards -->
+                <section class="scorecards">
+                    <div class="card metric-card">
+                        <div class="metric-icon blue"><i class="fas fa-layer-group"></i></div>
+                        <div class="metric-info">
+                            <p>Tổng Bài Viết (Tháng)</p>
+                            <h3 id="metric-total">0</h3>
+                        </div>
+                    </div>
+                    <div class="card metric-card">
+                        <div class="metric-icon green"><i class="fas fa-check-circle"></i></div>
+                        <div class="metric-info">
+                            <p>Đã Đăng Thành Công</p>
+                            <h3 id="metric-published">0</h3>
+                        </div>
+                    </div>
+                    <div class="card metric-card">
+                        <div class="metric-icon orange"><i class="fas fa-hourglass-half"></i></div>
+                        <div class="metric-info">
+                            <p>Đang Chờ Duyệt</p>
+                            <h3 id="metric-pending">0</h3>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Charts Section -->
+                <section class="charts-section">
+                    <div class="card chart-card">
+                        <h3>Phân bổ Nền Tảng</h3>
+                        <div class="chart-wrapper">
+                            <canvas id="platformChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card chart-card chart-large">
+                        <h3>Phân bổ Tuyến Nội Dung</h3>
+                        <div class="chart-wrapper">
+                            <canvas id="pillarChart"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Table Section -->
+                <section class="table-section card">
+                    <div class="table-header">
+                        <h3>Lịch Trình Sắp Tới</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="upcoming-table">
+                            <thead>
+                                <tr>
+                                    <th>Ngày lên bài</th>
+                                    <th>Tiêu đề</th>
+                                    <th>Nền tảng</th>
+                                    <th>Tuyến nội dung</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <!-- TAB 2: ADS ANALYSIS -->
+            <div id="ads-body" class="dashboard-body hidden">
+                <section class="scorecards">
+                    <div class="card metric-card">
+                        <div class="metric-icon blue"><i class="fas fa-money-bill-wave"></i></div>
+                        <div class="metric-info">
+                            <p>Tổng Chi Tiêu (7 ngày)</p>
+                            <h3 id="ads-spend">0đ</h3>
+                        </div>
+                    </div>
+                    <div class="card metric-card">
+                        <div class="metric-icon green"><i class="fas fa-user-plus"></i></div>
+                        <div class="metric-info">
+                            <p>Khách hàng tiềm năng (Leads)</p>
+                            <h3 id="ads-leads">0</h3>
+                        </div>
+                    </div>
+                    <div class="card metric-card">
+                        <div class="metric-icon orange"><i class="fas fa-bullseye"></i></div>
+                        <div class="metric-info">
+                            <p>Chi phí / Lead (CPL)</p>
+                            <h3 id="ads-cpl">0đ</h3>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="table-section card">
+                    <div class="table-header">
+                        <h3>Hiệu Quả Từng Chiến Dịch</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="ads-table">
+                            <thead>
+                                <tr>
+                                    <th>Tên Chiến Dịch</th>
+                                    <th>Chi Tiêu</th>
+                                    <th>Lượt Hiển Thị</th>
+                                    <th>Clicks</th>
+                                    <th>Leads</th>
+                                    <th>Chi phí / Lead</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+[
+    {
+        "campaign": "POTATO_He_2026_ThuDauMot",
+        "spend": 1500000,
+        "impressions": 45000,
+        "clicks": 1200,
+        "cpc": 1250,
+        "leads": 45
+    },
+    {
+        "campaign": "POTATO_Retargeting_TestFree",
+        "spend": 500000,
+        "impressions": 12000,
+        "clicks": 350,
+        "cpc": 1428,
+        "leads": 20
+    }
+]
