@@ -301,38 +301,7 @@
                 <i class="fa-solid fa-sliders text-base w-5 text-center text-emerald-600"></i>
                 <span class="sidebar-label font-bold">Cài đặt</span>
               </div>
-              <i class="menu-chevron fa-solid fa-chevron-right text-[10px] text-slate-400 transition-transform"></i>
             </button>
-            <div id="submenu-about" class="sidebar-submenu hidden pl-9 pr-2 py-1 space-y-0.5">
-              <button type="button" id="subnav-about-general" onclick="switchSettingSubPage('general', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
-                <span>Giới thiệu chung</span>
-              </button>
-              <button type="button" id="subnav-about-contact" onclick="switchSettingSubPage('contact', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
-                <span>Thông tin liên hệ</span>
-              </button>
-              <button type="button" id="subnav-about-voice" onclick="switchSettingSubPage('voice', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
-                <span>Tone of voice</span>
-              </button>
-              <button type="button" id="subnav-about-courses" onclick="switchSettingSubPage('courses', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                <span>Chương trình học</span>
-              </button>
-              <button type="button" id="subnav-about-visual" onclick="switchSettingSubPage('visual', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-indigo-600"></span>
-                <span>Nhận diện thị giác</span>
-              </button>
-              <button type="button" id="subnav-about-specs" onclick="switchSettingSubPage('specs', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
-                <span>Quy chuẩn nội dung</span>
-              </button>
-              <button type="button" id="subnav-about-sheet" onclick="openSheetSettingsSubPage(this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2 border-t border-slate-100 mt-1 pt-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
-                <span>Cấu hình Sheet</span>
-              </button>
-            </div>
           </div>
 
         </nav>
@@ -510,11 +479,7 @@
                 <span class="flex-1">Quy chuẩn nội dung</span>
               </button>
 
-              <!-- 7. Sheet Config Link -->
-              <button type="button" onclick="openSheetSettingsSubPage(this)" data-tab="sheet" id="rm-tab-sheet" class="rankmath-tab-btn flex-shrink-0 whitespace-nowrap lg:whitespace-normal w-auto lg:w-full text-left py-3 px-3.5 rounded-xl font-medium text-xs text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all flex items-center gap-3 border-l-4 border-transparent lg:border-t lg:border-slate-200/80 lg:mt-2 lg:pt-3">
-                <i class="fa-solid fa-sliders text-emerald-600 text-sm w-5 text-center flex-shrink-0"></i>
-                <span class="flex-1">Cấu hình Sheet GID</span>
-              </button>
+              
             </nav>
           </div>
 
@@ -1615,96 +1580,7 @@
       <!-- =============================================================== -->
       <!-- MODULE 6: CẤU HÌNH & DỮ LIỆU (SETTINGS PANEL) -->
       <!-- =============================================================== -->
-      <section id="panel-settings" class="module-panel hidden p-4 sm:p-6 max-w-7xl mx-auto w-full space-y-6">
-        
-        <!-- [INVARIANT 1]: MODULE HEADER / BANNER -->
-        <div class="module-header bg-white border border-slate-200/80 p-5 sm:p-6 rounded-3xl shadow-subtle flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div class="flex items-center gap-3.5">
-            <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl flex-shrink-0 border border-emerald-200/60">
-              <i class="fa-solid fa-sliders"></i>
-            </div>
-            <div>
-              <div class="flex items-center gap-2">
-                <h2 class="text-lg sm:text-xl font-black text-slate-900 tracking-tight">Cấu Hình Dữ Liệu & Tích Hợp Kênh</h2>
-                <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-full">
-                  Đồng Bộ 2 Chi Nhánh
-                </span>
-              </div>
-              <p class="text-xs text-slate-500 mt-0.5">
-                Quản lý các liên kết trực tiếp tới Google Sheet chính thức với mã Tab GID chuẩn, Webhook và API.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Google Sheet Links Cards (Strict GID Rule Compliant) -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-            <div class="flex items-center gap-2">
-              <i class="fa-solid fa-table-list text-emerald-600"></i>
-              <h3 class="font-extrabold text-sm text-slate-900">Liên Kết Trực Tiếp Tới Google Sheet (Chính Xác Tab GID)</h3>
-            </div>
-            <span class="text-[10px] text-slate-400">Tuân thủ quy chuẩn hệ thống</span>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
-            <!-- Link 1 -->
-            <a href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=926192727" target="_blank" class="p-3 rounded-xl border border-slate-200/70 hover:border-emerald-500 hover:bg-emerald-50/30 transition-all flex items-center justify-between">
-              <div>
-                <h4 class="font-bold text-slate-800">📅 OMNICHANNEL CALENDAR</h4>
-                <p class="text-[10px] text-slate-400">Tab GID: #gid=926192727</p>
-              </div>
-              <i class="fa-solid fa-arrow-up-right-from-square text-emerald-600 text-xs"></i>
-            </a>
-
-            <!-- Link 2 -->
-            <a href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=965315565" target="_blank" class="p-3 rounded-xl border border-slate-200/70 hover:border-emerald-500 hover:bg-emerald-50/30 transition-all flex items-center justify-between">
-              <div>
-                <h4 class="font-bold text-slate-800">🤖 Agent System</h4>
-                <p class="text-[10px] text-slate-400">Tab GID: #gid=965315565</p>
-              </div>
-              <i class="fa-solid fa-arrow-up-right-from-square text-emerald-600 text-xs"></i>
-            </a>
-
-            <!-- Link 3 -->
-            <a href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=972938634" target="_blank" class="p-3 rounded-xl border border-slate-200/70 hover:border-emerald-500 hover:bg-emerald-50/30 transition-all flex items-center justify-between">
-              <div>
-                <h4 class="font-bold text-slate-800">📝 Content FB</h4>
-                <p class="text-[10px] text-slate-400">Tab GID: #gid=972938634</p>
-              </div>
-              <i class="fa-solid fa-arrow-up-right-from-square text-emerald-600 text-xs"></i>
-            </a>
-
-            <!-- Link 4 -->
-            <a href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=1926517812" target="_blank" class="p-3 rounded-xl border border-slate-200/70 hover:border-emerald-500 hover:bg-emerald-50/30 transition-all flex items-center justify-between">
-              <div>
-                <h4 class="font-bold text-slate-800">🎬 Brief Video TikTok</h4>
-                <p class="text-[10px] text-slate-400">Tab GID: #gid=1926517812</p>
-              </div>
-              <i class="fa-solid fa-arrow-up-right-from-square text-emerald-600 text-xs"></i>
-            </a>
-
-            <!-- Link 5 -->
-            <a href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=2124327340" target="_blank" class="p-3 rounded-xl border border-slate-200/70 hover:border-emerald-500 hover:bg-emerald-50/30 transition-all flex items-center justify-between">
-              <div>
-                <h4 class="font-bold text-slate-800">🌐 SEO Dashboard</h4>
-                <p class="text-[10px] text-slate-400">Tab GID: #gid=2124327340</p>
-              </div>
-              <i class="fa-solid fa-arrow-up-right-from-square text-emerald-600 text-xs"></i>
-            </a>
-
-            <!-- Link 6 -->
-            <a href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=1638293495" target="_blank" class="p-3 rounded-xl border border-slate-200/70 hover:border-emerald-500 hover:bg-emerald-50/30 transition-all flex items-center justify-between">
-              <div>
-                <h4 class="font-bold text-slate-800">⚙️ DATA SETTINGS</h4>
-                <p class="text-[10px] text-slate-400">Tab GID: #gid=1638293495</p>
-              </div>
-              <i class="fa-solid fa-arrow-up-right-from-square text-emerald-600 text-xs"></i>
-            </a>
-          </div>
-        </div>
-
-      </section>
+      
 
       <!-- =============================================================== -->
       <!-- [INVARIANT 2]: GLOBAL FOOTER (AT THE VERY END OF ALL PANELS) -->
@@ -3076,24 +2952,11 @@
         }
       }
 
-      // 3. Keep submenu-about open in Main Sidebar
+      // 3. Close all submenus in Main Sidebar (Cài đặt uses internal Rank Math widget)
       const submenus = document.querySelectorAll('.sidebar-submenu');
-      submenus.forEach(sm => {
-        if (sm.id !== 'submenu-about') sm.classList.add('hidden');
-        else sm.classList.remove('hidden');
-      });
+      submenus.forEach(sm => sm.classList.add('hidden'));
 
-      // 4. Highlight sub-item in Main Sidebar
-      const mainSubBtns = document.querySelectorAll('#submenu-about .submenu-item');
-      mainSubBtns.forEach(b => {
-        b.classList.remove('bg-potato-softBlue', 'text-potato-navy', 'font-bold');
-        b.classList.add('text-slate-500');
-      });
-      const targetMainSub = document.getElementById(`subnav-about-${pageKey}`);
-      if (targetMainSub) {
-        targetMainSub.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold');
-        targetMainSub.classList.remove('text-slate-500');
-      }
+
 
       // 5. Highlight Rank Math Widget Left Nav Tab
       const rmTabs = document.querySelectorAll('.rankmath-tab-btn');
@@ -3123,50 +2986,7 @@
       if (mainElem) mainElem.scrollTop = 0;
     }
 
-    function openSheetSettingsSubPage(btnElem) {
-      // 1. Hide all panels, show panel-settings
-      const panels = document.querySelectorAll('.module-panel');
-      panels.forEach(p => p.classList.add('hidden'));
-      const targetPanel = document.getElementById('panel-settings');
-      if (targetPanel) targetPanel.classList.remove('hidden');
-
-      // 2. Activate nav-about parent button
-      const navBtns = document.querySelectorAll('.nav-btn');
-      navBtns.forEach(btn => {
-        btn.classList.remove('bg-potato-softBlue', 'text-potato-navy', 'font-bold', 'border', 'border-potato-cyan/20');
-        btn.classList.add('text-slate-600');
-      });
-      const navAbout = document.getElementById('nav-about');
-      if (navAbout) {
-        navAbout.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold', 'border', 'border-potato-cyan/20');
-        navAbout.classList.remove('text-slate-600');
-        const ch = navAbout.querySelector('.menu-chevron');
-        if (ch) {
-          ch.classList.remove('fa-chevron-right');
-          ch.classList.add('fa-chevron-down');
-        }
-      }
-
-      // 3. Keep submenu-about open in Main Sidebar
-      const submenuAbout = document.getElementById('submenu-about');
-      if (submenuAbout) submenuAbout.classList.remove('hidden');
-
-      // 4. Highlight Cấu hình Sheet sub-item
-      const subBtns = document.querySelectorAll('#submenu-about .submenu-item');
-      subBtns.forEach(b => {
-        b.classList.remove('bg-potato-softBlue', 'text-potato-navy', 'font-bold');
-        b.classList.add('text-slate-500');
-      });
-      const targetSubBtn = document.getElementById('subnav-about-sheet');
-      if (targetSubBtn) {
-        targetSubBtn.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold');
-        targetSubBtn.classList.remove('text-slate-500');
-      }
-
-      // 5. Scroll main to top
-      const mainElem = document.querySelector('main');
-      if (mainElem) mainElem.scrollTop = 0;
-    }
+    
 
     function navigateToSettingSection(groupName, btn) {
       for (const [key, cfg] of Object.entries(SETTING_SUBPAGES)) {
