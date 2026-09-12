@@ -304,27 +304,31 @@
               <i class="menu-chevron fa-solid fa-chevron-right text-[10px] text-slate-400 transition-transform"></i>
             </button>
             <div id="submenu-about" class="sidebar-submenu hidden pl-9 pr-2 py-1 space-y-0.5">
-              <button type="button" onclick="navigateToSettingSection('1. TỔNG QUAN & PHÁP LÝ', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
+              <button type="button" id="subnav-about-general" onclick="switchSettingSubPage('general', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
                 <span>Giới thiệu chung</span>
               </button>
-              <button type="button" onclick="navigateToSettingSection('3. TÔN CHỈ & TONE OF VOICE', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
+              <button type="button" id="subnav-about-contact" onclick="switchSettingSubPage('contact', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                <span>Thông tin liên hệ</span>
+              </button>
+              <button type="button" id="subnav-about-voice" onclick="switchSettingSubPage('voice', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
                 <span>Tone of voice</span>
               </button>
-              <button type="button" onclick="navigateToSettingSection('4. CHƯƠNG TRÌNH HỌC', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
+              <button type="button" id="subnav-about-courses" onclick="switchSettingSubPage('courses', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
                 <span>Chương trình học</span>
               </button>
-              <button type="button" onclick="navigateToSettingSection('5. NHẬN DIỆN THỊ GIÁC', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
+              <button type="button" id="subnav-about-visual" onclick="switchSettingSubPage('visual', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-indigo-600"></span>
                 <span>Nhận diện thị giác</span>
               </button>
-              <button type="button" onclick="navigateToSettingSection('6. QUY CHUẨN NỘI DUNG', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
+              <button type="button" id="subnav-about-specs" onclick="switchSettingSubPage('specs', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
                 <span>Quy chuẩn nội dung</span>
               </button>
-              <button type="button" onclick="switchTab('settings')" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2 border-t border-slate-100 mt-1 pt-1.5">
+              <button type="button" id="subnav-about-sheet" onclick="openSheetSettingsSubPage(this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2 border-t border-slate-100 mt-1 pt-1.5">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
                 <span>Cấu hình Sheet</span>
               </button>
@@ -421,23 +425,28 @@
       <section id="panel-about" class="module-panel hidden p-4 sm:p-6 max-w-7xl mx-auto w-full space-y-6">
         
         <!-- [INVARIANT 1]: MODULE HEADER / BANNER -->
-        <div class="module-header bg-gradient-to-r from-potato-navy via-[#0A4E8C] to-potato-blue text-white p-5 sm:p-6 rounded-3xl shadow-card relative overflow-hidden">
+        <div id="about-module-header" class="module-header bg-gradient-to-r from-potato-navy via-[#0A4E8C] to-potato-blue text-white p-5 sm:p-6 rounded-3xl shadow-card relative overflow-hidden transition-all duration-300">
           <div class="absolute -right-6 -bottom-6 text-white/5 text-9xl font-black pointer-events-none select-none">
             SETTINGS
           </div>
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
             <div class="flex items-center gap-4">
-              <img src="potato_logo.png" onerror="this.src='Potato_English_Logo.jpeg'" alt="Potato English Logo" class="w-14 h-14 rounded-2xl bg-white/95 p-1.5 object-contain border border-white/20 shadow-md flex-shrink-0">
+              <div id="about-header-icon-box" class="w-14 h-14 rounded-2xl bg-white/15 backdrop-blur-md p-2 flex items-center justify-center border border-white/20 shadow-md flex-shrink-0 text-white text-2xl">
+                <i id="about-header-icon" class="fa-solid fa-landmark"></i>
+              </div>
               <div>
                 <div class="flex items-center gap-2 flex-wrap">
-                  <h2 class="text-xl sm:text-2xl font-black tracking-tight text-white">Cài Đặt & Cơ Sở Dữ Liệu Thương Hiệu</h2>
+                  <h2 id="about-header-title" class="text-xl sm:text-2xl font-black tracking-tight text-white">Cài Đặt: Giới Thiệu Chung & Pháp Lý</h2>
                   <span class="bg-emerald-500 text-white text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full flex items-center gap-1.5 shadow-2xs">
                     <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
                     Google Sheet Live (#gid=1973975368)
                   </span>
+                  <span id="about-dirty-tag" class="hidden font-bold text-amber-900 bg-amber-200 border border-amber-300 px-2 py-0.5 rounded-full text-[10px] animate-pulse">
+                    <i class="fa-solid fa-pen mr-1"></i>Có thay đổi chưa lưu
+                  </span>
                 </div>
-                <p class="text-xs sm:text-sm text-sky-100/90 mt-1 max-w-2xl">
-                  Giao diện quản trị thông số thương hiệu Potato English. Điền và điều chỉnh trực tiếp trong các ô box, nhấn Lưu ở cuối trang để đồng bộ 2 chiều vào Google Sheet.
+                <p id="about-header-desc" class="text-xs sm:text-sm text-sky-100/90 mt-1 max-w-2xl">
+                  Quản trị tên thương hiệu chính thức, slogan, định vị phân khúc, thông điệp cốt lõi và giấy phép pháp lý Potato English.
                 </p>
               </div>
             </div>
@@ -447,9 +456,9 @@
                 <i class="fa-solid fa-arrows-rotate" id="sync-about-top-icon"></i>
                 <span>Tải Lại Từ Sheet</span>
               </button>
-              <button type="button" onclick="saveAllAboutUsSettings()" class="px-4 py-2 rounded-xl bg-potato-cyan hover:bg-potato-cyanHover text-white font-extrabold text-xs shadow-md transition-all flex items-center gap-2">
+              <button type="button" onclick="saveAllAboutUsSettings()" id="btn-save-about-top" class="px-4 py-2 rounded-xl bg-potato-cyan hover:bg-potato-cyanHover text-white font-extrabold text-xs shadow-md transition-all flex items-center gap-2">
                 <i class="fa-solid fa-floppy-disk"></i>
-                <span>Lưu Thay Đổi</span>
+                <span id="btn-save-all-text">Lưu Thay Đổi</span>
               </button>
               <a href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit?pli=1&gid=1973975368#gid=1973975368" target="_blank" class="px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-sm transition-all flex items-center gap-2">
                 <i class="fa-solid fa-file-excel"></i>
@@ -459,139 +468,15 @@
           </div>
         </div>
 
-        <!-- Quick Summary Stats of Brand Master Data -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-          <div class="bg-white p-3.5 rounded-2xl border border-slate-200/80 shadow-xs flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg font-black flex-shrink-0">
-              <i class="fa-solid fa-layer-group"></i>
-            </div>
-            <div>
-              <p class="text-[10px] uppercase font-bold text-slate-400">Nhóm Thiết Lập</p>
-              <h4 class="text-lg font-black text-slate-900 leading-none mt-0.5">6 Phân Nhóm</h4>
-            </div>
-          </div>
-
-          <div class="bg-white p-3.5 rounded-2xl border border-slate-200/80 shadow-xs flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg font-black flex-shrink-0">
-              <i class="fa-solid fa-list-check"></i>
-            </div>
-            <div>
-              <p class="text-[10px] uppercase font-bold text-slate-400">Hạng Mục Nhận Diện</p>
-              <h4 class="text-lg font-black text-slate-900 leading-none mt-0.5">35 Thông Số</h4>
-            </div>
-          </div>
-
-          <div class="bg-white p-3.5 rounded-2xl border border-slate-200/80 shadow-xs flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-rose-50 text-potato-red flex items-center justify-center text-lg font-black flex-shrink-0">
-              <i class="fa-solid fa-scale-balanced"></i>
-            </div>
-            <div>
-              <p class="text-[10px] uppercase font-bold text-slate-400">Quy Định Pháp Lý</p>
-              <h4 class="text-lg font-black text-rose-600 leading-none mt-0.5">Cấm "Trung tâm"</h4>
-            </div>
-          </div>
-
-          <div class="bg-white p-3.5 rounded-2xl border border-slate-200/80 shadow-xs flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-lg font-black flex-shrink-0">
-              <i class="fa-solid fa-cloud-arrow-up"></i>
-            </div>
-            <div>
-              <p class="text-[10px] uppercase font-bold text-slate-400">Cơ Chế Đồng Bộ</p>
-              <h4 class="text-lg font-black text-emerald-600 leading-none mt-0.5">Real-time 2-Way</h4>
-            </div>
-          </div>
-        </div>
-
-        <!-- Filter & Search Controls Bar -->
-        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-2xs space-y-3">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <!-- Search Input -->
-            <div class="relative flex-1 max-w-md">
-              <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-xs"></i>
-              <input type="text" id="about-search-input" oninput="filterAboutUsData()" placeholder="Tìm kiếm nhanh thông số (Site Title, Tagline, Icon, CS1, CS2, Hotline...)..." class="w-full pl-9 pr-4 py-2 text-xs border border-slate-200 rounded-xl focus:outline-none focus:border-potato-cyan font-medium">
-            </div>
-
-            <!-- Source, Status & Counter -->
-            <div class="flex items-center gap-2 text-xs text-slate-500 flex-wrap">
-              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-              <span>Nguồn: <strong id="about-source-label" class="text-slate-800">Google Sheet Tab About us (#gid=1973975368)</strong></span>
-              <span class="text-slate-300">|</span>
-              <span id="about-count-badge" class="font-bold text-potato-navy bg-slate-100 px-2 py-0.5 rounded-md">35 thiết lập</span>
-              <span id="about-dirty-tag" class="hidden font-bold text-amber-800 bg-amber-100 border border-amber-300 px-2 py-0.5 rounded-md animate-pulse">
-                <i class="fa-solid fa-pen mr-1"></i>Có thay đổi chưa lưu
-              </span>
-            </div>
-          </div>
-
-          <!-- Group Category Filter Buttons -->
-          <div class="flex items-center gap-1.5 flex-wrap pt-2 border-t border-slate-100 text-xs" id="about-group-filters">
-            <button type="button" onclick="selectAboutGroup('all')" class="about-filter-btn px-2.5 py-1.5 rounded-lg bg-potato-navy text-white font-bold text-xs shadow-2xs transition-all" data-group="all">
-              Tất Cả Thiết Lập (35)
-            </button>
-            <button type="button" onclick="selectAboutGroup('1. TỔNG QUAN & PHÁP LÝ')" class="about-filter-btn px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all" data-group="1. TỔNG QUAN & PHÁP LÝ">
-              🏛️ 1. Tổng Quan & Pháp Lý
-            </button>
-            <button type="button" onclick="selectAboutGroup('2. LIÊN HỆ & CƠ SỞ')" class="about-filter-btn px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all" data-group="2. LIÊN HỆ & CƠ SỞ">
-              📍 2. Liên Hệ & 2 Cơ Sở
-            </button>
-            <button type="button" onclick="selectAboutGroup('3. TÔN CHỈ & TONE OF VOICE')" class="about-filter-btn px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all" data-group="3. TÔN CHỈ & TONE OF VOICE">
-              💬 3. Tôn Chỉ & Tone Voice
-            </button>
-            <button type="button" onclick="selectAboutGroup('4. CHƯƠNG TRÌNH HỌC')" class="about-filter-btn px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all" data-group="4. CHƯƠNG TRÌNH HỌC">
-              📚 4. Chương Trình Học
-            </button>
-            <button type="button" onclick="selectAboutGroup('5. NHẬN DIỆN THỊ GIÁC')" class="about-filter-btn px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all" data-group="5. NHẬN DIỆN THỊ GIÁC">
-              🎨 5. Thị Giác & Site Icon
-            </button>
-            <button type="button" onclick="selectAboutGroup('6. QUY CHUẨN NỘI DUNG')" class="about-filter-btn px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all" data-group="6. QUY CHUẨN NỘI DUNG">
-              📋 6. Quy Chuẩn Kỹ Thuật
-            </button>
-          </div>
-        </div>
-
-        <!-- WordPress General Settings Form Container (Rendered Dynamically via JS) -->
+        <!-- WordPress General Settings Form Container (Rendered Dynamically via JS for active subpage) -->
         <div id="about-settings-container" class="space-y-6">
-          <!-- Dynamically populated by renderAboutUs() in General Settings Box Style -->
-        </div>
-
-        <!-- Bottom Action Bar with Prominent Save Button -->
-        <div class="sticky bottom-4 z-20 bg-slate-900/95 text-white backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-slate-700/60 shadow-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg font-black flex-shrink-0 border border-emerald-500/30">
-              <i class="fa-solid fa-cloud-arrow-up"></i>
-            </div>
-            <div>
-              <div class="flex items-center gap-2 flex-wrap">
-                <h4 class="font-bold text-sm text-white">Đồng Bộ Trực Tiếp Google Sheet Tab About us</h4>
-                <span id="bottom-sync-status-badge" class="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                  Đã kết nối #gid=1973975368
-                </span>
-                <span id="bottom-unsaved-badge" class="hidden text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                  ⚠️ Chưa lưu thay đổi
-                </span>
-              </div>
-              <p class="text-[11px] text-slate-400 mt-0.5">
-                Các ô nhập liệu phía trên được liên kết trực tiếp với từng dòng trên Sheet. Nhấn nút bên dưới để ghi đồng bộ ngay lập tức.
-              </p>
-            </div>
-          </div>
-
-          <div class="flex items-center gap-2.5 flex-wrap flex-shrink-0">
-            <button type="button" onclick="syncAboutUsData()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs border border-slate-600 transition-all flex items-center gap-2">
-              <i class="fa-solid fa-arrows-rotate"></i>
-              <span>Tải Lại Từ Sheet</span>
-            </button>
-            <button type="button" onclick="saveAllAboutUsSettings()" id="btn-save-all-settings" class="px-6 py-2.5 rounded-xl bg-potato-cyan hover:bg-potato-cyanHover text-white font-black text-xs sm:text-sm shadow-lg shadow-potato-cyan/30 transition-all flex items-center gap-2 hover:scale-[1.02] active:scale-[0.98]">
-              <i class="fa-solid fa-floppy-disk" id="btn-save-all-icon"></i>
-              <span id="btn-save-all-text">Lưu Thay Đổi (Save Changes)</span>
-            </button>
-          </div>
+          <!-- Dynamically populated by renderAboutUs() -->
         </div>
 
       </section>
 
       <!-- =============================================================== -->
+      <!-- MODULE 1: TỔNG QUAN MARKETING<!-- =============================================================== -->
       <!-- MODULE 1: TỔNG QUAN MARKETING (DASHBOARD PANEL) -->
       <!-- =============================================================== -->
       <section id="panel-dashboard" class="module-panel hidden p-4 sm:p-6 max-w-7xl mx-auto w-full space-y-6">
@@ -2541,7 +2426,7 @@
 
       // 10. Special action when entering About tab
       if (tabId === 'about') {
-        renderAboutUs();
+        switchSettingSubPage(activeSettingPageKey || 'general');
         if (typeof syncAboutUsQuietly === 'function') {
           syncAboutUsQuietly();
         }
@@ -3023,7 +2908,53 @@
     // ===================================================================
     let dirtyAboutUsRows = new Set();
     let currentAboutUsData = [...INITIAL_ABOUT_US_DATA];
-    let selectedAboutGroup = 'all';
+    let activeSettingPageKey = 'general';
+    let currentSettingGroup = '1. TỔNG QUAN & PHÁP LÝ';
+
+    const SETTING_SUBPAGES = {
+      'general': {
+        group: '1. TỔNG QUAN & PHÁP LÝ',
+        title: 'Cài Đặt: Giới Thiệu Chung & Pháp Lý',
+        desc: 'Quản trị tên thương hiệu chính thức, slogan, định vị phân khúc, thông điệp cốt lõi và giấy phép pháp lý Potato English.',
+        icon: 'fa-solid fa-landmark',
+        gradient: 'from-potato-navy via-[#0A4E8C] to-potato-blue'
+      },
+      'contact': {
+        group: '2. LIÊN HỆ & CƠ SỞ',
+        title: 'Cài Đặt: Thông Tin Liên Hệ & Chi Nhánh',
+        desc: 'Quản trị địa chỉ trụ sở, hotline tuyển sinh, email, website và các liên kết mạng xã hội chính thức của Potato English.',
+        icon: 'fa-solid fa-address-book',
+        gradient: 'from-emerald-900 via-emerald-800 to-teal-700'
+      },
+      'voice': {
+        group: '3. TÔN CHỈ & TONE OF VOICE',
+        title: 'Cài Đặt: Tôn Chỉ & Tone Of Voice',
+        desc: 'Định hướng giọng văn, phong cách thương hiệu, nguyên tắc xưng hô thầy/cô và các trụ cột nội dung chính.',
+        icon: 'fa-solid fa-comments',
+        gradient: 'from-rose-900 via-rose-800 to-pink-700'
+      },
+      'courses': {
+        group: '4. CHƯƠNG TRÌNH HỌC',
+        title: 'Cài Đặt: Chương Trình Học & Đào Tạo',
+        desc: 'Độ tuổi tuyển sinh, các hệ đào tạo chính và cam kết chuẩn đầu ra của học viên Potato English.',
+        icon: 'fa-solid fa-graduation-cap',
+        gradient: 'from-amber-900 via-amber-800 to-orange-700'
+      },
+      'visual': {
+        group: '5. NHẬN DIỆN THỊ GIÁC',
+        title: 'Cài Đặt: Nhận Diện Thị Giác & Site Icon',
+        desc: 'Hệ màu chuẩn (#00AEEF, #F5A623, #0B2545), Typography, Logo Drive, đồng phục cyan và Mascot Potato.',
+        icon: 'fa-solid fa-palette',
+        gradient: 'from-indigo-900 via-indigo-800 to-blue-700'
+      },
+      'specs': {
+        group: '6. QUY CHUẨN NỘI DUNG',
+        title: 'Cài Đặt: Quy Chuẩn Nội Dung & Khung Giờ',
+        desc: 'Hashtag bắt buộc đa kênh, quy định bảo vệ hình ảnh học viên và khung giờ vàng phát sóng truyền thông.',
+        icon: 'fa-solid fa-clipboard-check',
+        gradient: 'from-teal-900 via-teal-800 to-cyan-800'
+      }
+    };
 
     function escapeHtml(text) {
       if (text === null || text === undefined) return '';
@@ -3035,103 +2966,197 @@
         .replace(/'/g, '&#039;');
     }
 
+    function switchSettingSubPage(pageKey, btnElem) {
+      activeSettingPageKey = pageKey;
+      const config = SETTING_SUBPAGES[pageKey];
+      if (!config) return;
+
+      currentSettingGroup = config.group;
+
+      // 1. Hide all panels, show panel-about
+      const panels = document.querySelectorAll('.module-panel');
+      panels.forEach(p => p.classList.add('hidden'));
+      const targetPanel = document.getElementById('panel-about');
+      if (targetPanel) targetPanel.classList.remove('hidden');
+
+      // 2. Activate nav-about parent button
+      const navBtns = document.querySelectorAll('.nav-btn');
+      navBtns.forEach(btn => {
+        btn.classList.remove('bg-potato-softBlue', 'text-potato-navy', 'font-bold', 'border', 'border-potato-cyan/20');
+        btn.classList.add('text-slate-600');
+      });
+      const navAbout = document.getElementById('nav-about');
+      if (navAbout) {
+        navAbout.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold', 'border', 'border-potato-cyan/20');
+        navAbout.classList.remove('text-slate-600');
+        const ch = navAbout.querySelector('.menu-chevron');
+        if (ch) {
+          ch.classList.remove('fa-chevron-right');
+          ch.classList.add('fa-chevron-down');
+        }
+      }
+
+      // 3. Keep submenu-about open, close others
+      const submenus = document.querySelectorAll('.sidebar-submenu');
+      submenus.forEach(sm => {
+        if (sm.id !== 'submenu-about') sm.classList.add('hidden');
+        else sm.classList.remove('hidden');
+      });
+
+      // 4. Highlight target submenu item
+      const subBtns = document.querySelectorAll('#submenu-about .submenu-item');
+      subBtns.forEach(b => {
+        b.classList.remove('bg-potato-softBlue', 'text-potato-navy', 'font-bold');
+        b.classList.add('text-slate-500');
+      });
+      const targetSubBtn = btnElem || document.getElementById(`subnav-about-${pageKey}`);
+      if (targetSubBtn) {
+        targetSubBtn.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold');
+        targetSubBtn.classList.remove('text-slate-500');
+      }
+
+      // 5. Update Header Banner
+      const titleElem = document.getElementById('about-header-title');
+      const descElem = document.getElementById('about-header-desc');
+      const iconElem = document.getElementById('about-header-icon');
+      const headerElem = document.getElementById('about-module-header');
+
+      if (titleElem) titleElem.textContent = config.title;
+      if (descElem) descElem.textContent = config.desc;
+      if (iconElem) iconElem.className = config.icon;
+      if (headerElem) {
+        headerElem.className = `module-header bg-gradient-to-r ${config.gradient} text-white p-5 sm:p-6 rounded-3xl shadow-card relative overflow-hidden transition-all duration-300`;
+      }
+
+      // 6. Render the form boxes
+      renderAboutUs();
+
+      // 7. Scroll main to top
+      const mainElem = document.querySelector('main');
+      if (mainElem) mainElem.scrollTop = 0;
+    }
+
+    function openSheetSettingsSubPage(btnElem) {
+      // 1. Hide all panels, show panel-settings
+      const panels = document.querySelectorAll('.module-panel');
+      panels.forEach(p => p.classList.add('hidden'));
+      const targetPanel = document.getElementById('panel-settings');
+      if (targetPanel) targetPanel.classList.remove('hidden');
+
+      // 2. Activate nav-about parent button
+      const navBtns = document.querySelectorAll('.nav-btn');
+      navBtns.forEach(btn => {
+        btn.classList.remove('bg-potato-softBlue', 'text-potato-navy', 'font-bold', 'border', 'border-potato-cyan/20');
+        btn.classList.add('text-slate-600');
+      });
+      const navAbout = document.getElementById('nav-about');
+      if (navAbout) {
+        navAbout.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold', 'border', 'border-potato-cyan/20');
+        navAbout.classList.remove('text-slate-600');
+        const ch = navAbout.querySelector('.menu-chevron');
+        if (ch) {
+          ch.classList.remove('fa-chevron-right');
+          ch.classList.add('fa-chevron-down');
+        }
+      }
+
+      // 3. Keep submenu-about open
+      const submenuAbout = document.getElementById('submenu-about');
+      if (submenuAbout) submenuAbout.classList.remove('hidden');
+
+      // 4. Highlight target submenu item
+      const subBtns = document.querySelectorAll('#submenu-about .submenu-item');
+      subBtns.forEach(b => {
+        b.classList.remove('bg-potato-softBlue', 'text-potato-navy', 'font-bold');
+        b.classList.add('text-slate-500');
+      });
+      const targetSubBtn = btnElem || document.getElementById('subnav-about-sheet');
+      if (targetSubBtn) {
+        targetSubBtn.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold');
+        targetSubBtn.classList.remove('text-slate-500');
+      }
+
+      // 5. Scroll main to top
+      const mainElem = document.querySelector('main');
+      if (mainElem) mainElem.scrollTop = 0;
+    }
+
+    function navigateToSettingSection(groupName, btn) {
+      for (const [key, cfg] of Object.entries(SETTING_SUBPAGES)) {
+        if (cfg.group === groupName) {
+          switchSettingSubPage(key, btn);
+          return;
+        }
+      }
+      switchSettingSubPage('general', btn);
+    }
+
     function renderAboutUs() {
       const container = document.getElementById('about-settings-container');
       if (!container) return;
 
-      const searchInput = document.getElementById('about-search-input');
-      const query = (searchInput ? searchInput.value.trim().toLowerCase() : '');
+      const items = currentAboutUsData.filter(i => i.group === currentSettingGroup);
 
-      const grouped = {};
-      currentAboutUsData.forEach(item => {
-        if (selectedAboutGroup !== 'all' && item.group !== selectedAboutGroup) return;
-
-        if (query) {
-          const matchItem = (item.item || '').toLowerCase().includes(query);
-          const matchContent = (item.content || '').toLowerCase().includes(query);
-          const matchRule = (item.rule || '').toLowerCase().includes(query);
-          const matchGroup = (item.group || '').toLowerCase().includes(query);
-          if (!matchItem && !matchContent && !matchRule && !matchGroup) return;
-        }
-
-        if (!grouped[item.group]) {
-          grouped[item.group] = [];
-        }
-        grouped[item.group].push(item);
-      });
-
-      const groupKeys = Object.keys(grouped);
-      const totalFiltered = groupKeys.reduce((acc, k) => acc + grouped[k].length, 0);
-
-      const countBadge = document.getElementById('about-count-badge');
-      if (countBadge) countBadge.textContent = totalFiltered + ' thiết lập hiển thị';
-
-      if (groupKeys.length === 0) {
+      if (items.length === 0) {
         container.innerHTML = `
-          <div class="bg-white p-12 rounded-3xl border border-slate-200 text-center space-y-3">
-            <div class="w-14 h-14 mx-auto rounded-2xl bg-slate-100 flex items-center justify-center text-2xl text-slate-400">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
-            <h4 class="font-extrabold text-base text-slate-800">Không tìm thấy thông số phù hợp</h4>
-            <p class="text-xs text-slate-500 max-w-sm mx-auto">Hãy thử đổi từ khóa tìm kiếm hoặc chọn tab "Tất Cả Thiết Lập (35)".</p>
+          <div class="bg-white rounded-3xl p-12 text-center border border-slate-200 shadow-sm">
+            <i class="fa-solid fa-circle-notch fa-spin text-3xl text-potato-cyan mb-3"></i>
+            <h4 class="font-bold text-slate-800 text-sm">Đang tải dữ liệu cho phân mục này...</h4>
+            <p class="text-xs text-slate-400 mt-1">Hệ thống đang kết nối Google Sheet Tab About us (#gid=1973975368).</p>
           </div>
         `;
         return;
       }
 
-      let resHtml = '';
-      groupKeys.forEach(groupName => {
-        const groupItems = grouped[groupName];
-        let groupIcon = 'fa-solid fa-gear text-potato-cyan';
-        let groupBadge = 'General Settings';
-        
-        if (groupName.includes('1.')) {
-          groupIcon = 'fa-solid fa-scale-balanced text-potato-navy';
-          groupBadge = 'Legal & Brand Core';
-        } else if (groupName.includes('2.')) {
-          groupIcon = 'fa-solid fa-map-location-dot text-emerald-600';
-          groupBadge = 'Channels & Branches';
-        } else if (groupName.includes('3.')) {
-          groupIcon = 'fa-solid fa-heart-pulse text-rose-500';
-          groupBadge = 'Tone & Philosophy';
-        } else if (groupName.includes('4.')) {
-          groupIcon = 'fa-solid fa-graduation-cap text-amber-500';
-          groupBadge = 'Courses & Programs';
-        } else if (groupName.includes('5.')) {
-          groupIcon = 'fa-solid fa-palette text-indigo-600';
-          groupBadge = 'Visual & Site Icon';
-        } else if (groupName.includes('6.')) {
-          groupIcon = 'fa-solid fa-sliders text-teal-600';
-          groupBadge = 'SOP & Specifications';
-        }
+      const config = SETTING_SUBPAGES[activeSettingPageKey] || {};
 
-        resHtml += `
-          <div class="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden">
-            <!-- Group Header (WordPress Settings Section Style) -->
-            <div class="px-6 py-4 border-b border-slate-200/80 bg-slate-50/80 flex items-center justify-between flex-wrap gap-2">
-              <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-xl bg-white border border-slate-200 text-sm flex items-center justify-center shadow-2xs">
-                  <i class="${groupIcon}"></i>
-                </div>
-                <div>
-                  <h3 class="font-bold text-sm text-slate-900 tracking-tight">${groupName}</h3>
-                  <p class="text-[11px] text-slate-400 font-medium">${groupItems.length} ô thiết lập cấu hình</p>
-                </div>
+      let html = `
+        <div class="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden">
+          <!-- Section Banner Header Inside Card -->
+          <div class="px-6 py-4 border-b border-slate-200/80 bg-slate-50/80 flex items-center justify-between flex-wrap gap-2">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-white border border-slate-200 text-base flex items-center justify-center shadow-2xs text-potato-navy">
+                <i class="${config.icon || 'fa-solid fa-sliders'}"></i>
               </div>
-              <span class="text-[10px] font-bold bg-white text-slate-500 border border-slate-200 px-2.5 py-1 rounded-full uppercase tracking-wider">
-                ${groupBadge}
+              <div>
+                <h3 class="font-bold text-sm text-slate-900 tracking-tight">${currentSettingGroup}</h3>
+                <p class="text-[11px] text-slate-400 font-medium">${items.length} hạng mục thông số cấu hình chuẩn hóa</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                Đồng Bộ Google Sheet
               </span>
             </div>
+          </div>
 
-            <!-- Settings Rows Container (Classic WordPress Field Boxes) -->
-            <div class="divide-y divide-slate-100">
-              ${groupItems.map(item => renderSettingBoxRow(item)).join('')}
+          <!-- Settings Rows Container (Classic WordPress Field Boxes) -->
+          <div class="divide-y divide-slate-100">
+            ${items.map(item => renderSettingBoxRow(item)).join('')}
+          </div>
+
+          <!-- Bottom Inline Action Bar (Clean, Non-Sticky) -->
+          <div class="p-5 bg-slate-50/80 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="flex items-center gap-2 text-xs text-slate-500">
+              <i class="fa-solid fa-circle-check text-emerald-600"></i>
+              <span>Dữ liệu tự động đồng bộ 2 chiều với Google Sheet (#gid=1973975368)</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button type="button" onclick="syncAboutUsData()" class="px-4 py-2 rounded-xl bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs border border-slate-200 transition-all flex items-center gap-2 shadow-2xs">
+                <i class="fa-solid fa-arrows-rotate"></i>
+                <span>Tải Lại Từ Sheet</span>
+              </button>
+              <button type="button" onclick="saveAllAboutUsSettings()" class="px-5 py-2 rounded-xl bg-potato-cyan hover:bg-potato-cyanHover text-white font-black text-xs shadow-md transition-all flex items-center gap-2">
+                <i class="fa-solid fa-floppy-disk"></i>
+                <span>Lưu Thay Đổi Mục Này</span>
+              </button>
             </div>
           </div>
-        `;
-      });
+        </div>
+      `;
 
-      container.innerHTML = resHtml;
+      container.innerHTML = html;
       updateDirtyBadges();
     }
 
@@ -3148,7 +3173,7 @@
       const isColor = !!hexMatch && (item.item || '').toLowerCase().includes('màu sắc');
 
       // Check if multiline textarea is needed
-      const isMultiline = isForbidden || /\n/.test(item.content || '') || (item.content || '').length > 80 || (item.item || '').toLowerCase().includes('triết lý') || (item.item || '').toLowerCase().includes('văn') || (item.item || '').toLowerCase().includes('boilerplate') || (item.item || '').toLowerCase().includes('chương trình');
+      const isMultiline = isForbidden || /\n/.test(item.content || '') || (item.content || '').length > 80 || (item.item || '').toLowerCase().includes('triết lý') || (item.item || '').toLowerCase().includes('văn') || (item.item || '').toLowerCase().includes('boilerplate') || (item.item || '').toLowerCase().includes('chương trình') || (item.item || '').toLowerCase().includes('địa chỉ') || (item.item || '').toLowerCase().includes('quy tắc');
 
       let badgeTag = '';
       if (isForbidden) {
@@ -3265,11 +3290,11 @@
             </div>
           </div>
 
-          <!-- Right Column: Editable Box + Explanatory Helper Text Underneath -->
+          <!-- Right Column: Editable Box + Helper Text Underneath -->
           <div class="flex-1 max-w-3xl space-y-1.5">
             ${fieldInputHtml}
 
-            <!-- Explanatory description helper text (Column D - Quy tắc & Lưu ý) -->
+            <!-- Helper text (Column D - Quy tắc & Lưu ý) -->
             <div class="flex items-start justify-between gap-3 max-w-2xl pt-0.5">
               <p class="text-xs text-slate-500 leading-relaxed ${isForbidden ? 'text-rose-700 font-semibold' : ''}">
                 ${item.rule ? escapeHtml(item.rule) : '<span class="text-slate-400 italic">Theo quy chuẩn nhận diện chính thức của Potato English.</span>'}
@@ -3300,7 +3325,6 @@
     function updateColorField(rowIndex, hexValue) {
       const item = currentAboutUsData.find(i => i.rowIndex === rowIndex);
       if (item) {
-        // Update hex code inside content string
         const oldContent = item.content || '';
         const newContent = oldContent.replace(/#([A-Fa-f0-9]{6})/, hexValue);
         item.content = newContent;
@@ -3322,7 +3346,6 @@
     function updateDirtyBadges() {
       const count = dirtyAboutUsRows.size;
       const topTag = document.getElementById('about-dirty-tag');
-      const bottomTag = document.getElementById('bottom-unsaved-badge');
       const btnText = document.getElementById('btn-save-all-text');
 
       if (count > 0) {
@@ -3330,34 +3353,13 @@
           topTag.classList.remove('hidden');
           topTag.innerHTML = `<i class="fa-solid fa-pen mr-1"></i>Có ${count} thay đổi chưa lưu`;
         }
-        if (bottomTag) {
-          bottomTag.classList.remove('hidden');
-          bottomTag.textContent = `⚠️ Có ${count} thay đổi chưa lưu`;
-        }
         if (btnText) {
-          btnText.textContent = `Lưu ${count} Thay Đổi Lên Google Sheet`;
+          btnText.textContent = `Lưu ${count} Thay Đổi`;
         }
       } else {
         if (topTag) topTag.classList.add('hidden');
-        if (bottomTag) bottomTag.classList.add('hidden');
-        if (btnText) btnText.textContent = 'Lưu Thay Đổi (Save Changes)';
+        if (btnText) btnText.textContent = 'Lưu Thay Đổi';
       }
-    }
-
-    function selectAboutGroup(groupName) {
-      selectedAboutGroup = groupName;
-      document.querySelectorAll('.about-filter-btn').forEach(btn => {
-        if (btn.getAttribute('data-group') === groupName) {
-          btn.className = 'about-filter-btn px-2.5 py-1.5 rounded-lg bg-potato-navy text-white font-bold text-xs shadow-2xs transition-all';
-        } else {
-          btn.className = 'about-filter-btn px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all';
-        }
-      });
-      renderAboutUs();
-    }
-
-    function filterAboutUsData() {
-      renderAboutUs();
     }
 
     function copyAboutItemContent(text) {
@@ -3367,14 +3369,11 @@
     }
 
     async function saveAllAboutUsSettings() {
-      const btn = document.getElementById('btn-save-all-settings');
-      const icon = document.getElementById('btn-save-all-icon');
+      const btn = document.getElementById('btn-save-about-top');
       const text = document.getElementById('btn-save-all-text');
-      const bottomStatus = document.getElementById('bottom-sync-status-badge');
 
-      btn.disabled = true;
-      if (icon) icon.className = 'fa-solid fa-spinner fa-spin';
-      if (text) text.textContent = 'Đang Đồng Bộ Lên Google Sheet...';
+      if (btn) btn.disabled = true;
+      if (text) text.textContent = 'Đang Lưu...';
 
       try {
         const res = await fetch('/api/about-us/batch-update', {
@@ -3387,13 +3386,8 @@
         if (jsonRes.success) {
           dirtyAboutUsRows.clear();
           updateDirtyBadges();
-          
-          const nowTime = new Date().toLocaleTimeString('vi-VN');
-          if (bottomStatus) {
-            bottomStatus.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Đã đồng bộ lúc ${nowTime} (#gid=1973975368)`;
-          }
-
-          showToast(jsonRes.message || '✓ Đã lưu thay đổi và đồng bộ thành công vào Google Sheet Tab About us (#gid=1973975368)!', 'success');
+          renderAboutUs();
+          showToast(jsonRes.message || '✓ Đã lưu thay đổi thành công vào Google Sheet Tab About us (#gid=1973975368)!', 'success');
         } else {
           showToast(jsonRes.message || 'Không thể đồng bộ lên Google Sheet', 'warning');
         }
@@ -3401,15 +3395,15 @@
         // Offline / file:// fallback
         dirtyAboutUsRows.clear();
         updateDirtyBadges();
+        renderAboutUs();
         try {
           localStorage.setItem('potato_about_us_cached', JSON.stringify(currentAboutUsData));
         } catch (e) {}
 
-        showToast('Đã lưu dữ liệu vào bộ nhớ Webapp! (Mở qua http://localhost:8080 để đồng bộ live lên Google Sheet)', 'info');
+        showToast('Đã lưu dữ liệu vào bộ nhớ Webapp! (Đồng bộ live qua server Vercel/Node)', 'info');
       } finally {
-        btn.disabled = false;
-        if (icon) icon.className = 'fa-solid fa-floppy-disk';
-        if (text) text.textContent = 'Lưu Thay Đổi (Save Changes)';
+        if (btn) btn.disabled = false;
+        if (text) text.textContent = 'Lưu Thay Đổi';
       }
     }
 
@@ -3423,16 +3417,14 @@
         if (jsonRes.success && jsonRes.items && jsonRes.items.length > 0) {
           currentAboutUsData = jsonRes.items;
           dirtyAboutUsRows.clear();
-          const srcLabel = document.getElementById('about-source-label');
-          if (srcLabel) srcLabel.textContent = `${jsonRes.source} (#gid=1973975368)`;
           renderAboutUs();
-          showToast('✓ Đã đồng bộ thành công 35 thông số từ Google Sheet Live!', 'success');
+          showToast('✓ Đã tải lại thành công 35 thông số từ Google Sheet Live (#gid=1973975368)!', 'success');
         } else {
           showToast('Không thể lấy dữ liệu mới từ Google Sheet', 'warning');
         }
       } catch (err) {
         renderAboutUs();
-        showToast('Đang sử dụng dữ liệu chuẩn Potato English (#gid=1973975368)', 'info');
+        showToast('Đang chạy chế độ ngoại tuyến với bộ nhớ đệm chuẩn.', 'info');
       } finally {
         if (iconTop) iconTop.classList.remove('fa-spin');
       }
