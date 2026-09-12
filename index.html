@@ -294,48 +294,25 @@
             </div>
           </div>
 
-          <!-- 6. Giới Thiệu -->
+          <!-- 6. Cài Đặt (Level 1) -->
           <div class="sidebar-group">
-            <button onclick="switchTab('intro')" id="nav-intro" class="sidebar-item nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-potato-navy transition-all">
+            <button onclick="switchTab('about')" id="nav-about" class="sidebar-item nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-potato-navy transition-all">
               <div class="flex items-center gap-3">
-                <i class="fa-solid fa-circle-info text-base w-5 text-center text-blue-600"></i>
-                <span class="sidebar-label font-bold">Giới thiệu</span>
+                <i class="fa-solid fa-sliders text-base w-5 text-center text-emerald-600"></i>
+                <span class="sidebar-label font-bold">Cài đặt</span>
               </div>
               <i class="menu-chevron fa-solid fa-chevron-right text-[10px] text-slate-400 transition-transform"></i>
             </button>
-            <div id="submenu-intro" class="sidebar-submenu hidden pl-9 pr-2 py-1 space-y-0.5">
-              <button type="button" id="subnav-intro-general" onclick="openSettingFromSidebar('general', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
+            <div id="submenu-about" class="sidebar-submenu hidden pl-9 pr-2 py-1 space-y-0.5">
+              <!-- 1.1 Giới thiệu -->
+              <button type="button" id="subnav-settings-intro" onclick="openSettingSection('intro', this)" class="submenu-item w-full text-left py-2 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
-                <span>Tổng quan</span>
+                <span>Giới thiệu</span>
               </button>
-              <button type="button" id="subnav-intro-contact" onclick="openSettingFromSidebar('contact', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
-                <span>Thông tin liên hệ</span>
-              </button>
-              <button type="button" id="subnav-intro-visual" onclick="openSettingFromSidebar('visual', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-indigo-600"></span>
-                <span>Nhận diện thương hiệu</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- 7. Nội Dung -->
-          <div class="sidebar-group">
-            <button onclick="switchTab('content')" id="nav-content" class="sidebar-item nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-potato-navy transition-all">
-              <div class="flex items-center gap-3">
-                <i class="fa-solid fa-pen-nib text-base w-5 text-center text-rose-500"></i>
-                <span class="sidebar-label font-bold">Nội dung</span>
-              </div>
-              <i class="menu-chevron fa-solid fa-chevron-right text-[10px] text-slate-400 transition-transform"></i>
-            </button>
-            <div id="submenu-content" class="sidebar-submenu hidden pl-9 pr-2 py-1 space-y-0.5">
-              <button type="button" id="subnav-content-voice" onclick="openSettingFromSidebar('voice', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
+              <!-- 1.2 Nội dung -->
+              <button type="button" id="subnav-settings-content" onclick="openSettingSection('content', this)" class="submenu-item w-full text-left py-2 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
-                <span>Tone of voice</span>
-              </button>
-              <button type="button" id="subnav-content-specs" onclick="openSettingFromSidebar('specs', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
-                <span>Quy chuẩn nội dung</span>
+                <span>Nội dung</span>
               </button>
             </div>
           </div>
@@ -479,43 +456,39 @@
             
             <!-- Rank Math Nav Tabs List -->
             <nav class="flex lg:flex-col overflow-x-auto lg:overflow-visible gap-1 pb-1 lg:pb-0" id="rankmath-settings-nav">
-              <!-- 1. General -->
+              <!-- Group 1.1: GIỚI THIỆU -->
+              <div class="hidden lg:block px-3 pt-2 pb-1 text-[10px] font-black uppercase text-blue-600 tracking-wider">
+                1.1 GIỚI THIỆU
+              </div>
               <button type="button" onclick="switchSettingSubPage('general', this)" data-tab="general" id="rm-tab-general" class="rankmath-tab-btn flex-shrink-0 whitespace-nowrap lg:whitespace-normal w-auto lg:w-full text-left py-3 px-3.5 rounded-xl font-bold text-xs transition-all flex items-center gap-3 border-l-4 border-potato-cyan bg-sky-50 text-potato-navy shadow-2xs">
                 <i class="fa-solid fa-landmark text-potato-cyan text-sm w-5 text-center flex-shrink-0"></i>
                 <span class="flex-1">Tổng quan</span>
               </button>
-
-              <!-- 2. Contact -->
               <button type="button" onclick="switchSettingSubPage('contact', this)" data-tab="contact" id="rm-tab-contact" class="rankmath-tab-btn flex-shrink-0 whitespace-nowrap lg:whitespace-normal w-auto lg:w-full text-left py-3 px-3.5 rounded-xl font-medium text-xs text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all flex items-center gap-3 border-l-4 border-transparent">
                 <i class="fa-solid fa-address-book text-slate-400 text-sm w-5 text-center flex-shrink-0"></i>
                 <span class="flex-1">Thông tin liên hệ</span>
               </button>
-
-              <!-- 3. Voice -->
-              <button type="button" onclick="switchSettingSubPage('voice', this)" data-tab="voice" id="rm-tab-voice" class="rankmath-tab-btn flex-shrink-0 whitespace-nowrap lg:whitespace-normal w-auto lg:w-full text-left py-3 px-3.5 rounded-xl font-medium text-xs text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all flex items-center gap-3 border-l-4 border-transparent">
-                <i class="fa-solid fa-comments text-slate-400 text-sm w-5 text-center flex-shrink-0"></i>
-                <span class="flex-1">Tone of voice</span>
+              <button type="button" onclick="switchSettingSubPage('visual', this)" data-tab="visual" id="rm-tab-visual" class="rankmath-tab-btn flex-shrink-0 whitespace-nowrap lg:whitespace-normal w-auto lg:w-full text-left py-3 px-3.5 rounded-xl font-medium text-xs text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all flex items-center gap-3 border-l-4 border-transparent">
+                <i class="fa-solid fa-palette text-slate-400 text-sm w-5 text-center flex-shrink-0"></i>
+                <span class="flex-1">Nhận diện thương hiệu</span>
               </button>
-
-              <!-- 4. Courses -->
               <button type="button" onclick="switchSettingSubPage('courses', this)" data-tab="courses" id="rm-tab-courses" class="rankmath-tab-btn flex-shrink-0 whitespace-nowrap lg:whitespace-normal w-auto lg:w-full text-left py-3 px-3.5 rounded-xl font-medium text-xs text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all flex items-center gap-3 border-l-4 border-transparent">
                 <i class="fa-solid fa-graduation-cap text-slate-400 text-sm w-5 text-center flex-shrink-0"></i>
                 <span class="flex-1">Chương trình học</span>
               </button>
 
-              <!-- 5. Visual -->
-              <button type="button" onclick="switchSettingSubPage('visual', this)" data-tab="visual" id="rm-tab-visual" class="rankmath-tab-btn flex-shrink-0 whitespace-nowrap lg:whitespace-normal w-auto lg:w-full text-left py-3 px-3.5 rounded-xl font-medium text-xs text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all flex items-center gap-3 border-l-4 border-transparent">
-                <i class="fa-solid fa-palette text-slate-400 text-sm w-5 text-center flex-shrink-0"></i>
-                <span class="flex-1">Nhận diện thương hiệu</span>
+              <!-- Group 1.2: NỘI DUNG -->
+              <div class="hidden lg:block px-3 pt-4 pb-1 text-[10px] font-black uppercase text-rose-600 tracking-wider border-t border-slate-200/80 mt-2">
+                1.2 NỘI DUNG
+              </div>
+              <button type="button" onclick="switchSettingSubPage('voice', this)" data-tab="voice" id="rm-tab-voice" class="rankmath-tab-btn flex-shrink-0 whitespace-nowrap lg:whitespace-normal w-auto lg:w-full text-left py-3 px-3.5 rounded-xl font-medium text-xs text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all flex items-center gap-3 border-l-4 border-transparent">
+                <i class="fa-solid fa-comments text-slate-400 text-sm w-5 text-center flex-shrink-0"></i>
+                <span class="flex-1">Tone of voice</span>
               </button>
-
-              <!-- 6. Specs -->
               <button type="button" onclick="switchSettingSubPage('specs', this)" data-tab="specs" id="rm-tab-specs" class="rankmath-tab-btn flex-shrink-0 whitespace-nowrap lg:whitespace-normal w-auto lg:w-full text-left py-3 px-3.5 rounded-xl font-medium text-xs text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all flex items-center gap-3 border-l-4 border-transparent">
                 <i class="fa-solid fa-clipboard-check text-slate-400 text-sm w-5 text-center flex-shrink-0"></i>
                 <span class="flex-1">Quy chuẩn nội dung</span>
               </button>
-
-              
             </nav>
           </div>
 
@@ -2422,19 +2395,9 @@
       const mainElem = document.querySelector('main');
       if (mainElem) mainElem.scrollTop = 0;
 
-      // 10. Special actions for 'intro', 'content', and 'about' tabs
-      if (tabId === 'intro') {
-        openSettingFromSidebar('general', document.getElementById('subnav-intro-general'));
-        if (typeof syncAboutUsQuietly === 'function') {
-          syncAboutUsQuietly();
-        }
-      } else if (tabId === 'content') {
-        openSettingFromSidebar('voice', document.getElementById('subnav-content-voice'));
-        if (typeof syncAboutUsQuietly === 'function') {
-          syncAboutUsQuietly();
-        }
-      } else if (tabId === 'about') {
-        switchSettingSubPage(activeSettingPageKey || 'general');
+      // 10. Special actions when entering About tab (Cài đặt)
+      if (tabId === 'about') {
+        openSettingSection('intro', document.getElementById('subnav-settings-intro'));
         if (typeof syncAboutUsQuietly === 'function') {
           syncAboutUsQuietly();
         }
@@ -2922,48 +2885,42 @@
         title: 'Tổng Quan',
         desc: 'Quản trị tên thương hiệu chính thức, slogan, định vị phân khúc và thông điệp cốt lõi Potato English.',
         icon: 'fa-solid fa-landmark',
-        parentNav: 'intro',
-        subnavId: 'subnav-intro-general'
+        section: 'intro'
       },
       'contact': {
         group: '2. LIÊN HỆ & CƠ SỞ',
         title: 'Thông Tin Liên Hệ & Chi Nhánh',
         desc: 'Quản trị địa chỉ trụ sở, cơ sở đào tạo, hotline tuyển sinh, email, website và các liên kết mạng xã hội chính thức.',
         icon: 'fa-solid fa-address-book',
-        parentNav: 'intro',
-        subnavId: 'subnav-intro-contact'
+        section: 'intro'
       },
       'visual': {
         group: '5. NHẬN DIỆN THỊ GIÁC',
         title: 'Nhận Diện Thương Hiệu',
         desc: 'Hệ màu chuẩn (#00AEEF, #F5A623, #0B2545), Typography, Logo Drive, đồng phục cyan và Mascot Potato.',
         icon: 'fa-solid fa-palette',
-        parentNav: 'intro',
-        subnavId: 'subnav-intro-visual'
-      },
-      'voice': {
-        group: '3. TÔN CHỈ & TONE OF VOICE',
-        title: 'Tone Of Voice',
-        desc: 'Định hướng giọng văn, phong cách thương hiệu, nguyên tắc xưng hô thầy/cô và các trụ cột nội dung chính của Potato English.',
-        icon: 'fa-solid fa-comments',
-        parentNav: 'content',
-        subnavId: 'subnav-content-voice'
-      },
-      'specs': {
-        group: '6. QUY CHUẨN NỘI DUNG',
-        title: 'Quy Chuẩn Nội Dung & Khung Giờ',
-        desc: 'Hashtag bắt buộc đa kênh, quy định bảo vệ hình ảnh học viên và khung giờ vàng phát sóng truyền thông.',
-        icon: 'fa-solid fa-clipboard-check',
-        parentNav: 'content',
-        subnavId: 'subnav-content-specs'
+        section: 'intro'
       },
       'courses': {
         group: '4. CHƯƠNG TRÌNH HỌC',
         title: 'Chương Trình Học & Đào Tạo',
         desc: 'Độ tuổi tuyển sinh, các hệ đào tạo tiếng Anh chính và cam kết chuẩn đầu ra học viên Potato English.',
         icon: 'fa-solid fa-graduation-cap',
-        parentNav: 'intro',
-        subnavId: ''
+        section: 'intro'
+      },
+      'voice': {
+        group: '3. TÔN CHỈ & TONE OF VOICE',
+        title: 'Tone Of Voice',
+        desc: 'Định hướng giọng văn, phong cách thương hiệu, nguyên tắc xưng hô thầy/cô và các trụ cột nội dung chính của Potato English.',
+        icon: 'fa-solid fa-comments',
+        section: 'content'
+      },
+      'specs': {
+        group: '6. QUY CHUẨN NỘI DUNG',
+        title: 'Quy Chuẩn Nội Dung & Khung Giờ',
+        desc: 'Hashtag bắt buộc đa kênh, quy định bảo vệ hình ảnh học viên và khung giờ vàng phát sóng truyền thông.',
+        icon: 'fa-solid fa-clipboard-check',
+        section: 'content'
       }
     };
 
@@ -2977,55 +2934,55 @@
         .replace(/'/g, '&#039;');
     }
 
-    function openSettingFromSidebar(pageKey, subBtnElem) {
-      const config = SETTING_SUBPAGES[pageKey];
-      if (!config) return;
-
-      const parentNavId = config.parentNav || 'intro';
-
-      // 1. Switch tab to panel-about
+    function openSettingSection(sectionKey, subBtnElem) {
+      // 1. Hide all panels, show panel-about
       const panels = document.querySelectorAll('.module-panel');
       panels.forEach(p => p.classList.add('hidden'));
       const targetPanel = document.getElementById('panel-about');
       if (targetPanel) targetPanel.classList.remove('hidden');
 
-      // 2. Activate parent nav button
+      // 2. Activate nav-about parent button
       const navBtns = document.querySelectorAll('.nav-btn');
       navBtns.forEach(btn => {
         btn.classList.remove('bg-potato-softBlue', 'text-potato-navy', 'font-bold', 'border', 'border-potato-cyan/20');
         btn.classList.add('text-slate-600');
       });
-      const parentNav = document.getElementById(`nav-${parentNavId}`);
-      if (parentNav) {
-        parentNav.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold', 'border', 'border-potato-cyan/20');
-        parentNav.classList.remove('text-slate-600');
-        const ch = parentNav.querySelector('.menu-chevron');
+      const navAbout = document.getElementById('nav-about');
+      if (navAbout) {
+        navAbout.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold', 'border', 'border-potato-cyan/20');
+        navAbout.classList.remove('text-slate-600');
+        const ch = navAbout.querySelector('.menu-chevron');
         if (ch) {
           ch.classList.remove('fa-chevron-right');
           ch.classList.add('fa-chevron-down');
         }
       }
 
-      // 3. Keep target submenu open, close others
+      // 3. Keep submenu-about open, close others
       const submenus = document.querySelectorAll('.sidebar-submenu');
       submenus.forEach(sm => {
-        if (sm.id === `submenu-${parentNavId}`) sm.classList.remove('hidden');
+        if (sm.id === 'submenu-about') sm.classList.remove('hidden');
         else sm.classList.add('hidden');
       });
 
-      // 4. Highlight sub-item in Main Sidebar
-      const allSubBtns = document.querySelectorAll('.sidebar-submenu .submenu-item');
-      allSubBtns.forEach(b => {
+      // 4. Highlight target submenu item (1.1 Giới thiệu or 1.2 Nội dung)
+      const subBtns = document.querySelectorAll('#submenu-about .submenu-item');
+      subBtns.forEach(b => {
         b.classList.remove('bg-potato-softBlue', 'text-potato-navy', 'font-bold');
         b.classList.add('text-slate-500');
       });
-      if (subBtnElem) {
-        subBtnElem.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold');
-        subBtnElem.classList.remove('text-slate-500');
+      const targetSub = subBtnElem || document.getElementById(`subnav-settings-${sectionKey}`);
+      if (targetSub) {
+        targetSub.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold');
+        targetSub.classList.remove('text-slate-500');
       }
 
-      // 5. Activate tab in Rank Math Widget
-      switchSettingSubPage(pageKey);
+      // 5. Select default tab for section
+      if (sectionKey === 'content') {
+        switchSettingSubPage('voice');
+      } else {
+        switchSettingSubPage('general');
+      }
     }
 
     function switchSettingSubPage(pageKey, btnElem) {
@@ -3041,43 +2998,41 @@
       const targetPanel = document.getElementById('panel-about');
       if (targetPanel) targetPanel.classList.remove('hidden');
 
-      // 2. Highlight parent nav in Sidebar
-      const parentNavId = config.parentNav || 'intro';
+      // 2. Activate nav-about parent button
       const navBtns = document.querySelectorAll('.nav-btn');
       navBtns.forEach(btn => {
         btn.classList.remove('bg-potato-softBlue', 'text-potato-navy', 'font-bold', 'border', 'border-potato-cyan/20');
         btn.classList.add('text-slate-600');
       });
-      const parentNav = document.getElementById(`nav-${parentNavId}`);
-      if (parentNav) {
-        parentNav.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold', 'border', 'border-potato-cyan/20');
-        parentNav.classList.remove('text-slate-600');
-        const ch = parentNav.querySelector('.menu-chevron');
+      const navAbout = document.getElementById('nav-about');
+      if (navAbout) {
+        navAbout.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold', 'border', 'border-potato-cyan/20');
+        navAbout.classList.remove('text-slate-600');
+        const ch = navAbout.querySelector('.menu-chevron');
         if (ch) {
           ch.classList.remove('fa-chevron-right');
           ch.classList.add('fa-chevron-down');
         }
       }
 
-      // 3. Open parent submenu in Sidebar, close others
+      // 3. Keep submenu-about open, close others
       const submenus = document.querySelectorAll('.sidebar-submenu');
       submenus.forEach(sm => {
-        if (sm.id === `submenu-${parentNavId}`) sm.classList.remove('hidden');
+        if (sm.id === 'submenu-about') sm.classList.remove('hidden');
         else sm.classList.add('hidden');
       });
 
-      // 4. Highlight sub-item in Sidebar if matching
-      const allSubBtns = document.querySelectorAll('.sidebar-submenu .submenu-item');
-      allSubBtns.forEach(b => {
+      // 4. Highlight corresponding sub-item in Main Sidebar (1.1 Giới thiệu or 1.2 Nội dung)
+      const subBtns = document.querySelectorAll('#submenu-about .submenu-item');
+      subBtns.forEach(b => {
         b.classList.remove('bg-potato-softBlue', 'text-potato-navy', 'font-bold');
         b.classList.add('text-slate-500');
       });
-      if (config.subnavId) {
-        const subBtn = document.getElementById(config.subnavId);
-        if (subBtn) {
-          subBtn.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold');
-          subBtn.classList.remove('text-slate-500');
-        }
+      const sectionKey = config.section || 'intro';
+      const targetSub = document.getElementById(`subnav-settings-${sectionKey}`);
+      if (targetSub) {
+        targetSub.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold');
+        targetSub.classList.remove('text-slate-500');
       }
 
       // 5. Highlight Rank Math Widget Left Nav Tab
