@@ -80,6 +80,10 @@ module.exports = async (req, res) => {
     for (let idx = 1; idx < rows.length; idx++) {
       const r = rows[idx];
       if (!r || r.length === 0 || (r.length === 1 && !r[0])) continue;
+      const itemName = (r[1] || '').toUpperCase();
+      if (itemName.includes('PHÁP LÝ BẮT BUỘC') || itemName.includes('CẢM XÚC')) {
+        continue; // Excluded from Webapp settings as requested
+      }
       items.push({
         rowIndex: idx + 1,
         group: r[0] || '',

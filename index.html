@@ -294,14 +294,50 @@
             </div>
           </div>
 
-          <!-- 6. Cài Đặt -->
+          <!-- 6. Giới Thiệu -->
           <div class="sidebar-group">
-            <button onclick="switchTab('about')" id="nav-about" class="sidebar-item nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-potato-navy transition-all">
+            <button onclick="switchTab('intro')" id="nav-intro" class="sidebar-item nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-potato-navy transition-all">
               <div class="flex items-center gap-3">
-                <i class="fa-solid fa-sliders text-base w-5 text-center text-emerald-600"></i>
-                <span class="sidebar-label font-bold">Cài đặt</span>
+                <i class="fa-solid fa-circle-info text-base w-5 text-center text-blue-600"></i>
+                <span class="sidebar-label font-bold">Giới thiệu</span>
               </div>
+              <i class="menu-chevron fa-solid fa-chevron-right text-[10px] text-slate-400 transition-transform"></i>
             </button>
+            <div id="submenu-intro" class="sidebar-submenu hidden pl-9 pr-2 py-1 space-y-0.5">
+              <button type="button" id="subnav-intro-general" onclick="openSettingFromSidebar('general', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+                <span>Tổng quan</span>
+              </button>
+              <button type="button" id="subnav-intro-contact" onclick="openSettingFromSidebar('contact', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                <span>Thông tin liên hệ</span>
+              </button>
+              <button type="button" id="subnav-intro-visual" onclick="openSettingFromSidebar('visual', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-indigo-600"></span>
+                <span>Nhận diện thương hiệu</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 7. Nội Dung -->
+          <div class="sidebar-group">
+            <button onclick="switchTab('content')" id="nav-content" class="sidebar-item nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-potato-navy transition-all">
+              <div class="flex items-center gap-3">
+                <i class="fa-solid fa-pen-nib text-base w-5 text-center text-rose-500"></i>
+                <span class="sidebar-label font-bold">Nội dung</span>
+              </div>
+              <i class="menu-chevron fa-solid fa-chevron-right text-[10px] text-slate-400 transition-transform"></i>
+            </button>
+            <div id="submenu-content" class="sidebar-submenu hidden pl-9 pr-2 py-1 space-y-0.5">
+              <button type="button" id="subnav-content-voice" onclick="openSettingFromSidebar('voice', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+                <span>Tone of voice</span>
+              </button>
+              <button type="button" id="subnav-content-specs" onclick="openSettingFromSidebar('specs', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
+                <span>Quy chuẩn nội dung</span>
+              </button>
+            </div>
           </div>
 
         </nav>
@@ -446,7 +482,7 @@
               <!-- 1. General -->
               <button type="button" onclick="switchSettingSubPage('general', this)" data-tab="general" id="rm-tab-general" class="rankmath-tab-btn flex-shrink-0 whitespace-nowrap lg:whitespace-normal w-auto lg:w-full text-left py-3 px-3.5 rounded-xl font-bold text-xs transition-all flex items-center gap-3 border-l-4 border-potato-cyan bg-sky-50 text-potato-navy shadow-2xs">
                 <i class="fa-solid fa-landmark text-potato-cyan text-sm w-5 text-center flex-shrink-0"></i>
-                <span class="flex-1">Tổng quan & Pháp lý</span>
+                <span class="flex-1">Tổng quan</span>
               </button>
 
               <!-- 2. Contact -->
@@ -470,7 +506,7 @@
               <!-- 5. Visual -->
               <button type="button" onclick="switchSettingSubPage('visual', this)" data-tab="visual" id="rm-tab-visual" class="rankmath-tab-btn flex-shrink-0 whitespace-nowrap lg:whitespace-normal w-auto lg:w-full text-left py-3 px-3.5 rounded-xl font-medium text-xs text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all flex items-center gap-3 border-l-4 border-transparent">
                 <i class="fa-solid fa-palette text-slate-400 text-sm w-5 text-center flex-shrink-0"></i>
-                <span class="flex-1">Nhận diện thị giác</span>
+                <span class="flex-1">Nhận diện thương hiệu</span>
               </button>
 
               <!-- 6. Specs -->
@@ -489,7 +525,7 @@
             <!-- Top Title Area Inside Content Pane (Centered Rank Math Style) -->
             <div class="text-center py-7 px-6 border-b border-slate-100 bg-white">
               <h3 id="rankmath-pane-title" class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-                Tổng Quan & Pháp Lý
+                Tổng Quan
               </h3>
               <p id="rankmath-pane-desc" class="text-xs sm:text-sm text-slate-500 mt-1.5 max-w-xl mx-auto leading-relaxed">
                 Quản trị tên thương hiệu chính thức, slogan, định vị phân khúc, thông điệp cốt lõi và giấy phép pháp lý Potato English.
@@ -2386,8 +2422,18 @@
       const mainElem = document.querySelector('main');
       if (mainElem) mainElem.scrollTop = 0;
 
-      // 10. Special action when entering About tab
-      if (tabId === 'about') {
+      // 10. Special actions for 'intro', 'content', and 'about' tabs
+      if (tabId === 'intro') {
+        openSettingFromSidebar('general', document.getElementById('subnav-intro-general'));
+        if (typeof syncAboutUsQuietly === 'function') {
+          syncAboutUsQuietly();
+        }
+      } else if (tabId === 'content') {
+        openSettingFromSidebar('voice', document.getElementById('subnav-content-voice'));
+        if (typeof syncAboutUsQuietly === 'function') {
+          syncAboutUsQuietly();
+        }
+      } else if (tabId === 'about') {
         switchSettingSubPage(activeSettingPageKey || 'general');
         if (typeof syncAboutUsQuietly === 'function') {
           syncAboutUsQuietly();
@@ -2619,251 +2665,237 @@
     // 9. ABOUT US (MASTER BRAND DATABASE) CONTROLLER
     // ===================================================================
     const INITIAL_ABOUT_US_DATA = [
-  {
-    "rowIndex": 2,
-    "group": "1. TỔNG QUAN & PHÁP LÝ",
-    "item": "Tên thương hiệu chính thức",
-    "content": "POTATO ENGLISH",
-    "rule": "Viết hoa toàn bộ hoặc dạng Title Case: Potato English. Tuyệt đối KHÔNG viết tắt."
-  },
-  {
-    "rowIndex": 3,
-    "group": "1. TỔNG QUAN & PHÁP LÝ",
-    "item": "Định vị & Phân khúc",
-    "content": "Môi trường học tiếng Anh trẻ em và thiếu niên (4 – 16 tuổi)",
-    "rule": "Tập trung phân khúc mầm non, tiểu học và THCS tại Bình Dương."
-  },
-  {
-    "rowIndex": 4,
-    "group": "1. TỔNG QUAN & PHÁP LÝ",
-    "item": "Slogan thương hiệu",
-    "content": "NEVER STOP LEARNING",
-    "rule": "Slogan chính thức xuất hiện trên dải ruy băng đỏ của Logo."
-  },
-  {
-    "rowIndex": 5,
-    "group": "1. TỔNG QUAN & PHÁP LÝ",
-    "item": "Thông điệp cốt lõi (One-liner)",
-    "content": "Potato English là môi trường học tiếng Anh dành cho trẻ 4–16 tuổi, giúp các em xây nền tảng vững chắc và tự tin sử dụng tiếng Anh trong học tập lẫn cuộc sống.",
-    "rule": "Bắt buộc lồng ghép vào phần giới thiệu hoặc chân bài viết."
-  },
-  {
-    "rowIndex": 6,
-    "group": "1. TỔNG QUAN & PHÁP LÝ",
-    "item": "Giới thiệu thương hiệu (About Us)",
-    "content": "Potato English là không gian học tiếng Anh ấm áp và thân thiện dành cho trẻ em và thiếu niên tại Bình Dương. Chúng tôi lấy triết lý \"Học qua trải nghiệm - Học bằng niềm vui\" làm trọng tâm, kết hợp các phương pháp trực quan sinh động như Story Spark, Phonics tự nhiên, tương tác thực tế và lớp học sĩ số nhỏ kèm sát từng con. Tại Potato English, mỗi bạn nhỏ đều được tôn trọng sự phát triển riêng biệt, tự tin mở lời mà không sợ sai, từ đó xây dựng nền tảng 4 kỹ năng Nghe - Nói - Đọc - Viết vững chắc và chinh phục các kỳ thi quốc tế Cambridge, IELTS.",
-    "rule": "Văn phong chân thật, mộc mạc, không dùng từ ngữ quảng cáo thổi phồng."
-  },
-  {
-    "rowIndex": 7,
-    "group": "1. TỔNG QUAN & PHÁP LÝ",
-    "item": "QUY ĐỊNH PHÁP LÝ BẮT BUỘC (CẤM TỪ 'TRUNG TÂM')",
-    "content": "Tuyệt đối KHÔNG sử dụng từ \"TRUNG TÂM\" trong bất kỳ văn bản, ấn phẩm hay bài đăng nào (Do doanh nghiệp không có giấy phép thành lập trung tâm ngoại ngữ).\n\nCÁC TỪ THAY THẾ CHUẨN:\n- Potato English\n- Lớp học Potato English\n- Không gian học tập Potato English\n- Ngôi nhà Potato English\n- Thầy cô Potato English\n- Tại 2 cơ sở Phú Cường & Hưng Định",
-    "rule": "VI PHẠM NGHIÊM TRỌNG NẾU DÙNG: 'Trung tâm Potato English', 'Trung tâm tiếng Anh', 'Tại trung tâm'."
-  },
-  {
-    "rowIndex": 8,
-    "group": "1. TỔNG QUAN & PHÁP LÝ",
-    "item": "QUY TẮC CẢM XÚC (CẤM TỪ 'ÁP LỰC')",
-    "content": "Tuyệt đối KHÔNG dùng các cụm từ: \"áp lực\", \"không áp lực\", \"xóa bỏ áp lực điểm số\" (vì vô tình gieo tâm lý căng thẳng vào phụ huynh).\n\nCHUYỂN ĐỔI SANG TỪ TÍCH CỰC:\n- Học bằng niềm vui / Học qua trải nghiệm\n- Học tập nhẹ nhàng, hào hứng khám phá\n- Thoải mái, tự tin mở lời\n- Tiến bộ tự nhiên mỗi ngày",
-    "rule": "Giữ tinh thần tích cực, gần gũi, giúp ba mẹ và các con luôn cảm thấy vui vẻ khi nhắc đến lớp học."
-  },
-  {
-    "rowIndex": 9,
-    "group": "2. LIÊN HỆ & CƠ SỞ",
-    "item": "Hotline tư vấn chính thức",
-    "content": "0918 671 981",
-    "rule": "Hiển thị đồng bộ trên mọi bài đăng và ấn phẩm đồ họa."
-  },
-  {
-    "rowIndex": 10,
-    "group": "2. LIÊN HỆ & CƠ SỞ",
-    "item": "Email tiếp nhận thông tin",
-    "content": "potatoenglishbd@gmail.com",
-    "rule": "Email liên hệ chính thức."
-  },
-  {
-    "rowIndex": 11,
-    "group": "2. LIÊN HỆ & CƠ SỞ",
-    "item": "Website chính thức",
-    "content": "potatoenglish.edu.vn (https://potatoenglish.edu.vn)",
-    "rule": "Kênh thông tin chính thống và bài viết chuyên môn SEO."
-  },
-  {
-    "rowIndex": 12,
-    "group": "2. LIÊN HỆ & CƠ SỞ",
-    "item": "Fanpage Facebook chính thức",
-    "content": "Potato English (https://www.facebook.com/HocAnhVanTotBinhDuong)",
-    "rule": "Định vị là 'Nhật ký lớp học thực tế' (Proof of Life), không đăng bài bán hàng."
-  },
-  {
-    "rowIndex": 13,
-    "group": "2. LIÊN HỆ & CƠ SỞ",
-    "item": "Kênh TikTok chính thức",
-    "content": "Potato English (https://www.tiktok.com/@potatoenglish)",
-    "rule": "Kênh video ngắn 15-30s ghi lại khoảnh khắc bé phản xạ tự nhiên."
-  },
-  {
-    "rowIndex": 14,
-    "group": "2. LIÊN HỆ & CƠ SỞ",
-    "item": "Cơ sở 1 (CS1)",
-    "content": "Số 37 Ngô Quyền, Phường Phú Cường, Thành phố Hồ Chí Minh (TP. Thủ Dầu Một, Bình Dương)",
-    "rule": "Ghi đúng địa chỉ chuẩn theo định dạng thương hiệu."
-  },
-  {
-    "rowIndex": 15,
-    "group": "2. LIÊN HỆ & CƠ SỞ",
-    "item": "Cơ sở 2 (CS2)",
-    "content": "Số 9 KP Hưng Phước, Phường Hưng Định, Thành phố Hồ Chí Minh (TP. Thuận An, Bình Dương)",
-    "rule": "Ghi đúng địa chỉ chuẩn theo định dạng thương hiệu."
-  },
-  {
-    "rowIndex": 16,
-    "group": "2. LIÊN HỆ & CƠ SỞ",
-    "item": "Khối thông tin cố định (Boilerplate)",
-    "content": "📌 Hotline tư vấn: 0918 671 981 | Website: potatoenglish.edu.vn\n📍 Cơ sở 1: Số 37 Ngô Quyền, Phường Phú Cường, Thành phố Hồ Chí Minh.\n📍 Cơ sở 2: Số 9 KP Hưng Phước, Phường Hưng Định, Thành phố Hồ Chí Minh",
-    "rule": "Khối văn bản bắt buộc đặt ở chân các bài đăng Facebook/Website."
-  },
-  {
-    "rowIndex": 17,
-    "group": "3. TÔN CHỈ & TONE OF VOICE",
-    "item": "Triết lý thương hiệu cốt lõi",
-    "content": "BÌNH DỊ - CHÂN THẬT - NÓI ĐÚNG LÀM THẬT - GẦN GỮI NHƯ GIA ĐÌNH",
-    "rule": "Kim chỉ nam cho toàn bộ hoạt động giao tiếp, giảng dạy và marketing."
-  },
-  {
-    "rowIndex": 18,
-    "group": "3. TÔN CHỈ & TONE OF VOICE",
-    "item": "Giọng văn (Tone of Voice)",
-    "content": "Ấm áp, mộc mạc, khiêm tốn, chân thành, tôn trọng phụ huynh và học viên. Dẫn dắt bằng những nỗ lực và nụ cười nhỏ bé mỗi ngày của con.",
-    "rule": "Tuyệt đối KHÔNG dùng giọng văn trịnh thượng, công nghiệp hay phô trương."
-  },
-  {
-    "rowIndex": 19,
-    "group": "3. TÔN CHỈ & TONE OF VOICE",
-    "item": "Từ ngữ cấm kỵ (Blacklist words)",
-    "content": "CẤM: 'Vườn sao', 'Thần đồng', 'Bảng vàng danh giá', 'Xuất sắc vượt trội', 'Độ tuổi vàng', 'Giai đoạn vàng bỏ lỡ sẽ tụt hậu', 'Đăng ký ngay kẻo lỡ', 'Ưu đãi khủng'.",
-    "rule": "Không tạo áp lực tâm lý sợ hãi (FOMO) hoặc hứa hẹn viển vông với phụ huynh."
-  },
-  {
-    "rowIndex": 20,
-    "group": "3. TÔN CHỈ & TONE OF VOICE",
-    "item": "Định vị chức năng Fanpage",
-    "content": "NHẬT KÝ LỚP HỌC THỰC TẾ (PROOF OF LIFE):\n- Duy trì nhịp thở hoạt động của lớp học.\n- Minh chứng phụ huynh thấy lớp học đang diễn ra vui vẻ, học thật, tiến bộ thật.\n- Hạn chế tối đa CTA bán hàng, thay bằng Lời kết tự nhiên ấm áp (Warm Sign-off).",
-    "rule": "Theo chỉ đạo trực tiếp từ Anh Trí và Ban Điều Hành."
-  },
-  {
-    "rowIndex": 21,
-    "group": "4. CHƯƠNG TRÌNH HỌC",
-    "item": "Mầm non: Friendly Kid (4 – 5 tuổi)",
-    "content": "Phương pháp Story Spark: Học tiếng Anh qua 10 câu chuyện & bài hát Series 3. Nhập vai, âm nhạc, vận động, tắm ngôn ngữ tự nhiên 15 phút mỗi buổi. Giúp trẻ dạn dĩ, yêu thích tiếng Anh từ những năm tháng đầu đời.",
-    "rule": "Nhấn mạnh niềm vui, phản xạ tự nhiên, không ép học thuộc lòng máy móc."
-  },
-  {
-    "rowIndex": 22,
-    "group": "4. CHƯƠNG TRÌNH HỌC",
-    "item": "Tiểu học: Happy Junior (6 – 11 tuổi)",
-    "content": "Lộ trình Cambridge Young Learners: Starters (6-8t), Movers (8-10t), Flyers (10-11t). Học qua trải nghiệm, củng cố Phonics, từ vựng nền tảng, phản xạ giao tiếp tự nhiên và chuẩn bị tâm lý tự tin cho các kỳ thi chứng chỉ quốc tế.",
-    "rule": "Cam kết nói đúng làm thật, giúp con tự tin mở lời và vững ngữ pháp trên trường."
-  },
-  {
-    "rowIndex": 23,
-    "group": "4. CHƯƠNG TRÌNH HỌC",
-    "item": "Thiếu niên: Leading Teen (12 – 16 tuổi)",
-    "content": "Lộ trình Cambridge & IELTS Foundation: KET, PET, Pre-IELTS. Rèn luyện tư duy phản biện, làm chủ 4 kỹ năng Nghe - Nói - Đọc - Viết học thuật, bứt phá điểm số trường lớp và xây nền tảng chinh phục 6.5+ IELTS.",
-    "rule": "Đồng hành sát sao theo năng lực từng học viên với sĩ số lớp nhỏ."
-  },
-  {
-    "rowIndex": 24,
-    "group": "5. NHẬN DIỆN THỊ GIÁC",
-    "item": "Logo chính thức",
-    "content": "🔗 Link tải & xem trực tiếp:\nhttps://potatoenglish.edu.vn/wp-content/uploads/2025/12/logo.jpg\n\n📁 Đường dẫn kho nội bộ: media_vault/Potato_English_Logo.jpeg\nChi tiết: 3 chú Mascot Khoai Tây Đội Nón Cử Nhân + Chữ 'POTATO' 6 màu cách điệu + Slogan 'NEVER STOP LEARNING' trên dải ruy băng đỏ.",
-    "rule": "BẮT BUỘC dùng asset chính thức. Tuyệt đối KHÔNG gõ lại bằng font thường hoặc tự vẽ lại."
-  },
-  {
-    "rowIndex": 25,
-    "group": "5. NHẬN DIỆN THỊ GIÁC",
-    "item": "Mascot nhân vật đại diện",
-    "content": "Chú khoai tây 'Tato' phiên bản 2D/3D ngộ nghĩnh, biểu cảm thân thiện, gần gũi như người bạn nhỏ của các con.",
-    "rule": "Xuất hiện trong các ấn phẩm mầm non, tranh vẽ doodle và series hoạt hình."
-  },
-  {
-    "rowIndex": 26,
-    "group": "5. NHẬN DIỆN THỊ GIÁC",
-    "item": "Đồng phục học viên",
-    "content": "Áo thun Polo màu Xanh Cyan (#17AEDC / #00AEEF) có thêu/in Logo Potato English bên ngực trái.",
-    "rule": "Tất cả ảnh học viên thật hoặc đồ họa phải đảm bảo màu áo đồng phục chuẩn này."
-  },
-  {
-    "rowIndex": 27,
-    "group": "5. NHẬN DIỆN THỊ GIÁC",
-    "item": "Màu sắc: Deep Ocean Navy",
-    "content": "Mã HEX: #003F75 | RGB(0, 63, 117)\nCông dụng: Tiêu đề chính (H1, H2), khối cấu trúc bảng, tên học viên vinh danh. Thể hiện sự đĩnh đạc, tri thức và đồng bộ website.",
-    "rule": "Màu chủ đạo cấp 1 (Primary Dark)."
-  },
-  {
-    "rowIndex": 28,
-    "group": "5. NHẬN DIỆN THỊ GIÁC",
-    "item": "Màu sắc: Vibrant Cyan Blue",
-    "content": "Mã HEX: #00AEEF | RGB(0, 174, 239)\nCông dụng: Màu thương hiệu đặc trưng trên website (--bricks-color-meuruq), tag vinh danh, nút bấm nổi bật, icon accent.",
-    "rule": "Màu thương hiệu nổi bật (Brand Signature Blue)."
-  },
-  {
-    "rowIndex": 29,
-    "group": "5. NHẬN DIỆN THỊ GIÁC",
-    "item": "Màu sắc: Trust Blue",
-    "content": "Mã HEX: #1B75BC | RGB(27, 117, 188)\nCông dụng: Thanh điều hướng, dải footer chân trang, khung viền thương hiệu truyền thống.",
-    "rule": "Màu tin cậy truyền thống."
-  },
-  {
-    "rowIndex": 30,
-    "group": "5. NHẬN DIỆN THỊ GIÁC",
-    "item": "Màu sắc: Energy Red",
-    "content": "Mã HEX: #E53935 | RGB(229, 57, 53)\nCông dụng: Dải ruy băng tiêu đề, điểm nhấn headline, nút báo động/sự kiện đặc biệt.",
-    "rule": "Màu năng lượng, nhiệt huyết."
-  },
-  {
-    "rowIndex": 31,
-    "group": "5. NHẬN DIỆN THỊ GIÁC",
-    "item": "Màu sắc: Potato Tan & Yellow",
-    "content": "Mã HEX Potato Tan: #D49A5B (Vàng khoai tây ấm)\nMã HEX Creative Yellow: #FFD511 / #FCC018 (Vàng sáng tạo)\nCông dụng: Viền oval, khung thẻ, dải sóng lượn, highlight từ vựng.",
-    "rule": "Màu ấm áp, gần gũi, kích thích sáng tạo."
-  },
-  {
-    "rowIndex": 32,
-    "group": "5. NHẬN DIỆN THỊ GIÁC",
-    "item": "Màu sắc: Nền chủ đạo (Background)",
-    "content": "Mã HEX: #FFFFFF (Trắng tươi) & #FFF6E9 / #FDFBF7 (Kem ấm sáng)\nCông dụng: Chiếm 60% diện tích không gian thiết kế, tạo cảm giác thoáng đãng, ấm cúng và sạch sẽ.",
-    "rule": "Tuyệt đối không dùng nền tối đen hoặc màu neon chói mắt."
-  },
-  {
-    "rowIndex": 33,
-    "group": "5. NHẬN DIỆN THỊ GIÁC",
-    "item": "Phong cách thiết kế chuẩn (Official Style)",
-    "content": "OFFICIAL DOODLE UI STYLE:\n1. Nền kem ấm #FDFBF7 phủ họa tiết doodle nét mảnh (sách, bút chì, ABC, sao).\n2. Logo Potato chính giữa phía trên.\n3. Tiêu đề dạng viên thuốc bo tròn (Rounded Pill).\n4. Thẻ trắng trung tâm bo góc đổ bóng mờ (White Rounded Card).\n5. Dải footer xanh #1B75BC hiển thị tên thương hiệu & 2 cơ sở.",
-    "rule": "Phong cách thiết kế chính thức duy nhất được phê duyệt cho toàn bộ ấn phẩm Potato English."
-  },
-  {
-    "rowIndex": 34,
-    "group": "6. QUY CHUẨN NỘI DUNG",
-    "item": "Quy chuẩn Thẻ tag (Hashtags)",
-    "content": "Mỗi bài đăng Facebook/TikTok BẮT BUỘC có ĐÚNG 5 thẻ tags đặt ở cuối:\n- 3 Thẻ tag thương hiệu: #PotatoEnglish và chọn 2 trong nhóm (#FriendlyKid, #HappyJunior, #LeadingTeen, #Starters, #Movers, #Flyers, #Pre_Ielts, #TiengAnhMamNon)\n- 2 Thẻ tag theo ngữ cảnh bài: (#KhaiGiang2026, #StorySpark, #VinhDanhHocVien, #TrungThu2026, #LopHocNho, #HocTiengAnhMoiNgay...)",
-    "rule": "Tuân thủ nghiêm ngặt cấu trúc 3 core + 2 topic."
-  },
-  {
-    "rowIndex": 35,
-    "group": "6. QUY CHUẨN NỘI DUNG",
-    "item": "Quy chuẩn kích thước hình ảnh",
-    "content": "1. Facebook Hero Banner: Tỷ lệ 3:2 (1200 x 800px) - Safe margin >= 100px. CẤM dùng 16:9 vì sẽ bị cắt mép trên Facebook.\n2. Facebook Child Cards: 1080 x 1080px (1:1).\n3. Video TikTok / Reels: 1080 x 1920px (9:16).\n4. Website Banner: 1200 x 630px hoặc 1920 x 1080px.",
-    "rule": "Đảm bảo đúng tỷ lệ kỹ thuật từng nền tảng."
-  },
-  {
-    "rowIndex": 36,
-    "group": "6. QUY CHUẨN NỘI DUNG",
-    "item": "Xử lý ảnh học viên thật (Enhancement SOP)",
-    "content": "BẮT BUỘC nâng cấp chất lượng ảnh chụp thật trước khi thiết kế:\n- Brightness: +15% đến +20%\n- Contrast: +5% đến +10%\n- Color Vibrance: +15% đến +25%\nGiúp da bé sáng hồng tự nhiên, áo đồng phục tươi tắn và lớp học bừng sáng.",
-    "rule": "Không để ảnh chụp tối, ám vàng hay mờ nhòe lên bài truyền thông."
-  }
+      {
+            "rowIndex": 2,
+            "group": "1. TỔNG QUAN & PHÁP LÝ",
+            "item": "Tên thương hiệu chính thức",
+            "content": "POTATO ENGLISH",
+            "rule": "Viết hoa toàn bộ hoặc dạng Title Case: Potato English. Tuyệt đối KHÔNG viết tắt."
+      },
+      {
+            "rowIndex": 3,
+            "group": "1. TỔNG QUAN & PHÁP LÝ",
+            "item": "Định vị & Phân khúc",
+            "content": "Môi trường học tiếng Anh trẻ em và thiếu niên (4 – 16 tuổi)",
+            "rule": "Tập trung phân khúc mầm non, tiểu học và THCS tại Bình Dương."
+      },
+      {
+            "rowIndex": 4,
+            "group": "1. TỔNG QUAN & PHÁP LÝ",
+            "item": "Slogan thương hiệu",
+            "content": "NEVER STOP LEARNING",
+            "rule": "Slogan chính thức xuất hiện trên dải ruy băng đỏ của Logo."
+      },
+      {
+            "rowIndex": 5,
+            "group": "1. TỔNG QUAN & PHÁP LÝ",
+            "item": "Thông điệp cốt lõi (One-liner)",
+            "content": "Potato English là môi trường học tiếng Anh dành cho trẻ 4–16 tuổi, giúp các em xây nền tảng vững chắc và tự tin sử dụng tiếng Anh trong học tập lẫn cuộc sống.",
+            "rule": "Bắt buộc lồng ghép vào phần giới thiệu hoặc chân bài viết."
+      },
+      {
+            "rowIndex": 6,
+            "group": "1. TỔNG QUAN & PHÁP LÝ",
+            "item": "Giới thiệu thương hiệu (About Us)",
+            "content": "Potato English là không gian học tiếng Anh ấm áp và thân thiện dành cho trẻ em và thiếu niên tại Bình Dương. Chúng tôi lấy triết lý \"Học qua trải nghiệm - Học bằng niềm vui\" làm trọng tâm, kết hợp các phương pháp trực quan sinh động như Story Spark, Phonics tự nhiên, tương tác thực tế và lớp học sĩ số nhỏ kèm sát từng con. Tại Potato English, mỗi bạn nhỏ đều được tôn trọng sự phát triển riêng biệt, tự tin mở lời mà không sợ sai, từ đó xây dựng nền tảng 4 kỹ năng Nghe - Nói - Đọc - Viết vững chắc và chinh phục các kỳ thi quốc tế Cambridge, IELTS.",
+            "rule": "Văn phong chân thật, mộc mạc, không dùng từ ngữ quảng cáo thổi phồng."
+      },
+      {
+            "rowIndex": 9,
+            "group": "2. LIÊN HỆ & CƠ SỞ",
+            "item": "Hotline tư vấn chính thức",
+            "content": "0918 671 981",
+            "rule": "Hiển thị đồng bộ trên mọi bài đăng và ấn phẩm đồ họa."
+      },
+      {
+            "rowIndex": 10,
+            "group": "2. LIÊN HỆ & CƠ SỞ",
+            "item": "Email tiếp nhận thông tin",
+            "content": "potatoenglishbd@gmail.com",
+            "rule": "Email liên hệ chính thức."
+      },
+      {
+            "rowIndex": 11,
+            "group": "2. LIÊN HỆ & CƠ SỞ",
+            "item": "Website chính thức",
+            "content": "potatoenglish.edu.vn (https://potatoenglish.edu.vn)",
+            "rule": "Kênh thông tin chính thống và bài viết chuyên môn SEO."
+      },
+      {
+            "rowIndex": 12,
+            "group": "2. LIÊN HỆ & CƠ SỞ",
+            "item": "Fanpage Facebook chính thức",
+            "content": "Potato English (https://www.facebook.com/HocAnhVanTotBinhDuong)",
+            "rule": "Định vị là 'Nhật ký lớp học thực tế' (Proof of Life), không đăng bài bán hàng."
+      },
+      {
+            "rowIndex": 13,
+            "group": "2. LIÊN HỆ & CƠ SỞ",
+            "item": "Kênh TikTok chính thức",
+            "content": "Potato English (https://www.tiktok.com/@potatoenglish)",
+            "rule": "Kênh video ngắn 15-30s ghi lại khoảnh khắc bé phản xạ tự nhiên."
+      },
+      {
+            "rowIndex": 14,
+            "group": "2. LIÊN HỆ & CƠ SỞ",
+            "item": "Cơ sở 1 (CS1)",
+            "content": "Số 37 Ngô Quyền, Phường Phú Cường, Thành phố Hồ Chí Minh (TP. Thủ Dầu Một, Bình Dương)",
+            "rule": "Ghi đúng địa chỉ chuẩn theo định dạng thương hiệu."
+      },
+      {
+            "rowIndex": 15,
+            "group": "2. LIÊN HỆ & CƠ SỞ",
+            "item": "Cơ sở 2 (CS2)",
+            "content": "Số 9 KP Hưng Phước, Phường Hưng Định, Thành phố Hồ Chí Minh (TP. Thuận An, Bình Dương)",
+            "rule": "Ghi đúng địa chỉ chuẩn theo định dạng thương hiệu."
+      },
+      {
+            "rowIndex": 16,
+            "group": "2. LIÊN HỆ & CƠ SỞ",
+            "item": "Khối thông tin cố định (Boilerplate)",
+            "content": "📌 Hotline tư vấn: 0918 671 981 | Website: potatoenglish.edu.vn\n📍 Cơ sở 1: Số 37 Ngô Quyền, Phường Phú Cường, Thành phố Hồ Chí Minh.\n📍 Cơ sở 2: Số 9 KP Hưng Phước, Phường Hưng Định, Thành phố Hồ Chí Minh",
+            "rule": "Khối văn bản bắt buộc đặt ở chân các bài đăng Facebook/Website."
+      },
+      {
+            "rowIndex": 17,
+            "group": "3. TÔN CHỈ & TONE OF VOICE",
+            "item": "Triết lý thương hiệu cốt lõi",
+            "content": "BÌNH DỊ - CHÂN THẬT - NÓI ĐÚNG LÀM THẬT - GẦN GỮI NHƯ GIA ĐÌNH",
+            "rule": "Kim chỉ nam cho toàn bộ hoạt động giao tiếp, giảng dạy và marketing."
+      },
+      {
+            "rowIndex": 18,
+            "group": "3. TÔN CHỈ & TONE OF VOICE",
+            "item": "Giọng văn (Tone of Voice)",
+            "content": "Ấm áp, mộc mạc, khiêm tốn, chân thành, tôn trọng phụ huynh và học viên. Dẫn dắt bằng những nỗ lực và nụ cười nhỏ bé mỗi ngày của con.",
+            "rule": "Tuyệt đối KHÔNG dùng giọng văn trịnh thượng, công nghiệp hay phô trương."
+      },
+      {
+            "rowIndex": 19,
+            "group": "3. TÔN CHỈ & TONE OF VOICE",
+            "item": "Từ ngữ cấm kỵ (Blacklist words)",
+            "content": "CẤM: 'Vườn sao', 'Thần đồng', 'Bảng vàng danh giá', 'Xuất sắc vượt trội', 'Độ tuổi vàng', 'Giai đoạn vàng bỏ lỡ sẽ tụt hậu', 'Đăng ký ngay kẻo lỡ', 'Ưu đãi khủng'.",
+            "rule": "Không tạo áp lực tâm lý sợ hãi (FOMO) hoặc hứa hẹn viển vông với phụ huynh."
+      },
+      {
+            "rowIndex": 20,
+            "group": "3. TÔN CHỈ & TONE OF VOICE",
+            "item": "Định vị chức năng Fanpage",
+            "content": "NHẬT KÝ LỚP HỌC THỰC TẾ (PROOF OF LIFE):\n- Duy trì nhịp thở hoạt động của lớp học.\n- Minh chứng phụ huynh thấy lớp học đang diễn ra vui vẻ, học thật, tiến bộ thật.\n- Hạn chế tối đa CTA bán hàng, thay bằng Lời kết tự nhiên ấm áp (Warm Sign-off).",
+            "rule": "Theo chỉ đạo trực tiếp từ Anh Trí và Ban Điều Hành."
+      },
+      {
+            "rowIndex": 21,
+            "group": "4. CHƯƠNG TRÌNH HỌC",
+            "item": "Mầm non: Friendly Kid (4 – 5 tuổi)",
+            "content": "Phương pháp Story Spark: Học tiếng Anh qua 10 câu chuyện & bài hát Series 3. Nhập vai, âm nhạc, vận động, tắm ngôn ngữ tự nhiên 15 phút mỗi buổi. Giúp trẻ dạn dĩ, yêu thích tiếng Anh từ những năm tháng đầu đời.",
+            "rule": "Nhấn mạnh niềm vui, phản xạ tự nhiên, không ép học thuộc lòng máy móc."
+      },
+      {
+            "rowIndex": 22,
+            "group": "4. CHƯƠNG TRÌNH HỌC",
+            "item": "Tiểu học: Happy Junior (6 – 11 tuổi)",
+            "content": "Lộ trình Cambridge Young Learners: Starters (6-8t), Movers (8-10t), Flyers (10-11t). Học qua trải nghiệm, củng cố Phonics, từ vựng nền tảng, phản xạ giao tiếp tự nhiên và chuẩn bị tâm lý tự tin cho các kỳ thi chứng chỉ quốc tế.",
+            "rule": "Cam kết nói đúng làm thật, giúp con tự tin mở lời và vững ngữ pháp trên trường."
+      },
+      {
+            "rowIndex": 23,
+            "group": "4. CHƯƠNG TRÌNH HỌC",
+            "item": "Thiếu niên: Leading Teen (12 – 16 tuổi)",
+            "content": "Lộ trình Cambridge & IELTS Foundation: KET, PET, Pre-IELTS. Rèn luyện tư duy phản biện, làm chủ 4 kỹ năng Nghe - Nói - Đọc - Viết học thuật, bứt phá điểm số trường lớp và xây nền tảng chinh phục 6.5+ IELTS.",
+            "rule": "Đồng hành sát sao theo năng lực từng học viên với sĩ số lớp nhỏ."
+      },
+      {
+            "rowIndex": 24,
+            "group": "5. NHẬN DIỆN THỊ GIÁC",
+            "item": "Logo chính thức",
+            "content": "🔗 Link tải & xem trực tiếp:\nhttps://potatoenglish.edu.vn/wp-content/uploads/2025/12/logo.jpg\n\n📁 Đường dẫn kho nội bộ: media_vault/Potato_English_Logo.jpeg\nChi tiết: 3 chú Mascot Khoai Tây Đội Nón Cử Nhân + Chữ 'POTATO' 6 màu cách điệu + Slogan 'NEVER STOP LEARNING' trên dải ruy băng đỏ.",
+            "rule": "BẮT BUỘC dùng asset chính thức. Tuyệt đối KHÔNG gõ lại bằng font thường hoặc tự vẽ lại."
+      },
+      {
+            "rowIndex": 25,
+            "group": "5. NHẬN DIỆN THỊ GIÁC",
+            "item": "Mascot nhân vật đại diện",
+            "content": "Chú khoai tây 'Tato' phiên bản 2D/3D ngộ nghĩnh, biểu cảm thân thiện, gần gũi như người bạn nhỏ của các con.",
+            "rule": "Xuất hiện trong các ấn phẩm mầm non, tranh vẽ doodle và series hoạt hình."
+      },
+      {
+            "rowIndex": 26,
+            "group": "5. NHẬN DIỆN THỊ GIÁC",
+            "item": "Đồng phục học viên",
+            "content": "Áo thun Polo màu Xanh Cyan (#17AEDC / #00AEEF) có thêu/in Logo Potato English bên ngực trái.",
+            "rule": "Tất cả ảnh học viên thật hoặc đồ họa phải đảm bảo màu áo đồng phục chuẩn này."
+      },
+      {
+            "rowIndex": 27,
+            "group": "5. NHẬN DIỆN THỊ GIÁC",
+            "item": "Màu sắc: Deep Ocean Navy",
+            "content": "Mã HEX: #003F75 | RGB(0, 63, 117)\nCông dụng: Tiêu đề chính (H1, H2), khối cấu trúc bảng, tên học viên vinh danh. Thể hiện sự đĩnh đạc, tri thức và đồng bộ website.",
+            "rule": "Màu chủ đạo cấp 1 (Primary Dark)."
+      },
+      {
+            "rowIndex": 28,
+            "group": "5. NHẬN DIỆN THỊ GIÁC",
+            "item": "Màu sắc: Vibrant Cyan Blue",
+            "content": "Mã HEX: #00AEEF | RGB(0, 174, 239)\nCông dụng: Màu thương hiệu đặc trưng trên website (--bricks-color-meuruq), tag vinh danh, nút bấm nổi bật, icon accent.",
+            "rule": "Màu thương hiệu nổi bật (Brand Signature Blue)."
+      },
+      {
+            "rowIndex": 29,
+            "group": "5. NHẬN DIỆN THỊ GIÁC",
+            "item": "Màu sắc: Trust Blue",
+            "content": "Mã HEX: #1B75BC | RGB(27, 117, 188)\nCông dụng: Thanh điều hướng, dải footer chân trang, khung viền thương hiệu truyền thống.",
+            "rule": "Màu tin cậy truyền thống."
+      },
+      {
+            "rowIndex": 30,
+            "group": "5. NHẬN DIỆN THỊ GIÁC",
+            "item": "Màu sắc: Energy Red",
+            "content": "Mã HEX: #E53935 | RGB(229, 57, 53)\nCông dụng: Dải ruy băng tiêu đề, điểm nhấn headline, nút báo động/sự kiện đặc biệt.",
+            "rule": "Màu năng lượng, nhiệt huyết."
+      },
+      {
+            "rowIndex": 31,
+            "group": "5. NHẬN DIỆN THỊ GIÁC",
+            "item": "Màu sắc: Potato Tan & Yellow",
+            "content": "Mã HEX Potato Tan: #D49A5B (Vàng khoai tây ấm)\nMã HEX Creative Yellow: #FFD511 / #FCC018 (Vàng sáng tạo)\nCông dụng: Viền oval, khung thẻ, dải sóng lượn, highlight từ vựng.",
+            "rule": "Màu ấm áp, gần gũi, kích thích sáng tạo."
+      },
+      {
+            "rowIndex": 32,
+            "group": "5. NHẬN DIỆN THỊ GIÁC",
+            "item": "Màu sắc: Nền chủ đạo (Background)",
+            "content": "Mã HEX: #FFFFFF (Trắng tươi) & #FFF6E9 / #FDFBF7 (Kem ấm sáng)\nCông dụng: Chiếm 60% diện tích không gian thiết kế, tạo cảm giác thoáng đãng, ấm cúng và sạch sẽ.",
+            "rule": "Tuyệt đối không dùng nền tối đen hoặc màu neon chói mắt."
+      },
+      {
+            "rowIndex": 33,
+            "group": "5. NHẬN DIỆN THỊ GIÁC",
+            "item": "Phong cách thiết kế chuẩn (Official Style)",
+            "content": "OFFICIAL DOODLE UI STYLE:\n1. Nền kem ấm #FDFBF7 phủ họa tiết doodle nét mảnh (sách, bút chì, ABC, sao).\n2. Logo Potato chính giữa phía trên.\n3. Tiêu đề dạng viên thuốc bo tròn (Rounded Pill).\n4. Thẻ trắng trung tâm bo góc đổ bóng mờ (White Rounded Card).\n5. Dải footer xanh #1B75BC hiển thị tên thương hiệu & 2 cơ sở.",
+            "rule": "Phong cách thiết kế chính thức duy nhất được phê duyệt cho toàn bộ ấn phẩm Potato English."
+      },
+      {
+            "rowIndex": 34,
+            "group": "6. QUY CHUẨN NỘI DUNG",
+            "item": "Quy chuẩn Thẻ tag (Hashtags)",
+            "content": "Mỗi bài đăng Facebook/TikTok BẮT BUỘC có ĐÚNG 5 thẻ tags đặt ở cuối:\n- 3 Thẻ tag thương hiệu: #PotatoEnglish và chọn 2 trong nhóm (#FriendlyKid, #HappyJunior, #LeadingTeen, #Starters, #Movers, #Flyers, #Pre_Ielts, #TiengAnhMamNon)\n- 2 Thẻ tag theo ngữ cảnh bài: (#KhaiGiang2026, #StorySpark, #VinhDanhHocVien, #TrungThu2026, #LopHocNho, #HocTiengAnhMoiNgay...)",
+            "rule": "Tuân thủ nghiêm ngặt cấu trúc 3 core + 2 topic."
+      },
+      {
+            "rowIndex": 35,
+            "group": "6. QUY CHUẨN NỘI DUNG",
+            "item": "Quy chuẩn kích thước hình ảnh",
+            "content": "1. Facebook Hero Banner: Tỷ lệ 3:2 (1200 x 800px) - Safe margin >= 100px. CẤM dùng 16:9 vì sẽ bị cắt mép trên Facebook.\n2. Facebook Child Cards: 1080 x 1080px (1:1).\n3. Video TikTok / Reels: 1080 x 1920px (9:16).\n4. Website Banner: 1200 x 630px hoặc 1920 x 1080px.",
+            "rule": "Đảm bảo đúng tỷ lệ kỹ thuật từng nền tảng."
+      },
+      {
+            "rowIndex": 36,
+            "group": "6. QUY CHUẨN NỘI DUNG",
+            "item": "Xử lý ảnh học viên thật (Enhancement SOP)",
+            "content": "BẮT BUỘC nâng cấp chất lượng ảnh chụp thật trước khi thiết kế:\n- Brightness: +15% đến +20%\n- Contrast: +5% đến +10%\n- Color Vibrance: +15% đến +25%\nGiúp da bé sáng hồng tự nhiên, áo đồng phục tươi tắn và lớp học bừng sáng.",
+            "rule": "Không để ảnh chụp tối, ám vàng hay mờ nhòe lên bài truyền thông."
+      }
 ];
         // ===================================================================
     // 9. ABOUT US (MASTER BRAND DATABASE) CONTROLLER - WORDPRESS SETTINGS STYLE
@@ -2873,42 +2905,65 @@
     let activeSettingPageKey = 'general';
     let currentSettingGroup = '1. TỔNG QUAN & PHÁP LÝ';
 
+    const EXCLUDED_SETTINGS_ITEMS = [
+      "QUY ĐỊNH PHÁP LÝ BẮT BUỘC",
+      "QUY TRÌNH PHÁP LÝ BẮT BUỘC",
+      "QUY TẮC CẢM XÚC"
+    ];
+
+    function isItemExcluded(item) {
+      const name = (item.item || '').toUpperCase();
+      return EXCLUDED_SETTINGS_ITEMS.some(ex => name.includes(ex));
+    }
+
     const SETTING_SUBPAGES = {
       'general': {
         group: '1. TỔNG QUAN & PHÁP LÝ',
-        title: 'Tổng Quan & Pháp Lý',
-        desc: 'Quản trị tên thương hiệu chính thức, slogan, định vị phân khúc, thông điệp cốt lõi và giấy phép pháp lý Potato English.',
-        icon: 'fa-solid fa-landmark'
+        title: 'Tổng Quan',
+        desc: 'Quản trị tên thương hiệu chính thức, slogan, định vị phân khúc và thông điệp cốt lõi Potato English.',
+        icon: 'fa-solid fa-landmark',
+        parentNav: 'intro',
+        subnavId: 'subnav-intro-general'
       },
       'contact': {
         group: '2. LIÊN HỆ & CƠ SỞ',
         title: 'Thông Tin Liên Hệ & Chi Nhánh',
         desc: 'Quản trị địa chỉ trụ sở, cơ sở đào tạo, hotline tuyển sinh, email, website và các liên kết mạng xã hội chính thức.',
-        icon: 'fa-solid fa-address-book'
-      },
-      'voice': {
-        group: '3. TÔN CHỈ & TONE OF VOICE',
-        title: 'Tôn Chỉ & Tone Of Voice',
-        desc: 'Định hướng giọng văn, phong cách thương hiệu, nguyên tắc xưng hô thầy/cô và các trụ cột nội dung chính của Potato English.',
-        icon: 'fa-solid fa-comments'
-      },
-      'courses': {
-        group: '4. CHƯƠNG TRÌNH HỌC',
-        title: 'Chương Trình Học & Đào Tạo',
-        desc: 'Độ tuổi tuyển sinh, các hệ đào tạo tiếng Anh chính và cam kết chuẩn đầu ra học viên Potato English.',
-        icon: 'fa-solid fa-graduation-cap'
+        icon: 'fa-solid fa-address-book',
+        parentNav: 'intro',
+        subnavId: 'subnav-intro-contact'
       },
       'visual': {
         group: '5. NHẬN DIỆN THỊ GIÁC',
-        title: 'Nhận Diện Thị Giác & Site Icon',
+        title: 'Nhận Diện Thương Hiệu',
         desc: 'Hệ màu chuẩn (#00AEEF, #F5A623, #0B2545), Typography, Logo Drive, đồng phục cyan và Mascot Potato.',
-        icon: 'fa-solid fa-palette'
+        icon: 'fa-solid fa-palette',
+        parentNav: 'intro',
+        subnavId: 'subnav-intro-visual'
+      },
+      'voice': {
+        group: '3. TÔN CHỈ & TONE OF VOICE',
+        title: 'Tone Of Voice',
+        desc: 'Định hướng giọng văn, phong cách thương hiệu, nguyên tắc xưng hô thầy/cô và các trụ cột nội dung chính của Potato English.',
+        icon: 'fa-solid fa-comments',
+        parentNav: 'content',
+        subnavId: 'subnav-content-voice'
       },
       'specs': {
         group: '6. QUY CHUẨN NỘI DUNG',
         title: 'Quy Chuẩn Nội Dung & Khung Giờ',
         desc: 'Hashtag bắt buộc đa kênh, quy định bảo vệ hình ảnh học viên và khung giờ vàng phát sóng truyền thông.',
-        icon: 'fa-solid fa-clipboard-check'
+        icon: 'fa-solid fa-clipboard-check',
+        parentNav: 'content',
+        subnavId: 'subnav-content-specs'
+      },
+      'courses': {
+        group: '4. CHƯƠNG TRÌNH HỌC',
+        title: 'Chương Trình Học & Đào Tạo',
+        desc: 'Độ tuổi tuyển sinh, các hệ đào tạo tiếng Anh chính và cam kết chuẩn đầu ra học viên Potato English.',
+        icon: 'fa-solid fa-graduation-cap',
+        parentNav: 'intro',
+        subnavId: ''
       }
     };
 
@@ -2920,6 +2975,57 @@
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
+    }
+
+    function openSettingFromSidebar(pageKey, subBtnElem) {
+      const config = SETTING_SUBPAGES[pageKey];
+      if (!config) return;
+
+      const parentNavId = config.parentNav || 'intro';
+
+      // 1. Switch tab to panel-about
+      const panels = document.querySelectorAll('.module-panel');
+      panels.forEach(p => p.classList.add('hidden'));
+      const targetPanel = document.getElementById('panel-about');
+      if (targetPanel) targetPanel.classList.remove('hidden');
+
+      // 2. Activate parent nav button
+      const navBtns = document.querySelectorAll('.nav-btn');
+      navBtns.forEach(btn => {
+        btn.classList.remove('bg-potato-softBlue', 'text-potato-navy', 'font-bold', 'border', 'border-potato-cyan/20');
+        btn.classList.add('text-slate-600');
+      });
+      const parentNav = document.getElementById(`nav-${parentNavId}`);
+      if (parentNav) {
+        parentNav.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold', 'border', 'border-potato-cyan/20');
+        parentNav.classList.remove('text-slate-600');
+        const ch = parentNav.querySelector('.menu-chevron');
+        if (ch) {
+          ch.classList.remove('fa-chevron-right');
+          ch.classList.add('fa-chevron-down');
+        }
+      }
+
+      // 3. Keep target submenu open, close others
+      const submenus = document.querySelectorAll('.sidebar-submenu');
+      submenus.forEach(sm => {
+        if (sm.id === `submenu-${parentNavId}`) sm.classList.remove('hidden');
+        else sm.classList.add('hidden');
+      });
+
+      // 4. Highlight sub-item in Main Sidebar
+      const allSubBtns = document.querySelectorAll('.sidebar-submenu .submenu-item');
+      allSubBtns.forEach(b => {
+        b.classList.remove('bg-potato-softBlue', 'text-potato-navy', 'font-bold');
+        b.classList.add('text-slate-500');
+      });
+      if (subBtnElem) {
+        subBtnElem.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold');
+        subBtnElem.classList.remove('text-slate-500');
+      }
+
+      // 5. Activate tab in Rank Math Widget
+      switchSettingSubPage(pageKey);
     }
 
     function switchSettingSubPage(pageKey, btnElem) {
@@ -2935,35 +3041,51 @@
       const targetPanel = document.getElementById('panel-about');
       if (targetPanel) targetPanel.classList.remove('hidden');
 
-      // 2. Activate nav-about parent button in Main Sidebar
+      // 2. Highlight parent nav in Sidebar
+      const parentNavId = config.parentNav || 'intro';
       const navBtns = document.querySelectorAll('.nav-btn');
       navBtns.forEach(btn => {
         btn.classList.remove('bg-potato-softBlue', 'text-potato-navy', 'font-bold', 'border', 'border-potato-cyan/20');
         btn.classList.add('text-slate-600');
       });
-      const navAbout = document.getElementById('nav-about');
-      if (navAbout) {
-        navAbout.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold', 'border', 'border-potato-cyan/20');
-        navAbout.classList.remove('text-slate-600');
-        const ch = navAbout.querySelector('.menu-chevron');
+      const parentNav = document.getElementById(`nav-${parentNavId}`);
+      if (parentNav) {
+        parentNav.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold', 'border', 'border-potato-cyan/20');
+        parentNav.classList.remove('text-slate-600');
+        const ch = parentNav.querySelector('.menu-chevron');
         if (ch) {
           ch.classList.remove('fa-chevron-right');
           ch.classList.add('fa-chevron-down');
         }
       }
 
-      // 3. Close all submenus in Main Sidebar (Cài đặt uses internal Rank Math widget)
+      // 3. Open parent submenu in Sidebar, close others
       const submenus = document.querySelectorAll('.sidebar-submenu');
-      submenus.forEach(sm => sm.classList.add('hidden'));
+      submenus.forEach(sm => {
+        if (sm.id === `submenu-${parentNavId}`) sm.classList.remove('hidden');
+        else sm.classList.add('hidden');
+      });
 
-
+      // 4. Highlight sub-item in Sidebar if matching
+      const allSubBtns = document.querySelectorAll('.sidebar-submenu .submenu-item');
+      allSubBtns.forEach(b => {
+        b.classList.remove('bg-potato-softBlue', 'text-potato-navy', 'font-bold');
+        b.classList.add('text-slate-500');
+      });
+      if (config.subnavId) {
+        const subBtn = document.getElementById(config.subnavId);
+        if (subBtn) {
+          subBtn.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold');
+          subBtn.classList.remove('text-slate-500');
+        }
+      }
 
       // 5. Highlight Rank Math Widget Left Nav Tab
       const rmTabs = document.querySelectorAll('.rankmath-tab-btn');
       rmTabs.forEach(tab => {
         tab.className = 'rankmath-tab-btn flex-shrink-0 whitespace-nowrap lg:whitespace-normal w-auto lg:w-full text-left py-3 px-3.5 rounded-xl font-medium text-xs text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all flex items-center gap-3 border-l-4 border-transparent';
         const icon = tab.querySelector('i');
-        if (icon && !tab.id.includes('sheet')) icon.className = icon.className.replace(/text-potato-cyan/g, 'text-slate-400');
+        if (icon) icon.className = icon.className.replace(/text-potato-cyan/g, 'text-slate-400');
       });
       const activeRmTab = document.getElementById(`rm-tab-${pageKey}`);
       if (activeRmTab) {
@@ -2986,23 +3108,12 @@
       if (mainElem) mainElem.scrollTop = 0;
     }
 
-    
-
-    function navigateToSettingSection(groupName, btn) {
-      for (const [key, cfg] of Object.entries(SETTING_SUBPAGES)) {
-        if (cfg.group === groupName) {
-          switchSettingSubPage(key, btn);
-          return;
-        }
-      }
-      switchSettingSubPage('general', btn);
-    }
-
     function renderAboutUs() {
       const container = document.getElementById('about-settings-container');
       if (!container) return;
 
-      const items = currentAboutUsData.filter(i => i.group === currentSettingGroup);
+      // Filter by group and exclude forbidden items (Quy định pháp lý bắt buộc & Quy tắc cảm xúc)
+      const items = currentAboutUsData.filter(i => i.group === currentSettingGroup && !isItemExcluded(i));
 
       if (items.length === 0) {
         container.innerHTML = `
@@ -3274,10 +3385,10 @@
         const res = await fetch('/api/about-us/sync', { method: 'POST' });
         const jsonRes = await res.json();
         if (jsonRes.success && jsonRes.items && jsonRes.items.length > 0) {
-          currentAboutUsData = jsonRes.items;
+          currentAboutUsData = jsonRes.items.filter(i => !isItemExcluded(i));
           dirtyAboutUsRows.clear();
           renderAboutUs();
-          showToast('✓ Đã tải lại thành công 35 thông số từ Google Sheet Live (#gid=1973975368)!', 'success');
+          showToast('✓ Đã tải lại thành công các thông số từ Google Sheet Live (#gid=1973975368)!', 'success');
         } else {
           showToast('Không thể lấy dữ liệu mới từ Google Sheet', 'warning');
         }
