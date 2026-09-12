@@ -2,6 +2,10 @@
   "version": 2,
   "rewrites": [
     {
+      "source": "/api/survey/submit",
+      "destination": "/api/survey"
+    },
+    {
       "source": "/api/about-us/sync",
       "destination": "/api/about-us-sync"
     },
@@ -16,6 +20,14 @@
     {
       "source": "/score",
       "destination": "/student_score_report.html"
+    },
+    {
+      "source": "/survey",
+      "destination": "/survey_tone_of_voice.html"
+    },
+    {
+      "source": "/khao-sat",
+      "destination": "/survey_tone_of_voice.html"
     }
   ],
   "headers": [
