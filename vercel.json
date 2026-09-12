@@ -1,0 +1,36 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/api/about-us/sync",
+      "destination": "/api/about-us-sync"
+    },
+    {
+      "source": "/api/about-us/batch-update",
+      "destination": "/api/about-us-batch"
+    },
+    {
+      "source": "/api/about-us",
+      "destination": "/api/about-us"
+    },
+    {
+      "source": "/score",
+      "destination": "/student_score_report.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
+      ]
+    }
+  ]
+}

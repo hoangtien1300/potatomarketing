@@ -1,0 +1,22 @@
+# Environment & Credentials
+.env
+.env.local
+*.pem
+credentials*.json
+google_credentials*.json
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python
+__pycache__/
+*.py[cod]

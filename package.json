@@ -1,0 +1,21 @@
+{
+  "name": "potatomarketing",
+  "version": "2.0.0",
+  "description": "Potato English - Marketing Command Hub & Brand Master Data",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoangtien1300/potatomarketing.git"
+  },
+  "keywords": [
+    "potato-english",
+    "marketing",
+    "hub",
+    "dashboard"
+  ],
+  "author": "hoangtien1300",
+  "license": "MIT"
+}
