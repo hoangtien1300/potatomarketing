@@ -751,64 +751,52 @@
       <section id="panel-calendar" class="module-panel p-4 sm:p-6 max-w-7xl mx-auto w-full space-y-5">
         
         <!-- [INVARIANT 1]: MODULE HEADER / BANNER -->
-        <div class="module-header bg-white border border-slate-200/80 p-5 sm:p-6 rounded-3xl shadow-subtle flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div class="flex items-center gap-3.5">
-            <div class="w-12 h-12 rounded-2xl bg-potato-softBlue text-potato-blue flex items-center justify-center text-xl flex-shrink-0 border border-potato-cyan/20">
+        <div class="module-header bg-white border border-slate-200/80 p-4 sm:p-6 rounded-3xl shadow-subtle flex flex-col md:flex-row md:items-center justify-between gap-3.5">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-potato-softBlue text-potato-blue flex items-center justify-center text-lg sm:text-xl flex-shrink-0 border border-potato-cyan/20">
               <i class="fa-solid fa-calendar-days"></i>
             </div>
             <div>
-              <h2 id="calendar-channel-heading" class="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+              <h2 id="calendar-channel-heading" class="text-base sm:text-xl font-black text-slate-900 tracking-tight">
                 Lịch đăng đa kênh
               </h2>
-              <p class="text-xs font-semibold text-slate-500 mt-1 flex items-center gap-1.5">
+              <p class="text-xs font-semibold text-slate-500 mt-0.5 flex items-center gap-1.5">
                 <i class="fa-regular fa-calendar text-potato-cyan text-[11px]"></i>
                 <span id="calendar-current-month-text">Tháng 9/2026</span>
               </p>
             </div>
           </div>
 
-          <!-- Controls: View mode switcher & Date selector & Sync -->
-          <div class="flex items-center gap-2 flex-wrap w-full md:w-auto justify-between sm:justify-start">
-            <!-- Sync with Google Sheet Button -->
-            <button id="btn-calendar-sync" onclick="syncCalendarFromSheet()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs min-h-[36px] touch-manipulation" title="Đồng bộ lại từ Google Sheet">
+          <!-- Controls: Bộ lọc view & Nút đồng bộ Sheet nằm cùng hàng, Nút đồng bộ Sheet ở bên phải -->
+          <div class="flex items-center justify-between sm:justify-end gap-2.5 w-full md:w-auto">
+            <!-- Hộp lựa chọn View Mode (Select) -->
+            <div class="relative flex-1 sm:flex-initial">
+              <select id="select-view-mode" onchange="switchViewMode(this.value)" class="w-full sm:w-auto appearance-none bg-slate-100 hover:bg-slate-200/80 border border-slate-200 text-slate-800 text-xs font-extrabold py-2 pl-3 pr-8 rounded-xl shadow-2xs focus:outline-none focus:border-potato-cyan cursor-pointer min-h-[38px] transition-all" title="Chọn chế độ xem lịch">
+                <option value="day">📅 Xem theo Ngày</option>
+                <option value="three-days">📑 Xem 3 Ngày</option>
+                <option value="week" selected>📆 Xem theo Tuần</option>
+                <option value="month">🗓️ Xem theo Tháng</option>
+                <option value="list">📋 Xem dạng Bảng</option>
+              </select>
+              <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-slate-500 pointer-events-none"></i>
+            </div>
+
+            <!-- Nút Đồng Bộ Sheet ở bên phải -->
+            <button id="btn-calendar-sync" onclick="syncCalendarFromSheet()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs min-h-[38px] touch-manipulation flex-shrink-0" title="Đồng bộ lại từ Google Sheet">
               <i id="icon-calendar-sync" class="fa-solid fa-rotate text-potato-cyan"></i>
               <span id="text-calendar-sync">Đồng Bộ Sheet</span>
             </button>
-
-            <!-- 5 View Modes Switcher (Horizontal scroll on narrow mobile) -->
-            <div class="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-bold shadow-inner overflow-x-auto max-w-full custom-scrollbar">
-              <button onclick="switchViewMode('day')" id="btn-view-day" class="calendar-view-btn flex items-center gap-1 px-3 py-1.5 sm:px-2.5 sm:py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all whitespace-nowrap min-h-[34px]">
-                <i class="fa-regular fa-calendar text-[11px]"></i>
-                <span>Ngày</span>
-              </button>
-              <button onclick="switchViewMode('three-days')" id="btn-view-three-days" class="calendar-view-btn flex items-center gap-1 px-3 py-1.5 sm:px-2.5 sm:py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all whitespace-nowrap min-h-[34px]">
-                <i class="fa-solid fa-table-columns text-[11px]"></i>
-                <span>3 Ngày</span>
-              </button>
-              <button onclick="switchViewMode('week')" id="btn-view-week" class="calendar-view-btn flex items-center gap-1 px-3 py-1.5 sm:px-2.5 sm:py-1.5 rounded-lg bg-white text-potato-navy shadow-xs font-extrabold transition-all whitespace-nowrap min-h-[34px]">
-                <i class="fa-solid fa-calendar-week text-potato-cyan text-[11px]"></i>
-                <span>Tuần</span>
-              </button>
-              <button onclick="switchViewMode('month')" id="btn-view-month" class="calendar-view-btn flex items-center gap-1 px-3 py-1.5 sm:px-2.5 sm:py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all whitespace-nowrap min-h-[34px]">
-                <i class="fa-solid fa-calendar-days text-[11px]"></i>
-                <span>Tháng</span>
-              </button>
-              <button onclick="switchViewMode('list')" id="btn-view-list" class="calendar-view-btn flex items-center gap-1 px-3 py-1.5 sm:px-2.5 sm:py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all whitespace-nowrap min-h-[34px]">
-                <i class="fa-solid fa-list-ul text-[11px]"></i>
-                <span>Bảng</span>
-              </button>
-            </div>
           </div>
         </div>
 
         <!-- Filter & Date Navigation Bar -->
         <div class="bg-white p-3.5 sm:p-4 rounded-2xl border border-slate-200/80 shadow-2xs space-y-3 text-xs">
           
-          <!-- Top Row: Date Navigator + Quick Week Selector -->
-          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <!-- Top Row: Date Navigator & Search Box (Đã xóa bộ lọc tuần thừa bên dưới) -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <!-- Date Navigator -->
-            <div class="flex items-center gap-2 flex-wrap">
-              <div class="flex items-center bg-slate-100 rounded-xl p-0.5 border border-slate-200/60">
+            <div class="flex items-center gap-2">
+              <div class="flex items-center bg-slate-100 rounded-xl p-0.5 border border-slate-200/60 flex-shrink-0">
                 <button onclick="navigateCalendar(-1)" class="w-9 h-9 sm:w-8 sm:h-8 rounded-lg hover:bg-white text-slate-700 flex items-center justify-center transition-all shadow-2xs touch-manipulation" title="Lùi lại">
                   <i class="fa-solid fa-chevron-left text-xs"></i>
                 </button>
@@ -820,74 +808,44 @@
                 </button>
               </div>
 
-              <h3 id="calendar-date-heading" class="font-extrabold text-sm sm:text-base text-potato-navy ml-1.5 flex items-center gap-2">
+              <h3 id="calendar-date-heading" class="font-extrabold text-xs sm:text-base text-potato-navy ml-1 flex items-center gap-2 truncate">
                 <span>Tuần 2: 07/09 - 13/09/2026</span>
               </h3>
             </div>
 
-            <!-- Quick Week Selector (Buttons W1 to W5 for Month 9) -->
-            <div id="quick-week-selector" class="flex items-center gap-1.5 flex-wrap">
-              <span class="text-slate-400 font-bold text-[10px] uppercase tracking-wider mr-1">Chọn tuần:</span>
-              <button onclick="jumpToWeek(1)" id="btn-jump-w1" class="quick-week-btn px-3 py-1.5 sm:px-2.5 sm:py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-all min-h-[32px]">Tuần 1</button>
-              <button onclick="jumpToWeek(2)" id="btn-jump-w2" class="quick-week-btn px-3 py-1.5 sm:px-2.5 sm:py-1 rounded-lg bg-potato-navy text-white font-bold text-[11px] transition-all shadow-2xs min-h-[32px]">Tuần 2</button>
-              <button onclick="jumpToWeek(3)" id="btn-jump-w3" class="quick-week-btn px-3 py-1.5 sm:px-2.5 sm:py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-all min-h-[32px]">Tuần 3</button>
-              <button onclick="jumpToWeek(4)" id="btn-jump-w4" class="quick-week-btn px-3 py-1.5 sm:px-2.5 sm:py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-all min-h-[32px]">Tuần 4</button>
+            <!-- Search Box -->
+            <div class="relative w-full sm:w-64 flex-shrink-0">
+              <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+              <input type="text" id="calendar-search-input" oninput="handleCalendarSearch(this.value)" placeholder="Tìm tiêu đề, hashtag..." class="w-full pl-8 pr-7 py-2 bg-slate-50 hover:bg-white focus:bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-potato-cyan font-medium transition-all min-h-[36px]">
+              <button id="calendar-search-clear" onclick="clearCalendarSearch()" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 text-xs">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
             </div>
           </div>
 
-          <!-- Bottom Row: Filters (Channel, Status) and Search Bar -->
-          <div class="pt-2 border-t border-slate-100 flex flex-col lg:flex-row lg:items-center justify-between gap-3">
-            <!-- Filter Pills -->
-            <div class="flex items-center gap-2.5 flex-wrap">
-              <!-- Channel Filter Badges -->
-              <div class="flex items-center gap-1.5 flex-wrap">
-                <span class="text-slate-400 font-bold text-[10px] uppercase tracking-wider mr-1 w-full sm:w-auto">Kênh:</span>
-                <button onclick="filterChannel('all')" class="channel-filter-btn px-2.5 py-1.5 rounded-lg bg-potato-navy text-white font-bold text-xs transition-all shadow-2xs min-h-[32px]" data-channel="all">
-                  Tất cả (<span id="count-ch-all">15</span>)
-                </button>
-                <button onclick="filterChannel('facebook')" class="channel-filter-btn px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5 min-h-[32px]" data-channel="facebook">
-                  <i class="fa-brands fa-facebook-f text-blue-600"></i>
-                  <span>Facebook (<span id="count-ch-fb">7</span>)</span>
-                </button>
-                <button onclick="filterChannel('tiktok')" class="channel-filter-btn px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5 min-h-[32px]" data-channel="tiktok">
-                  <i class="fa-brands fa-tiktok text-slate-900"></i>
-                  <span>TikTok (<span id="count-ch-tiktok">4</span>)</span>
-                </button>
-                <button onclick="filterChannel('seo')" class="channel-filter-btn px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5 min-h-[32px]" data-channel="seo">
-                  <i class="fa-solid fa-globe text-emerald-600"></i>
-                  <span>Website SEO (<span id="count-ch-seo">3</span>)</span>
-                </button>
-                <button onclick="filterChannel('zalo')" class="channel-filter-btn px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5 min-h-[32px]" data-channel="zalo">
-                  <i class="fa-solid fa-comment-dots text-blue-500"></i>
-                  <span>Zalo (<span id="count-ch-zalo">1</span>)</span>
-                </button>
-              </div>
-
-              <!-- Status Filter Badges -->
-              <div class="flex items-center gap-1.5 flex-wrap pl-0 sm:pl-2 sm:border-l sm:border-slate-200">
-                <span class="text-slate-400 font-bold text-[10px] uppercase tracking-wider mr-1 w-full sm:w-auto">Trạng thái:</span>
-                <button onclick="filterStatus('all')" class="status-filter-btn px-2.5 py-1.5 rounded-md bg-slate-800 text-white font-bold text-[11px] transition-all min-h-[30px]" data-status="all">
-                  Tất cả
-                </button>
-                <button onclick="filterStatus('published')" class="status-filter-btn px-2.5 py-1.5 rounded-md bg-slate-100 hover:bg-slate-200 text-emerald-700 font-bold text-[11px] transition-all min-h-[30px]" data-status="published">
-                  Đã đăng (5)
-                </button>
-                <button onclick="filterStatus('ready')" class="status-filter-btn px-2.5 py-1.5 rounded-md bg-slate-100 hover:bg-slate-200 text-blue-700 font-bold text-[11px] transition-all min-h-[30px]" data-status="ready">
-                  Sẵn sàng (1)
-                </button>
-                <button onclick="filterStatus('planned')" class="status-filter-btn px-2.5 py-1.5 rounded-md bg-slate-100 hover:bg-slate-200 text-amber-700 font-bold text-[11px] transition-all min-h-[30px]" data-status="planned">
-                  Kế hoạch (9)
-                </button>
-              </div>
+          <!-- Bottom Row: Gom bộ lọc Kênh & Trạng thái thành 2 dạng Select gọn gàng -->
+          <div class="pt-2.5 border-t border-slate-100 flex items-center gap-2.5 flex-wrap sm:flex-nowrap">
+            <!-- Select Kênh -->
+            <div class="relative flex-1 sm:w-52 sm:flex-initial">
+              <select id="filter-channel-select" onchange="filterChannel(this.value)" class="w-full appearance-none bg-slate-50 hover:bg-white border border-slate-200 text-slate-700 text-xs font-bold py-2 pl-3 pr-8 rounded-xl shadow-2xs focus:outline-none focus:border-potato-cyan cursor-pointer min-h-[36px] transition-all" title="Lọc theo kênh">
+                <option value="all" id="opt-ch-all">Kênh: Tất cả (15)</option>
+                <option value="facebook" id="opt-ch-fb">Facebook Fanpage (7)</option>
+                <option value="tiktok" id="opt-ch-tiktok">TikTok Shorts (4)</option>
+                <option value="seo" id="opt-ch-seo">Website SEO (3)</option>
+                <option value="zalo" id="opt-ch-zalo">Zalo OA (1)</option>
+              </select>
+              <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 pointer-events-none"></i>
             </div>
 
-            <!-- Search Box -->
-            <div class="relative w-full sm:w-64 flex-shrink-0">
-              <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
-              <input type="text" id="calendar-search-input" oninput="handleCalendarSearch(this.value)" placeholder="Tìm tiêu đề, hashtag, nội dung..." class="w-full pl-8 pr-7 py-1.5 bg-slate-50 hover:bg-white focus:bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-potato-cyan font-medium transition-all">
-              <button id="calendar-search-clear" onclick="clearCalendarSearch()" class="hidden absolute right-2.5 top-2 text-slate-400 hover:text-slate-700 text-xs">
-                <i class="fa-solid fa-xmark"></i>
-              </button>
+            <!-- Select Trạng thái -->
+            <div class="relative flex-1 sm:w-48 sm:flex-initial">
+              <select id="filter-status-select" onchange="filterStatus(this.value)" class="w-full appearance-none bg-slate-50 hover:bg-white border border-slate-200 text-slate-700 text-xs font-bold py-2 pl-3 pr-8 rounded-xl shadow-2xs focus:outline-none focus:border-potato-cyan cursor-pointer min-h-[36px] transition-all" title="Lọc theo trạng thái">
+                <option value="all" id="opt-st-all">Trạng thái: Tất cả</option>
+                <option value="published" id="opt-st-published">Đã đăng (5)</option>
+                <option value="ready" id="opt-st-ready">Sẵn sàng (1)</option>
+                <option value="planned" id="opt-st-planned">Kế hoạch (9)</option>
+              </select>
+              <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 pointer-events-none"></i>
             </div>
           </div>
 
@@ -2686,13 +2644,39 @@
       });
     }
 
-    // Update Counts on Filter Badges
+    // Update Counts on Filter Badges & Selects
     function updateCalendarFilterCounts() {
       const allPosts = getAllCalendarPosts();
       const fbCount = allPosts.filter(p => p.platformKey === 'facebook').length;
       const tiktokCount = allPosts.filter(p => p.platformKey === 'tiktok').length;
       const seoCount = allPosts.filter(p => p.platformKey === 'seo').length;
       const zaloCount = allPosts.filter(p => p.platformKey === 'zalo').length;
+
+      const optAll = document.getElementById('opt-ch-all');
+      const optFb = document.getElementById('opt-ch-fb');
+      const optTt = document.getElementById('opt-ch-tiktok');
+      const optSeo = document.getElementById('opt-ch-seo');
+      const optZalo = document.getElementById('opt-ch-zalo');
+
+      if (optAll) optAll.textContent = `Kênh: Tất cả (${allPosts.length})`;
+      if (optFb) optFb.textContent = `Facebook Fanpage (${fbCount})`;
+      if (optTt) optTt.textContent = `TikTok Shorts (${tiktokCount})`;
+      if (optSeo) optSeo.textContent = `Website SEO (${seoCount})`;
+      if (optZalo) optZalo.textContent = `Zalo OA (${zaloCount})`;
+
+      const pubCount = allPosts.filter(p => p.statusKey === 'published').length;
+      const readyCount = allPosts.filter(p => p.statusKey === 'ready').length;
+      const planCount = allPosts.filter(p => p.statusKey === 'planned').length;
+
+      const optStAll = document.getElementById('opt-st-all');
+      const optStPub = document.getElementById('opt-st-published');
+      const optStRdy = document.getElementById('opt-st-ready');
+      const optStPlan = document.getElementById('opt-st-planned');
+
+      if (optStAll) optStAll.textContent = `Trạng thái: Tất cả (${allPosts.length})`;
+      if (optStPub) optStPub.textContent = `Đã đăng (${pubCount})`;
+      if (optStRdy) optStRdy.textContent = `Sẵn sàng (${readyCount})`;
+      if (optStPlan) optStPlan.textContent = `Kế hoạch (${planCount})`;
 
       const elAll = document.getElementById('count-ch-all');
       const elFb = document.getElementById('count-ch-fb');
@@ -3228,7 +3212,12 @@
     function switchViewMode(mode) {
       CALENDAR_STATE.viewMode = mode;
 
-      // Update Toolbar buttons styling
+      const viewSel = document.getElementById('select-view-mode');
+      if (viewSel && viewSel.value !== mode) {
+        viewSel.value = mode;
+      }
+
+      // Update Toolbar buttons styling if any remain
       const buttons = ['day', 'three-days', 'week', 'month', 'list'];
       buttons.forEach(m => {
         const btn = document.getElementById(`btn-view-${m}`);
@@ -3305,6 +3294,11 @@
         else heading.textContent = 'Lịch đăng đa kênh';
       }
 
+      const chSel = document.getElementById('filter-channel-select');
+      if (chSel && chSel.value !== channel) {
+        chSel.value = channel;
+      }
+
       document.querySelectorAll('.channel-filter-btn').forEach(btn => {
         if (btn.getAttribute('data-channel') === channel) {
           btn.className = 'channel-filter-btn px-2.5 py-1 rounded-lg bg-potato-navy text-white font-bold text-xs transition-all shadow-2xs';
@@ -3318,6 +3312,11 @@
 
     function filterStatus(status) {
       CALENDAR_STATE.statusFilter = status;
+
+      const stSel = document.getElementById('filter-status-select');
+      if (stSel && stSel.value !== status) {
+        stSel.value = status;
+      }
 
       document.querySelectorAll('.status-filter-btn').forEach(btn => {
         if (btn.getAttribute('data-status') === status) {
