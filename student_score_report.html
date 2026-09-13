@@ -450,6 +450,22 @@
     window.addEventListener('DOMContentLoaded', () => {
       document.getElementById('reportSection').classList.add('hidden');
       loadSheetDataInBackground();
+
+      // Hỗ trợ tự động tra cứu học viên qua đường dẫn URL (?id=... hoặc ?idScore=... &test=...)
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const queryId = (urlParams.get('id') || urlParams.get('idScore') || '').trim();
+        const testNum = parseInt(urlParams.get('test'), 10) || 1;
+        if (queryId) {
+          const inputEl = document.getElementById('idScoreInput');
+          const testSelect = document.getElementById('testSelectLogin');
+          if (inputEl) inputEl.value = queryId;
+          if (testSelect) testSelect.value = testNum;
+          handleLookup(queryId, testNum);
+        }
+      } catch (err) {
+        console.warn('Cannot parse URL search params:', err);
+      }
     });
 
     async function loadSheetDataInBackground() {
@@ -709,6 +725,14 @@
       // Hide login, show report
       document.getElementById('loginSection').classList.add('hidden');
       document.getElementById('reportSection').classList.remove('hidden');
+      if (student.idScore) {
+        try {
+          const url = new URL(window.location);
+          url.searchParams.set('id', student.idScore);
+          url.searchParams.set('test', currentSelectedTest);
+          window.history.replaceState({}, '', url);
+        } catch (e) {}
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -743,6 +767,12 @@
       currentSelectedTest = parseInt(testNum, 10);
       if (currentStudentObj) {
         renderStudent(currentStudentObj);
+        try {
+          const url = new URL(window.location);
+          url.searchParams.set('id', currentStudentObj.idScore);
+          url.searchParams.set('test', currentSelectedTest);
+          window.history.replaceState({}, '', url);
+        } catch (e) {}
       }
     }
 
@@ -750,6 +780,13 @@
       document.getElementById('loginSection').classList.remove('hidden');
       document.getElementById('reportSection').classList.add('hidden');
       document.getElementById('statusBox').classList.add('hidden');
+      try {
+        const url = new URL(window.location);
+        url.searchParams.delete('id');
+        url.searchParams.delete('idScore');
+        url.searchParams.delete('test');
+        window.history.replaceState({}, '', url);
+      } catch (e) {}
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
