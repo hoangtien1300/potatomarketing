@@ -2,6 +2,14 @@
   "version": 2,
   "rewrites": [
     {
+      "source": "/api/calendar",
+      "destination": "/api/calendar"
+    },
+    {
+      "source": "/api/calendar/sync",
+      "destination": "/api/calendar-sync"
+    },
+    {
       "source": "/api/survey/submit",
       "destination": "/api/survey"
     },

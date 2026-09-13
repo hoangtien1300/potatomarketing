@@ -167,14 +167,27 @@
               <i class="menu-chevron fa-solid fa-chevron-right text-[10px] text-slate-400 transition-transform"></i>
             </button>
             <div id="submenu-calendar" class="sidebar-submenu hidden pl-9 pr-2 py-1 space-y-0.5">
-              <button type="button" onclick="switchCalendarSubView('calendar', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
+              <button type="button" onclick="switchCalendarSubView('day', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-potato-cyan"></span>
+                <span>Lịch theo ngày</span>
+              </button>
+              <button type="button" onclick="switchCalendarSubView('three-days', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-potato-tan"></span>
+                <span>Lịch 3 ngày</span>
+              </button>
+              <button type="button" onclick="switchCalendarSubView('week', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-potato-blue"></span>
                 <span>Lịch tuần</span>
+              </button>
+              <button type="button" onclick="switchCalendarSubView('month', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
+                <span>Lịch tháng</span>
               </button>
               <button type="button" onclick="switchCalendarSubView('list', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
                 <span>Danh sách bài</span>
               </button>
+              <div class="border-t border-slate-100 my-1"></div>
               <button type="button" onclick="filterChannelSub('facebook', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
                 <span>Kênh Facebook</span>
@@ -186,10 +199,6 @@
               <button type="button" onclick="filterChannelSub('seo', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
                 <span>Kênh Website</span>
-              </button>
-              <button type="button" onclick="filterChannelSub('zalo', this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
-                <span>Kênh Zalo</span>
               </button>
             </div>
           </div>
@@ -854,29 +863,55 @@
             <div>
               <div class="flex items-center gap-2 flex-wrap">
                 <h2 id="calendar-channel-heading" class="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
-                  Tất Cả Kênh Xuất Bản
+                  Lịch Đăng Đa Kênh Omnichannel (Tháng 9/2026)
                 </h2>
-                <span class="text-xs font-bold text-potato-cyan bg-potato-cyanLight px-2.5 py-0.5 rounded-full border border-potato-cyan/20">
-                  8 bài đã lên lịch tuần này
+                <span id="calendar-summary-badge" class="text-xs font-bold text-potato-cyan bg-potato-cyanLight px-2.5 py-0.5 rounded-full border border-potato-cyan/20">
+                  15 bài đã lên lịch
+                </span>
+                <span id="calendar-source-badge" class="text-[10px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span>Google Sheet Live</span>
                 </span>
               </div>
-              <p class="text-xs text-slate-500 mt-0.5">
-                Kế hoạch phân phối nội dung đa kênh tự động hóa chuẩn Omnichannel Buffer Calendar.
+              <p class="text-xs text-slate-500 mt-1 flex items-center gap-2 flex-wrap">
+                <span>Dữ liệu đồng bộ trực tiếp từ Tab <strong>📅 OMNICHANNEL CALENDAR</strong>.</span>
+                <a href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=926192727" target="_blank" class="text-potato-blue hover:text-potato-cyan font-bold inline-flex items-center gap-1 underline underline-offset-2">
+                  <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                  <span>Mở Google Sheet (#gid=926192727)</span>
+                </a>
               </p>
             </div>
           </div>
 
-          <!-- Controls: View mode switcher & Date selector -->
+          <!-- Controls: View mode switcher & Date selector & Sync -->
           <div class="flex items-center gap-2.5 flex-wrap">
-            <!-- View Mode (Calendar / List) -->
-            <div class="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-bold">
-              <button onclick="switchViewMode('calendar')" id="btn-view-calendar" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-potato-navy shadow-xs font-extrabold transition-all">
-                <i class="fa-solid fa-calendar-days text-potato-cyan"></i>
-                <span>Lịch Tuần</span>
+            <!-- Sync with Google Sheet Button -->
+            <button id="btn-calendar-sync" onclick="syncCalendarFromSheet()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs" title="Đồng bộ lại từ Google Sheet">
+              <i id="icon-calendar-sync" class="fa-solid fa-rotate text-potato-cyan"></i>
+              <span id="text-calendar-sync">Đồng Bộ Sheet</span>
+            </button>
+
+            <!-- 5 View Modes Switcher -->
+            <div class="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-bold shadow-inner">
+              <button onclick="switchViewMode('day')" id="btn-view-day" class="calendar-view-btn flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all">
+                <i class="fa-regular fa-calendar text-[11px]"></i>
+                <span>Ngày</span>
               </button>
-              <button onclick="switchViewMode('list')" id="btn-view-list" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all">
-                <i class="fa-solid fa-list-ul"></i>
-                <span>Danh Sách</span>
+              <button onclick="switchViewMode('three-days')" id="btn-view-three-days" class="calendar-view-btn flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all">
+                <i class="fa-solid fa-table-columns text-[11px]"></i>
+                <span>3 Ngày</span>
+              </button>
+              <button onclick="switchViewMode('week')" id="btn-view-week" class="calendar-view-btn flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white text-potato-navy shadow-xs font-extrabold transition-all">
+                <i class="fa-solid fa-calendar-week text-potato-cyan text-[11px]"></i>
+                <span>Tuần</span>
+              </button>
+              <button onclick="switchViewMode('month')" id="btn-view-month" class="calendar-view-btn flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all">
+                <i class="fa-solid fa-calendar-days text-[11px]"></i>
+                <span>Tháng</span>
+              </button>
+              <button onclick="switchViewMode('list')" id="btn-view-list" class="calendar-view-btn flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all">
+                <i class="fa-solid fa-list-ul text-[11px]"></i>
+                <span>Bảng</span>
               </button>
             </div>
 
@@ -888,335 +923,101 @@
           </div>
         </div>
 
-        <!-- Filter & Week Navigation Bar -->
-        <div class="bg-white p-3.5 rounded-2xl border border-slate-200/80 shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs">
+        <!-- Filter & Date Navigation Bar -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-2xs space-y-3 text-xs">
           
-          <!-- Date Navigator -->
-          <div class="flex items-center gap-2">
-            <div class="flex items-center bg-slate-100 rounded-lg p-0.5">
-              <button onclick="navigateWeek(-1)" class="w-8 h-8 rounded-md hover:bg-white text-slate-600 flex items-center justify-center transition-all" title="Tuần trước">
-                <i class="fa-solid fa-chevron-left text-xs"></i>
-              </button>
-              <button onclick="resetToToday()" class="px-2.5 py-1 text-xs font-bold text-slate-700 hover:bg-white rounded-md transition-all">
-                Hôm nay
-              </button>
-              <button onclick="navigateWeek(1)" class="w-8 h-8 rounded-md hover:bg-white text-slate-600 flex items-center justify-center transition-all" title="Tuần sau">
-                <i class="fa-solid fa-chevron-right text-xs"></i>
-              </button>
+          <!-- Top Row: Date Navigator + Quick Week Selector -->
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <!-- Date Navigator -->
+            <div class="flex items-center gap-2 flex-wrap">
+              <div class="flex items-center bg-slate-100 rounded-xl p-0.5 border border-slate-200/60">
+                <button onclick="navigateCalendar(-1)" class="w-8 h-8 rounded-lg hover:bg-white text-slate-700 flex items-center justify-center transition-all shadow-2xs" title="Lùi lại">
+                  <i class="fa-solid fa-chevron-left text-xs"></i>
+                </button>
+                <button onclick="resetCalendarToToday()" class="px-3 py-1.5 text-xs font-extrabold text-potato-navy hover:bg-white rounded-lg transition-all" title="Chuyển về ngày hiện tại">
+                  Hôm nay (13/09)
+                </button>
+                <button onclick="navigateCalendar(1)" class="w-8 h-8 rounded-lg hover:bg-white text-slate-700 flex items-center justify-center transition-all shadow-2xs" title="Tiến lên">
+                  <i class="fa-solid fa-chevron-right text-xs"></i>
+                </button>
+              </div>
+
+              <h3 id="calendar-date-heading" class="font-extrabold text-sm sm:text-base text-potato-navy ml-1.5 flex items-center gap-2">
+                <span>Tuần 2: 07/09 - 13/09/2026</span>
+              </h3>
             </div>
 
-            <h3 id="current-month-heading" class="font-extrabold text-sm text-potato-navy ml-2">
-              Tháng 8 / Tháng 9, 2026 (Tuần Khai Giảng)
-            </h3>
+            <!-- Quick Week Selector (Buttons W1 to W5 for Month 9) -->
+            <div id="quick-week-selector" class="flex items-center gap-1 flex-wrap">
+              <span class="text-slate-400 font-bold text-[10px] uppercase tracking-wider mr-1">Chọn tuần:</span>
+              <button onclick="jumpToWeek(1)" id="btn-jump-w1" class="quick-week-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-all">Tuần 1</button>
+              <button onclick="jumpToWeek(2)" id="btn-jump-w2" class="quick-week-btn px-2.5 py-1 rounded-lg bg-potato-navy text-white font-bold text-[11px] transition-all shadow-2xs">Tuần 2</button>
+              <button onclick="jumpToWeek(3)" id="btn-jump-w3" class="quick-week-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-all">Tuần 3</button>
+              <button onclick="jumpToWeek(4)" id="btn-jump-w4" class="quick-week-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-all">Tuần 4</button>
+            </div>
           </div>
 
-          <!-- Channel Filter Badges -->
-          <div class="flex items-center gap-1.5 flex-wrap">
-            <span class="text-slate-400 font-bold text-[11px] mr-1">Bộ lọc:</span>
-            <button onclick="filterChannel('all')" class="channel-filter-btn px-2.5 py-1.5 rounded-lg bg-potato-navy text-white font-bold text-xs shadow-2xs transition-all" data-channel="all">
-              Tất cả
-            </button>
-            <button onclick="filterChannel('facebook')" class="channel-filter-btn px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5" data-channel="facebook">
-              <i class="fa-brands fa-facebook-f text-blue-600"></i>
-              <span>Facebook (3)</span>
-            </button>
-            <button onclick="filterChannel('tiktok')" class="channel-filter-btn px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5" data-channel="tiktok">
-              <i class="fa-brands fa-tiktok text-slate-900"></i>
-              <span>TikTok (2)</span>
-            </button>
-            <button onclick="filterChannel('seo')" class="channel-filter-btn px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5" data-channel="seo">
-              <i class="fa-solid fa-globe text-emerald-600"></i>
-              <span>SEO (2)</span>
-            </button>
-            <button onclick="filterChannel('zalo')" class="channel-filter-btn px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5" data-channel="zalo">
-              <i class="fa-solid fa-comment-dots text-blue-500"></i>
-              <span>Zalo (1)</span>
-            </button>
+          <!-- Bottom Row: Filters (Channel, Status) and Search Bar -->
+          <div class="pt-2 border-t border-slate-100 flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+            <!-- Filter Pills -->
+            <div class="flex items-center gap-2 flex-wrap">
+              <!-- Channel Filter Badges -->
+              <div class="flex items-center gap-1 flex-wrap">
+                <span class="text-slate-400 font-bold text-[10px] uppercase tracking-wider mr-1">Kênh:</span>
+                <button onclick="filterChannel('all')" class="channel-filter-btn px-2.5 py-1 rounded-lg bg-potato-navy text-white font-bold text-xs transition-all shadow-2xs" data-channel="all">
+                  Tất cả (<span id="count-ch-all">15</span>)
+                </button>
+                <button onclick="filterChannel('facebook')" class="channel-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5" data-channel="facebook">
+                  <i class="fa-brands fa-facebook-f text-blue-600"></i>
+                  <span>Facebook (<span id="count-ch-fb">7</span>)</span>
+                </button>
+                <button onclick="filterChannel('tiktok')" class="channel-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5" data-channel="tiktok">
+                  <i class="fa-brands fa-tiktok text-slate-900"></i>
+                  <span>TikTok (<span id="count-ch-tiktok">4</span>)</span>
+                </button>
+                <button onclick="filterChannel('seo')" class="channel-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5" data-channel="seo">
+                  <i class="fa-solid fa-globe text-emerald-600"></i>
+                  <span>Website SEO (<span id="count-ch-seo">3</span>)</span>
+                </button>
+                <button onclick="filterChannel('zalo')" class="channel-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5" data-channel="zalo">
+                  <i class="fa-solid fa-comment-dots text-blue-500"></i>
+                  <span>Zalo (<span id="count-ch-zalo">1</span>)</span>
+                </button>
+              </div>
+
+              <!-- Status Filter Badges -->
+              <div class="flex items-center gap-1 flex-wrap pl-0 sm:pl-2 sm:border-l sm:border-slate-200">
+                <span class="text-slate-400 font-bold text-[10px] uppercase tracking-wider mr-1">Trạng thái:</span>
+                <button onclick="filterStatus('all')" class="status-filter-btn px-2 py-0.8 rounded-md bg-slate-800 text-white font-bold text-[11px] transition-all" data-status="all">
+                  Tất cả
+                </button>
+                <button onclick="filterStatus('published')" class="status-filter-btn px-2 py-0.8 rounded-md bg-slate-100 hover:bg-slate-200 text-emerald-700 font-bold text-[11px] transition-all" data-status="published">
+                  Đã đăng (5)
+                </button>
+                <button onclick="filterStatus('ready')" class="status-filter-btn px-2 py-0.8 rounded-md bg-slate-100 hover:bg-slate-200 text-blue-700 font-bold text-[11px] transition-all" data-status="ready">
+                  Sẵn sàng (1)
+                </button>
+                <button onclick="filterStatus('planned')" class="status-filter-btn px-2 py-0.8 rounded-md bg-slate-100 hover:bg-slate-200 text-amber-700 font-bold text-[11px] transition-all" data-status="planned">
+                  Kế hoạch (9)
+                </button>
+              </div>
+            </div>
+
+            <!-- Search Box -->
+            <div class="relative w-full sm:w-64 flex-shrink-0">
+              <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+              <input type="text" id="calendar-search-input" oninput="handleCalendarSearch(this.value)" placeholder="Tìm tiêu đề, hashtag, nội dung..." class="w-full pl-8 pr-7 py-1.5 bg-slate-50 hover:bg-white focus:bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-potato-cyan font-medium transition-all">
+              <button id="calendar-search-clear" onclick="clearCalendarSearch()" class="hidden absolute right-2.5 top-2 text-slate-400 hover:text-slate-700 text-xs">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
           </div>
 
         </div>
 
-        <!-- 1. CALENDAR VIEW CONTAINER (DEFAULT) -->
-        <div id="calendar-view-container" class="space-y-4">
-          
-          <!-- Weekly Schedule Grid (Responsive Column on Desktop, Stacked Cards on Mobile) -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            
-            <!-- Column 1: Thứ Hai (25/08) -->
-            <div class="bg-white rounded-2xl border border-slate-200/80 p-3.5 flex flex-col space-y-3">
-              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                <span class="font-extrabold text-xs text-potato-navy">Thứ Hai • 25/08</span>
-                <span class="text-[10px] font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md">2 bài</span>
-              </div>
-              
-              <!-- Post Card 1: FB Album -->
-              <div onclick="openPostModal('P_W1_01')" data-channel="facebook" class="post-card-buffer cursor-pointer p-3 rounded-xl border border-slate-200/80 hover:border-potato-cyan bg-[#FCFDFF] hover:shadow-card transition-all space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="flex items-center gap-1.5 text-[11px] font-extrabold text-blue-600">
-                    <i class="fa-brands fa-facebook-f"></i> Fanpage
-                  </span>
-                  <span class="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">Đã duyệt</span>
-                </div>
-                <h4 class="font-bold text-xs text-slate-900 line-clamp-2 leading-snug">
-                  Album 4 ảnh thực tế: "Tự hào trở lại lớp học Potato English - Tự tin khai giảng 2026"
-                </h4>
-                <div class="text-[10px] text-slate-400 flex items-center justify-between pt-1 border-t border-slate-100">
-                  <span>⏰ 19:30 Tối</span>
-                  <span>🖼️ 4 Ảnh 1:1</span>
-                </div>
-              </div>
-
-              <!-- Post Card 2: TikTok -->
-              <div onclick="openPostModal('P_W1_02')" data-channel="tiktok" class="post-card-buffer cursor-pointer p-3 rounded-xl border border-slate-200/80 hover:border-potato-cyan bg-[#FCFDFF] hover:shadow-card transition-all space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="flex items-center gap-1.5 text-[11px] font-extrabold text-slate-900">
-                    <i class="fa-brands fa-tiktok"></i> TikTok
-                  </span>
-                  <span class="text-[10px] font-bold bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded">Chờ duyệt</span>
-                </div>
-                <h4 class="font-bold text-xs text-slate-900 line-clamp-2 leading-snug">
-                  Video ngắn 15s: "Mascot Leo và bí kíp nhớ từ vựng tiếng Anh giao thông siêu tốc"
-                </h4>
-                <div class="text-[10px] text-slate-400 flex items-center justify-between pt-1 border-t border-slate-100">
-                  <span>⏰ 20:15 Tối</span>
-                  <span>🎬 9:16 Short</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Column 2: Thứ Tư (27/08) -->
-            <div class="bg-white rounded-2xl border border-slate-200/80 p-3.5 flex flex-col space-y-3">
-              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                <span class="font-extrabold text-xs text-potato-navy">Thứ Tư • 27/08</span>
-                <span class="text-[10px] font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md">2 bài</span>
-              </div>
-
-              <!-- Post Card 3: SEO Blog -->
-              <div onclick="openPostModal('P_W1_03')" data-channel="seo" class="post-card-buffer cursor-pointer p-3 rounded-xl border border-slate-200/80 hover:border-potato-cyan bg-[#FCFDFF] hover:shadow-card transition-all space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="flex items-center gap-1.5 text-[11px] font-extrabold text-emerald-700">
-                    <i class="fa-solid fa-globe"></i> Website SEO
-                  </span>
-                  <span class="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">Đã duyệt</span>
-                </div>
-                <h4 class="font-bold text-xs text-slate-900 line-clamp-2 leading-snug">
-                  Bài học thuật: "Cơ chế học tiếng Anh như tiếng mẹ đẻ cho trẻ từ 6-12 tuổi"
-                </h4>
-                <div class="text-[10px] text-slate-400 flex items-center justify-between pt-1 border-t border-slate-100">
-                  <span>⏰ 09:00 Sáng</span>
-                  <span>✍️ 1.800 từ</span>
-                </div>
-              </div>
-
-              <!-- Post Card 4: FB Single -->
-              <div onclick="openPostModal('P_W1_04')" data-channel="facebook" class="post-card-buffer cursor-pointer p-3 rounded-xl border border-slate-200/80 hover:border-potato-cyan bg-[#FCFDFF] hover:shadow-card transition-all space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="flex items-center gap-1.5 text-[11px] font-extrabold text-blue-600">
-                    <i class="fa-brands fa-facebook-f"></i> Fanpage
-                  </span>
-                  <span class="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">Đã lên lịch</span>
-                </div>
-                <h4 class="font-bold text-xs text-slate-900 line-clamp-2 leading-snug">
-                  Proof of Life: "Một buổi chiều rộn rã tiếng cười của lớp Starters tại CS1 Phú Cường"
-                </h4>
-                <div class="text-[10px] text-slate-400 flex items-center justify-between pt-1 border-t border-slate-100">
-                  <span>⏰ 16:30 Chiều</span>
-                  <span>📸 Ảnh lớp học</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Column 3: Thứ Sáu (29/08) -->
-            <div class="bg-white rounded-2xl border border-slate-200/80 p-3.5 flex flex-col space-y-3">
-              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                <span class="font-extrabold text-xs text-potato-navy">Thứ Sáu • 29/08</span>
-                <span class="text-[10px] font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md">2 bài</span>
-              </div>
-
-              <!-- Post Card 5: TikTok -->
-              <div onclick="openPostModal('P_W1_05')" data-channel="tiktok" class="post-card-buffer cursor-pointer p-3 rounded-xl border border-slate-200/80 hover:border-potato-cyan bg-[#FCFDFF] hover:shadow-card transition-all space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="flex items-center gap-1.5 text-[11px] font-extrabold text-slate-900">
-                    <i class="fa-brands fa-tiktok"></i> TikTok
-                  </span>
-                  <span class="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">Đã duyệt</span>
-                </div>
-                <h4 class="font-bold text-xs text-slate-900 line-clamp-2 leading-snug">
-                  Challenge hài hước: "Phỏng vấn nhanh các bạn nhỏ lớp Flyers khi gặp người nước ngoài"
-                </h4>
-                <div class="text-[10px] text-slate-400 flex items-center justify-between pt-1 border-t border-slate-100">
-                  <span>⏰ 18:00 Tối</span>
-                  <span>🎬 Video thực tế</span>
-                </div>
-              </div>
-
-              <!-- Post Card 6: SEO Blog -->
-              <div onclick="openPostModal('P_W1_06')" data-channel="seo" class="post-card-buffer cursor-pointer p-3 rounded-xl border border-slate-200/80 hover:border-potato-cyan bg-[#FCFDFF] hover:shadow-card transition-all space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="flex items-center gap-1.5 text-[11px] font-extrabold text-emerald-700">
-                    <i class="fa-solid fa-globe"></i> Website SEO
-                  </span>
-                  <span class="text-[10px] font-bold bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded">Chờ duyệt</span>
-                </div>
-                <h4 class="font-bold text-xs text-slate-900 line-clamp-2 leading-snug">
-                  Cẩm nang phụ huynh: "5 dấu hiệu con bạn đang học vẹt tiếng Anh và cách khắc phục"
-                </h4>
-                <div class="text-[10px] text-slate-400 flex items-center justify-between pt-1 border-t border-slate-100">
-                  <span>⏰ 21:00 Tối</span>
-                  <span>✍️ 2.100 từ</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Column 4: Cuối Tuần (30-31/08) -->
-            <div class="bg-white rounded-2xl border border-slate-200/80 p-3.5 flex flex-col space-y-3">
-              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                <span class="font-extrabold text-xs text-potato-navy">Thứ Bảy & CN • 30-31/08</span>
-                <span class="text-[10px] font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md">2 bài</span>
-              </div>
-
-              <!-- Post Card 7: Top Student Honor FB -->
-              <div onclick="openPostModal('P_W1_07')" data-channel="facebook" class="post-card-buffer cursor-pointer p-3 rounded-xl border border-potato-tan/40 hover:border-potato-cyan bg-amber-50/20 hover:shadow-card transition-all space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="flex items-center gap-1.5 text-[11px] font-extrabold text-amber-700">
-                    <i class="fa-solid fa-trophy"></i> Vinh Danh Top
-                  </span>
-                  <span class="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">Đã duyệt</span>
-                </div>
-                <h4 class="font-bold text-xs text-slate-900 line-clamp-2 leading-snug">
-                  Vinh danh học viên: "Bé Bảo An đạt điểm tuyệt đối 15/15 Khiên Cambridge Starters"
-                </h4>
-                <div class="text-[10px] text-slate-400 flex items-center justify-between pt-1 border-t border-slate-100">
-                  <span>⏰ Thứ Bảy 10:00 Sáng</span>
-                  <span>🏆 Doodle Frame</span>
-                </div>
-              </div>
-
-              <!-- Post Card 8: Zalo CRM -->
-              <div onclick="openPostModal('P_W1_08')" data-channel="zalo" class="post-card-buffer cursor-pointer p-3 rounded-xl border border-slate-200/80 hover:border-potato-cyan bg-[#FCFDFF] hover:shadow-card transition-all space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="flex items-center gap-1.5 text-[11px] font-extrabold text-blue-600">
-                    <i class="fa-solid fa-comment-dots"></i> Zalo OA
-                  </span>
-                  <span class="text-[10px] font-bold bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">Đang gửi</span>
-                </div>
-                <h4 class="font-bold text-xs text-slate-900 line-clamp-2 leading-snug">
-                  Zalo CRM: Tặng Bộ Flashcard 100 câu tiếng Anh sinh hoạt & Mời kiểm tra 1-1
-                </h4>
-                <div class="text-[10px] text-slate-400 flex items-center justify-between pt-1 border-t border-slate-100">
-                  <span>⏰ Chủ Nhật 09:00 Sáng</span>
-                  <span>📄 PDF In màu</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- 2. LIST VIEW CONTAINER (HIDDEN INITIALLY) -->
-        <div id="list-view-container" class="hidden bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-xs">
-          <!-- Mobile Card List (<640px) -->
-          <div class="block sm:hidden divide-y divide-slate-100">
-            <!-- Mobile List Card 1 -->
-            <div onclick="openPostModal('P_W1_01')" class="p-4 space-y-2 cursor-pointer hover:bg-slate-50">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-extrabold text-blue-600"><i class="fa-brands fa-facebook-f"></i> Fanpage</span>
-                <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Đã duyệt</span>
-              </div>
-              <h4 class="font-bold text-xs text-slate-900">Album 4 ảnh thực tế: "Tự hào trở lại lớp học Potato English"</h4>
-              <p class="text-[11px] text-slate-500">25/08 • 19:30 Tối • Chiến dịch Khai giảng</p>
-            </div>
-            <!-- Mobile List Card 2 -->
-            <div onclick="openPostModal('P_W1_02')" class="p-4 space-y-2 cursor-pointer hover:bg-slate-50">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-extrabold text-slate-900"><i class="fa-brands fa-tiktok"></i> TikTok</span>
-                <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded">Chờ duyệt</span>
-              </div>
-              <h4 class="font-bold text-xs text-slate-900">Video ngắn 15s: "Mascot Leo và từ vựng giao thông"</h4>
-              <p class="text-[11px] text-slate-500">25/08 • 20:15 Tối • Video Short 9:16</p>
-            </div>
-            <!-- Mobile List Card 3 -->
-            <div onclick="openPostModal('P_W1_07')" class="p-4 space-y-2 cursor-pointer hover:bg-slate-50">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-extrabold text-amber-700"><i class="fa-solid fa-trophy"></i> Vinh Danh</span>
-                <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Đã duyệt</span>
-              </div>
-              <h4 class="font-bold text-xs text-slate-900">Vinh danh: "Bé Bảo An 15/15 Khiên Cambridge Starters"</h4>
-              <p class="text-[11px] text-slate-500">30/08 • 10:00 Sáng • Top Student</p>
-            </div>
-          </div>
-
-          <!-- Desktop Table (>= 640px) -->
-          <div class="hidden sm:block overflow-x-auto">
-            <table class="w-full text-left text-xs">
-              <thead class="bg-slate-50 border-b border-slate-200/80 text-slate-500 uppercase tracking-wider font-bold">
-                <tr>
-                  <th class="p-3.5 pl-5">Tiêu Đề & Kênh</th>
-                  <th class="p-3.5">Chiến Dịch</th>
-                  <th class="p-3.5">Thời Gian</th>
-                  <th class="p-3.5">Định Dạng</th>
-                  <th class="p-3.5">Trạng Thái</th>
-                  <th class="p-3.5 pr-5 text-right">Thao Tác</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-slate-100">
-                <tr class="hover:bg-slate-50/80 cursor-pointer" onclick="openPostModal('P_W1_01')">
-                  <td class="p-3.5 pl-5">
-                    <div class="font-bold text-slate-900 flex items-center gap-2">
-                      <span class="w-2 h-2 rounded-full bg-blue-500"></span>
-                      Album 4 ảnh thực tế: "Tự hào trở lại lớp học Potato English"
-                    </div>
-                    <span class="text-[11px] text-blue-600 font-semibold">Facebook Fanpage</span>
-                  </td>
-                  <td class="p-3.5 text-slate-600 font-medium">Khai Giảng 2026</td>
-                  <td class="p-3.5 text-slate-600">25/08 • 19:30 Tối</td>
-                  <td class="p-3.5 text-slate-500">Album 4 ảnh (1:1)</td>
-                  <td class="p-3.5">
-                    <span class="bg-emerald-100 text-emerald-800 font-bold text-[10px] px-2 py-0.5 rounded">Đã duyệt</span>
-                  </td>
-                  <td class="p-3.5 pr-5 text-right">
-                    <button class="text-potato-cyan hover:underline font-bold">Xem chi tiết</button>
-                  </td>
-                </tr>
-                <tr class="hover:bg-slate-50/80 cursor-pointer" onclick="openPostModal('P_W1_02')">
-                  <td class="p-3.5 pl-5">
-                    <div class="font-bold text-slate-900 flex items-center gap-2">
-                      <span class="w-2 h-2 rounded-full bg-slate-900"></span>
-                      Video ngắn 15s: "Mascot Leo và từ vựng giao thông siêu tốc"
-                    </div>
-                    <span class="text-[11px] text-slate-700 font-semibold">TikTok Shorts</span>
-                  </td>
-                  <td class="p-3.5 text-slate-600 font-medium">Storytelling Mascot</td>
-                  <td class="p-3.5 text-slate-600">25/08 • 20:15 Tối</td>
-                  <td class="p-3.5 text-slate-500">Video ngắn 9:16</td>
-                  <td class="p-3.5">
-                    <span class="bg-amber-100 text-amber-800 font-bold text-[10px] px-2 py-0.5 rounded">Chờ duyệt</span>
-                  </td>
-                  <td class="p-3.5 pr-5 text-right">
-                    <button class="text-potato-cyan hover:underline font-bold">Xem chi tiết</button>
-                  </td>
-                </tr>
-                <tr class="hover:bg-slate-50/80 cursor-pointer" onclick="openPostModal('P_W1_07')">
-                  <td class="p-3.5 pl-5">
-                    <div class="font-bold text-slate-900 flex items-center gap-2">
-                      <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-                      Vinh danh học viên: "Bé Bảo An 15/15 Khiên Cambridge Starters"
-                    </div>
-                    <span class="text-[11px] text-amber-700 font-semibold">Facebook Top Student</span>
-                  </td>
-                  <td class="p-3.5 text-slate-600 font-medium">Vinh Danh Học Viên</td>
-                  <td class="p-3.5 text-slate-600">30/08 • 10:00 Sáng</td>
-                  <td class="p-3.5 text-slate-500">Doodle Frame UI</td>
-                  <td class="p-3.5">
-                    <span class="bg-emerald-100 text-emerald-800 font-bold text-[10px] px-2 py-0.5 rounded">Đã duyệt</span>
-                  </td>
-                  <td class="p-3.5 pr-5 text-right">
-                    <button class="text-potato-cyan hover:underline font-bold">Xem chi tiết</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <!-- DYNAMIC CALENDAR DISPLAY CONTAINER (DAY, 3-DAYS, WEEK, MONTH, LIST) -->
+        <div id="calendar-dynamic-container" class="w-full min-h-[420px] transition-opacity duration-200">
+          <!-- Rendered via JavaScript Engine -->
         </div>
 
       </section>
@@ -1923,20 +1724,64 @@
           <span id="modal-format-badge" class="bg-slate-100 text-slate-700 font-bold px-2.5 py-1 rounded-md text-[10px]">
             Album 4 ảnh (1:1)
           </span>
+          <a id="modal-sheet-link" href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=926192727" target="_blank" class="ml-auto text-[11px] text-potato-blue hover:text-potato-cyan font-bold inline-flex items-center gap-1.5 underline underline-offset-2">
+            <i class="fa-solid fa-file-excel text-emerald-600"></i>
+            <span id="modal-sheet-row-text">Dòng trên Google Sheet</span>
+          </a>
+        </div>
+
+        <!-- Live Links & Media Assets Row -->
+        <div id="modal-links-section" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+          <!-- Media Asset Box -->
+          <div id="modal-media-box" class="p-3 rounded-2xl bg-potato-softBlue/60 border border-potato-cyan/30 flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <div class="w-8 h-8 rounded-xl bg-potato-cyan/15 text-potato-cyan flex items-center justify-center flex-shrink-0">
+                <i id="modal-media-icon" class="fa-solid fa-photo-film"></i>
+              </div>
+              <div class="min-w-0">
+                <p class="text-[10px] font-extrabold uppercase text-slate-400">Tư Liệu Media</p>
+                <p id="modal-media-title" class="text-xs font-bold text-slate-800 truncate">Link Google Drive</p>
+              </div>
+            </div>
+            <a id="modal-media-btn" href="#" target="_blank" class="flex-shrink-0 px-2.5 py-1.5 rounded-lg bg-white hover:bg-potato-cyan hover:text-white border border-slate-200 text-potato-navy font-bold text-[11px] flex items-center gap-1 transition-all shadow-2xs">
+              <span>Mở file</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+            </a>
+          </div>
+
+          <!-- Published Post Box -->
+          <div id="modal-postlink-box" class="p-3 rounded-2xl bg-emerald-50/70 border border-emerald-200/80 flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0">
+                <i class="fa-solid fa-check-double"></i>
+              </div>
+              <div class="min-w-0">
+                <p class="text-[10px] font-extrabold uppercase text-emerald-600">Bài Đăng Thực Tế</p>
+                <p id="modal-postlink-title" class="text-xs font-bold text-slate-800 truncate">Đã phát hành trên mạng xã hội</p>
+              </div>
+            </div>
+            <a id="modal-postlink-btn" href="#" target="_blank" class="flex-shrink-0 px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] flex items-center gap-1 transition-all shadow-2xs">
+              <span>Xem bài</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+            </a>
+          </div>
         </div>
 
         <!-- Caption Content Box -->
         <div>
-          <label class="block text-slate-400 font-extrabold uppercase text-[10px] tracking-wider mb-1">Nội Dung Bài Đăng (Caption)</label>
-          <div id="modal-caption-text" class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 text-slate-800 font-normal leading-relaxed whitespace-pre-line text-xs">
+          <div class="flex items-center justify-between mb-1">
+            <label class="block text-slate-400 font-extrabold uppercase text-[10px] tracking-wider">Nội Dung Bài Đăng (Caption Chuẩn Brand Voice)</label>
+            <span class="text-[10px] text-slate-400 font-semibold" id="modal-char-count"></span>
+          </div>
+          <div id="modal-caption-text" class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 text-slate-800 font-normal leading-relaxed whitespace-pre-line text-xs max-h-60 overflow-y-auto custom-scrollbar">
             Nội dung chi tiết bài viết...
           </div>
         </div>
 
         <!-- Hashtags -->
         <div>
-          <label class="block text-slate-400 font-extrabold uppercase text-[10px] tracking-wider mb-1">Hashtags Nhận Diện</label>
-          <p id="modal-hashtags-text" class="text-potato-blue font-bold text-xs">#PotatoEnglish #NeverStopLearning</p>
+          <label class="block text-slate-400 font-extrabold uppercase text-[10px] tracking-wider mb-1">Hashtags Nhận Diện Thương Hiệu</label>
+          <p id="modal-hashtags-text" class="text-potato-blue font-bold text-xs p-2.5 rounded-xl bg-slate-50 border border-slate-200/60 break-words">#PotatoEnglish #NeverStopLearning</p>
         </div>
 
       </div>
@@ -2035,106 +1880,370 @@
   <!-- ================================================================= -->
   <script>
     // ===================================================================
-    // 1. DATA STORE & SAMPLE POSTS
+    // 1. DATA STORE & SAMPLE POSTS (FROM TAB 📅 OMNICHANNEL CALENDAR #gid=926192727)
     // ===================================================================
-    const POSTS_DATA = {
-      'P_W1_01': {
-        id: 'P_W1_01',
-        title: 'Album 4 ảnh: Tự Hào Trở Lại Lớp Học Potato English - Tự Tin Khai Giảng 2026',
-        platform: 'Facebook Fanpage',
-        platformIcon: 'fa-brands fa-facebook-f',
-        time: 'Thứ Hai (25/08) • 19:30 Tối',
-        status: 'Đã duyệt',
-        campaign: 'Khai Giảng 2026',
-        format: 'Album 4 ảnh thực tế (1:1)',
-        caption: `TIẾNG CƯỜI RỘN RÃ NGÀY TỰU TRƯỜNG - CON ĐÃ SẴN SÀNG CHO NĂM HỌC MỚI CÙNG POTATO ENGLISH! 🎒✨\n\nNụ cười rạng rỡ của các bạn nhỏ khi gặp lại thầy cô và bạn bè sau kỳ nghỉ chính là nguồn năng lượng tuyệt vời nhất tại Potato English.\n\n✅ 100% môi trường giao tiếp tự nhiên qua trò chơi và dự án sáng tạo.\n✅ Thầy cô kèm cặp sát sao, uốn nắn từng phát âm chuẩn xác.\n✅ Cơ sở vật chất thân thiện, kích thích tình yêu học tập trọn đời.\n\n🎁 Đăng ký ngay trong tuần này để nhận Học bổng Khai giảng cùng bộ Balo Mascot Potato độc quyền ba mẹ nhé!`,
-        hashtags: '#PotatoEnglish #NeverStopLearning #KhaiGiang2026 #TiengAnhTreEmBinhDuong'
-      },
-      'P_W1_02': {
-        id: 'P_W1_02',
-        title: 'Video ngắn 15s: Mascot Leo và bí kíp nhớ từ vựng tiếng Anh giao thông',
-        platform: 'TikTok Shorts',
-        platformIcon: 'fa-brands fa-tiktok',
-        time: 'Thứ Hai (25/08) • 20:15 Tối',
-        status: 'Chờ duyệt',
-        campaign: 'Mascot Leo Storytelling',
-        format: 'Video ngắn 9:16',
-        caption: `Cùng chú sư tử Leo học nhanh 3 từ vựng giao thông siêu dễ nhớ khi đi học mỗi sáng nhé!\n1. Traffic light 🚦\n2. Helmet ⛑️\n3. Zebra crossing 🦓\n\nComment ngay từ bạn nhớ nhất để nhận huy hiệu nhé!`,
-        hashtags: '#PotatoEnglish #LearnWithLeo #TikTokTiengAnh #TuVungGiaoThong'
-      },
-      'P_W1_03': {
-        id: 'P_W1_03',
-        title: 'Cơ chế học tiếng Anh như tiếng mẹ đẻ cho trẻ từ 6-12 tuổi',
-        platform: 'Website SEO',
-        platformIcon: 'fa-solid fa-globe',
-        time: 'Thứ Tư (27/08) • 09:00 Sáng',
-        status: 'Đã duyệt',
-        campaign: 'Bài Viết Học Thuật',
-        format: 'Bài viết chuẩn SEO (1.800 từ)',
-        caption: `Bài viết chuyên sâu phân tích cơ chế thụ đắc ngôn ngữ tự nhiên ở độ tuổi vàng tiểu học. Giải thích vì sao việc học vẹt ngữ pháp khiến trẻ sợ nói, và cách phương pháp Phonics & TPR tại Potato English giúp con phản xạ không cần dịch nhẩm.`,
-        hashtags: '#PhuongPhapTiengAnh #CoCheTiengMeDe #PotatoEnglishBlog'
-      },
-      'P_W1_04': {
-        id: 'P_W1_04',
-        title: 'Proof of Life: Một buổi chiều rộn rã tiếng cười của lớp Starters',
-        platform: 'Facebook Fanpage',
-        platformIcon: 'fa-brands fa-facebook-f',
-        time: 'Thứ Tư (27/08) • 16:30 Chiều',
-        status: 'Đã lên lịch',
-        campaign: 'Nhật Ký Lớp Học',
-        format: 'Hình ảnh thực tế lớp học',
-        caption: `Ghé thăm giờ học của lớp Starters tại CS1 Phú Cường chiều nay! Ba mẹ thấy các con chăm chú vẽ tranh từ vựng chưa nào? Từng ngày trôi qua là một bước tiến tự tin hơn của con.`,
-        hashtags: '#NhatKyLopHoc #StartersPotato #HocVuiMoiNgay'
-      },
-      'P_W1_05': {
-        id: 'P_W1_05',
-        title: 'Challenge hài hước: Phỏng vấn nhanh các bạn nhỏ lớp Flyers khi gặp người nước ngoài',
-        platform: 'TikTok Shorts',
-        platformIcon: 'fa-brands fa-tiktok',
-        time: 'Thứ Sáu (29/08) • 18:00 Tối',
-        status: 'Đã duyệt',
-        campaign: 'Viral Kids Video',
-        format: 'Video ngắn 9:16',
-        caption: `Khi học viên Potato English bất ngờ gặp thầy giáo nước ngoài tại hành lang thì sẽ phản ứng thế nào? Xem hết video để thấy sự tự tin đáng yêu của các bé nhé!`,
-        hashtags: '#KidsInterview #TuTinGiaoTiep #PotatoEnglishViral'
-      },
-      'P_W1_06': {
-        id: 'P_W1_06',
-        title: '5 dấu hiệu con bạn đang học vẹt tiếng Anh và cách khắc phục',
-        platform: 'Website SEO',
-        platformIcon: 'fa-solid fa-globe',
-        time: 'Thứ Sáu (29/08) • 21:00 Tối',
-        status: 'Chờ duyệt',
-        campaign: 'Cẩm Nang Phụ Huynh',
-        format: 'Bài viết chuẩn SEO (2.100 từ)',
-        caption: `Cẩm nang dành riêng cho phụ huynh có con học tiểu học: Cách nhận diện khi con thuộc bài nhưng không hiểu ngữ cảnh, và gợi ý 3 trò chơi tương tác tại nhà giúp kích thích phản xạ thực thụ.`,
-        hashtags: '#CamNangPhuHuynh #DongHanhCungCon #PotatoEnglish'
-      },
-      'P_W1_07': {
-        id: 'P_W1_07',
-        title: 'Vinh danh học viên: Bé Bảo An đạt điểm tuyệt đối 15/15 Khiên Cambridge Starters',
-        platform: 'Facebook Top Student',
-        platformIcon: 'fa-solid fa-trophy',
-        time: 'Thứ Bảy (30/08) • 10:00 Sáng',
-        status: 'Đã duyệt',
-        campaign: 'Vinh Danh Top Students',
-        format: 'Doodle UI 5 tầng',
-        caption: `CHÚC MỪNG BÉ NGUYỄN BẢO AN - XUẤT SẮC ĐẠT 15/15 KHIÊN TUYỆT ĐỐI KỲ THI CAMBRIDGE STARTERS! 🌟🏆\n\nSau 9 tháng đồng hành bền bỉ tại Potato English CS1, Bảo An đã tự tin chinh phục số điểm trọn vẹn ở cả 3 phần thi Listening, Reading & Writing, và Speaking.\n\nPotato English tự hào là người bạn đồng hành ươm mầm tri thức cho con!`,
-        hashtags: '#VinhDanhHocVien #CambridgeStarters #PotatoEnglishHonors #15KhienTuyetDoi'
-      },
-      'P_W1_08': {
-        id: 'P_W1_08',
-        title: 'Zalo CRM: Tặng Bộ Flashcard 100 câu tiếng Anh sinh hoạt & Mời kiểm tra 1-1',
-        platform: 'Zalo OA CSKH',
-        platformIcon: 'fa-solid fa-comment-dots',
-        time: 'Chủ Nhật (31/08) • 09:00 Sáng',
-        status: 'Đang gửi',
-        campaign: 'Chăm Sóc & Đặt Lịch Test',
-        format: 'File PDF In Màu + Tin nhắn Zalo',
-        caption: `Tin nhắn Zalo gửi tặng phụ huynh trọn bộ Flashcard 100 câu tiếng Anh sinh hoạt gia đình kèm lời mời đưa bé đến tham gia buổi Đánh giá năng lực 4 kỹ năng miễn phí cuối tuần.`,
-        hashtags: '#ZaloCRM #ChamSocPhuHuynh #Test11MienPhi'
-      }
-    };
+    const CALENDAR_RAW_DATA = [
+    {
+        "id": "POST_2026_09_05_facebook",
+        "sheetRowIndex": 2,
+        "month": 9,
+        "week": 1,
+        "day": 5,
+        "date": "05/09/2026",
+        "isoDate": "2026-09-05",
+        "platformKey": "facebook",
+        "platform": "Facebook Fanpage",
+        "platformIcon": "fa-brands fa-facebook-f",
+        "platformStyle": "text-blue-600 bg-blue-50 border-blue-200",
+        "platformBadge": "bg-blue-600 text-white",
+        "title": "RỘN RÃ TIẾNG TRỐNG TRƯỜNG – CHÚC CÁC BẠN NHỎ POTATO MỘT NĂM HỌC RỰC RỠ!",
+        "content": "Sáng nay tiếng trống khai trường đã chính thức điểm, mở ra năm học mới 2026 - 2027 ngập tràn hứng khởi! 🥁🌻\n\nNhìn những ánh mắt trong veo, nụ cười rạng rỡ và từng bước chân nhỏ hân hoan bước qua cổng trường, thầy cô Potato English chúc tất cả các con:\n✨ Luôn tự tin khám phá những điều mới mẻ.\n✨ Luôn giữ trọn niềm hào hứng và yêu thích việc học.\n✨ Mỗi ngày đến trường đều là một hành trình rực rỡ và ngập tràn niềm vui!\n\nỞ trường học giỏi, về Potato học vui. Thầy cô luôn sẵn sàng đồng hành cùng các con trên từng chặng đường tự tin mở lời với tiếng Anh! 🥔❤️\n\nPotato English là môi trường học tiếng Anh dành cho trẻ 4–16 tuổi, giúp các em xây nền tảng vững chắc và tự tin sử dụng tiếng Anh trong học tập lẫn cuộc sống. Thầy cô luôn sẵn sàng đồng hành cùng các con trên từng chặng đường! 🥔❤️\n\n📌 Hotline tư vấn: 0918 671 981 | Website: potatoenglish.edu.vn\n📍 Cơ sở 1: Số 37 Ngô Quyền, Phường Phú Cường, Thành phố Hồ Chí Minh.\n📍 Cơ sở 2: Số 9 KP Hưng Phước, Phường Hưng Định, Thành phố Hồ Chí Minh",
+        "tags": "#PotatoEnglish #FriendlyKid #HappyJunior #KhaiGiang2026 #BackToSchool2026",
+        "format": "Ảnh Hero 1200x800px",
+        "mediaLink": "https://drive.google.com/file/d/1KBP_Ap2oYvHSORbzFIWkhC-cMi-vHFr4/view?usp=sharing",
+        "status": "Đã đăng",
+        "statusKey": "published",
+        "statusBadge": "bg-emerald-100 text-emerald-800 border border-emerald-200",
+        "postLink": "https://www.facebook.com/HocAnhVanTotBinhDuong/posts/pfbid02XxhTCiyqYNZC936o8kiPLyNpCSUpuqXakBX7mNcUNF32zTNsjPu55484SWMVqtk5l"
+    },
+    {
+        "id": "POST_2026_09_06_tiktok",
+        "sheetRowIndex": 3,
+        "month": 9,
+        "week": 1,
+        "day": 6,
+        "date": "06/09/2026",
+        "isoDate": "2026-09-06",
+        "platformKey": "tiktok",
+        "platform": "TikTok Shorts",
+        "platformIcon": "fa-brands fa-tiktok",
+        "platformStyle": "text-slate-900 bg-slate-100 border-slate-300",
+        "platformBadge": "bg-slate-900 text-white",
+        "title": "Bé tập nói 9 động từ tiếng Anh quen thuộc mỗi ngày! 🥔✨",
+        "content": "Học tiếng Anh đâu cần phức tạp, bắt đầu từ những thói quen nhỏ của con mỗi ngày ba mẹ nha! 9 động từ chỉ hành động trong ngày giúp con phản xạ tiếng Anh tự nhiên nhất.\n\nPotato English là môi trường học tiếng Anh dành cho trẻ 4–16 tuổi, giúp các em xây nền tảng vững chắc và tự tin sử dụng tiếng Anh trong học tập lẫn cuộc sống.\n\n📌 Hotline tư vấn: 0918 671 981 | Website: potatoenglish.edu.vn\n📍 Cơ sở 1: Số 37 Ngô Quyền, Phường Phú Cường, Thành phố Hồ Chí Minh.\n📍 Cơ sở 2: Số 9 KP Hưng Phước, Phường Hưng Định, Thành phố Hồ Chí Minh",
+        "tags": "#PotatoEnglish #FriendlyKid #HappyJunior #TiengAnhMoiNgay #DongTuTiengAnh",
+        "format": "Video ngắn 9:16 (~54s)",
+        "mediaLink": "video 9 động từ tiếng Anh chỉ hành động trong ngày.mp4",
+        "status": "Đã đăng",
+        "statusKey": "published",
+        "statusBadge": "bg-emerald-100 text-emerald-800 border border-emerald-200",
+        "postLink": "https://www.tiktok.com/@potatoenglish/video/7682258943489379605"
+    },
+    {
+        "id": "POST_2026_09_08_facebook",
+        "sheetRowIndex": 4,
+        "month": 9,
+        "week": 2,
+        "day": 8,
+        "date": "08/09/2026",
+        "isoDate": "2026-09-08",
+        "platformKey": "facebook",
+        "platform": "Facebook Fanpage",
+        "platformIcon": "fa-brands fa-facebook-f",
+        "platformStyle": "text-blue-600 bg-blue-50 border-blue-200",
+        "platformBadge": "bg-blue-600 text-white",
+        "title": "BỨT PHÁ TIẾNG ANH THCS: CON ĐẠT ĐIỂM CAO TRÊN TRƯỜNG & TỰ TIN CHINH PHỤC CHỨNG CHỈ QUỐC TẾ! 🥔✨",
+        "content": "BỨT PHÁ TIẾNG ANH THCS: CON ĐẠT ĐIỂM CAO TRÊN TRƯỜNG & TỰ TIN CHINH PHỤC CHỨNG CHỈ QUỐC TẾ! 🥔✨\n\nBước vào cấp 2 (12–16 tuổi), tiếng Anh không còn là những bài hát vui nhộn đơn giản, mà là:\n👉 Áp lực điểm số các kỳ thi học kỳ & thi chuyển cấp lớp 10.\n👉 Khối lượng ngữ pháp học thuật, bài đọc hiểu dài và từ vựng chuyên sâu.\n👉 Yêu cầu chứng chỉ Cambridge (KET, PET) hay nền tảng Pre-IELTS để mở rộng cơ hội tương lai.\n\nLàm sao để con vừa nắm chắc điểm 9, 10 trường công, vừa tự tin thuyết trình lưu loát mà không bị ngợp hay áp lực học vẹt?\n\n🌱 KHÓA HỌC LEADING TEEN TẠI POTATO ENGLISH ĐƯỢC THIẾT KẾ RIÊNG CHO CON:\n✅ Lộ trình Cambridge & Pre-IELTS tinh gọn: Chuẩn hóa phát âm phản biện, rèn luyện chiến lược làm bài thi thực chiến KET (A2), PET (B1) và bước đệm IELTS vững vàng.\n✅ Phương pháp học qua dự án (Project-Based): Con tự nghiên cứu chủ đề, làm việc nhóm và thuyết trình 100% bằng tiếng Anh.\n✅ Bám sát chương trình trường công: Hệ thống hóa ngữ pháp chuyên sâu, giải đề kiểm tra giúp con tự tin dẫn đầu lớp học.\n✅ Sĩ số giới hạn 8 - 10 bạn/lớp: Thầy cô kèm cặp sát sao từng học viên, uốn nắn từng lỗi nhỏ để con không bị bỏ lại phía sau.\n\n🎁 ĐẶC QUYỀN TRONG THÁNG NÀY DÀNH CHO HỌC VIÊN MỚI:\n• 01 Buổi Đánh Giá Năng Lực 4 Kỹ Năng 1-1 chuẩn Cambridge & nhận Lộ trình chuyên biệt (0đ).\n• 01 Tuần Học Thử Trải Nghiệm Lớp Học Thực Tế hoàn toàn miễn phí.\n\n📩 Ba mẹ hãy nhắn tin ngay cho Potato English hoặc liên hệ Hotline 0918 671 981 để đăng ký lịch test và giữ suất học trải nghiệm cho con nhé!\n---\n🥔 POTATO ENGLISH - TIẾNG ANH TRẺ EM & THIẾU NIÊN\n📞 Hotline: 0918 671 981\n🌐 Website: https://potatoenglish.edu.vn/\n📍 CS1: Số 37 Ngô Quyền, P. Phú Cường, TP. Thủ Dầu Một\n📍 CS2: Số 9 KP Hưng Phước, P. Hưng Định, TP. Thuận An",
+        "tags": "#PotatoEnglish #LeadingTeen #TiengAnhTHCS #CambridgeKET #CambridgePET #PreIELTS",
+        "format": "Poster 1200x1600 (3:4)",
+        "mediaLink": "https://drive.google.com/file/d/1MCjFtQrnXps1vD_cv6-tg8QvJAaUcUio/view?usp=sharing",
+        "status": "Sẵn sàng đăng",
+        "statusKey": "ready",
+        "statusBadge": "bg-blue-100 text-blue-800 border border-blue-200",
+        "postLink": ""
+    },
+    {
+        "id": "POST_2026_09_09_facebook",
+        "sheetRowIndex": 5,
+        "month": 9,
+        "week": 2,
+        "day": 9,
+        "date": "09/09/2026",
+        "isoDate": "2026-09-09",
+        "platformKey": "facebook",
+        "platform": "Facebook Fanpage",
+        "platformIcon": "fa-brands fa-facebook-f",
+        "platformStyle": "text-blue-600 bg-blue-50 border-blue-200",
+        "platformBadge": "bg-blue-600 text-white",
+        "title": "Khi tiếng Anh không chỉ nằm trên trang vở, mà là cách các con tự tin bày tỏ góc nhìn của mình 🥔✨",
+        "content": "Khi tiếng Anh không chỉ nằm trên trang vở, mà là cách các con tự tin bày tỏ góc nhìn của mình 🥔✨\n\nMột buổi thuyết trình dự án \"Healthy Living\" của khối Teen tại Potato English: Các con không học thuộc lòng bài mẫu mà tự chuẩn bị nội dung, tự tin đứng trước lớp nói 100% bằng tiếng Anh và phản xạ trả lời câu hỏi trực tiếp cùng thầy cô. Nhìn các con thoải mái chia sẻ từ thói quen ăn uống đến cách vận động hàng ngày bằng tiếng Anh thật tự nhiên, đó chính là niềm vui lớn nhất của thầy cô mỗi ngày lên lớp! ❤️\n\n#PotatoEnglish #LeadingTeen #HappyJunior #ProofOfLife #TuTinThuyetTrinh",
+        "tags": "#PotatoEnglish #LeadingTeen #HappyJunior #ProofOfLife #TuTinThuyetTrinh",
+        "format": "Video ngắn (Reels)",
+        "mediaLink": "https://www.facebook.com/reel/3358639597674294",
+        "status": "Đã đăng",
+        "statusKey": "published",
+        "statusBadge": "bg-emerald-100 text-emerald-800 border border-emerald-200",
+        "postLink": "https://www.facebook.com/reel/3358639597674294"
+    },
+    {
+        "id": "POST_2026_09_10_seo",
+        "sheetRowIndex": 6,
+        "month": 9,
+        "week": 2,
+        "day": 10,
+        "date": "10/09/2026",
+        "isoDate": "2026-09-10",
+        "platformKey": "seo",
+        "platform": "Website Blog SEO",
+        "platformIcon": "fa-solid fa-globe",
+        "platformStyle": "text-emerald-700 bg-emerald-50 border-emerald-200",
+        "platformBadge": "bg-emerald-600 text-white",
+        "title": "Gỡ Nỗi Lo Học Vẹt Tiếng Anh: 3 Bí Quyết Giúp Trẻ Tự Tin Nói Tự Nhiên",
+        "content": "Bài viết chuyên sâu phân tích thực trạng trẻ học ngữ pháp điểm cao nhưng ngại nói. Chia sẻ giải pháp tắm ngôn ngữ qua câu chuyện và ngữ cảnh thực tế của Potato English, kèm 3 cách ba mẹ đồng hành cùng con tại nhà.\n\nPotato English là môi trường học tiếng Anh dành cho trẻ 4–16 tuổi, giúp các em xây nền tảng vững chắc và tự tin sử dụng tiếng Anh trong học tập lẫn cuộc sống.\n\n📌 Hotline tư vấn: 0918 671 981 | Website: potatoenglish.edu.vn\n📍 Cơ sở 1: Số 37 Ngô Quyền, Phường Phú Cường, Thành phố Hồ Chí Minh.\n📍 Cơ sở 2: Số 9 KP Hưng Phước, Phường Hưng Định, Thành phố Hồ Chí Minh",
+        "tags": "#PotatoEnglish #HappyJunior #HocKhongHocVet #PhuongPhapTiengAnh #GocPhuHuynh",
+        "format": "Bài viết Blog SEO (1000-1200 từ)",
+        "mediaLink": "https://potatoenglish.edu.vn/wp-content/uploads/2026/09/co-giao-va-hoc-vien-potato-dong-phuc-cyan.jpg\nhttps://potatoenglish.edu.vn/wp-content/uploads/2026/09/nhom-hoc-vien-potato-lam-du-an-mindmap-cyan.jpg\nVideo thực tế: https://youtu.be/iJtohqOQBPs",
+        "status": "Đã xuất bản",
+        "statusKey": "published",
+        "statusBadge": "bg-emerald-100 text-emerald-800 border border-emerald-200",
+        "postLink": "https://potatoenglish.edu.vn/go-noi-lo-hoc-vet-tieng-anh-giup-tre-tu-tin/"
+    },
+    {
+        "id": "POST_2026_09_12_facebook",
+        "sheetRowIndex": 7,
+        "month": 9,
+        "week": 2,
+        "day": 12,
+        "date": "12/09/2026",
+        "isoDate": "2026-09-12",
+        "platformKey": "facebook",
+        "platform": "Facebook Fanpage",
+        "platformIcon": "fa-brands fa-facebook-f",
+        "platformStyle": "text-blue-600 bg-blue-50 border-blue-200",
+        "platformBadge": "bg-blue-600 text-white",
+        "title": "“Practice makes perfect” – Có công mài sắt, có ngày nên kim (Top Students Tháng 8/2026)",
+        "content": "“Practice makes perfect” – Có công mài sắt, có ngày nên kim.\n\nKhông có sự thành công nào thiếu sự chăm chỉ và thực hành. Mỗi ngày cố gắng một chút thôi cũng sẽ tạo nên sự khác biệt. 🌱\n\nThầy cô chúc mừng các bạn học viên đã kiên trì làm bài tập được giao, đến lớp đầy đủ và tích cực tham gia các hoạt động tại lớp để đạt danh hiệu Top Student của tháng 8! 🎉👏\n\nHãy tiếp tục cố gắng, duy trì sự đều đặn và cùng chờ xem tên bạn có tiếp tục xuất hiện trong danh sách Top Student tháng tới nhé! ❤️\n\n---\n#PotatoEnglish #TiengAnhTreEm #TiengAnhBinhDuong #TopStudent",
+        "tags": "#PotatoEnglish #TiengAnhTreEm #TiengAnhBinhDuong #TopStudent",
+        "format": "Album 5 ảnh vuông 1080x1080px (1 Cover Hero + 4 Thẻ vinh danh)",
+        "mediaLink": "media_vault/processed/facebook_album_t8_2026/",
+        "status": "Đã đăng",
+        "statusKey": "published",
+        "statusBadge": "bg-emerald-100 text-emerald-800 border border-emerald-200",
+        "postLink": "https://www.facebook.com/HocAnhVanTotBinhDuong/posts/pfbid02grq4gtFjQqZWZBRBnfuqw2L7gE1eTNmqh1KcYoksJ7sVMRFjGamMFJYb1uHdL3Tdl"
+    },
+    {
+        "id": "POST_2026_09_13_tiktok",
+        "sheetRowIndex": 8,
+        "month": 9,
+        "week": 2,
+        "day": 13,
+        "date": "13/09/2026",
+        "isoDate": "2026-09-13",
+        "platformKey": "tiktok",
+        "platform": "TikTok Shorts",
+        "platformIcon": "fa-brands fa-tiktok",
+        "platformStyle": "text-slate-900 bg-slate-100 border-slate-300",
+        "platformBadge": "bg-slate-900 text-white",
+        "title": "Bé 5 tuổi lần đầu tự tin chào cô bằng tiếng Anh! 🥔❤️",
+        "content": "Khoảnh khắc nụ cười bỡ ngỡ nhưng đáng yêu của bé mầm non khi vừa bước vào cửa lớp Potato, đập tay high-five với cô giáo và ríu rít: \"Hello Teacher!\". Chỉ cần con không sợ sai, con sẽ tự tin mở lời.\n\nPotato English là môi trường học tiếng Anh dành cho trẻ 4–16 tuổi, giúp các em xây nền tảng vững chắc và tự tin sử dụng tiếng Anh trong học tập lẫn cuộc sống.\n\n📌 Hotline tư vấn: 0918 671 981 | Website: potatoenglish.edu.vn\n📍 Cơ sở 1: Số 37 Ngô Quyền, Phường Phú Cường, Thành phố Hồ Chí Minh.\n📍 Cơ sở 2: Số 9 KP Hưng Phước, Phường Hưng Định, Thành phố Hồ Chí Minh",
+        "tags": "#PotatoEnglish #FriendlyKid #TiengAnhMamNon #TuTinGiaoTiep #HelloTeacher",
+        "format": "Video ngắn 9:16 (15-20s)",
+        "mediaLink": "",
+        "status": "Lên kế hoạch",
+        "statusKey": "planned",
+        "statusBadge": "bg-slate-100 text-slate-700 border border-slate-200",
+        "postLink": ""
+    },
+    {
+        "id": "POST_2026_09_15_facebook",
+        "sheetRowIndex": 9,
+        "month": 9,
+        "week": 3,
+        "day": 15,
+        "date": "15/09/2026",
+        "isoDate": "2026-09-15",
+        "platformKey": "facebook",
+        "platform": "Facebook Fanpage",
+        "platformIcon": "fa-brands fa-facebook-f",
+        "platformStyle": "text-blue-600 bg-blue-50 border-blue-200",
+        "platformBadge": "bg-blue-600 text-white",
+        "title": "TRĂNG RẰM KHOAI TÂY 2026: GIỜ HỌC LÀM LỒNG ĐÈN THỦ CÔNG TẠI 2 CƠ SỞ!",
+        "content": "Mùa Trung Thu đang đến rất gần! Cuối tuần này, Potato English rủ các bạn nhỏ cùng tham gia hoạt động trải nghiệm đặc biệt: \"Trăng Rằm Khoai Tây 2026\"!\n\nCác con sẽ được:\n🏮 Tự tay làm những chiếc lồng đèn xinh xắn từ nguyên liệu tái chế thân thiện với môi trường.\n🎨 Thỏa sức sáng tạo, vẽ nụ cười khoai tây ngộ nghĩnh lên lồng đèn của riêng mình.\n🔤 Học và ghi nhớ các từ vựng tiếng Anh chủ đề Trung Thu qua trò chơi tương tác vui nhộn.\n\nHoạt động hoàn toàn miễn phí dành cho học viên Potato English và các bạn nhỏ đi cùng! 🥔🌕\n\nPotato English - Tiếng Anh trẻ em và thiếu niên.\nThầy cô đã chuẩn bị sẵn sàng nguyên liệu và không gian ngập tràn sắc màu để cùng các con làm nên một mùa trăng rằm đáng nhớ. Hẹn gặp các bạn nhỏ cuối tuần này nhé! 🥔🏮✨\n\n📌 Hotline tư vấn: 0918 671 981 | Website: potatoenglish.edu.vn\n📍 Cơ sở 1: Số 37 Ngô Quyền, Phường Phú Cường, Thành phố Hồ Chí Minh.\n📍 Cơ sở 2: Số 9 KP Hưng Phước, Phường Hưng Định, Thành phố Hồ Chí Minh",
+        "tags": "#PotatoEnglish #TiengAnhMamNon #FriendlyKid #TrungThu2026 #LamLongDen",
+        "format": "Poster Canva",
+        "mediaLink": "",
+        "status": "Lên kế hoạch",
+        "statusKey": "planned",
+        "statusBadge": "bg-slate-100 text-slate-700 border border-slate-200",
+        "postLink": ""
+    },
+    {
+        "id": "POST_2026_09_18_seo",
+        "sheetRowIndex": 10,
+        "month": 9,
+        "week": 3,
+        "day": 18,
+        "date": "18/09/2026",
+        "isoDate": "2026-09-18",
+        "platformKey": "seo",
+        "platform": "Website Blog SEO",
+        "platformIcon": "fa-solid fa-globe",
+        "platformStyle": "text-emerald-700 bg-emerald-50 border-emerald-200",
+        "platformBadge": "bg-emerald-600 text-white",
+        "title": "5 Trò chơi tiếng Anh chủ đề Trung Thu ba mẹ có thể chơi cùng con tại nhà",
+        "content": "Hướng dẫn chi tiết 5 trò chơi tiếng Anh ấm áp mùa trăng rằm (Lantern Hunt, Moon Cake Tasting...), đính kèm bộ từ vựng và câu đố mini song ngữ để ba mẹ tải về in ra chơi cùng con.\n\nPotato English là môi trường học tiếng Anh dành cho trẻ 4–16 tuổi, giúp các em xây nền tảng vững chắc và tự tin sử dụng tiếng Anh trong học tập lẫn cuộc sống.\n\n📌 Hotline tư vấn: 0918 671 981 | Website: potatoenglish.edu.vn\n📍 Cơ sở 1: Số 37 Ngô Quyền, Phường Phú Cường, Thành phố Hồ Chí Minh.\n📍 Cơ sở 2: Số 9 KP Hưng Phước, Phường Hưng Định, Thành phố Hồ Chí Minh",
+        "tags": "#PotatoEnglish #FriendlyKid #HappyJunior #TrungThu2026 #TroChoiTiengAnh",
+        "format": "Bài viết Blog SEO (1000 từ) + Flashcard PDF",
+        "mediaLink": "",
+        "status": "Lên kế hoạch",
+        "statusKey": "planned",
+        "statusBadge": "bg-slate-100 text-slate-700 border border-slate-200",
+        "postLink": ""
+    },
+    {
+        "id": "POST_2026_09_19_facebook",
+        "sheetRowIndex": 11,
+        "month": 9,
+        "week": 3,
+        "day": 19,
+        "date": "19/09/2026",
+        "isoDate": "2026-09-19",
+        "platformKey": "facebook",
+        "platform": "Facebook Fanpage",
+        "platformIcon": "fa-brands fa-facebook-f",
+        "platformStyle": "text-blue-600 bg-blue-50 border-blue-200",
+        "platformBadge": "bg-blue-600 text-white",
+        "title": "TIẾNG CƯỜI RỘN RÃ TRONG GIỜ LÀM ĐÈN ÔNG SAO CÙNG THẦY CÔ!",
+        "content": "Cuối tuần của các bạn nhỏ Potato English ngập tràn tiếng cười và sắc màu rực rỡ!\n\nMời ba mẹ cùng ngắm nhìn những khoảnh khắc đáng yêu trong buổi làm lồng đèn thủ công tại 2 cơ sở:\n• Đôi bàn tay nhỏ xíu tập trung cắt dán từng mảnh giấy kiếng.\n• Nụ cười tít mắt khi tự tay hoàn thành chiếc đèn ông sao mang về tặng ba mẹ.\n• Vừa làm thủ công vừa ríu rít khoe nhau: \"Look, my lantern is shining!\".\n\nHọc tiếng Anh qua trải nghiệm thực tế chưa bao giờ vui và gần gũi đến thế! 🥔❤️\n\nPotato English là môi trường học tiếng Anh dành cho trẻ 4–16 tuổi, giúp các em xây nền tảng vững chắc và tự tin sử dụng tiếng Anh trong học tập lẫn cuộc sống.\nMột buổi chiều rộn rã tiếng cười và sắc màu tuổi thơ tại các lớp học nhỏ Potato English. Chúc các con và gia đình một mùa Trung Thu thật ấm áp! 🥔🏮❤️\n\n📌 Hotline tư vấn: 0918 671 981 | Website: potatoenglish.edu.vn\n📍 Cơ sở 1: Số 37 Ngô Quyền, Phường Phú Cường, Thành phố Hồ Chí Minh.\n📍 Cơ sở 2: Số 9 KP Hưng Phước, Phường Hưng Định, Thành phố Hồ Chí Minh",
+        "tags": "#PotatoEnglish #FriendlyKid #HappyJunior #KhoanhKhacLopHoc #NiemVuiMoiNgay",
+        "format": "Phóng sự ảnh thật",
+        "mediaLink": "",
+        "status": "Lên kế hoạch",
+        "statusKey": "planned",
+        "statusBadge": "bg-slate-100 text-slate-700 border border-slate-200",
+        "postLink": ""
+    },
+    {
+        "id": "POST_2026_09_20_tiktok",
+        "sheetRowIndex": 12,
+        "month": 9,
+        "week": 3,
+        "day": 20,
+        "date": "20/09/2026",
+        "isoDate": "2026-09-20",
+        "platformKey": "tiktok",
+        "platform": "TikTok Shorts",
+        "platformIcon": "fa-brands fa-tiktok",
+        "platformStyle": "text-slate-900 bg-slate-100 border-slate-300",
+        "platformBadge": "bg-slate-900 text-white",
+        "title": "Một buổi làm lồng đèn Trung Thu nói tiếng Anh có gì vui? 🏮✨",
+        "content": "Cảnh các bé ríu rít cắt dán lồng đèn giấy kiếng, vừa làm vừa hào hứng gọi tên màu sắc: \"Red star, yellow moon!\". Vừa làm thủ công vừa học từ vựng, con nhớ bài tự nhiên qua trải nghiệm thật.\n\nPotato English là môi trường học tiếng Anh dành cho trẻ 4–16 tuổi, giúp các em xây nền tảng vững chắc và tự tin sử dụng tiếng Anh trong học tập lẫn cuộc sống.\n\n📌 Hotline tư vấn: 0918 671 981 | Website: potatoenglish.edu.vn\n📍 Cơ sở 1: Số 37 Ngô Quyền, Phường Phú Cường, Thành phố Hồ Chí Minh.\n📍 Cơ sở 2: Số 9 KP Hưng Phước, Phường Hưng Định, Thành phố Hồ Chí Minh",
+        "tags": "#PotatoEnglish #FriendlyKid #HappyJunior #LamLongDen #TrungThu2026",
+        "format": "Video ngắn 9:16 (20-30s)",
+        "mediaLink": "",
+        "status": "Lên kế hoạch",
+        "statusKey": "planned",
+        "statusBadge": "bg-slate-100 text-slate-700 border border-slate-200",
+        "postLink": ""
+    },
+    {
+        "id": "POST_2026_09_25_facebook",
+        "sheetRowIndex": 13,
+        "month": 9,
+        "week": 4,
+        "day": 25,
+        "date": "25/09/2026",
+        "isoDate": "2026-09-25",
+        "platformKey": "facebook",
+        "platform": "Facebook Fanpage",
+        "platformIcon": "fa-brands fa-facebook-f",
+        "platformStyle": "text-blue-600 bg-blue-50 border-blue-200",
+        "platformBadge": "bg-blue-600 text-white",
+        "title": "ĐÊM PHÁ CỖ TRUNG THU TRỌN VẸN: NỤ CƯỜI CỦA CÁC CON LÀ MÓN QUÀ LỚN NHẤT!",
+        "content": "Đêm hội Rằm tháng 8 tại Potato English đã khép lại trong niềm vui trọn vẹn và ấm áp!\n\nKhoảnh khắc các con cùng nhau rước đèn, reo hò theo tiếng trống múa lân mini và cùng phá cỗ Trung Thu là những kỷ niệm tuổi thơ vô cùng quý giá.\n\nThầy cô Potato English xin gửi lời cảm ơn chân thành đến quý phụ huynh đã luôn tin tưởng, đồng hành và dành thời gian đưa các con đến chung vui. Chúc tất cả các gia đình một mùa Tết Trung Thu đoàn viên, bình an và ngập tràn hạnh phúc! 🥔🏮❤️\n\nPotato English - Tiếng Anh trẻ em và thiếu niên.\nCảm ơn ba mẹ đã tin tưởng và đồng hành cùng lớp học nhỏ Potato English. Chúc các con và gia đình một mùa Tết Trung Thu đoàn viên, bình an và ngập tràn hạnh phúc! 🥔🏮❤️\n\n📌 Hotline tư vấn: 0918 671 981 | Website: potatoenglish.edu.vn\n📍 Cơ sở 1: Số 37 Ngô Quyền, Phường Phú Cường, Thành phố Hồ Chí Minh.\n📍 Cơ sở 2: Số 9 KP Hưng Phước, Phường Hưng Định, Thành phố Hồ Chí Minh",
+        "tags": "#PotatoEnglish #HappyJunior #LeadingTeen #TetTrungThu #PhaCoTrungThu",
+        "format": "Album sự kiện",
+        "mediaLink": "",
+        "status": "Lên kế hoạch",
+        "statusKey": "planned",
+        "statusBadge": "bg-slate-100 text-slate-700 border border-slate-200",
+        "postLink": ""
+    },
+    {
+        "id": "POST_2026_09_26_seo",
+        "sheetRowIndex": 14,
+        "month": 9,
+        "week": 4,
+        "day": 26,
+        "date": "26/09/2026",
+        "isoDate": "2026-09-26",
+        "platformKey": "seo",
+        "platform": "Website Blog SEO",
+        "platformIcon": "fa-solid fa-globe",
+        "platformStyle": "text-emerald-700 bg-emerald-50 border-emerald-200",
+        "platformBadge": "bg-emerald-600 text-white",
+        "title": "Nên cho con học tiếng Anh từ mấy tuổi? Lời khuyên chân thật từ thầy cô Potato",
+        "content": "Góc nhìn khoa học về khả năng thẩm thấu ngôn ngữ của trẻ 4–6 tuổi. Giải tỏa nỗi lo con bị loạn ngôn ngữ và định hướng lộ trình học tiếng Anh tự nhiên từ 4 đến 16 tuổi.\n\nPotato English là môi trường học tiếng Anh dành cho trẻ 4–16 tuổi, giúp các em xây nền tảng vững chắc và tự tin sử dụng tiếng Anh trong học tập lẫn cuộc sống.\n\n📌 Hotline tư vấn: 0918 671 981 | Website: potatoenglish.edu.vn\n📍 Cơ sở 1: Số 37 Ngô Quyền, Phường Phú Cường, Thành phố Hồ Chí Minh.\n📍 Cơ sở 2: Số 9 KP Hưng Phước, Phường Hưng Định, Thành phố Hồ Chí Minh",
+        "tags": "#PotatoEnglish #TiengAnhMamNon #FriendlyKid #DoTuoiHocTiengAnh #GocPhuHuynh",
+        "format": "Bài viết Blog SEO (1200 từ)",
+        "mediaLink": "",
+        "status": "Lên kế hoạch",
+        "statusKey": "planned",
+        "statusBadge": "bg-slate-100 text-slate-700 border border-slate-200",
+        "postLink": ""
+    },
+    {
+        "id": "POST_2026_09_27_tiktok",
+        "sheetRowIndex": 15,
+        "month": 9,
+        "week": 4,
+        "day": 27,
+        "date": "27/09/2026",
+        "isoDate": "2026-09-27",
+        "platformKey": "tiktok",
+        "platform": "TikTok Shorts",
+        "platformIcon": "fa-brands fa-tiktok",
+        "platformStyle": "text-slate-900 bg-slate-100 border-slate-300",
+        "platformBadge": "bg-slate-900 text-white",
+        "title": "3 câu tiếng Anh ba mẹ nói cùng con mỗi tối trước khi ngủ! 🥔🌙",
+        "content": "Hướng dẫn 3 mẫu câu tiếng Anh giao tiếp yêu thương đơn giản: \"1. Did you have fun today? - 2. Time to brush your teeth! - 3. Sweet dreams, I love you!\". Mỗi tối 5 phút cùng con, tiếng Anh trở thành ngôn ngữ của yêu thương.\n\nPotato English là môi trường học tiếng Anh dành cho trẻ 4–16 tuổi, giúp các em xây nền tảng vững chắc và tự tin sử dụng tiếng Anh trong học tập lẫn cuộc sống.\n\n📌 Hotline tư vấn: 0918 671 981 | Website: potatoenglish.edu.vn\n📍 Cơ sở 1: Số 37 Ngô Quyền, Phường Phú Cường, Thành phố Hồ Chí Minh.\n📍 Cơ sở 2: Số 9 KP Hưng Phước, Phường Hưng Định, Thành phố Hồ Chí Minh",
+        "tags": "#PotatoEnglish #FriendlyKid #TiengAnhGiaDinh #SweetDreams #HocTiengAnhCungCon",
+        "format": "Video ngắn 9:16 (20s Motion/Quote)",
+        "mediaLink": "",
+        "status": "Lên kế hoạch",
+        "statusKey": "planned",
+        "statusBadge": "bg-slate-100 text-slate-700 border border-slate-200",
+        "postLink": ""
+    },
+    {
+        "id": "POST_2026_09_29_facebook",
+        "sheetRowIndex": 16,
+        "month": 9,
+        "week": 4,
+        "day": 29,
+        "date": "29/09/2026",
+        "isoDate": "2026-09-29",
+        "platformKey": "facebook",
+        "platform": "Facebook Fanpage",
+        "platformIcon": "fa-brands fa-facebook-f",
+        "platformStyle": "text-blue-600 bg-blue-50 border-blue-200",
+        "platformBadge": "bg-blue-600 text-white",
+        "title": "KHI TIẾNG ANH LÀ NIỀM VUI MỖI BUỔI CHIỀU ĐÓN CON! 🥔❤️",
+        "content": "Khép lại tháng 9 đầu tiên của năm học mới, điều làm thầy cô Potato English hạnh phúc nhất không phải là những điểm số tròn trĩnh, mà là:\n\n✨ Nụ cười rạng rỡ của con khi chạy ùa ra cửa khoe ba mẹ: \"Hôm nay con được cô khen phát âm chuẩn!\".\n✨ Con không còn rụt rè, ngại ngùng khi nghe tiếng Anh, mà líu lo hát theo những giai điệu vui vẻ.\n✨ Mỗi buổi chiều đến lớp nhỏ Potato là một buổi đi chơi khám phá, tràn ngập tiếng cười cùng thầy cô và bạn bè.\n\nCảm ơn ba mẹ đã luôn kiên nhẫn và đồng hành cùng con trên hành trình tự tin lớn khôn! 🥔❤️\n\nPotato English là môi trường học tiếng Anh dành cho trẻ 4–16 tuổi, giúp các em xây nền tảng vững chắc và tự tin sử dụng tiếng Anh trong học tập lẫn cuộc sống.\nMỗi buổi chiều đón con với nụ cười rạng rỡ chính là động lực lớn nhất của thầy cô Potato English. Cảm ơn ba mẹ đã luôn đồng hành cùng con và lớp học nhỏ! 🥔❤️\n\n📌 Hotline tư vấn: 0918 671 981 | Website: potatoenglish.edu.vn\n📍 Cơ sở 1: Số 37 Ngô Quyền, Phường Phú Cường, Thành phố Hồ Chí Minh.\n📍 Cơ sở 2: Số 9 KP Hưng Phước, Phường Hưng Định, Thành phố Hồ Chí Minh",
+        "tags": "#PotatoEnglish #FriendlyKid #HappyJunior #KhoanhKhacLopHoc #NiemVuiMoiNgay",
+        "format": "Quote Card / Ảnh đơn ấm áp",
+        "mediaLink": "",
+        "status": "Lên kế hoạch",
+        "statusKey": "planned",
+        "statusBadge": "bg-slate-100 text-slate-700 border border-slate-200",
+        "postLink": ""
+    }
+];
+
+    const POSTS_DATA = {};
+    CALENDAR_RAW_DATA.forEach(p => {
+      POSTS_DATA[p.id] = p;
+    });
+
+    // Backwards-compatible aliases for original mock IDs
+    POSTS_DATA['P_W1_01'] = POSTS_DATA['POST_2026_09_05_facebook'];
+    POSTS_DATA['P_W1_02'] = POSTS_DATA['POST_2026_09_06_tiktok'];
+    POSTS_DATA['P_W1_03'] = POSTS_DATA['POST_2026_09_10_seo'];
+    POSTS_DATA['P_W1_04'] = POSTS_DATA['POST_2026_09_09_facebook'];
+    POSTS_DATA['P_W1_05'] = POSTS_DATA['POST_2026_09_13_tiktok'];
+    POSTS_DATA['P_W1_06'] = POSTS_DATA['POST_2026_09_18_seo'];
+    POSTS_DATA['P_W1_07'] = POSTS_DATA['POST_2026_09_12_facebook'];
+    POSTS_DATA['P_W1_08'] = POSTS_DATA['POST_2026_09_08_facebook'];
 
     // ===================================================================
     // 2. RBAC USER ROLES DEFINITIONS
@@ -2587,68 +2696,824 @@
       sidebar.classList.toggle('hidden');
     }
 
+        // ===================================================================
+    // 5. CALENDAR CONTROLLER & 4-VIEW ENGINE (DAY, 3-DAYS, WEEK, MONTH, LIST)
     // ===================================================================
-    // 5. CALENDAR & CHANNEL CONTROLLERS
-    // ===================================================================
-    function filterChannel(channel) {
-      const heading = document.getElementById('calendar-channel-heading');
-      const cards = document.querySelectorAll('.post-card-buffer');
+    const CALENDAR_STATE = {
+      viewMode: 'week', // 'day' | 'three-days' | 'week' | 'month' | 'list'
+      currentDate: new Date(2026, 8, 13), // 13/09/2026 (Tháng 9 = 8 trong JS 0-indexed)
+      channelFilter: 'all',
+      statusFilter: 'all',
+      searchQuery: '',
+      isLoading: false
+    };
 
-      if (channel === 'facebook') heading.textContent = 'Kênh: Facebook Fanpage';
-      else if (channel === 'tiktok') heading.textContent = 'Kênh: TikTok & Reels';
-      else if (channel === 'seo') heading.textContent = 'Kênh: Website SEO & Blog';
-      else if (channel === 'zalo') heading.textContent = 'Kênh: Zalo OA CRM';
-      else heading.textContent = 'Tất Cả Kênh Xuất Bản';
+    // Date Utilities
+    function padZero(num) {
+      return num < 10 ? '0' + num : '' + num;
+    }
 
-      cards.forEach(card => {
-        const c = card.getAttribute('data-channel');
-        if (channel === 'all' || c === channel) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
+    function formatDateDMY(d) {
+      return `${padZero(d.getDate())}/${padZero(d.getMonth() + 1)}/${d.getFullYear()}`;
+    }
+
+    function formatISODate(d) {
+      return `${d.getFullYear()}-${padZero(d.getMonth() + 1)}-${padZero(d.getDate())}`;
+    }
+
+    function getDayOfWeekNameVN(d) {
+      const days = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+      return days[d.getDay()];
+    }
+
+    function getDayOfWeekShortVN(d) {
+      const days = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+      return days[d.getDay()];
+    }
+
+    function getMondayOfWeek(d) {
+      const date = new Date(d);
+      const day = date.getDay();
+      const diff = date.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is sunday
+      return new Date(date.setDate(diff));
+    }
+
+    function getSundayOfWeek(d) {
+      const monday = getMondayOfWeek(d);
+      const sunday = new Date(monday);
+      sunday.setDate(monday.getDate() + 6);
+      return sunday;
+    }
+
+    function isSameDate(d1, d2) {
+      return d1.getFullYear() === d2.getFullYear() &&
+             d1.getMonth() === d2.getMonth() &&
+             d1.getDate() === d2.getDate();
+    }
+
+    // Get Active List of Calendar Posts
+    function getAllCalendarPosts() {
+      // Get array of unique post objects
+      const seen = new Set();
+      const list = [];
+      for (const key in POSTS_DATA) {
+        if (!key.startsWith('P_W1_') && POSTS_DATA[key] && !seen.has(POSTS_DATA[key].id)) {
+          seen.add(POSTS_DATA[key].id);
+          list.push(POSTS_DATA[key]);
         }
-      });
+      }
+      return list;
+    }
 
-      // Update filter button styles
-      document.querySelectorAll('.channel-filter-btn').forEach(btn => {
-        if (btn.getAttribute('data-channel') === channel) {
-          btn.className = 'channel-filter-btn px-2.5 py-1.5 rounded-lg bg-potato-navy text-white font-bold text-xs shadow-2xs transition-all';
-        } else {
-          btn.className = 'channel-filter-btn px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all';
+    // Filter Posts by Channel, Status & Search Query
+    function getFilteredCalendarPosts() {
+      const posts = getAllCalendarPosts();
+      const q = CALENDAR_STATE.searchQuery.toLowerCase().trim();
+
+      return posts.filter(p => {
+        // Channel filter
+        if (CALENDAR_STATE.channelFilter !== 'all' && p.platformKey !== CALENDAR_STATE.channelFilter) {
+          return false;
         }
+        // Status filter
+        if (CALENDAR_STATE.statusFilter !== 'all' && p.statusKey !== CALENDAR_STATE.statusFilter) {
+          return false;
+        }
+        // Search filter
+        if (q) {
+          const matchTitle = (p.title || '').toLowerCase().includes(q);
+          const matchContent = (p.content || '').toLowerCase().includes(q);
+          const matchTags = (p.tags || '').toLowerCase().includes(q);
+          const matchFormat = (p.format || '').toLowerCase().includes(q);
+          if (!matchTitle && !matchContent && !matchTags && !matchFormat) {
+            return false;
+          }
+        }
+        return true;
       });
     }
 
-    function switchViewMode(mode) {
-      const calView = document.getElementById('calendar-view-container');
-      const listView = document.getElementById('list-view-container');
-      const calBtn = document.getElementById('btn-view-calendar');
-      const listBtn = document.getElementById('btn-view-list');
+    // Update Counts on Filter Badges
+    function updateCalendarFilterCounts() {
+      const allPosts = getAllCalendarPosts();
+      const fbCount = allPosts.filter(p => p.platformKey === 'facebook').length;
+      const tiktokCount = allPosts.filter(p => p.platformKey === 'tiktok').length;
+      const seoCount = allPosts.filter(p => p.platformKey === 'seo').length;
+      const zaloCount = allPosts.filter(p => p.platformKey === 'zalo').length;
 
-      if (mode === 'calendar') {
-        calView.classList.remove('hidden');
-        listView.classList.add('hidden');
-        calBtn.className = 'flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-potato-navy shadow-xs font-extrabold transition-all';
-        listBtn.className = 'flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all';
-      } else {
-        calView.classList.add('hidden');
-        listView.classList.remove('hidden');
-        listBtn.className = 'flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-potato-navy shadow-xs font-extrabold transition-all';
-        calBtn.className = 'flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all';
+      const elAll = document.getElementById('count-ch-all');
+      const elFb = document.getElementById('count-ch-fb');
+      const elTt = document.getElementById('count-ch-tiktok');
+      const elSeo = document.getElementById('count-ch-seo');
+      const elZalo = document.getElementById('count-ch-zalo');
+
+      if (elAll) elAll.textContent = allPosts.length;
+      if (elFb) elFb.textContent = fbCount;
+      if (elTt) elTt.textContent = tiktokCount;
+      if (elSeo) elSeo.textContent = seoCount;
+      if (elZalo) elZalo.textContent = zaloCount;
+
+      const badge = document.getElementById('calendar-summary-badge');
+      if (badge) badge.textContent = `${allPosts.length} bài đã lên lịch tháng 9`;
+    }
+
+    // RENDER DISPATCHER
+    function renderCalendar() {
+      const container = document.getElementById('calendar-dynamic-container');
+      if (!container) return;
+
+      const filteredPosts = getFilteredCalendarPosts();
+      updateCalendarFilterCounts();
+      updateCalendarHeading();
+
+      // Render according to current view mode
+      switch (CALENDAR_STATE.viewMode) {
+        case 'day':
+          container.innerHTML = buildDayViewHTML(CALENDAR_STATE.currentDate, filteredPosts);
+          break;
+        case 'three-days':
+          container.innerHTML = buildThreeDaysViewHTML(CALENDAR_STATE.currentDate, filteredPosts);
+          break;
+        case 'month':
+          container.innerHTML = buildMonthViewHTML(CALENDAR_STATE.currentDate, filteredPosts);
+          break;
+        case 'list':
+          container.innerHTML = buildListViewHTML(filteredPosts);
+          break;
+        case 'week':
+        default:
+          container.innerHTML = buildWeekViewHTML(CALENDAR_STATE.currentDate, filteredPosts);
+          break;
       }
     }
 
-    function navigateWeek(dir) {
-      const heading = document.getElementById('current-month-heading');
-      if (dir === 1) heading.textContent = 'Tháng 9, 2026 (Tuần Hoạt Động Khóa Mới)';
-      else heading.textContent = 'Tháng 8, 2026 (Tuần Khởi Động Tuyển Sinh)';
-      showToast('Đã chuyển tuần hiển thị', 'info');
+    // Update Navigation Heading Label
+    function updateCalendarHeading() {
+      const heading = document.getElementById('calendar-date-heading');
+      if (!heading) return;
+
+      const d = CALENDAR_STATE.currentDate;
+      if (CALENDAR_STATE.viewMode === 'day') {
+        heading.innerHTML = `<span>${getDayOfWeekNameVN(d)} • ${formatDateDMY(d)}</span>`;
+      } else if (CALENDAR_STATE.viewMode === 'three-days') {
+        const dPrev = new Date(d); dPrev.setDate(d.getDate() - 1);
+        const dNext = new Date(d); dNext.setDate(d.getDate() + 1);
+        heading.innerHTML = `<span>3 Ngày: ${padZero(dPrev.getDate())}/${padZero(dPrev.getMonth()+1)} – ${padZero(dNext.getDate())}/${padZero(dNext.getMonth()+1)}/2026</span>`;
+      } else if (CALENDAR_STATE.viewMode === 'week') {
+        const mon = getMondayOfWeek(d);
+        const sun = getSundayOfWeek(d);
+        const weekNum = Math.ceil(d.getDate() / 7);
+        heading.innerHTML = `<span>Tuần ${weekNum}: ${padZero(mon.getDate())}/${padZero(mon.getMonth()+1)} – ${padZero(sun.getDate())}/${padZero(sun.getMonth()+1)}/2026</span>`;
+      } else if (CALENDAR_STATE.viewMode === 'month') {
+        heading.innerHTML = `<span>Tháng ${d.getMonth() + 1}, ${d.getFullYear()} (Lịch Xuất Bản Toàn Diện)</span>`;
+      } else if (CALENDAR_STATE.viewMode === 'list') {
+        heading.innerHTML = `<span>Danh Sách Tất Cả Bài Đăng (${getFilteredCalendarPosts().length} bài)</span>`;
+      }
     }
 
-    function resetToToday() {
-      document.getElementById('current-month-heading').textContent = 'Tháng 8 / Tháng 9, 2026 (Tuần Khai Giảng)';
-      filterChannel('all');
-      showToast('Đã quay về tuần hiện tại', 'info');
+    // -------------------------------------------------------------
+    // VIEW BUILDER 1: DAY VIEW (Chế độ Ngày)
+    // -------------------------------------------------------------
+    function buildDayViewHTML(targetDate, posts) {
+      const isoTarget = formatISODate(targetDate);
+      const dayPosts = posts.filter(p => p.isoDate === isoTarget || p.day === targetDate.getDate());
+      const isToday = isSameDate(targetDate, new Date(2026, 8, 13));
+
+      let cardsHtml = '';
+      if (dayPosts.length === 0) {
+        cardsHtml = `
+          <div class="p-10 text-center bg-white rounded-3xl border border-slate-200/80 shadow-subtle space-y-3">
+            <div class="w-16 h-16 mx-auto rounded-2xl bg-potato-softBlue text-potato-cyan flex items-center justify-center text-2xl border border-potato-cyan/20">
+              <i class="fa-regular fa-calendar-check"></i>
+            </div>
+            <h4 class="font-extrabold text-sm text-slate-800">Không có bài đăng nào lên lịch cho ngày ${formatDateDMY(targetDate)}</h4>
+            <p class="text-xs text-slate-500 max-w-md mx-auto">Bạn có thể chọn ngày khác hoặc bấm "Lên Lịch Bài" để bổ sung bài mới vào lịch đệm phát hành.</p>
+            <div class="pt-2">
+              <button onclick="handleCreatePostAction()" class="px-4 py-2 rounded-xl bg-potato-cyan hover:bg-potato-cyanHover text-white text-xs font-bold transition-all shadow-xs inline-flex items-center gap-2">
+                <i class="fa-solid fa-plus"></i>
+                <span>Lên lịch bài cho ngày này</span>
+              </button>
+            </div>
+          </div>
+        `;
+      } else {
+        cardsHtml = dayPosts.map(p => `
+          <div class="bg-white rounded-3xl border border-slate-200/80 p-5 sm:p-6 shadow-subtle hover:border-potato-cyan transition-all space-y-4">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <div class="flex items-center gap-2">
+                <span class="px-3 py-1 rounded-xl font-black text-xs ${p.platformBadge} flex items-center gap-1.5 shadow-2xs">
+                  <i class="${p.platformIcon}"></i>
+                  <span>${p.platform}</span>
+                </span>
+                <span class="text-xs font-bold px-2.5 py-1 rounded-lg ${p.statusBadge}">
+                  ${p.status}
+                </span>
+                <span class="text-xs font-bold bg-slate-100 text-slate-600 px-2.5 py-1 rounded-lg">
+                  ${p.format || 'Bài đăng tiêu chuẩn'}
+                </span>
+              </div>
+              <div class="text-xs text-slate-400 font-bold flex items-center gap-2">
+                <i class="fa-regular fa-clock"></i>
+                <span>Lịch đăng: ${p.date}</span>
+              </div>
+            </div>
+
+            <h3 class="text-base font-black text-slate-900 leading-snug cursor-pointer hover:text-potato-navy transition-colors" onclick="openPostModal('${p.id}')">
+              ${p.title}
+            </h3>
+
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 text-xs text-slate-700 leading-relaxed max-h-32 overflow-hidden relative">
+              <p class="line-clamp-3 whitespace-pre-line">${p.content}</p>
+              <div class="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-slate-50 to-transparent pointer-events-none"></div>
+            </div>
+
+            <div class="text-xs text-potato-blue font-semibold truncate">
+              ${p.tags}
+            </div>
+
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between flex-wrap gap-2 text-xs">
+              <div class="flex items-center gap-2 flex-wrap">
+                ${p.mediaLink ? `
+                  <a href="${p.mediaLink.startsWith('http') ? p.mediaLink : '#'}" target="_blank" class="px-3 py-1.5 rounded-xl bg-potato-softBlue hover:bg-potato-cyan hover:text-white text-potato-blue font-bold text-xs flex items-center gap-1.5 transition-all">
+                    <i class="fa-solid fa-photo-film"></i>
+                    <span>Tư liệu đính kèm</span>
+                  </a>
+                ` : ''}
+                ${p.postLink ? `
+                  <a href="${p.postLink}" target="_blank" class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-600 hover:text-white text-emerald-700 font-bold text-xs flex items-center gap-1.5 transition-all">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <span>Xem bài đã đăng</span>
+                  </a>
+                ` : ''}
+              </div>
+
+              <div class="flex items-center gap-2">
+                <button onclick="copyPostText('${p.id}')" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center gap-1.5 transition-all">
+                  <i class="fa-regular fa-copy"></i>
+                  <span>Sao chép</span>
+                </button>
+                <button onclick="openPostModal('${p.id}')" class="px-3.5 py-1.5 rounded-xl bg-potato-navy hover:bg-potato-blue text-white font-bold text-xs flex items-center gap-1.5 transition-all shadow-xs">
+                  <span>Chi tiết</span>
+                  <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      return `
+        <div class="space-y-4">
+          <!-- Day Banner Summary -->
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-4 flex items-center justify-between shadow-2xs">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl ${isToday ? 'bg-potato-cyan text-white shadow-md shadow-potato-cyan/30' : 'bg-slate-100 text-slate-700'} flex items-center justify-center font-black text-sm">
+                ${padZero(targetDate.getDate())}
+              </div>
+              <div>
+                <h4 class="font-extrabold text-sm text-potato-navy">
+                  ${getDayOfWeekNameVN(targetDate)}, ${formatDateDMY(targetDate)}
+                  ${isToday ? '<span class="ml-2 text-[10px] bg-red-100 text-potato-red font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Hôm nay</span>' : ''}
+                </h4>
+                <p class="text-xs text-slate-500">${dayPosts.length} bài đăng lên lịch phát hành</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <button onclick="navigateCalendar(-1)" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-all">
+                <i class="fa-solid fa-chevron-left text-xs"></i>
+              </button>
+              <button onclick="navigateCalendar(1)" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-all">
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Cards Stack -->
+          <div class="space-y-4">
+            ${cardsHtml}
+          </div>
+        </div>
+      `;
+    }
+
+    // -------------------------------------------------------------
+    // VIEW BUILDER 2: THREE-DAYS VIEW (Chế độ 3 Ngày)
+    // -------------------------------------------------------------
+    function buildThreeDaysViewHTML(centerDate, posts) {
+      const dates = [];
+      for (let i = -1; i <= 1; i++) {
+        const d = new Date(centerDate);
+        d.setDate(centerDate.getDate() + i);
+        dates.push(d);
+      }
+
+      const colsHtml = dates.map(d => {
+        const iso = formatISODate(d);
+        const dayPosts = posts.filter(p => p.isoDate === iso || p.day === d.getDate());
+        const isToday = isSameDate(d, new Date(2026, 8, 13));
+
+        const cards = dayPosts.length === 0
+          ? `
+            <div class="p-6 text-center rounded-2xl border border-dashed border-slate-200 text-slate-400 my-auto">
+              <i class="fa-regular fa-calendar-xmark text-lg mb-1 block"></i>
+              <span class="text-xs font-semibold">Trống bài đăng</span>
+            </div>
+          `
+          : dayPosts.map(p => `
+            <div onclick="openPostModal('${p.id}')" class="cursor-pointer p-3.5 rounded-2xl border border-slate-200/80 hover:border-potato-cyan bg-white hover:shadow-card transition-all space-y-2.5 group">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-extrabold ${p.platformBadge} px-2 py-0.5 rounded-md flex items-center gap-1">
+                  <i class="${p.platformIcon}"></i> ${p.platformKey.toUpperCase()}
+                </span>
+                <span class="text-[10px] font-bold px-1.5 py-0.5 rounded ${p.statusBadge}">
+                  ${p.status}
+                </span>
+              </div>
+              <h5 class="font-bold text-xs text-slate-900 line-clamp-2 leading-snug group-hover:text-potato-navy transition-colors">
+                ${p.title}
+              </h5>
+              <div class="text-[10px] text-slate-400 flex items-center justify-between pt-1 border-t border-slate-100">
+                <span class="truncate max-w-[130px]">📦 ${p.format || 'Bài đăng'}</span>
+                <span class="text-potato-cyan font-bold">Xem →</span>
+              </div>
+            </div>
+          `).join('');
+
+        return `
+          <div class="bg-white rounded-3xl border ${isToday ? 'border-potato-cyan ring-2 ring-potato-cyan/20' : 'border-slate-200/80'} p-4 flex flex-col space-y-3 shadow-subtle min-h-[400px]">
+            <!-- Column Header -->
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <span class="font-extrabold text-sm text-potato-navy">${getDayOfWeekNameVN(d)}</span>
+                  ${isToday ? '<span class="text-[9px] bg-red-100 text-potato-red font-bold px-1.5 py-0.2 rounded-full uppercase">Hôm nay</span>' : ''}
+                </div>
+                <span class="text-xs text-slate-500 font-semibold">${formatDateDMY(d)}</span>
+              </div>
+              <span class="w-7 h-7 rounded-xl ${dayPosts.length > 0 ? 'bg-potato-softBlue text-potato-blue font-extrabold' : 'bg-slate-100 text-slate-400'} flex items-center justify-center text-xs">
+                ${dayPosts.length}
+              </span>
+            </div>
+
+            <!-- Column Post Stack -->
+            <div class="flex-1 flex flex-col space-y-3 overflow-y-auto custom-scrollbar pr-0.5">
+              ${cards}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          ${colsHtml}
+        </div>
+      `;
+    }
+
+    // -------------------------------------------------------------
+    // VIEW BUILDER 3: WEEK VIEW (Chế độ Tuần 7 Cột)
+    // -------------------------------------------------------------
+    function buildWeekViewHTML(centerDate, posts) {
+      const monday = getMondayOfWeek(centerDate);
+      const weekDays = [];
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(monday);
+        d.setDate(monday.getDate() + i);
+        weekDays.push(d);
+      }
+
+      const colsHtml = weekDays.map(d => {
+        const iso = formatISODate(d);
+        const dayPosts = posts.filter(p => p.isoDate === iso || p.day === d.getDate());
+        const isToday = isSameDate(d, new Date(2026, 8, 13));
+
+        const cards = dayPosts.length === 0
+          ? `
+            <div class="p-4 text-center rounded-xl border border-dashed border-slate-200 text-slate-300 text-[11px] my-auto">
+              Trống
+            </div>
+          `
+          : dayPosts.map(p => `
+            <div onclick="openPostModal('${p.id}')" class="cursor-pointer p-2.5 rounded-xl border border-slate-200/90 hover:border-potato-cyan bg-[#FCFDFF] hover:bg-white hover:shadow-card transition-all space-y-1.5 group">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-extrabold ${p.platformBadge} px-1.5 py-0.2 rounded flex items-center gap-1">
+                  <i class="${p.platformIcon}"></i> ${p.platformKey.toUpperCase()}
+                </span>
+                <span class="text-[9px] font-bold px-1 rounded ${p.statusBadge}">
+                  ${p.status}
+                </span>
+              </div>
+              <h5 class="font-bold text-[11px] text-slate-900 line-clamp-2 leading-snug group-hover:text-potato-navy transition-colors">
+                ${p.title}
+              </h5>
+              <div class="text-[9px] text-slate-400 flex items-center justify-between pt-1 border-t border-slate-100">
+                <span class="truncate max-w-[80px]">${p.format || 'Bài đăng'}</span>
+                <span class="text-potato-cyan font-bold text-[10px]">Xem</span>
+              </div>
+            </div>
+          `).join('');
+
+        return `
+          <div class="bg-white rounded-2xl border ${isToday ? 'border-potato-cyan ring-2 ring-potato-cyan/20' : 'border-slate-200/80'} p-3 flex flex-col space-y-2.5 shadow-2xs min-h-[360px]">
+            <!-- Day Column Header -->
+            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+              <div>
+                <div class="flex items-center gap-1">
+                  <span class="font-extrabold text-xs text-potato-navy">${getDayOfWeekShortVN(d)}</span>
+                  ${isToday ? '<span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>' : ''}
+                </div>
+                <span class="text-[11px] font-bold text-slate-500">${padZero(d.getDate())}/${padZero(d.getMonth()+1)}</span>
+              </div>
+              <span class="w-5 h-5 rounded-lg ${dayPosts.length > 0 ? 'bg-potato-softBlue text-potato-blue font-black' : 'bg-slate-100 text-slate-400'} flex items-center justify-center text-[10px]">
+                ${dayPosts.length}
+              </span>
+            </div>
+
+            <!-- Cards Container -->
+            <div class="flex-1 flex flex-col space-y-2 overflow-y-auto custom-scrollbar">
+              ${cards}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
+          ${colsHtml}
+        </div>
+      `;
+    }
+
+    // -------------------------------------------------------------
+    // VIEW BUILDER 4: MONTH VIEW (Chế độ Tháng Chuẩn 7x5)
+    // -------------------------------------------------------------
+    function buildMonthViewHTML(targetDate, posts) {
+      const year = targetDate.getFullYear();
+      const month = targetDate.getMonth(); // 0-indexed
+
+      const firstDayOfMonth = new Date(year, month, 1);
+      const lastDayOfMonth = new Date(year, month + 1, 0);
+      const totalDays = lastDayOfMonth.getDate();
+
+      // Day of week for 1st day (0 is Sun, 1 is Mon... convert so Mon is 0, Sun is 6)
+      let startDayOfWeek = firstDayOfMonth.getDay() - 1;
+      if (startDayOfWeek === -1) startDayOfWeek = 6;
+
+      const daysHeader = ['Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy', 'Chủ Nhật'];
+      const headerHtml = daysHeader.map(h => `
+        <div class="p-2 text-center font-extrabold text-slate-500 text-[11px] uppercase tracking-wider bg-slate-50 rounded-xl">
+          ${h}
+        </div>
+      `).join('');
+
+      const cells = [];
+      // Empty cells before 1st day
+      for (let i = 0; i < startDayOfWeek; i++) {
+        cells.push(`
+          <div class="min-h-[90px] p-2 bg-slate-50/50 rounded-2xl border border-slate-100/60 opacity-40"></div>
+        `);
+      }
+
+      // Month days
+      for (let day = 1; day <= totalDays; day++) {
+        const currentDate = new Date(year, month, day);
+        const iso = formatISODate(currentDate);
+        const dayPosts = posts.filter(p => p.isoDate === iso || p.day === day);
+        const isToday = isSameDate(currentDate, new Date(2026, 8, 13));
+
+        const pills = dayPosts.slice(0, 3).map(p => `
+          <div onclick="event.stopPropagation(); openPostModal('${p.id}')" class="truncate px-1.5 py-0.5 rounded text-[10px] font-bold ${p.platformBadge} cursor-pointer hover:opacity-85 flex items-center gap-1 shadow-2xs" title="${p.title}">
+            <i class="${p.platformIcon} text-[9px]"></i>
+            <span class="truncate">${p.title}</span>
+          </div>
+        `).join('');
+
+        const extraCount = dayPosts.length > 3 ? `<span class="text-[9px] font-bold text-slate-400 pl-1">+${dayPosts.length - 3} bài nữa</span>` : '';
+
+        cells.push(`
+          <div onclick="jumpToDate(${year}, ${month}, ${day})" class="min-h-[105px] p-2 rounded-2xl bg-white border ${isToday ? 'border-potato-cyan ring-2 ring-potato-cyan/20' : 'border-slate-200/80'} hover:border-potato-cyan hover:shadow-card transition-all cursor-pointer flex flex-col justify-between group">
+            <div class="flex items-center justify-between">
+              <span class="font-black text-xs ${isToday ? 'w-6 h-6 rounded-full bg-potato-cyan text-white flex items-center justify-center' : 'text-slate-700'}">
+                ${day}
+              </span>
+              ${dayPosts.length > 0 ? `<span class="text-[9px] font-bold bg-potato-softBlue text-potato-blue px-1.5 py-0.2 rounded-md">${dayPosts.length}</span>` : ''}
+            </div>
+            <div class="space-y-1 my-1 overflow-hidden">
+              ${pills}
+              ${extraCount}
+            </div>
+            <div class="text-[9px] text-slate-300 group-hover:text-potato-cyan transition-colors text-right">
+              Chi tiết →
+            </div>
+          </div>
+        `);
+      }
+
+      return `
+        <div class="bg-white rounded-3xl border border-slate-200/80 p-4 sm:p-5 shadow-subtle space-y-3">
+          <div class="grid grid-cols-7 gap-2">
+            ${headerHtml}
+          </div>
+          <div class="grid grid-cols-7 gap-2">
+            ${cells.join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // -------------------------------------------------------------
+    // VIEW BUILDER 5: LIST VIEW (Chế độ Bảng & Card List)
+    // -------------------------------------------------------------
+    function buildListViewHTML(posts) {
+      if (posts.length === 0) {
+        return `
+          <div class="p-10 text-center bg-white rounded-3xl border border-slate-200 shadow-subtle">
+            <p class="text-sm font-bold text-slate-500">Không tìm thấy bài đăng nào phù hợp với bộ lọc.</p>
+          </div>
+        `;
+      }
+
+      // Mobile Card List (<640px)
+      const mobileListHtml = posts.map(p => `
+        <div onclick="openPostModal('${p.id}')" class="p-4 space-y-2.5 cursor-pointer hover:bg-slate-50 transition-colors">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black ${p.platformBadge} px-2 py-0.5 rounded flex items-center gap-1">
+              <i class="${p.platformIcon}"></i> ${p.platform}
+            </span>
+            <span class="text-[10px] ${p.statusBadge} font-bold px-2 py-0.5 rounded">
+              ${p.status}
+            </span>
+          </div>
+          <h4 class="font-bold text-xs text-slate-900 line-clamp-2">${p.title}</h4>
+          <div class="text-[11px] text-slate-500 flex items-center justify-between pt-1">
+            <span>📅 ${p.date} • ${p.format || 'Bài đăng'}</span>
+            <span class="text-potato-cyan font-bold">Xem chi tiết →</span>
+          </div>
+        </div>
+      `).join('');
+
+      // Desktop Table Rows (>=640px)
+      const desktopRowsHtml = posts.map(p => `
+        <tr class="hover:bg-slate-50/80 cursor-pointer transition-colors" onclick="openPostModal('${p.id}')">
+          <td class="p-3.5 pl-5">
+            <div class="font-bold text-slate-900 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full ${p.platformKey === 'facebook' ? 'bg-blue-600' : p.platformKey === 'tiktok' ? 'bg-slate-900' : 'bg-emerald-600'}"></span>
+              <span class="line-clamp-1 max-w-md">${p.title}</span>
+            </div>
+            <div class="flex items-center gap-2 text-[11px] mt-0.5">
+              <span class="font-bold ${p.platformKey === 'facebook' ? 'text-blue-600' : p.platformKey === 'tiktok' ? 'text-slate-900' : 'text-emerald-600'} flex items-center gap-1">
+                <i class="${p.platformIcon}"></i> ${p.platform}
+              </span>
+              <span class="text-slate-400">•</span>
+              <span class="text-slate-500">${p.tags || ''}</span>
+            </div>
+          </td>
+          <td class="p-3.5 font-bold text-slate-700 whitespace-nowrap">
+            ${p.date}
+          </td>
+          <td class="p-3.5 text-slate-600 font-medium">
+            <span class="px-2 py-0.5 bg-slate-100 rounded-md text-[11px]">${p.format || 'Bài đăng'}</span>
+          </td>
+          <td class="p-3.5">
+            ${p.mediaLink ? `
+              <a href="${p.mediaLink.startsWith('http') ? p.mediaLink : '#'}" target="_blank" onclick="event.stopPropagation()" class="text-potato-cyan hover:underline font-bold text-[11px] flex items-center gap-1">
+                <i class="fa-solid fa-cloud-arrow-down"></i> Có tư liệu
+              </a>
+            ` : '<span class="text-slate-300 text-[11px]">Chưa có</span>'}
+          </td>
+          <td class="p-3.5">
+            <span class="${p.statusBadge} font-bold text-[10px] px-2 py-0.8 rounded-md">
+              ${p.status}
+            </span>
+          </td>
+          <td class="p-3.5 pr-5 text-right">
+            <button class="text-potato-cyan hover:text-potato-navy font-bold text-xs inline-flex items-center gap-1">
+              <span>Xem</span>
+              <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+
+      return `
+        <div class="bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-subtle">
+          <!-- Mobile List -->
+          <div class="block sm:hidden divide-y divide-slate-100">
+            ${mobileListHtml}
+          </div>
+
+          <!-- Desktop Table -->
+          <div class="hidden sm:block overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-50 border-b border-slate-200/80 text-slate-500 uppercase tracking-wider font-extrabold text-[10px]">
+                <tr>
+                  <th class="p-3.5 pl-5">Tiêu Đề & Kênh</th>
+                  <th class="p-3.5">Ngày Phát Hành</th>
+                  <th class="p-3.5">Định Dạng</th>
+                  <th class="p-3.5">Tư Liệu</th>
+                  <th class="p-3.5">Trạng Thái</th>
+                  <th class="p-3.5 pr-5 text-right">Thao Tác</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                ${desktopRowsHtml}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    // -------------------------------------------------------------
+    // CONTROLS & NAVIGATION HANDLERS
+    // -------------------------------------------------------------
+    function switchViewMode(mode) {
+      CALENDAR_STATE.viewMode = mode;
+
+      // Update Toolbar buttons styling
+      const buttons = ['day', 'three-days', 'week', 'month', 'list'];
+      buttons.forEach(m => {
+        const btn = document.getElementById(`btn-view-${m}`);
+        if (!btn) return;
+        if (m === mode) {
+          btn.className = 'calendar-view-btn flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white text-potato-navy shadow-xs font-extrabold transition-all';
+        } else {
+          btn.className = 'calendar-view-btn flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all';
+        }
+      });
+
+      renderCalendar();
+    }
+
+    function navigateCalendar(dir) {
+      const mode = CALENDAR_STATE.viewMode;
+      const d = CALENDAR_STATE.currentDate;
+
+      if (mode === 'day') {
+        d.setDate(d.getDate() + dir);
+      } else if (mode === 'three-days') {
+        d.setDate(d.getDate() + (dir * 3));
+      } else if (mode === 'week' || mode === 'list') {
+        d.setDate(d.getDate() + (dir * 7));
+      } else if (mode === 'month') {
+        d.setMonth(d.getMonth() + dir);
+      }
+
+      renderCalendar();
+      showToast('Đã chuyển thời gian hiển thị', 'info');
+    }
+
+    function resetCalendarToToday() {
+      CALENDAR_STATE.currentDate = new Date(2026, 8, 13); // 13/09/2026
+      renderCalendar();
+      showToast('Đã quay về ngày hiện tại (13/09/2026)', 'info');
+    }
+
+    function jumpToWeek(weekNum) {
+      // Month 9/2026 weeks approximate target days
+      const targetDays = [5, 12, 18, 26];
+      const targetDay = targetDays[weekNum - 1] || 13;
+      CALENDAR_STATE.currentDate = new Date(2026, 8, targetDay);
+      CALENDAR_STATE.viewMode = 'week';
+
+      // Update quick week buttons
+      [1, 2, 3, 4].forEach(w => {
+        const btn = document.getElementById(`btn-jump-w${w}`);
+        if (!btn) return;
+        if (w === weekNum) {
+          btn.className = 'quick-week-btn px-2.5 py-1 rounded-lg bg-potato-navy text-white font-bold text-[11px] transition-all shadow-2xs';
+        } else {
+          btn.className = 'quick-week-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-all';
+        }
+      });
+
+      switchViewMode('week');
+    }
+
+    function jumpToDate(year, month, day) {
+      CALENDAR_STATE.currentDate = new Date(year, month, day);
+      switchViewMode('day');
+    }
+
+    function filterChannel(channel) {
+      CALENDAR_STATE.channelFilter = channel;
+
+      const heading = document.getElementById('calendar-channel-heading');
+      if (heading) {
+        if (channel === 'facebook') heading.textContent = 'Kênh: Facebook Fanpage';
+        else if (channel === 'tiktok') heading.textContent = 'Kênh: TikTok Shorts';
+        else if (channel === 'seo') heading.textContent = 'Kênh: Website SEO & Blog';
+        else if (channel === 'zalo') heading.textContent = 'Kênh: Zalo OA CRM';
+        else heading.textContent = 'Lịch Đăng Đa Kênh Omnichannel (Tháng 9/2026)';
+      }
+
+      document.querySelectorAll('.channel-filter-btn').forEach(btn => {
+        if (btn.getAttribute('data-channel') === channel) {
+          btn.className = 'channel-filter-btn px-2.5 py-1 rounded-lg bg-potato-navy text-white font-bold text-xs transition-all shadow-2xs';
+        } else {
+          btn.className = 'channel-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5';
+        }
+      });
+
+      renderCalendar();
+    }
+
+    function filterStatus(status) {
+      CALENDAR_STATE.statusFilter = status;
+
+      document.querySelectorAll('.status-filter-btn').forEach(btn => {
+        if (btn.getAttribute('data-status') === status) {
+          btn.className = 'status-filter-btn px-2 py-0.8 rounded-md bg-slate-800 text-white font-bold text-[11px] transition-all shadow-2xs';
+        } else {
+          btn.className = 'status-filter-btn px-2 py-0.8 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-all';
+        }
+      });
+
+      renderCalendar();
+    }
+
+    function handleCalendarSearch(val) {
+      CALENDAR_STATE.searchQuery = val;
+      const clearBtn = document.getElementById('calendar-search-clear');
+      if (clearBtn) {
+        if (val.trim()) clearBtn.classList.remove('hidden');
+        else clearBtn.classList.add('hidden');
+      }
+      renderCalendar();
+    }
+
+    function clearCalendarSearch() {
+      const input = document.getElementById('calendar-search-input');
+      if (input) input.value = '';
+      handleCalendarSearch('');
+    }
+
+    // Copy Single Post Text from Day View
+    function copyPostText(postId) {
+      const post = POSTS_DATA[postId];
+      if (!post) return;
+      const fullText = `${post.title}\n\n${post.content}\n\n${post.tags || ''}`;
+      navigator.clipboard.writeText(fullText).then(() => {
+        showToast('Đã sao chép nội dung bài đăng vào clipboard!', 'success');
+      });
+    }
+
+    // SYNC FROM GOOGLE SHEET LIVE
+    function syncCalendarFromSheet() {
+      const btn = document.getElementById('btn-calendar-sync');
+      const icon = document.getElementById('icon-calendar-sync');
+      const text = document.getElementById('text-calendar-sync');
+
+      if (icon) icon.classList.add('fa-spin');
+      if (text) text.textContent = 'Đang đồng bộ...';
+      if (btn) btn.disabled = true;
+
+      fetch('/api/calendar/sync', { method: 'POST' })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success && data.posts && data.posts.length > 0) {
+            // Update POSTS_DATA in memory
+            data.posts.forEach(p => {
+              POSTS_DATA[p.id] = p;
+            });
+            showToast(`Đã đồng bộ thành công ${data.posts.length} bài đăng từ Google Sheet (Tab #gid=926192727)!`, 'success');
+            renderCalendar();
+          } else {
+            showToast('Không thể kết nối máy chủ Google Sheet. Đang sử dụng bộ nhớ đệm.', 'warning');
+          }
+        })
+        .catch(err => {
+          console.warn('[Calendar Sync Fallback]', err);
+          showToast('Đang hiển thị dữ liệu lịch đệm an toàn từ Tab #gid=926192727.', 'info');
+        })
+        .finally(() => {
+          if (icon) icon.classList.remove('fa-spin');
+          if (text) text.textContent = 'Đồng Bộ Sheet';
+          if (btn) btn.disabled = false;
+        });
+    }
+
+    // Auto-fetch Live Calendar Data on Load
+    function initCalendarLiveFetch() {
+      fetch('/api/calendar')
+        .then(res => res.json())
+        .then(data => {
+          if (data.success && data.posts && data.posts.length > 0) {
+            data.posts.forEach(p => {
+              POSTS_DATA[p.id] = p;
+            });
+            const badge = document.getElementById('calendar-source-badge');
+            if (badge) {
+              badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span><span>${data.source}</span>`;
+            }
+            renderCalendar();
+          }
+        })
+        .catch(e => {
+          // Server not running, static mode works 100%
+          console.log('[Calendar Static Loaded]');
+          renderCalendar();
+        });
     }
 
     // ===================================================================
@@ -2660,15 +3525,59 @@
       currentPostId = postId;
 
       document.getElementById('modal-post-title').textContent = post.title;
-      document.getElementById('modal-post-meta').textContent = `${post.platform} • ${post.time}`;
+      document.getElementById('modal-post-meta').textContent = `${post.platform} • Lịch đăng: ${post.date}`;
       document.getElementById('modal-status-badge').textContent = post.status;
-      document.getElementById('modal-campaign-badge').textContent = post.campaign;
-      document.getElementById('modal-format-badge').textContent = post.format;
-      document.getElementById('modal-caption-text').textContent = post.caption;
-      document.getElementById('modal-hashtags-text').textContent = post.hashtags;
+      document.getElementById('modal-campaign-badge').textContent = `Tháng ${post.month || 9}/2026 (Tuần ${post.week || 1})`;
+      document.getElementById('modal-format-badge').textContent = post.format || 'Bài đăng chuẩn';
+      document.getElementById('modal-caption-text').textContent = post.content || post.caption || '';
+      document.getElementById('modal-hashtags-text').textContent = post.tags || post.hashtags || '#PotatoEnglish';
+
+      // Character count
+      const charCountElem = document.getElementById('modal-char-count');
+      if (charCountElem) {
+        const text = post.content || post.caption || '';
+        const words = text.trim().split(/\s+/).filter(Boolean).length;
+        charCountElem.textContent = `${words} từ • ${text.length} ký tự`;
+      }
+
+      // Google Sheet Row Link
+      const sheetRowElem = document.getElementById('modal-sheet-row-text');
+      const sheetLinkElem = document.getElementById('modal-sheet-link');
+      if (sheetRowElem && post.sheetRowIndex) {
+        sheetRowElem.textContent = `Dòng ${post.sheetRowIndex} trên Tab OMNICHANNEL CALENDAR`;
+      }
+      if (sheetLinkElem) {
+        sheetLinkElem.href = 'https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=926192727';
+      }
+
+      // Media Asset Box
+      const mediaBox = document.getElementById('modal-media-box');
+      const mediaBtn = document.getElementById('modal-media-btn');
+      const mediaTitle = document.getElementById('modal-media-title');
+      if (post.mediaLink && post.mediaLink.trim()) {
+        mediaBox.classList.remove('hidden');
+        mediaTitle.textContent = post.mediaLink.includes('drive.google.com') ? 'Tệp Google Drive' : (post.mediaLink.includes('.mp4') ? 'Video Media' : 'Tệp tư liệu');
+        mediaBtn.href = post.mediaLink.startsWith('http') ? post.mediaLink : '#';
+      } else {
+        mediaBox.classList.add('hidden');
+      }
+
+      // Published Post Box
+      const postlinkBox = document.getElementById('modal-postlink-box');
+      const postlinkBtn = document.getElementById('modal-postlink-btn');
+      const postlinkTitle = document.getElementById('modal-postlink-title');
+      if (post.postLink && post.postLink.trim()) {
+        postlinkBox.classList.remove('hidden');
+        postlinkTitle.textContent = post.postLink.includes('facebook') ? 'Bài viết trên Facebook' : (post.postLink.includes('tiktok') ? 'Video trên TikTok' : 'Bài viết trên Website');
+        postlinkBtn.href = post.postLink;
+      } else {
+        postlinkBox.classList.add('hidden');
+      }
 
       const iconElem = document.getElementById('modal-platform-icon');
-      iconElem.innerHTML = `<i class="${post.platformIcon}"></i>`;
+      if (iconElem) {
+        iconElem.innerHTML = `<i class="${post.platformIcon}"></i>`;
+      }
 
       updateModalRBAC();
       document.getElementById('post-detail-modal').classList.remove('hidden');
@@ -2682,7 +3591,9 @@
     function copyModalCaption() {
       if (!currentPostId || !POSTS_DATA[currentPostId]) return;
       const p = POSTS_DATA[currentPostId];
-      const fullText = `${p.caption}\n\n${p.hashtags}`;
+      const text = p.content || p.caption || '';
+      const tags = p.tags || p.hashtags || '';
+      const fullText = `${p.title}\n\n${text}\n\n${tags}`;
       navigator.clipboard.writeText(fullText).then(() => {
         document.getElementById('copy-btn-text').textContent = '✓ Đã sao chép!';
         showToast('Đã sao chép nội dung bài đăng vào clipboard!', 'success');
@@ -3471,6 +4382,8 @@
     // Initialize on DOM ready
     window.addEventListener('DOMContentLoaded', () => {
       initAuth();
+      renderCalendar();
+      initCalendarLiveFetch();
       // Default view is calendar
       switchTab('calendar');
     });
