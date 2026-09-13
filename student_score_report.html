@@ -466,6 +466,7 @@
       } catch (err) {
         console.warn('Cannot parse URL search params:', err);
       }
+      setTimeout(syncParentFrame, 300);
     });
 
     async function loadSheetDataInBackground() {
@@ -733,6 +734,7 @@
           window.history.replaceState({}, '', url);
         } catch (e) {}
       }
+      syncParentFrame();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -787,6 +789,7 @@
         url.searchParams.delete('test');
         window.history.replaceState({}, '', url);
       } catch (e) {}
+      syncParentFrame();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -814,6 +817,17 @@
         text.innerText = '📥 LẤY DỮ LIỆU & MỞ BẢNG ĐIỂM';
       }
     }
+
+    function syncParentFrame() {
+      if (window.parent && window.parent !== window) {
+        try {
+          const h = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, 850);
+          window.parent.postMessage({ type: 'setScoreHeight', height: h }, '*');
+          window.parent.postMessage({ type: 'syncUrl', urlParams: window.location.search }, '*');
+        } catch (e) {}
+      }
+    }
+    window.addEventListener('resize', syncParentFrame);
   </script>
 </body>
 </html>
