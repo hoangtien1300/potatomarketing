@@ -126,31 +126,31 @@
   <div class="flex h-full w-full overflow-hidden">
 
     <!-- ================================================================= -->
-    <!-- 1. LEFT SIDEBAR NAVIGATION (COLLAPSIBLE & RBAC AWARE) -->
+    <!-- 1. LEFT SIDEBAR NAVIGATION (DRAWER ON MOBILE, COLLAPSIBLE ON DESKTOP) -->
     <!-- ================================================================= -->
-    <aside id="main-sidebar" class="w-64 bg-white border-r border-slate-200/90 flex flex-col justify-between flex-shrink-0 transition-all duration-300 z-30 shadow-subtle">
+    <!-- Mobile Sidebar Backdrop Overlay -->
+    <div id="sidebar-mobile-backdrop" onclick="closeSidebarMobile()" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-40 lg:hidden hidden transition-opacity duration-300"></div>
+
+    <aside id="main-sidebar" class="fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] bg-white border-r border-slate-200/90 flex flex-col justify-between flex-shrink-0 transition-transform duration-300 transform -translate-x-full lg:translate-x-0 lg:static lg:w-64 shadow-2xl lg:shadow-subtle">
       
       <!-- Top Section -->
       <div class="flex flex-col flex-1 overflow-y-auto custom-scrollbar">
         
-        <!-- Brand Header with Official Potato English Logo -->
-        <div class="h-16 flex items-center px-3.5 border-b border-slate-100 bg-white">
-          <img src="potato_logo.png" onerror="this.src='Potato_English_Logo.jpeg'" alt="Potato English Logo" class="h-10 w-10 object-contain rounded-xl flex-shrink-0">
-          <div class="sidebar-header-text ml-2.5 overflow-hidden">
-            <h1 class="font-extrabold text-xs text-potato-navy tracking-tight truncate leading-tight">POTATO ENGLISH</h1>
-            <div class="mt-0.5">
-              <span class="text-[8px] font-black text-potato-red bg-red-50 border border-red-200/60 px-1.5 py-0.2 rounded tracking-wider uppercase">
-                NEVER STOP LEARNING
-              </span>
+        <!-- Brand Header with Official Potato English Logo & Mobile Close Button -->
+        <div class="h-16 flex items-center justify-between px-3.5 border-b border-slate-100 bg-white flex-shrink-0">
+          <div class="flex items-center">
+            <img src="potato_logo.png" onerror="this.src='Potato_English_Logo.jpeg'" alt="Potato English Logo" class="h-10 w-10 object-contain rounded-xl flex-shrink-0">
+            <div class="sidebar-header-text ml-2.5 overflow-hidden">
+              <h1 class="font-extrabold text-xs text-potato-navy tracking-tight truncate leading-tight">POTATO ENGLISH</h1>
+              <div class="mt-0.5">
+                <span class="text-[8px] font-black text-potato-red bg-red-50 border border-red-200/60 px-1.5 py-0.2 rounded tracking-wider uppercase">
+                  NEVER STOP LEARNING
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-
-        <!-- Quick Action CTA Button (Checked via RBAC) -->
-        <div class="p-3 border-b border-slate-100">
-          <button id="btn-sidebar-create-post" onclick="handleCreatePostAction()" class="sidebar-item w-full flex items-center justify-center gap-2.5 bg-potato-cyan hover:bg-potato-cyanHover text-white rounded-xl py-2.5 px-3 font-bold text-xs shadow-md shadow-potato-cyan/25 transition-all">
-            <i class="fa-solid fa-circle-plus text-sm"></i>
-            <span class="sidebar-label">Tạo Bài Đăng Mới</span>
+          <button onclick="closeSidebarMobile()" class="lg:hidden w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition-all" title="Đóng menu">
+            <i class="fa-solid fa-xmark text-sm"></i>
           </button>
         </div>
 
@@ -203,107 +203,7 @@
             </div>
           </div>
 
-          <!-- 2. Tổng Quan Marketing -->
-          <div class="sidebar-group">
-            <button onclick="switchTab('dashboard')" id="nav-dashboard" class="sidebar-item nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-potato-navy transition-all">
-              <div class="flex items-center gap-3">
-                <i class="fa-solid fa-chart-pie text-base w-5 text-center text-potato-cyan"></i>
-                <span class="sidebar-label font-bold">Tổng quan marketing</span>
-              </div>
-              <i class="menu-chevron fa-solid fa-chevron-right text-[10px] text-slate-400 transition-transform"></i>
-            </button>
-            <div id="submenu-dashboard" class="sidebar-submenu hidden pl-9 pr-2 py-1 space-y-0.5">
-              <button type="button" onclick="highlightSubItem(this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-potato-cyan"></span>
-                <span>Chỉ số KPI</span>
-              </button>
-              <button type="button" onclick="highlightSubItem(this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                <span>Chiến dịch trọng điểm</span>
-              </button>
-              <button type="button" onclick="highlightSubItem(this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>
-                <span>Vinh danh học viên</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- 3. Kho Ý Tưởng -->
-          <div class="sidebar-group">
-            <button onclick="switchTab('ideas')" id="nav-ideas" class="sidebar-item nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-potato-navy transition-all">
-              <div class="flex items-center gap-3">
-                <i class="fa-regular fa-lightbulb text-base w-5 text-center text-amber-500"></i>
-                <span class="sidebar-label font-bold">Kho ý tưởng</span>
-              </div>
-              <i class="menu-chevron fa-solid fa-chevron-right text-[10px] text-slate-400 transition-transform"></i>
-            </button>
-            <div id="submenu-ideas" class="sidebar-submenu hidden pl-9 pr-2 py-1 space-y-0.5">
-              <button type="button" onclick="highlightSubItem(this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                <span>Ý tưởng Mascot</span>
-              </button>
-              <button type="button" onclick="highlightSubItem(this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
-                <span>Kịch bản video</span>
-              </button>
-              <button type="button" onclick="highlightSubItem(this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                <span>Cẩm nang phụ huynh</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- 4. Thư Viện Media -->
-          <div class="sidebar-group">
-            <button onclick="switchTab('media')" id="nav-media" class="sidebar-item nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-potato-navy transition-all">
-              <div class="flex items-center gap-3">
-                <i class="fa-solid fa-photo-film text-base w-5 text-center text-indigo-500"></i>
-                <span class="sidebar-label font-bold">Thư viện media</span>
-              </div>
-              <i class="menu-chevron fa-solid fa-chevron-right text-[10px] text-slate-400 transition-transform"></i>
-            </button>
-            <div id="submenu-media" class="sidebar-submenu hidden pl-9 pr-2 py-1 space-y-0.5">
-              <button type="button" onclick="highlightSubItem(this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
-                <span>Logo và Favicon</span>
-              </button>
-              <button type="button" onclick="highlightSubItem(this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-potato-cyan"></span>
-                <span>Khung ảnh Doodle</span>
-              </button>
-              <button type="button" onclick="highlightSubItem(this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                <span>Cutout Mascot</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- 5. Tài Khoản Phân Quyền -->
-          <div class="sidebar-group">
-            <button onclick="switchTab('rbac')" id="nav-rbac" class="sidebar-item nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-potato-navy transition-all">
-              <div class="flex items-center gap-3">
-                <i class="fa-solid fa-user-shield text-base w-5 text-center text-rose-500"></i>
-                <span class="sidebar-label font-bold">Tài khoản phân quyền</span>
-              </div>
-              <i class="menu-chevron fa-solid fa-chevron-right text-[10px] text-slate-400 transition-transform"></i>
-            </button>
-            <div id="submenu-rbac" class="sidebar-submenu hidden pl-9 pr-2 py-1 space-y-0.5">
-              <button type="button" onclick="highlightSubItem(this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
-                <span>Danh sách nhân sự</span>
-              </button>
-              <button type="button" onclick="highlightSubItem(this)" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                <span>Ma trận quyền</span>
-              </button>
-              <button type="button" onclick="openRoleSwitcherModal()" class="submenu-item w-full text-left py-1.5 px-2.5 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 font-medium transition-all flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-potato-cyan"></span>
-                <span>Đổi vai trò</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- 6. Cài Đặt (Level 1) -->
+          <!-- 2. Cài Đặt (Level 1) -->
           <div class="sidebar-group">
             <button onclick="switchTab('settings-intro')" id="nav-about" class="sidebar-item nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-potato-navy transition-all">
               <div class="flex items-center gap-3">
@@ -348,12 +248,12 @@
       <header class="h-14 border-b border-slate-200/90 px-4 sm:px-6 flex items-center justify-between flex-shrink-0 bg-white sticky top-0 z-20 shadow-xs">
         
         <!-- Left: Mobile Menu Toggle & Only "Potato Hub v2.0" -->
-        <div class="flex items-center gap-3">
-          <button onclick="toggleSidebarMobile()" class="lg:hidden w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-all">
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <button onclick="toggleSidebarMobile()" class="lg:hidden w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 flex items-center justify-center transition-all shadow-2xs" aria-label="Mở menu điều hướng">
             <i class="fa-solid fa-bars text-sm"></i>
           </button>
 
-          <span class="text-xs font-extrabold text-potato-navy bg-potato-softBlue border border-potato-cyan/30 px-3 py-1.5 rounded-xl flex items-center gap-2 shadow-2xs">
+          <span class="text-[11px] sm:text-xs font-extrabold text-potato-navy bg-potato-softBlue border border-potato-cyan/30 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl flex items-center gap-2 shadow-2xs">
             <span class="w-2 h-2 rounded-full bg-potato-cyan animate-ping"></span>
             Potato Hub v2.0
           </span>
@@ -363,7 +263,7 @@
         <div class="relative">
           <div class="flex items-center gap-2">
             <!-- User Profile Box Dropdown Button -->
-            <button onclick="toggleUserDropdown()" id="topbar-user-btn" class="flex items-center gap-2.5 p-1.5 pr-3 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200/80 transition-all shadow-2xs">
+            <button onclick="toggleUserDropdown()" id="topbar-user-btn" class="flex items-center gap-2.5 p-1.5 pr-2 sm:pr-3 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200/80 transition-all shadow-2xs">
               <div id="user-avatar-badge" class="w-8 h-8 rounded-xl bg-potato-navy text-white font-extrabold flex items-center justify-center text-xs shadow-xs flex-shrink-0">
                 HT
               </div>
@@ -383,7 +283,7 @@
           </div>
 
           <!-- User Profile Dropdown Menu -->
-          <div id="user-dropdown-menu" class="hidden absolute right-0 mt-2 w-60 bg-white rounded-2xl shadow-xl border border-slate-200/90 py-2 z-50">
+          <div id="user-dropdown-menu" class="hidden absolute right-0 mt-2 w-60 max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-xl border border-slate-200/90 py-2 z-50">
             <div class="px-4 py-2.5 border-b border-slate-100">
               <p class="text-xs font-bold text-slate-800 truncate" id="dropdown-user-name">Hoàng Tiến</p>
               <p class="text-[11px] text-slate-500 truncate" id="dropdown-user-email">tien.hoang@potatoenglish.edu.vn</p>
@@ -393,10 +293,6 @@
               <button onclick="openRoleSwitcherModal(); closeUserDropdown();" class="w-full text-left px-4 py-2 hover:bg-slate-50 flex items-center gap-2.5 text-slate-700 font-semibold">
                 <i class="fa-solid fa-arrows-rotate text-potato-cyan text-xs"></i>
                 <span>Đổi vai trò phân quyền (Demo)</span>
-              </button>
-              <button onclick="switchTab('rbac'); closeUserDropdown();" class="w-full text-left px-4 py-2 hover:bg-slate-50 flex items-center gap-2.5 text-slate-700 font-semibold">
-                <i class="fa-solid fa-user-shield text-rose-500 text-xs"></i>
-                <span>Xem ma trận quyền & thành viên</span>
               </button>
             </div>
             <div class="border-t border-slate-100 pt-1">
@@ -440,16 +336,16 @@
             </div>
           </div>
           
-          <div class="flex items-center gap-2 flex-wrap">
-            <button type="button" onclick="syncAboutUsData()" id="btn-sync-intro-top" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs border border-slate-200 transition-all flex items-center gap-2 shadow-2xs">
+          <div class="flex items-center gap-2 flex-wrap w-full md:w-auto">
+            <button type="button" onclick="syncAboutUsData()" id="btn-sync-intro-top" class="flex-1 sm:flex-none px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs border border-slate-200 transition-all flex items-center justify-center gap-2 shadow-2xs min-h-[36px]">
               <i class="fa-solid fa-arrows-rotate" id="sync-intro-top-icon"></i>
               <span>Tải Lại Từ Sheet</span>
             </button>
-            <button type="button" onclick="saveAllAboutUsSettings()" id="btn-save-intro-top" class="px-5 py-2 rounded-xl bg-potato-cyan hover:bg-potato-cyanHover text-white font-extrabold text-xs shadow-md shadow-potato-cyan/20 transition-all flex items-center gap-2">
+            <button type="button" onclick="saveAllAboutUsSettings()" id="btn-save-intro-top" class="flex-1 sm:flex-none px-4 py-2 rounded-xl bg-potato-cyan hover:bg-potato-cyanHover text-white font-extrabold text-xs shadow-md shadow-potato-cyan/20 transition-all flex items-center justify-center gap-2 min-h-[36px]">
               <i class="fa-solid fa-floppy-disk"></i>
               <span class="btn-save-text">Lưu Thay Đổi</span>
             </button>
-            <a href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit?pli=1&gid=1973975368#gid=1973975368" target="_blank" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-2xs transition-all flex items-center gap-2">
+            <a href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit?pli=1&gid=1973975368#gid=1973975368" target="_blank" class="w-full sm:w-auto px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-2xs transition-all flex items-center justify-center gap-2 min-h-[36px]">
               <i class="fa-solid fa-file-excel"></i>
               <span>Google Sheet GID</span>
             </a>
@@ -555,16 +451,16 @@
             </div>
           </div>
           
-          <div class="flex items-center gap-2 flex-wrap">
-            <button type="button" onclick="syncAboutUsData()" id="btn-sync-content-top" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs border border-slate-200 transition-all flex items-center gap-2 shadow-2xs">
+          <div class="flex items-center gap-2 flex-wrap w-full md:w-auto">
+            <button type="button" onclick="syncAboutUsData()" id="btn-sync-content-top" class="flex-1 sm:flex-none px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs border border-slate-200 transition-all flex items-center justify-center gap-2 shadow-2xs min-h-[36px]">
               <i class="fa-solid fa-arrows-rotate" id="sync-content-top-icon"></i>
               <span>Tải Lại Từ Sheet</span>
             </button>
-            <button type="button" onclick="saveAllAboutUsSettings()" id="btn-save-content-top" class="px-5 py-2 rounded-xl bg-potato-cyan hover:bg-potato-cyanHover text-white font-extrabold text-xs shadow-md shadow-potato-cyan/20 transition-all flex items-center gap-2">
+            <button type="button" onclick="saveAllAboutUsSettings()" id="btn-save-content-top" class="flex-1 sm:flex-none px-4 py-2 rounded-xl bg-potato-cyan hover:bg-potato-cyanHover text-white font-extrabold text-xs shadow-md shadow-potato-cyan/20 transition-all flex items-center justify-center gap-2 min-h-[36px]">
               <i class="fa-solid fa-floppy-disk"></i>
               <span class="btn-save-text">Lưu Thay Đổi</span>
             </button>
-            <a href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit?pli=1&gid=1973975368#gid=1973975368" target="_blank" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-2xs transition-all flex items-center gap-2">
+            <a href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit?pli=1&gid=1973975368#gid=1973975368" target="_blank" class="w-full sm:w-auto px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-2xs transition-all flex items-center justify-center gap-2 min-h-[36px]">
               <i class="fa-solid fa-file-excel"></i>
               <span>Google Sheet GID</span>
             </a>
@@ -861,83 +757,65 @@
               <i class="fa-solid fa-calendar-days"></i>
             </div>
             <div>
-              <div class="flex items-center gap-2 flex-wrap">
-                <h2 id="calendar-channel-heading" class="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
-                  Lịch Đăng Đa Kênh Omnichannel (Tháng 9/2026)
-                </h2>
-                <span id="calendar-summary-badge" class="text-xs font-bold text-potato-cyan bg-potato-cyanLight px-2.5 py-0.5 rounded-full border border-potato-cyan/20">
-                  15 bài đã lên lịch
-                </span>
-                <span id="calendar-source-badge" class="text-[10px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                  <span>Google Sheet Live</span>
-                </span>
-              </div>
-              <p class="text-xs text-slate-500 mt-1 flex items-center gap-2 flex-wrap">
-                <span>Dữ liệu đồng bộ trực tiếp từ Tab <strong>📅 OMNICHANNEL CALENDAR</strong>.</span>
-                <a href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=926192727" target="_blank" class="text-potato-blue hover:text-potato-cyan font-bold inline-flex items-center gap-1 underline underline-offset-2">
-                  <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                  <span>Mở Google Sheet (#gid=926192727)</span>
-                </a>
+              <h2 id="calendar-channel-heading" class="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+                Lịch đăng đa kênh
+              </h2>
+              <p class="text-xs font-semibold text-slate-500 mt-1 flex items-center gap-1.5">
+                <i class="fa-regular fa-calendar text-potato-cyan text-[11px]"></i>
+                <span id="calendar-current-month-text">Tháng 9/2026</span>
               </p>
             </div>
           </div>
 
           <!-- Controls: View mode switcher & Date selector & Sync -->
-          <div class="flex items-center gap-2.5 flex-wrap">
+          <div class="flex items-center gap-2 flex-wrap w-full md:w-auto justify-between sm:justify-start">
             <!-- Sync with Google Sheet Button -->
-            <button id="btn-calendar-sync" onclick="syncCalendarFromSheet()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs" title="Đồng bộ lại từ Google Sheet">
+            <button id="btn-calendar-sync" onclick="syncCalendarFromSheet()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs min-h-[36px] touch-manipulation" title="Đồng bộ lại từ Google Sheet">
               <i id="icon-calendar-sync" class="fa-solid fa-rotate text-potato-cyan"></i>
               <span id="text-calendar-sync">Đồng Bộ Sheet</span>
             </button>
 
-            <!-- 5 View Modes Switcher -->
-            <div class="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-bold shadow-inner">
-              <button onclick="switchViewMode('day')" id="btn-view-day" class="calendar-view-btn flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all">
+            <!-- 5 View Modes Switcher (Horizontal scroll on narrow mobile) -->
+            <div class="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-bold shadow-inner overflow-x-auto max-w-full custom-scrollbar">
+              <button onclick="switchViewMode('day')" id="btn-view-day" class="calendar-view-btn flex items-center gap-1 px-3 py-1.5 sm:px-2.5 sm:py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all whitespace-nowrap min-h-[34px]">
                 <i class="fa-regular fa-calendar text-[11px]"></i>
                 <span>Ngày</span>
               </button>
-              <button onclick="switchViewMode('three-days')" id="btn-view-three-days" class="calendar-view-btn flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all">
+              <button onclick="switchViewMode('three-days')" id="btn-view-three-days" class="calendar-view-btn flex items-center gap-1 px-3 py-1.5 sm:px-2.5 sm:py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all whitespace-nowrap min-h-[34px]">
                 <i class="fa-solid fa-table-columns text-[11px]"></i>
                 <span>3 Ngày</span>
               </button>
-              <button onclick="switchViewMode('week')" id="btn-view-week" class="calendar-view-btn flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white text-potato-navy shadow-xs font-extrabold transition-all">
+              <button onclick="switchViewMode('week')" id="btn-view-week" class="calendar-view-btn flex items-center gap-1 px-3 py-1.5 sm:px-2.5 sm:py-1.5 rounded-lg bg-white text-potato-navy shadow-xs font-extrabold transition-all whitespace-nowrap min-h-[34px]">
                 <i class="fa-solid fa-calendar-week text-potato-cyan text-[11px]"></i>
                 <span>Tuần</span>
               </button>
-              <button onclick="switchViewMode('month')" id="btn-view-month" class="calendar-view-btn flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all">
+              <button onclick="switchViewMode('month')" id="btn-view-month" class="calendar-view-btn flex items-center gap-1 px-3 py-1.5 sm:px-2.5 sm:py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all whitespace-nowrap min-h-[34px]">
                 <i class="fa-solid fa-calendar-days text-[11px]"></i>
                 <span>Tháng</span>
               </button>
-              <button onclick="switchViewMode('list')" id="btn-view-list" class="calendar-view-btn flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all">
+              <button onclick="switchViewMode('list')" id="btn-view-list" class="calendar-view-btn flex items-center gap-1 px-3 py-1.5 sm:px-2.5 sm:py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition-all whitespace-nowrap min-h-[34px]">
                 <i class="fa-solid fa-list-ul text-[11px]"></i>
                 <span>Bảng</span>
               </button>
             </div>
-
-            <!-- Add Post Button -->
-            <button id="btn-calendar-add-post" onclick="handleCreatePostAction()" class="bg-potato-cyan hover:bg-potato-cyanHover text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow-xs transition-all flex items-center gap-2">
-              <i class="fa-solid fa-plus"></i>
-              <span>Lên Lịch Bài</span>
-            </button>
           </div>
         </div>
 
         <!-- Filter & Date Navigation Bar -->
-        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-2xs space-y-3 text-xs">
+        <div class="bg-white p-3.5 sm:p-4 rounded-2xl border border-slate-200/80 shadow-2xs space-y-3 text-xs">
           
           <!-- Top Row: Date Navigator + Quick Week Selector -->
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
             <!-- Date Navigator -->
             <div class="flex items-center gap-2 flex-wrap">
               <div class="flex items-center bg-slate-100 rounded-xl p-0.5 border border-slate-200/60">
-                <button onclick="navigateCalendar(-1)" class="w-8 h-8 rounded-lg hover:bg-white text-slate-700 flex items-center justify-center transition-all shadow-2xs" title="Lùi lại">
+                <button onclick="navigateCalendar(-1)" class="w-9 h-9 sm:w-8 sm:h-8 rounded-lg hover:bg-white text-slate-700 flex items-center justify-center transition-all shadow-2xs touch-manipulation" title="Lùi lại">
                   <i class="fa-solid fa-chevron-left text-xs"></i>
                 </button>
-                <button onclick="resetCalendarToToday()" class="px-3 py-1.5 text-xs font-extrabold text-potato-navy hover:bg-white rounded-lg transition-all" title="Chuyển về ngày hiện tại">
+                <button onclick="resetCalendarToToday()" class="px-3 py-2 sm:py-1.5 text-xs font-extrabold text-potato-navy hover:bg-white rounded-lg transition-all min-h-[36px] sm:min-h-0 flex items-center" title="Chuyển về ngày hiện tại">
                   Hôm nay (13/09)
                 </button>
-                <button onclick="navigateCalendar(1)" class="w-8 h-8 rounded-lg hover:bg-white text-slate-700 flex items-center justify-center transition-all shadow-2xs" title="Tiến lên">
+                <button onclick="navigateCalendar(1)" class="w-9 h-9 sm:w-8 sm:h-8 rounded-lg hover:bg-white text-slate-700 flex items-center justify-center transition-all shadow-2xs touch-manipulation" title="Tiến lên">
                   <i class="fa-solid fa-chevron-right text-xs"></i>
                 </button>
               </div>
@@ -948,56 +826,56 @@
             </div>
 
             <!-- Quick Week Selector (Buttons W1 to W5 for Month 9) -->
-            <div id="quick-week-selector" class="flex items-center gap-1 flex-wrap">
+            <div id="quick-week-selector" class="flex items-center gap-1.5 flex-wrap">
               <span class="text-slate-400 font-bold text-[10px] uppercase tracking-wider mr-1">Chọn tuần:</span>
-              <button onclick="jumpToWeek(1)" id="btn-jump-w1" class="quick-week-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-all">Tuần 1</button>
-              <button onclick="jumpToWeek(2)" id="btn-jump-w2" class="quick-week-btn px-2.5 py-1 rounded-lg bg-potato-navy text-white font-bold text-[11px] transition-all shadow-2xs">Tuần 2</button>
-              <button onclick="jumpToWeek(3)" id="btn-jump-w3" class="quick-week-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-all">Tuần 3</button>
-              <button onclick="jumpToWeek(4)" id="btn-jump-w4" class="quick-week-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-all">Tuần 4</button>
+              <button onclick="jumpToWeek(1)" id="btn-jump-w1" class="quick-week-btn px-3 py-1.5 sm:px-2.5 sm:py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-all min-h-[32px]">Tuần 1</button>
+              <button onclick="jumpToWeek(2)" id="btn-jump-w2" class="quick-week-btn px-3 py-1.5 sm:px-2.5 sm:py-1 rounded-lg bg-potato-navy text-white font-bold text-[11px] transition-all shadow-2xs min-h-[32px]">Tuần 2</button>
+              <button onclick="jumpToWeek(3)" id="btn-jump-w3" class="quick-week-btn px-3 py-1.5 sm:px-2.5 sm:py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-all min-h-[32px]">Tuần 3</button>
+              <button onclick="jumpToWeek(4)" id="btn-jump-w4" class="quick-week-btn px-3 py-1.5 sm:px-2.5 sm:py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-all min-h-[32px]">Tuần 4</button>
             </div>
           </div>
 
           <!-- Bottom Row: Filters (Channel, Status) and Search Bar -->
           <div class="pt-2 border-t border-slate-100 flex flex-col lg:flex-row lg:items-center justify-between gap-3">
             <!-- Filter Pills -->
-            <div class="flex items-center gap-2 flex-wrap">
+            <div class="flex items-center gap-2.5 flex-wrap">
               <!-- Channel Filter Badges -->
-              <div class="flex items-center gap-1 flex-wrap">
-                <span class="text-slate-400 font-bold text-[10px] uppercase tracking-wider mr-1">Kênh:</span>
-                <button onclick="filterChannel('all')" class="channel-filter-btn px-2.5 py-1 rounded-lg bg-potato-navy text-white font-bold text-xs transition-all shadow-2xs" data-channel="all">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="text-slate-400 font-bold text-[10px] uppercase tracking-wider mr-1 w-full sm:w-auto">Kênh:</span>
+                <button onclick="filterChannel('all')" class="channel-filter-btn px-2.5 py-1.5 rounded-lg bg-potato-navy text-white font-bold text-xs transition-all shadow-2xs min-h-[32px]" data-channel="all">
                   Tất cả (<span id="count-ch-all">15</span>)
                 </button>
-                <button onclick="filterChannel('facebook')" class="channel-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5" data-channel="facebook">
+                <button onclick="filterChannel('facebook')" class="channel-filter-btn px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5 min-h-[32px]" data-channel="facebook">
                   <i class="fa-brands fa-facebook-f text-blue-600"></i>
                   <span>Facebook (<span id="count-ch-fb">7</span>)</span>
                 </button>
-                <button onclick="filterChannel('tiktok')" class="channel-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5" data-channel="tiktok">
+                <button onclick="filterChannel('tiktok')" class="channel-filter-btn px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5 min-h-[32px]" data-channel="tiktok">
                   <i class="fa-brands fa-tiktok text-slate-900"></i>
                   <span>TikTok (<span id="count-ch-tiktok">4</span>)</span>
                 </button>
-                <button onclick="filterChannel('seo')" class="channel-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5" data-channel="seo">
+                <button onclick="filterChannel('seo')" class="channel-filter-btn px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5 min-h-[32px]" data-channel="seo">
                   <i class="fa-solid fa-globe text-emerald-600"></i>
                   <span>Website SEO (<span id="count-ch-seo">3</span>)</span>
                 </button>
-                <button onclick="filterChannel('zalo')" class="channel-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5" data-channel="zalo">
+                <button onclick="filterChannel('zalo')" class="channel-filter-btn px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5 min-h-[32px]" data-channel="zalo">
                   <i class="fa-solid fa-comment-dots text-blue-500"></i>
                   <span>Zalo (<span id="count-ch-zalo">1</span>)</span>
                 </button>
               </div>
 
               <!-- Status Filter Badges -->
-              <div class="flex items-center gap-1 flex-wrap pl-0 sm:pl-2 sm:border-l sm:border-slate-200">
-                <span class="text-slate-400 font-bold text-[10px] uppercase tracking-wider mr-1">Trạng thái:</span>
-                <button onclick="filterStatus('all')" class="status-filter-btn px-2 py-0.8 rounded-md bg-slate-800 text-white font-bold text-[11px] transition-all" data-status="all">
+              <div class="flex items-center gap-1.5 flex-wrap pl-0 sm:pl-2 sm:border-l sm:border-slate-200">
+                <span class="text-slate-400 font-bold text-[10px] uppercase tracking-wider mr-1 w-full sm:w-auto">Trạng thái:</span>
+                <button onclick="filterStatus('all')" class="status-filter-btn px-2.5 py-1.5 rounded-md bg-slate-800 text-white font-bold text-[11px] transition-all min-h-[30px]" data-status="all">
                   Tất cả
                 </button>
-                <button onclick="filterStatus('published')" class="status-filter-btn px-2 py-0.8 rounded-md bg-slate-100 hover:bg-slate-200 text-emerald-700 font-bold text-[11px] transition-all" data-status="published">
+                <button onclick="filterStatus('published')" class="status-filter-btn px-2.5 py-1.5 rounded-md bg-slate-100 hover:bg-slate-200 text-emerald-700 font-bold text-[11px] transition-all min-h-[30px]" data-status="published">
                   Đã đăng (5)
                 </button>
-                <button onclick="filterStatus('ready')" class="status-filter-btn px-2 py-0.8 rounded-md bg-slate-100 hover:bg-slate-200 text-blue-700 font-bold text-[11px] transition-all" data-status="ready">
+                <button onclick="filterStatus('ready')" class="status-filter-btn px-2.5 py-1.5 rounded-md bg-slate-100 hover:bg-slate-200 text-blue-700 font-bold text-[11px] transition-all min-h-[30px]" data-status="ready">
                   Sẵn sàng (1)
                 </button>
-                <button onclick="filterStatus('planned')" class="status-filter-btn px-2 py-0.8 rounded-md bg-slate-100 hover:bg-slate-200 text-amber-700 font-bold text-[11px] transition-all" data-status="planned">
+                <button onclick="filterStatus('planned')" class="status-filter-btn px-2.5 py-1.5 rounded-md bg-slate-100 hover:bg-slate-200 text-amber-700 font-bold text-[11px] transition-all min-h-[30px]" data-status="planned">
                   Kế hoạch (9)
                 </button>
               </div>
@@ -1515,29 +1393,15 @@
   <!-- ================================================================= -->
   <!-- [INVARIANT 4]: MOBILE-FIRST SAFE BOTTOM NAVIGATION -->
   <!-- ================================================================= -->
-  <nav id="mobile-bottom-nav" class="lg:hidden fixed bottom-0 left-0 right-0 h-16 bg-white/95 backdrop-blur-md border-t border-slate-200/90 z-40 flex items-center justify-around px-2 shadow-float">
-    <button onclick="switchTab('dashboard')" id="mobile-nav-dashboard" class="flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-potato-navy w-14 py-1">
-      <i class="fa-solid fa-chart-pie text-sm"></i>
-      <span class="text-[9px] font-bold">Tổng quan</span>
+  <nav id="mobile-bottom-nav" class="lg:hidden fixed bottom-0 left-0 right-0 h-16 bg-white/95 backdrop-blur-md border-t border-slate-200/90 z-40 flex items-center justify-around px-6 shadow-float">
+    <button onclick="switchTab('calendar')" id="mobile-nav-calendar" class="flex flex-col items-center justify-center gap-1 text-potato-cyan font-bold w-24 py-1 transition-all">
+      <i class="fa-solid fa-calendar-days text-base"></i>
+      <span class="text-[10px]">Lịch đăng</span>
     </button>
 
-    <button onclick="switchTab('calendar')" id="mobile-nav-calendar" class="flex flex-col items-center justify-center gap-1 text-potato-cyan font-bold w-14 py-1">
-      <i class="fa-solid fa-calendar-days text-sm"></i>
-      <span class="text-[9px]">Lịch đăng</span>
-    </button>
-
-    <button onclick="handleCreatePostAction()" class="w-11 h-11 -mt-5 rounded-full bg-potato-cyan text-white flex items-center justify-center shadow-lg shadow-potato-cyan/40 text-lg">
-      <i class="fa-solid fa-plus"></i>
-    </button>
-
-    <button onclick="switchTab('ideas')" id="mobile-nav-ideas" class="flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-potato-navy w-14 py-1">
-      <i class="fa-regular fa-lightbulb text-sm"></i>
-      <span class="text-[9px] font-bold">Ý tưởng</span>
-    </button>
-
-    <button onclick="switchTab('rbac')" id="mobile-nav-rbac" class="flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-potato-navy w-14 py-1">
-      <i class="fa-solid fa-user-shield text-sm"></i>
-      <span class="text-[9px] font-bold">Quyền</span>
+    <button onclick="switchTab('settings-intro')" id="mobile-nav-settings" class="flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-potato-navy w-24 py-1 transition-all">
+      <i class="fa-solid fa-sliders text-base"></i>
+      <span class="text-[10px]">Cài đặt</span>
     </button>
   </nav>
 
@@ -1691,40 +1555,40 @@
   </div>
 
   <!-- 3. POST DETAIL MODAL -->
-  <div id="post-detail-modal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
-    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
+  <div id="post-detail-modal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 flex items-center justify-center p-3 sm:p-4 hidden">
+    <div class="bg-white rounded-2xl sm:rounded-3xl max-w-2xl w-full max-h-[92vh] sm:max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
       
       <!-- Modal Header -->
-      <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50">
-        <div class="flex items-center gap-2.5">
-          <span id="modal-platform-icon" class="w-8 h-8 rounded-xl bg-potato-softBlue text-potato-blue flex items-center justify-center text-sm font-black">
+      <div class="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50 flex-shrink-0">
+        <div class="flex items-center gap-2.5 min-w-0 pr-2">
+          <span id="modal-platform-icon" class="w-8 h-8 rounded-xl bg-potato-softBlue text-potato-blue flex items-center justify-center text-sm font-black flex-shrink-0">
             <i class="fa-brands fa-facebook-f"></i>
           </span>
-          <div>
-            <h3 id="modal-post-title" class="font-black text-sm text-slate-900 line-clamp-1">Tiêu Đề Bài Viết</h3>
-            <p id="modal-post-meta" class="text-[11px] text-slate-500">Kênh • Thời gian phát hành</p>
+          <div class="min-w-0">
+            <h3 id="modal-post-title" class="font-black text-xs sm:text-sm text-slate-900 line-clamp-1">Tiêu Đề Bài Viết</h3>
+            <p id="modal-post-meta" class="text-[10px] sm:text-[11px] text-slate-500 truncate">Kênh • Thời gian phát hành</p>
           </div>
         </div>
-        <button onclick="closePostModal()" class="w-8 h-8 rounded-xl bg-white hover:bg-slate-200 text-slate-400 hover:text-slate-700 flex items-center justify-center transition-all">
+        <button onclick="closePostModal()" class="w-9 h-9 sm:w-8 sm:h-8 rounded-xl bg-white hover:bg-slate-200 text-slate-400 hover:text-slate-700 flex items-center justify-center transition-all flex-shrink-0 shadow-2xs" aria-label="Đóng chi tiết bài đăng">
           <i class="fa-solid fa-xmark text-sm"></i>
         </button>
       </div>
 
       <!-- Modal Body -->
-      <div class="p-6 overflow-y-auto custom-scrollbar space-y-4 text-xs">
+      <div class="p-4 sm:p-6 overflow-y-auto custom-scrollbar space-y-4 text-xs">
         
         <!-- Badges Bar -->
-        <div class="flex items-center gap-2 flex-wrap">
-          <span id="modal-status-badge" class="bg-emerald-100 text-emerald-800 font-black px-2.5 py-1 rounded-md text-[10px]">
+        <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+          <span id="modal-status-badge" class="bg-emerald-100 text-emerald-800 font-black px-2.5 py-0.8 rounded-md text-[10px]">
             Đã duyệt
           </span>
-          <span id="modal-campaign-badge" class="bg-blue-100 text-blue-800 font-bold px-2.5 py-1 rounded-md text-[10px]">
+          <span id="modal-campaign-badge" class="bg-blue-100 text-blue-800 font-bold px-2.5 py-0.8 rounded-md text-[10px]">
             Khai Giảng 2026
           </span>
-          <span id="modal-format-badge" class="bg-slate-100 text-slate-700 font-bold px-2.5 py-1 rounded-md text-[10px]">
+          <span id="modal-format-badge" class="bg-slate-100 text-slate-700 font-bold px-2.5 py-0.8 rounded-md text-[10px]">
             Album 4 ảnh (1:1)
           </span>
-          <a id="modal-sheet-link" href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=926192727" target="_blank" class="ml-auto text-[11px] text-potato-blue hover:text-potato-cyan font-bold inline-flex items-center gap-1.5 underline underline-offset-2">
+          <a id="modal-sheet-link" href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=926192727" target="_blank" class="text-[11px] text-potato-blue hover:text-potato-cyan font-bold inline-flex items-center gap-1.5 underline underline-offset-2 ml-0 sm:ml-auto">
             <i class="fa-solid fa-file-excel text-emerald-600"></i>
             <span id="modal-sheet-row-text">Dòng trên Google Sheet</span>
           </a>
@@ -1743,7 +1607,7 @@
                 <p id="modal-media-title" class="text-xs font-bold text-slate-800 truncate">Link Google Drive</p>
               </div>
             </div>
-            <a id="modal-media-btn" href="#" target="_blank" class="flex-shrink-0 px-2.5 py-1.5 rounded-lg bg-white hover:bg-potato-cyan hover:text-white border border-slate-200 text-potato-navy font-bold text-[11px] flex items-center gap-1 transition-all shadow-2xs">
+            <a id="modal-media-btn" href="#" target="_blank" class="flex-shrink-0 px-2.5 py-1.5 rounded-lg bg-white hover:bg-potato-cyan hover:text-white border border-slate-200 text-potato-navy font-bold text-[11px] flex items-center gap-1 transition-all shadow-2xs min-h-[32px]">
               <span>Mở file</span>
               <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
             </a>
@@ -1760,7 +1624,7 @@
                 <p id="modal-postlink-title" class="text-xs font-bold text-slate-800 truncate">Đã phát hành trên mạng xã hội</p>
               </div>
             </div>
-            <a id="modal-postlink-btn" href="#" target="_blank" class="flex-shrink-0 px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] flex items-center gap-1 transition-all shadow-2xs">
+            <a id="modal-postlink-btn" href="#" target="_blank" class="flex-shrink-0 px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] flex items-center gap-1 transition-all shadow-2xs min-h-[32px]">
               <span>Xem bài</span>
               <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
             </a>
@@ -1773,7 +1637,7 @@
             <label class="block text-slate-400 font-extrabold uppercase text-[10px] tracking-wider">Nội Dung Bài Đăng (Caption Chuẩn Brand Voice)</label>
             <span class="text-[10px] text-slate-400 font-semibold" id="modal-char-count"></span>
           </div>
-          <div id="modal-caption-text" class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 text-slate-800 font-normal leading-relaxed whitespace-pre-line text-xs max-h-60 overflow-y-auto custom-scrollbar">
+          <div id="modal-caption-text" class="p-3.5 sm:p-4 rounded-2xl bg-slate-50 border border-slate-200/80 text-slate-800 font-normal leading-relaxed whitespace-pre-line text-xs max-h-52 sm:max-h-60 overflow-y-auto custom-scrollbar">
             Nội dung chi tiết bài viết...
           </div>
         </div>
@@ -1787,20 +1651,20 @@
       </div>
 
       <!-- Modal Footer with RBAC Actions -->
-      <div class="p-4 border-t border-slate-100 bg-slate-50 flex items-center justify-between">
-        <button onclick="copyModalCaption()" class="px-4 py-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 font-bold text-xs flex items-center gap-2 transition-all">
+      <div class="p-3 sm:p-4 border-t border-slate-100 bg-slate-50 flex items-center justify-between flex-wrap gap-2 flex-shrink-0">
+        <button onclick="copyModalCaption()" class="px-3.5 py-2 sm:px-4 sm:py-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 font-bold text-xs flex items-center gap-2 transition-all min-h-[36px] shadow-2xs">
           <i class="fa-regular fa-copy"></i>
           <span id="copy-btn-text">Sao chép nội dung</span>
         </button>
 
         <div class="flex items-center gap-2">
           <!-- Delete Button (Admin only) -->
-          <button id="modal-delete-btn" onclick="handleDeletePostAction()" class="px-3 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold text-xs transition-all">
+          <button id="modal-delete-btn" onclick="handleDeletePostAction()" class="w-9 h-9 sm:w-8 sm:h-8 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold text-xs transition-all flex items-center justify-center shadow-2xs" title="Xóa bài đăng">
             <i class="fa-solid fa-trash"></i>
           </button>
 
           <!-- Approve Button (Admin only) -->
-          <button id="modal-approve-btn" onclick="handleApprovePostAction()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-2 transition-all shadow-xs">
+          <button id="modal-approve-btn" onclick="handleApprovePostAction()" class="px-3.5 py-2 sm:px-4 sm:py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-2 transition-all shadow-xs min-h-[36px]">
             <i class="fa-solid fa-check"></i>
             <span>Duyệt Xuất Bản</span>
           </button>
@@ -2541,6 +2405,9 @@
       }
 
       currentTab = tabId;
+      if (typeof closeSidebarMobile === 'function') {
+        closeSidebarMobile();
+      }
 
       // 1. Hide all panels
       const panels = document.querySelectorAll('.module-panel');
@@ -2564,6 +2431,20 @@
         b.classList.remove('bg-potato-softBlue', 'text-potato-navy', 'font-bold');
         b.classList.add('text-slate-500');
       });
+
+      // Mobile bottom nav sync
+      const mobileBtns = document.querySelectorAll('#mobile-bottom-nav button');
+      mobileBtns.forEach(btn => {
+        btn.classList.remove('text-potato-cyan', 'font-bold');
+        btn.classList.add('text-slate-500');
+      });
+      const activeMobileBtn = (tabId.startsWith('settings-') || tabId === 'about')
+        ? document.getElementById('mobile-nav-settings')
+        : document.getElementById(`mobile-nav-${tabId}`);
+      if (activeMobileBtn) {
+        activeMobileBtn.classList.remove('text-slate-500');
+        activeMobileBtn.classList.add('text-potato-cyan', 'font-bold');
+      }
 
       // 3. Handle Cài đặt 1.1 Giới thiệu
       if (tabId === 'settings-intro') {
@@ -2653,18 +2534,6 @@
         targetBtn.classList.remove('text-slate-600');
       }
 
-      // Mobile bottom nav sync
-      const mobileBtns = document.querySelectorAll('#mobile-bottom-nav button');
-      mobileBtns.forEach(btn => {
-        btn.classList.remove('text-potato-cyan', 'font-bold');
-        btn.classList.add('text-slate-500');
-      });
-      const activeMobileBtn = document.getElementById(`mobile-nav-${tabId}`);
-      if (activeMobileBtn) {
-        activeMobileBtn.classList.remove('text-slate-500');
-        activeMobileBtn.classList.add('text-potato-cyan', 'font-bold');
-      }
-
       const mainElem = document.querySelector('main');
       if (mainElem) mainElem.scrollTop = 0;
 
@@ -2693,7 +2562,31 @@
 
     function toggleSidebarMobile() {
       const sidebar = document.getElementById('main-sidebar');
-      sidebar.classList.toggle('hidden');
+      const backdrop = document.getElementById('sidebar-mobile-backdrop');
+      if (!sidebar) return;
+      
+      const isClosed = sidebar.classList.contains('-translate-x-full');
+      if (isClosed) {
+        sidebar.classList.remove('-translate-x-full');
+        sidebar.classList.add('translate-x-0');
+        if (backdrop) backdrop.classList.remove('hidden');
+      } else {
+        sidebar.classList.add('-translate-x-full');
+        sidebar.classList.remove('translate-x-0');
+        if (backdrop) backdrop.classList.add('hidden');
+      }
+    }
+
+    function closeSidebarMobile() {
+      const sidebar = document.getElementById('main-sidebar');
+      const backdrop = document.getElementById('sidebar-mobile-backdrop');
+      if (sidebar) {
+        sidebar.classList.add('-translate-x-full');
+        sidebar.classList.remove('translate-x-0');
+      }
+      if (backdrop) {
+        backdrop.classList.add('hidden');
+      }
     }
 
         // ===================================================================
@@ -2853,6 +2746,11 @@
       if (!heading) return;
 
       const d = CALENDAR_STATE.currentDate;
+      const monthText = document.getElementById('calendar-current-month-text');
+      if (monthText) {
+        monthText.textContent = `Tháng ${d.getMonth() + 1}/${d.getFullYear()}`;
+      }
+
       if (CALENDAR_STATE.viewMode === 'day') {
         heading.innerHTML = `<span>${getDayOfWeekNameVN(d)} • ${formatDateDMY(d)}</span>`;
       } else if (CALENDAR_STATE.viewMode === 'three-days') {
@@ -2887,13 +2785,7 @@
               <i class="fa-regular fa-calendar-check"></i>
             </div>
             <h4 class="font-extrabold text-sm text-slate-800">Không có bài đăng nào lên lịch cho ngày ${formatDateDMY(targetDate)}</h4>
-            <p class="text-xs text-slate-500 max-w-md mx-auto">Bạn có thể chọn ngày khác hoặc bấm "Lên Lịch Bài" để bổ sung bài mới vào lịch đệm phát hành.</p>
-            <div class="pt-2">
-              <button onclick="handleCreatePostAction()" class="px-4 py-2 rounded-xl bg-potato-cyan hover:bg-potato-cyanHover text-white text-xs font-bold transition-all shadow-xs inline-flex items-center gap-2">
-                <i class="fa-solid fa-plus"></i>
-                <span>Lên lịch bài cho ngày này</span>
-              </button>
-            </div>
+            <p class="text-xs text-slate-500 max-w-md mx-auto">Bạn có thể chọn ngày khác để xem nội dung đã được lên lịch phát hành.</p>
           </div>
         `;
       } else {
@@ -3040,7 +2932,7 @@
           `).join('');
 
         return `
-          <div class="bg-white rounded-3xl border ${isToday ? 'border-potato-cyan ring-2 ring-potato-cyan/20' : 'border-slate-200/80'} p-4 flex flex-col space-y-3 shadow-subtle min-h-[400px]">
+          <div class="bg-white rounded-3xl border ${isToday ? 'border-potato-cyan ring-2 ring-potato-cyan/20' : 'border-slate-200/80'} p-4 flex flex-col space-y-3 shadow-subtle min-h-[160px] md:min-h-[400px]">
             <!-- Column Header -->
             <div class="flex items-center justify-between pb-3 border-b border-slate-100">
               <div>
@@ -3114,7 +3006,7 @@
           `).join('');
 
         return `
-          <div class="bg-white rounded-2xl border ${isToday ? 'border-potato-cyan ring-2 ring-potato-cyan/20' : 'border-slate-200/80'} p-3 flex flex-col space-y-2.5 shadow-2xs min-h-[360px]">
+          <div class="bg-white rounded-2xl border ${isToday ? 'border-potato-cyan ring-2 ring-potato-cyan/20' : 'border-slate-200/80'} p-3 flex flex-col space-y-2.5 shadow-2xs min-h-[140px] sm:min-h-[360px]">
             <!-- Day Column Header -->
             <div class="flex items-center justify-between pb-2 border-b border-slate-100">
               <div>
@@ -3160,9 +3052,11 @@
       if (startDayOfWeek === -1) startDayOfWeek = 6;
 
       const daysHeader = ['Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy', 'Chủ Nhật'];
-      const headerHtml = daysHeader.map(h => `
-        <div class="p-2 text-center font-extrabold text-slate-500 text-[11px] uppercase tracking-wider bg-slate-50 rounded-xl">
-          ${h}
+      const daysHeaderShort = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
+      const headerHtml = daysHeader.map((h, idx) => `
+        <div class="p-1.5 sm:p-2 text-center font-extrabold text-slate-500 text-[10px] sm:text-[11px] uppercase tracking-wider bg-slate-50 rounded-xl">
+          <span class="hidden sm:inline">${h}</span>
+          <span class="sm:hidden">${daysHeaderShort[idx]}</span>
         </div>
       `).join('');
 
@@ -3170,7 +3064,7 @@
       // Empty cells before 1st day
       for (let i = 0; i < startDayOfWeek; i++) {
         cells.push(`
-          <div class="min-h-[90px] p-2 bg-slate-50/50 rounded-2xl border border-slate-100/60 opacity-40"></div>
+          <div class="min-h-[80px] sm:min-h-[90px] p-1.5 sm:p-2 bg-slate-50/50 rounded-2xl border border-slate-100/60 opacity-40"></div>
         `);
       }
 
@@ -3191,7 +3085,7 @@
         const extraCount = dayPosts.length > 3 ? `<span class="text-[9px] font-bold text-slate-400 pl-1">+${dayPosts.length - 3} bài nữa</span>` : '';
 
         cells.push(`
-          <div onclick="jumpToDate(${year}, ${month}, ${day})" class="min-h-[105px] p-2 rounded-2xl bg-white border ${isToday ? 'border-potato-cyan ring-2 ring-potato-cyan/20' : 'border-slate-200/80'} hover:border-potato-cyan hover:shadow-card transition-all cursor-pointer flex flex-col justify-between group">
+          <div onclick="jumpToDate(${year}, ${month}, ${day})" class="min-h-[95px] sm:min-h-[105px] p-1.5 sm:p-2 rounded-2xl bg-white border ${isToday ? 'border-potato-cyan ring-2 ring-potato-cyan/20' : 'border-slate-200/80'} hover:border-potato-cyan hover:shadow-card transition-all cursor-pointer flex flex-col justify-between group">
             <div class="flex items-center justify-between">
               <span class="font-black text-xs ${isToday ? 'w-6 h-6 rounded-full bg-potato-cyan text-white flex items-center justify-center' : 'text-slate-700'}">
                 ${day}
@@ -3210,12 +3104,16 @@
       }
 
       return `
-        <div class="bg-white rounded-3xl border border-slate-200/80 p-4 sm:p-5 shadow-subtle space-y-3">
-          <div class="grid grid-cols-7 gap-2">
-            ${headerHtml}
-          </div>
-          <div class="grid grid-cols-7 gap-2">
-            ${cells.join('')}
+        <div class="bg-white rounded-3xl border border-slate-200/80 p-3 sm:p-5 shadow-subtle space-y-3">
+          <div class="overflow-x-auto custom-scrollbar pb-1">
+            <div class="min-w-[580px] sm:min-w-0 space-y-2 sm:space-y-3">
+              <div class="grid grid-cols-7 gap-1.5 sm:gap-2">
+                ${headerHtml}
+              </div>
+              <div class="grid grid-cols-7 gap-1.5 sm:gap-2">
+                ${cells.join('')}
+              </div>
+            </div>
           </div>
         </div>
       `;
@@ -3404,7 +3302,7 @@
         else if (channel === 'tiktok') heading.textContent = 'Kênh: TikTok Shorts';
         else if (channel === 'seo') heading.textContent = 'Kênh: Website SEO & Blog';
         else if (channel === 'zalo') heading.textContent = 'Kênh: Zalo OA CRM';
-        else heading.textContent = 'Lịch Đăng Đa Kênh Omnichannel (Tháng 9/2026)';
+        else heading.textContent = 'Lịch đăng đa kênh';
       }
 
       document.querySelectorAll('.channel-filter-btn').forEach(btn => {
