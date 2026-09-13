@@ -73,7 +73,13 @@ function mapRowToPost(r, idx) {
   let plat_color = 'text-blue-600 bg-blue-50 border-blue-200';
   let badge_color = 'bg-blue-600 text-white';
 
-  if (plat_lower.includes('tiktok')) {
+  if (plat_lower.includes('facebook') && plat_lower.includes('tiktok')) {
+    plat_key = 'facebook';
+    plat_name = 'Facebook & TikTok';
+    plat_icon = 'fa-brands fa-facebook-f';
+    plat_color = 'text-blue-600 bg-blue-50 border-blue-200';
+    badge_color = 'bg-blue-600 text-white';
+  } else if (plat_lower.includes('tiktok')) {
     plat_key = 'tiktok';
     plat_name = 'TikTok Shorts';
     plat_icon = 'fa-brands fa-tiktok';
