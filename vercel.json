@@ -1,5 +1,7 @@
 {
   "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": false,
   "rewrites": [
     {
       "source": "/api/calendar",
@@ -30,11 +32,31 @@
       "destination": "/student_score_report.html"
     },
     {
+      "source": "/score/",
+      "destination": "/student_score_report.html"
+    },
+    {
+      "source": "/bang-diem",
+      "destination": "/student_score_report.html"
+    },
+    {
+      "source": "/bang-diem/",
+      "destination": "/student_score_report.html"
+    },
+    {
       "source": "/survey",
       "destination": "/survey_tone_of_voice.html"
     },
     {
+      "source": "/survey/",
+      "destination": "/survey_tone_of_voice.html"
+    },
+    {
       "source": "/khao-sat",
+      "destination": "/survey_tone_of_voice.html"
+    },
+    {
+      "source": "/khao-sat/",
       "destination": "/survey_tone_of_voice.html"
     }
   ],
