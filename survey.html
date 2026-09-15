@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full bg-slate-50">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Khảo Sát Định Vị Tone of Voice - Potato English</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts: Be Vietnam Pro & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Be Vietnam Pro"', 'sans-serif'],
+            display: ['Outfit', '"Be Vietnam Pro"', 'sans-serif'],
+          },
+          colors: {
+            potato: {
+              cyan: '#00AEEF',
+              cyanHover: '#0098D4',
+              navy: '#003F75',
+              navyDark: '#00284D',
+              tan: '#D49A5B',
+              tanLight: '#FDF6EE',
+              tanBorder: '#E8CAAA',
+              red: '#E53935',
+              green: '#10B981',
+              cream: '#FAFAF8'
+            }
+          },
+          boxShadow: {
+            'card': '0 4px 20px -2px rgba(0, 63, 117, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.04)',
+            'card-hover': '0 12px 28px -4px rgba(0, 63, 117, 0.12), 0 4px 10px -2px rgba(0, 0, 0, 0.04)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+
+    /* Range slider custom styling */
+    input[type=range] {
+      accent-color: #00AEEF;
+    }
+
+    /* Radio Card Active State */
+    .option-card input[type="radio"]:checked + .option-box,
+    .option-card input[type="checkbox"]:checked + .option-box {
+      border-color: #00AEEF;
+      background-color: #F0F9FF;
+      box-shadow: 0 0 0 1px #00AEEF;
+    }
+    .option-card input[type="radio"]:checked + .option-box .radio-dot {
+      border-color: #00AEEF;
+      background-color: #00AEEF;
+    }
+    .option-card input[type="checkbox"]:checked + .option-box .checkbox-box {
+      border-color: #00AEEF;
+      background-color: #00AEEF;
+      color: white;
+    }
+
+    /* Smooth transitions */
+    .fade-in {
+      animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="min-h-full flex flex-col font-sans text-slate-800 bg-[#F8FAFC]">
+
+  <!-- TOPBAR HEADER (RULE[user_global] Invariant 1: Tiêu đề mục luôn nằm ở đầu tiên) -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/90 shadow-2xs">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+      
+      <!-- Brand Logo & Title -->
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-2.5 group">
+          <div class="w-10 h-10 rounded-xl bg-potato-navy flex items-center justify-center text-white shadow-sm group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-seedling text-potato-cyan text-lg"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="font-display font-black text-base sm:text-lg tracking-tight text-potato-navy">POTATO ENGLISH</span>
+              <span class="text-[10px] font-black uppercase tracking-wider bg-sky-100 text-sky-700 px-2 py-0.5 rounded-full border border-sky-200">KST-2026</span>
+            </div>
+            <p class="text-[11px] text-slate-400 font-medium">Bản Sắc Thương Hiệu & Tone of Voice</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Navigation & Sheet Link -->
+      <div class="flex items-center gap-2">
+        <a href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=602562886" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-xs font-bold border border-emerald-200/80 transition-all shadow-2xs"
+           title="Xem dữ liệu trực tiếp trên Google Sheet tab 'Khảo sát Tone of Voice'">
+          <i class="fa-solid fa-table text-emerald-600"></i>
+          <span>Google Sheet (#gid=602562886)</span>
+        </a>
+        <a href="index.html" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold border border-slate-200 transition-all">
+          <i class="fa-solid fa-arrow-left mr-1"></i>Về Webapp
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER (RULE[user_global] Invariant 4: pb-28 lg:pb-8 Safe Area) -->
+  <main class="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 pb-28 lg:pb-12">
+
+    <!-- ======================================================== -->
+    <!-- BƯỚC 1: GATEKEEPER - THÔNG TIN NGƯỜI TRẢ LỜI (BẮT BUỘC) -->
+    <!-- ======================================================== -->
+    <section id="step-identity" class="module-panel fade-in">
+      
+      <!-- Module Banner / Header -->
+      <div class="bg-gradient-to-br from-potato-navy to-slate-900 rounded-3xl p-6 sm:p-10 text-white shadow-card relative overflow-hidden mb-6">
+        <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-potato-cyan/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative z-10">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-potato-cyan text-xs font-bold mb-3 backdrop-blur-sm border border-white/10">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Cổng Định Danh Ý Kiến Ban Điều Hành</span>
+          </div>
+          <h1 class="font-display font-black text-2xl sm:text-4xl text-white tracking-tight leading-tight">
+            Khảo Sát Định Vị Tone of Voice
+          </h1>
+          <p class="text-xs sm:text-base text-slate-300 mt-2.5 max-w-2xl leading-relaxed">
+            Kính gửi Ban Điều Hành & Đội Ngũ Chuyên Môn Potato English. Phiếu khảo sát này sẽ xác lập chính xác 100% mạch cảm xúc, phong cách ngôn từ và các chuẩn mực nội dung đa kênh của thương hiệu.
+          </p>
+        </div>
+      </div>
+
+      <!-- Identity Card Gatekeeper -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-card">
+        <div class="flex items-center gap-3 pb-5 border-b border-slate-100">
+          <div class="w-10 h-10 rounded-2xl bg-sky-50 border border-sky-100 flex items-center justify-center text-potato-cyan">
+            <i class="fa-solid fa-user-check text-lg"></i>
+          </div>
+          <div>
+            <h2 class="text-base sm:text-lg font-black text-slate-900">Xác Nhận Người Thẩm Định</h2>
+            <p class="text-xs text-slate-500">Thông tin được gắn kèm với phiếu trả lời lưu vào Google Sheet (#gid=602562886)</p>
+          </div>
+        </div>
+
+        <form id="form-gatekeeper" onsubmit="handleEnterSurvey(event)" class="mt-6 space-y-5">
+          
+          <!-- Họ và tên -->
+          <div>
+            <label for="input-fullname" class="block text-xs sm:text-sm font-bold text-slate-700 mb-1.5">
+              Họ và tên của Anh/Chị <span class="text-rose-500">*</span>
+            </label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-solid fa-id-card"></i>
+              </span>
+              <input type="text" 
+                     id="input-fullname" 
+                     required 
+                     placeholder="VD: Anh Trí, Chị Đào, Cô Hà..." 
+                     class="w-full pl-10 pr-4 py-3 rounded-2xl border border-slate-200 text-sm font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:border-potato-cyan focus:ring-4 focus:ring-potato-cyan/10 transition-all bg-slate-50/50 hover:bg-white focus:bg-white"
+                     oninput="validateGatekeeper()" />
+            </div>
+          </div>
+
+          <!-- Chức vụ / Vai trò -->
+          <div>
+            <label for="input-role" class="block text-xs sm:text-sm font-bold text-slate-700 mb-1.5">
+              Chức vụ / Vai trò tại Potato English <span class="text-rose-500">*</span>
+            </label>
+            
+            <!-- Quick Chips -->
+            <div class="flex flex-wrap gap-2 mb-2.5">
+              <button type="button" onclick="selectRoleChip('Ban Sáng Lập / Ban Điều Hành (Co-Founder)')" class="role-chip text-xs px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-sky-50 hover:border-potato-cyan text-slate-600 font-semibold transition-all">
+                🌟 Co-Founder / Điều Hành
+              </button>
+              <button type="button" onclick="selectRoleChip('Giám Đốc Chuyên Môn / Học Thuật')" class="role-chip text-xs px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-sky-50 hover:border-potato-cyan text-slate-600 font-semibold transition-all">
+                🎓 Giám Đốc Chuyên Môn
+              </button>
+              <button type="button" onclick="selectRoleChip('Quản Lý Cơ Sở Phú Cường')" class="role-chip text-xs px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-sky-50 hover:border-potato-cyan text-slate-600 font-semibold transition-all">
+                🏫 Quản Lý CS Phú Cường
+              </button>
+              <button type="button" onclick="selectRoleChip('Quản Lý Cơ Sở Hưng Định')" class="role-chip text-xs px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-sky-50 hover:border-potato-cyan text-slate-600 font-semibold transition-all">
+                🏫 Quản Lý CS Hưng Định
+              </button>
+              <button type="button" onclick="selectRoleChip('Giáo Viên Chuyên Trách')" class="role-chip text-xs px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-sky-50 hover:border-potato-cyan text-slate-600 font-semibold transition-all">
+                👩‍🏫 Giáo Viên Chuyên Trách
+              </button>
+            </div>
+
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-solid fa-briefcase"></i>
+              </span>
+              <input type="text" 
+                     id="input-role" 
+                     required 
+                     placeholder="Chọn gợi ý phía trên hoặc nhập chức vụ..." 
+                     class="w-full pl-10 pr-4 py-3 rounded-2xl border border-slate-200 text-sm font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:border-potato-cyan focus:ring-4 focus:ring-potato-cyan/10 transition-all bg-slate-50/50 hover:bg-white focus:bg-white"
+                     oninput="validateGatekeeper()" />
+            </div>
+          </div>
+
+          <!-- Lời cam kết bảo mật & minh bạch -->
+          <div class="p-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 flex items-start gap-3">
+            <i class="fa-solid fa-circle-info text-amber-600 text-base mt-0.5"></i>
+            <p class="text-xs text-amber-800 leading-relaxed font-medium">
+              Sau khi điền tên và chức vụ, phiếu khảo sát sẽ mở khóa 12 câu hỏi chiến lược. Mọi lựa chọn của bạn sẽ được ghi nhận minh bạch vào dòng dữ liệu riêng trên Google Sheet chính thức của Potato English.
+            </p>
+          </div>
+
+          <!-- Nút bắt đầu -->
+          <div class="pt-2">
+            <button type="submit" 
+                    id="btn-start-survey" 
+                    disabled
+                    class="w-full py-4 rounded-2xl font-extrabold text-sm text-white bg-slate-300 cursor-not-allowed transition-all duration-200 shadow-md flex items-center justify-center gap-2">
+              <span>Bắt Đầu Trả Lời Khảo Sát</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+
+    <!-- ======================================================== -->
+    <!-- BƯỚC 2: GIAO DIỆN 12 CÂU HỎI KHẢO SÁT CHUYÊN SÂU -->
+    <!-- ======================================================== -->
+    <section id="step-questions" class="module-panel hidden fade-in space-y-6">
+
+      <!-- Sticky Subheader with Responder Info & Progress -->
+      <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/90 shadow-2xs flex flex-col sm:flex-row items-center justify-between gap-4 sticky top-20 z-30 backdrop-blur-md bg-white/95">
+        <div class="flex items-center gap-3 w-full sm:w-auto">
+          <div class="w-10 h-10 rounded-xl bg-potato-cyan/10 text-potato-cyan flex items-center justify-center text-lg flex-shrink-0">
+            <i class="fa-solid fa-user-pen"></i>
+          </div>
+          <div class="truncate">
+            <div class="flex items-center gap-2">
+              <span id="display-fullname" class="font-extrabold text-sm text-slate-800 truncate">Họ và tên</span>
+              <span id="display-role" class="text-[11px] font-bold bg-sky-100 text-sky-800 px-2.5 py-0.5 rounded-full border border-sky-200 truncate max-w-[180px]">Chức vụ</span>
+            </div>
+            <p class="text-[11px] text-slate-400">Phiếu khảo sát cá nhân hóa</p>
+          </div>
+        </div>
+
+        <div class="w-full sm:w-56 flex flex-col gap-1.5">
+          <div class="flex items-center justify-between text-xs font-bold text-slate-600">
+            <span>Tiến độ khảo sát</span>
+            <span id="progress-percent" class="text-potato-cyan">0%</span>
+          </div>
+          <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+            <div id="progress-bar-fill" class="h-full bg-potato-cyan rounded-full transition-all duration-300 w-0"></div>
+          </div>
+        </div>
+      </div>
+
+      <form id="form-survey" onsubmit="handleSubmitSurvey(event)" class="space-y-6">
+
+        <!-- NHÓM 1: HÌNH MẪU & VỊ THẾ PHÁT NGÔN -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-card">
+          <div class="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-potato-cyan mb-2">
+            <i class="fa-solid fa-compass"></i>
+            <span>PHẦN 1: HÌNH MẪU THƯƠNG HIỆU & VỊ THẾ PHÁT NGÔN</span>
+          </div>
+          <h3 class="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+            1. Nếu Potato English là một con người, Potato sẽ là ai?
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1 mb-5">
+            Chọn hình tượng mô tả chính xác nhất tính cách mà Potato English muốn xây dựng trong tâm trí phụ huynh và học sinh.
+          </p>
+
+          <div class="grid grid-cols-1 gap-3">
+            
+            <label class="option-card cursor-pointer">
+              <input type="radio" name="q1_archetype" value="The Caregiver & Friend (Người Nuôi Dưỡng & Đồng Hành Ấm Áp)" class="hidden" checked onchange="updateSurveyProgress()" />
+              <div class="option-box p-4 sm:p-5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all flex items-start gap-4">
+                <div class="radio-dot w-5 h-5 rounded-full border-2 border-slate-300 mt-0.5 flex-shrink-0 transition-all"></div>
+                <div class="flex-1">
+                  <div class="flex items-center gap-2">
+                    <span class="font-extrabold text-sm sm:text-base text-slate-800">A. Người nuôi dưỡng & Người bạn đồng hành (The Caregiver & Friend)</span>
+                    <span class="text-[10px] font-black bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-md uppercase">Khuyến nghị</span>
+                  </div>
+                  <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                    Mộc mạc, ấm áp, khiêm tốn, kiên nhẫn, gần gũi như người thân trong gia đình đón con mỗi giờ tan lớp. Tôn trọng từng nỗ lực nhỏ bé và nụ cười của con.
+                  </p>
+                </div>
+              </div>
+            </label>
+
+            <label class="option-card cursor-pointer">
+              <input type="radio" name="q1_archetype" value="The Sage (Người Thầy Uyên Bác & Chuẩn Mực)" class="hidden" onchange="updateSurveyProgress()" />
+              <div class="option-box p-4 sm:p-5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all flex items-start gap-4">
+                <div class="radio-dot w-5 h-5 rounded-full border-2 border-slate-300 mt-0.5 flex-shrink-0 transition-all"></div>
+                <div class="flex-1">
+                  <span class="font-extrabold text-sm sm:text-base text-slate-800">B. Người thầy uyên bác & chuẩn mực (The Sage)</span>
+                  <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                    Đậm chất học thuật, ngôn từ chỉn chu sư phạm, phân tích sâu các phương pháp giáo dục Cambridge, CEFR, thể hiện uy tín chuyên môn cao.
+                  </p>
+                </div>
+              </div>
+            </label>
+
+            <label class="option-card cursor-pointer">
+              <input type="radio" name="q1_archetype" value="The Inspirer (Người Truyền Cảm Hứng & Tràn Đầy Năng Lượng)" class="hidden" onchange="updateSurveyProgress()" />
+              <div class="option-box p-4 sm:p-5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all flex items-start gap-4">
+                <div class="radio-dot w-5 h-5 rounded-full border-2 border-slate-300 mt-0.5 flex-shrink-0 transition-all"></div>
+                <div class="flex-1">
+                  <span class="font-extrabold text-sm sm:text-base text-slate-800">C. Người truyền cảm hứng sôi nổi (The Inspirer)</span>
+                  <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                    Hào hứng, bùng nổ năng lượng, nhiều trò chơi hoạt náo, liên tục tạo cảm hứng vui nhộn và thử thách hào hứng cho các bé.
+                  </p>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <!-- Câu 2 -->
+          <div class="mt-8 pt-6 border-t border-slate-100">
+            <h3 class="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+              2. Vị thế phát ngôn chính của Potato English trên Fanpage là gì?
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1 mb-5">
+              Kênh truyền thông đóng vai trò gì trong mắt người đọc?
+            </p>
+
+            <div class="grid grid-cols-1 gap-3">
+              <label class="option-card cursor-pointer">
+                <input type="radio" name="q2_pov" value="Nhật Ký Lớp Học Thực Tế (Proof of Life)" class="hidden" checked onchange="updateSurveyProgress()" />
+                <div class="option-box p-4 sm:p-5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all flex items-start gap-4">
+                  <div class="radio-dot w-5 h-5 rounded-full border-2 border-slate-300 mt-0.5 flex-shrink-0 transition-all"></div>
+                  <div class="flex-1">
+                    <div class="flex items-center gap-2">
+                      <span class="font-extrabold text-sm sm:text-base text-slate-800">A. Cuốn nhật ký lớp học thực tế (Proof of Life)</span>
+                      <span class="text-[10px] font-black bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-md uppercase">Chỉ đạo Anh Trí</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                      Lùi lại phía sau, lặng lẽ quan sát và ghi nhận nụ cười, giờ học thật, tiến bộ thật của con. Không kể lể về bản thân trung tâm, không quảng cáo ồ ạt.
+                    </p>
+                  </div>
+                </div>
+              </label>
+
+              <label class="option-card cursor-pointer">
+                <input type="radio" name="q2_pov" value="Người Đồng Hành Cùng Ba Mẹ (Parenting Companion)" class="hidden" onchange="updateSurveyProgress()" />
+                <div class="option-box p-4 sm:p-5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all flex items-start gap-4">
+                  <div class="radio-dot w-5 h-5 rounded-full border-2 border-slate-300 mt-0.5 flex-shrink-0 transition-all"></div>
+                  <div class="flex-1">
+                    <span class="font-extrabold text-sm sm:text-base text-slate-800">B. Người đồng hành cùng ba mẹ (Parenting Companion)</span>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                      Chuyên chia sẻ góc nhìn nuôi dạy con, gỡ rối căng thẳng áp lực học tập và cung cấp tài liệu học tiếng Anh tại nhà.
+                    </p>
+                  </div>
+                </div>
+              </label>
+
+              <label class="option-card cursor-pointer">
+                <input type="radio" name="q2_pov" value="Tiếng Nói Yêu Thương Của Thầy Cô Giáo" class="hidden" onchange="updateSurveyProgress()" />
+                <div class="option-box p-4 sm:p-5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all flex items-start gap-4">
+                  <div class="radio-dot w-5 h-5 rounded-full border-2 border-slate-300 mt-0.5 flex-shrink-0 transition-all"></div>
+                  <div class="flex-1">
+                    <span class="font-extrabold text-sm sm:text-base text-slate-800">C. Tiếng nói yêu thương của thầy cô giáo</span>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                      Chia sẻ trực tiếp từ góc nhìn của giáo viên đứng lớp: sự tỉ mỉ, tình thương và những khoảnh khắc xúc động với từng bạn học trò.
+                    </p>
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- NHÓM 2: THƯỚC ĐO ÂM SẮC & ĐỘ DÀI BÀI VIẾT -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-card">
+          <div class="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-potato-cyan mb-2">
+            <i class="fa-solid fa-sliders"></i>
+            <span>PHẦN 2: THƯỚC ĐO ÂM SẮC & ĐỘ DÀI BÀI VIẾT</span>
+          </div>
+
+          <!-- Câu 3: Mức độ thân mật -->
+          <div class="mb-8">
+            <div class="flex items-center justify-between gap-2">
+              <h3 class="text-base sm:text-lg font-black text-slate-900">
+                3. Thước đo Mức độ Thân Mật (Intimacy Level)
+              </h3>
+              <span id="slider-val-intimacy" class="text-xs font-black px-3 py-1 rounded-xl bg-sky-100 text-sky-800 border border-sky-200">
+                Mức 3: Thân mật như người thân trong gia đình
+              </span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1 mb-4">
+              Kéo thanh trượt để chọn mức độ từ Trịnh trọng chuẩn mực (1) đến Rất thân mật, gần gũi (5).
+            </p>
+
+            <input type="range" 
+                   name="q3_intimacy" 
+                   id="range-intimacy" 
+                   min="1" max="5" value="3" step="1" 
+                   class="w-full h-2.5 bg-slate-200 rounded-lg cursor-pointer"
+                   oninput="handleSliderChange('intimacy', this.value)" />
+
+            <div class="flex justify-between text-[11px] font-semibold text-slate-400 mt-2 px-1">
+              <span>1. Trang trọng, mực thước</span>
+              <span>2. Lịch sự, nhã nhặn</span>
+              <span class="text-potato-navy font-bold">3. Ấm áp như gia đình</span>
+              <span>4. Tự nhiên đời thường</span>
+              <span>5. Suồng sã, dí dỏm</span>
+            </div>
+          </div>
+
+          <!-- Câu 4: Mức độ Học thuật -->
+          <div class="mb-8 pt-6 border-t border-slate-100">
+            <div class="flex items-center justify-between gap-2">
+              <h3 class="text-base sm:text-lg font-black text-slate-900">
+                4. Thước đo Tính Bình Dân vs Học Thuật Chuyên Sâu
+              </h3>
+              <span id="slider-val-academic" class="text-xs font-black px-3 py-1 rounded-xl bg-amber-100 text-amber-900 border border-amber-200">
+                Mức 1: Hoàn toàn bình dân, mộc mạc, dễ hiểu
+              </span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1 mb-4">
+              Kéo thanh trượt để chọn mức độ ưu tiên giữa cách diễn đạt mộc mạc và thuật ngữ giáo dục.
+            </p>
+
+            <input type="range" 
+                   name="q4_academic" 
+                   id="range-academic" 
+                   min="1" max="5" value="1" step="1" 
+                   class="w-full h-2.5 bg-slate-200 rounded-lg cursor-pointer"
+                   oninput="handleSliderChange('academic', this.value)" />
+
+            <div class="flex justify-between text-[11px] font-semibold text-slate-400 mt-2 px-1">
+              <span class="text-amber-800 font-bold">1. Bình dân, mộc mạc</span>
+              <span>2. Dễ hiểu, ít thuật ngữ</span>
+              <span>3. Cân bằng trải nghiệm</span>
+              <span>4. Chuẩn mực Cambridge</span>
+              <span>5. Chuyên sâu học thuật</span>
+            </div>
+          </div>
+
+          <!-- Câu 5: Độ dài bài viết FB -->
+          <div class="pt-6 border-t border-slate-100">
+            <h3 class="text-base sm:text-lg font-black text-slate-900">
+              5. Độ dài và phong cách bài viết Fanpage chuẩn:
+            </h3>
+            <p class="text-xs text-slate-500 mt-1 mb-4">
+              Người xem lướt mạng xã hội rất nhanh. Quy chuẩn nào phản ánh đúng chiến lược nội dung của cơ sở?
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <label class="option-card cursor-pointer">
+                <input type="radio" name="q5_length" value="Micro-copy siêu ngắn dưới 80 từ" class="hidden" checked onchange="updateSurveyProgress()" />
+                <div class="option-box p-4 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all h-full flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="font-extrabold text-sm text-slate-800">Dưới 80 từ</span>
+                      <span class="text-[9px] font-black bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">Chỉ đạo Chị Đào</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                      Micro-copywriting cực kỳ súc tích. Đọc trọn vẹn trong 5 giây mà không cần bấm "Xem thêm". Học viên là trung tâm duy nhất.
+                    </p>
+                  </div>
+                  <div class="radio-dot w-4 h-4 rounded-full border-2 border-slate-300 mt-3 self-end"></div>
+                </div>
+              </label>
+
+              <label class="option-card cursor-pointer">
+                <input type="radio" name="q5_length" value="Vừa phải (100 - 150 từ)" class="hidden" onchange="updateSurveyProgress()" />
+                <div class="option-box p-4 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all h-full flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="font-extrabold text-sm text-slate-800">100 - 150 từ</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                      Kể một câu chuyện nhỏ (Storytelling) về hành trình của con, có mở đầu, khoảnh khắc đáng yêu và lời kết ấm áp.
+                    </p>
+                  </div>
+                  <div class="radio-dot w-4 h-4 rounded-full border-2 border-slate-300 mt-3 self-end"></div>
+                </div>
+              </label>
+
+              <label class="option-card cursor-pointer">
+                <input type="radio" name="q5_length" value="Bài viết dài chiều sâu (250+ từ)" class="hidden" onchange="updateSurveyProgress()" />
+                <div class="option-box p-4 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all h-full flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="font-extrabold text-sm text-slate-800">250+ từ</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                      Phân tích sâu, tâm sự dài dành riêng cho các bài chuyên đề nuôi dạy con, giải tỏa áp lực học ngoại ngữ.
+                    </p>
+                  </div>
+                  <div class="radio-dot w-4 h-4 rounded-full border-2 border-slate-300 mt-3 self-end"></div>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- NHÓM 3: NGUYÊN TẮC XƯNG HÔ & ĐẠI TỪ -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-card">
+          <div class="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-potato-cyan mb-2">
+            <i class="fa-solid fa-comments"></i>
+            <span>PHẦN 3: NGUYÊN TẮC XƯNG HÔ & NGÔI KỂ</span>
+          </div>
+
+          <!-- Câu 6: Xưng hô với Phụ huynh -->
+          <div class="mb-6">
+            <h3 class="text-base sm:text-lg font-black text-slate-900 mb-1">
+              6. Khi gọi người đọc / phụ huynh trên Fanpage & mạng xã hội:
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mt-3">
+              <label class="option-card cursor-pointer">
+                <input type="radio" name="q6_parents" value="Ba mẹ" class="hidden" checked onchange="updateSurveyProgress()" />
+                <div class="option-box p-3.5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all flex items-center justify-between">
+                  <span class="font-extrabold text-sm text-slate-800">"Ba mẹ" (Ấm áp, thân thương)</span>
+                  <div class="radio-dot w-4 h-4 rounded-full border-2 border-slate-300"></div>
+                </div>
+              </label>
+              <label class="option-card cursor-pointer">
+                <input type="radio" name="q6_parents" value="Quý phụ huynh" class="hidden" onchange="updateSurveyProgress()" />
+                <div class="option-box p-3.5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all flex items-center justify-between">
+                  <span class="font-extrabold text-sm text-slate-800">"Quý phụ huynh" (Lịch thiệp)</span>
+                  <div class="radio-dot w-4 h-4 rounded-full border-2 border-slate-300"></div>
+                </div>
+              </label>
+              <label class="option-card cursor-pointer">
+                <input type="radio" name="q6_parents" value="Ba mẹ / Phụ huynh (Linh hoạt)" class="hidden" onchange="updateSurveyProgress()" />
+                <div class="option-box p-3.5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all flex items-center justify-between">
+                  <span class="font-extrabold text-sm text-slate-800">"Ba mẹ / Phụ huynh"</span>
+                  <div class="radio-dot w-4 h-4 rounded-full border-2 border-slate-300"></div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Câu 7: Tự xưng về phía cơ sở -->
+          <div class="mb-6 pt-5 border-t border-slate-100">
+            <div class="flex items-center gap-2 mb-1">
+              <h3 class="text-base sm:text-lg font-black text-slate-900">
+                7. Khi tự xưng về phía Potato English:
+              </h3>
+              <span class="text-[10px] font-black bg-rose-100 text-rose-800 px-2 py-0.5 rounded uppercase">Cấm từ "Trung tâm"</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mt-3">
+              <label class="option-card cursor-pointer">
+                <input type="radio" name="q7_potato" value="Thầy cô Potato English" class="hidden" checked onchange="updateSurveyProgress()" />
+                <div class="option-box p-3.5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all flex items-center justify-between">
+                  <span class="font-extrabold text-sm text-slate-800">"Thầy cô Potato English"</span>
+                  <div class="radio-dot w-4 h-4 rounded-full border-2 border-slate-300"></div>
+                </div>
+              </label>
+              <label class="option-card cursor-pointer">
+                <input type="radio" name="q7_potato" value="Lớp học Potato English" class="hidden" onchange="updateSurveyProgress()" />
+                <div class="option-box p-3.5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all flex items-center justify-between">
+                  <span class="font-extrabold text-sm text-slate-800">"Lớp học Potato English"</span>
+                  <div class="radio-dot w-4 h-4 rounded-full border-2 border-slate-300"></div>
+                </div>
+              </label>
+              <label class="option-card cursor-pointer">
+                <input type="radio" name="q7_potato" value="Nhà Khoai Tây / Potato English" class="hidden" onchange="updateSurveyProgress()" />
+                <div class="option-box p-3.5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all flex items-center justify-between">
+                  <span class="font-extrabold text-sm text-slate-800">"Nhà Khoai Tây"</span>
+                  <div class="radio-dot w-4 h-4 rounded-full border-2 border-slate-300"></div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Câu 8: Cách gọi học viên -->
+          <div class="pt-5 border-t border-slate-100">
+            <h3 class="text-base sm:text-lg font-black text-slate-900 mb-1">
+              8. Cách xưng gọi học viên trong các bài viết:
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mt-3">
+              <label class="option-card cursor-pointer">
+                <input type="radio" name="q8_students" value="Các bạn nhỏ / Các con" class="hidden" checked onchange="updateSurveyProgress()" />
+                <div class="option-box p-3.5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all flex items-center justify-between">
+                  <span class="font-extrabold text-sm text-slate-800">"Các bạn nhỏ / Các con"</span>
+                  <div class="radio-dot w-4 h-4 rounded-full border-2 border-slate-300"></div>
+                </div>
+              </label>
+              <label class="option-card cursor-pointer">
+                <input type="radio" name="q8_students" value="Học viên" class="hidden" onchange="updateSurveyProgress()" />
+                <div class="option-box p-3.5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all flex items-center justify-between">
+                  <span class="font-extrabold text-sm text-slate-800">"Học viên / Bạn [Tên]"</span>
+                  <div class="radio-dot w-4 h-4 rounded-full border-2 border-slate-300"></div>
+                </div>
+              </label>
+              <label class="option-card cursor-pointer">
+                <input type="radio" name="q8_students" value="Các siêu nhí / Mầm non" class="hidden" onchange="updateSurveyProgress()" />
+                <div class="option-box p-3.5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all flex items-center justify-between">
+                  <span class="font-extrabold text-sm text-slate-800">"Các bạn học trò"</span>
+                  <div class="radio-dot w-4 h-4 rounded-full border-2 border-slate-300"></div>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- NHÓM 4: XÁC NHẬN RANH GIỚI & VÙNG CẤM KỴ -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-card">
+          <div class="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-rose-500 mb-2">
+            <i class="fa-solid fa-ban"></i>
+            <span>PHẦN 4: XÁC NHẬN RANH GIỚI BẮT BUỘC (CHECKLIST VÙNG CẤM)</span>
+          </div>
+          <h3 class="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+            9. Anh/Chị xác nhận áp dụng 100% các ranh giới cấm kỵ sau:
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1 mb-5">
+            Đánh dấu các nguyên tắc bắt buộc mà mọi thành viên và hệ thống AI đều phải tuân thủ nghiêm ngặt.
+          </p>
+
+          <div class="space-y-3">
+            <label class="option-card cursor-pointer block">
+              <input type="checkbox" name="q9_taboos" value="CẤM từ Trung tâm (thay bằng Potato English / Lớp học)" class="hidden" checked onchange="updateSurveyProgress()" />
+              <div class="option-box p-4 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all flex items-start gap-3.5">
+                <div class="checkbox-box w-5 h-5 rounded-lg border-2 border-slate-300 flex items-center justify-center text-xs mt-0.5 flex-shrink-0 transition-all">
+                  <i class="fa-solid fa-check"></i>
+                </div>
+                <div>
+                  <span class="font-extrabold text-xs sm:text-sm text-slate-800">🚫 CẤM SỬ DỤNG TỪ "TRUNG TÂM"</span>
+                  <p class="text-xs text-slate-500 mt-0.5">Do định danh công ty, tuyệt đối không dùng: "Trung tâm Potato English", "Tại trung tâm". Thay bằng: <strong>Potato English, Lớp học Potato English, Tại 2 cơ sở Phú Cường & Hưng Định</strong>.</p>
+                </div>
+              </div>
+            </label>
+
+            <label class="option-card cursor-pointer block">
+              <input type="checkbox" name="q9_taboos" value="CẤM từ ngữ FOMO / Thần đồng hóa / Bảng vàng danh giá" class="hidden" checked onchange="updateSurveyProgress()" />
+              <div class="option-box p-4 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all flex items-start gap-3.5">
+                <div class="checkbox-box w-5 h-5 rounded-lg border-2 border-slate-300 flex items-center justify-center text-xs mt-0.5 flex-shrink-0 transition-all">
+                  <i class="fa-solid fa-check"></i>
+                </div>
+                <div>
+                  <span class="font-extrabold text-xs sm:text-sm text-slate-800">🚫 CẤM TỪ NGỮ FOMO & THẦN THÁNH HÓA</span>
+                  <p class="text-xs text-slate-500 mt-0.5">Cấm: "Thần đồng", "Vườn sao", "Bảng vàng danh giá", "Xuất sắc vượt trội", "Độ tuổi vàng bỏ lỡ sẽ tụt hậu". Không gây hoang mang tâm lý cho cha mẹ.</p>
+                </div>
+              </div>
+            </label>
+
+            <label class="option-card cursor-pointer block">
+              <input type="checkbox" name="q9_taboos" value="CẤM giục giã tuyển sinh / Đăng ký ngay kẻo lỡ" class="hidden" checked onchange="updateSurveyProgress()" />
+              <div class="option-box p-4 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all flex items-start gap-3.5">
+                <div class="checkbox-box w-5 h-5 rounded-lg border-2 border-slate-300 flex items-center justify-center text-xs mt-0.5 flex-shrink-0 transition-all">
+                  <i class="fa-solid fa-check"></i>
+                </div>
+                <div>
+                  <span class="font-extrabold text-xs sm:text-sm text-slate-800">🚫 CẤM KÊU GỌI BÁN HÀNG GIỤC GIÃ TRÊN POST THƯỜNG NHẬT</span>
+                  <p class="text-xs text-slate-500 mt-0.5">Không dùng: "Đăng ký ngay kẻo lỡ", "Ưu đãi khủng", "Inbox giữ suất". Thay bằng lời nhắn gửi ấm áp tự nhiên (Warm Sign-off).</p>
+                </div>
+              </div>
+            </label>
+
+            <label class="option-card cursor-pointer block">
+              <input type="checkbox" name="q9_taboos" value="TRIỆT TIÊU LỜI KÊU GỌI CHỈ ĐẠO (Zero Directive CTA)" class="hidden" checked onchange="updateSurveyProgress()" />
+              <div class="option-box p-4 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all flex items-start gap-3.5">
+                <div class="checkbox-box w-5 h-5 rounded-lg border-2 border-slate-300 flex items-center justify-center text-xs mt-0.5 flex-shrink-0 transition-all">
+                  <i class="fa-solid fa-check"></i>
+                </div>
+                <div>
+                  <span class="font-extrabold text-xs sm:text-sm text-slate-800">🚫 TRIỆT TIÊU LỜI KÊU GỌI CHỈ ĐẠO (ZERO DIRECTIVE CTA)</span>
+                  <p class="text-xs text-slate-500 mt-0.5">Loại bỏ các câu chỉ huy cơ học như: "👉 Mời ba mẹ bấm vào từng ảnh...", "Hãy xem ngay...". Để phụ huynh tương tác hoàn toàn tự nhiên.</p>
+                </div>
+              </div>
+            </label>
+
+            <label class="option-card cursor-pointer block">
+              <input type="checkbox" name="q9_taboos" value="BỎ KHỐI HOTLINE VÀ ĐỊA CHỈ DÀI DÒNG TRÊN BÀI POST FACEBOOK" class="hidden" checked onchange="updateSurveyProgress()" />
+              <div class="option-box p-4 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all flex items-start gap-3.5">
+                <div class="checkbox-box w-5 h-5 rounded-lg border-2 border-slate-300 flex items-center justify-center text-xs mt-0.5 flex-shrink-0 transition-all">
+                  <i class="fa-solid fa-check"></i>
+                </div>
+                <div>
+                  <span class="font-extrabold text-xs sm:text-sm text-slate-800">🚫 BỎ KHỐI HOTLINE & ĐỊA CHỈ DÀI DÒNG DƯỚI ĐÁY BÀI POST FB</span>
+                  <p class="text-xs text-slate-500 mt-0.5">Trang mạng xã hội đã có nút gọi và địa chỉ trên profile, không dán khối boilerplate dài dòng gây cảm giác bài rao vặt.</p>
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- NHÓM 5: BENCHMARK TEST CASE THỰC TẾ -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-card">
+          <div class="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-potato-cyan mb-2">
+            <i class="fa-solid fa-flask"></i>
+            <span>PHẦN 5: A/B TESTING QUA TÌNH HUỐNG THỰC TẾ (BENCHMARK)</span>
+          </div>
+
+          <!-- Câu 10 -->
+          <div class="mb-8">
+            <h3 class="text-base sm:text-lg font-black text-slate-900 mb-1">
+              10. Tình huống: Bài đăng vinh danh bạn nhỏ có nỗ lực tiến bộ trong tháng
+            </h3>
+            <p class="text-xs text-slate-500 mb-4">Anh/Chị ưng ý phong cách văn phong nào nhất?</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <label class="option-card cursor-pointer">
+                <input type="radio" name="q10_top_student" value="Phương án 1 (Phong cách công nghiệp / Bảng vàng)" class="hidden" onchange="updateSurveyProgress()" />
+                <div class="option-box p-4 sm:p-5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all h-full flex flex-col justify-between bg-slate-50/50">
+                  <div>
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="font-extrabold text-xs text-slate-700">Phương án 1: Kiểu Truyền Thống</span>
+                      <span class="text-[9px] font-bold bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded">Công nghiệp</span>
+                    </div>
+                    <blockquote class="text-xs text-slate-600 italic bg-white p-3 rounded-xl border border-slate-200 leading-relaxed">
+                      "BẢNG VÀNG VINH DANH TOP HỌC VIÊN XUẤT SẮC THÁNG 9! Trung tâm Potato English tự hào chúc mừng bạn Minh Khang đã xuất sắc đạt điểm tuyệt đối. Potato English luôn là bệ phóng tài năng giúp con tỏa sáng. Ba mẹ hãy nhanh tay đăng ký để con gia nhập bảng vàng nhé!"
+                    </blockquote>
+                  </div>
+                  <div class="radio-dot w-4 h-4 rounded-full border-2 border-slate-300 mt-3 self-end"></div>
+                </div>
+              </label>
+
+              <label class="option-card cursor-pointer">
+                <input type="radio" name="q10_top_student" value="Phương án 2 (Bình dị, ấm áp, nỗ lực nhỏ, <60 từ)" class="hidden" checked onchange="updateSurveyProgress()" />
+                <div class="option-box p-4 sm:p-5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all h-full flex flex-col justify-between bg-sky-50/30">
+                  <div>
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="font-extrabold text-xs text-potato-navy">Phương án 2: Phong Cách Potato</span>
+                      <span class="text-[9px] font-black bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">Khuyến nghị</span>
+                    </div>
+                    <blockquote class="text-xs text-slate-700 italic bg-white p-3 rounded-xl border border-sky-100 leading-relaxed shadow-2xs">
+                      "NHỮNG NỖ LỰC NHỎ TỎA SÁNG 🥔✨<br/>
+                      Từng rụt rè những ngày đầu, hôm nay Khang đã tự tin đọc to trọn vẹn mẩu chuyện về gia đình trước cả lớp.<br/>
+                      Tự hào về sự kiên trì và nụ cười rạng rỡ của con mỗi ngày đến lớp! ❤️<br/>
+                      #PotatoEnglish #NỗLựcMỗiNgày #HappyJunior"
+                    </blockquote>
+                  </div>
+                  <div class="radio-dot w-4 h-4 rounded-full border-2 border-slate-300 mt-3 self-end"></div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Câu 11 -->
+          <div class="pt-6 border-t border-slate-100">
+            <h3 class="text-base sm:text-lg font-black text-slate-900 mb-1">
+              11. Tình huống: Lời kết (Sign-off) cuối một bài post về hoạt động lớp mầm non
+            </h3>
+            <p class="text-xs text-slate-500 mb-4">Cách kết bài nào chạm cảm xúc cha mẹ hơn?</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <label class="option-card cursor-pointer">
+                <input type="radio" name="q11_signoff" value="Phương án A (Chốt sale tuyển sinh dồn dập)" class="hidden" onchange="updateSurveyProgress()" />
+                <div class="option-box p-4 sm:p-5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all h-full flex flex-col justify-between bg-slate-50/50">
+                  <div>
+                    <span class="font-extrabold text-xs text-slate-700 block mb-2">Phương án A: Tuyển Sinh Trực Diện</span>
+                    <blockquote class="text-xs text-slate-600 italic bg-white p-3 rounded-xl border border-slate-200 leading-relaxed">
+                      "📌 Đăng ký ngay lớp Friendly Kid cho bé 4-5 tuổi. Hotline: 0918 671 981. Cơ sở 1: 37 Ngô Quyền, Cơ sở 2: 9 KP Hưng Phước. Nhắn tin để giữ chỗ ngay hôm nay kẻo hết suất!"
+                    </blockquote>
+                  </div>
+                  <div class="radio-dot w-4 h-4 rounded-full border-2 border-slate-300 mt-3 self-end"></div>
+                </div>
+              </label>
+
+              <label class="option-card cursor-pointer">
+                <input type="radio" name="q11_signoff" value="Phương án B (Warm Sign-off - Ấm áp tự nhiên)" class="hidden" checked onchange="updateSurveyProgress()" />
+                <div class="option-box p-4 sm:p-5 rounded-2xl border-2 border-slate-200 hover:border-slate-300 transition-all h-full flex flex-col justify-between bg-sky-50/30">
+                  <div>
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="font-extrabold text-xs text-potato-navy">Phương án B: Lời Nhắn Gửi Ấm Áp</span>
+                      <span class="text-[9px] font-black bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">Khuyến nghị</span>
+                    </div>
+                    <blockquote class="text-xs text-slate-700 italic bg-white p-3 rounded-xl border border-sky-100 leading-relaxed shadow-2xs">
+                      "Một buổi chiều rộn rã tiếng cười của các bạn nhỏ tại lớp học Phú Cường. Hẹn gặp lại các con vào buổi học tới nhé! 🥔🌿<br/>
+                      #PotatoEnglish #FriendlyKid #TuTinNoiTiengAnh"
+                    </blockquote>
+                  </div>
+                  <div class="radio-dot w-4 h-4 rounded-full border-2 border-slate-300 mt-3 self-end"></div>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- NHÓM 6: ĐÓNG GÓP Ý KIẾN THÊM -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-card">
+          <div class="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-potato-cyan mb-2">
+            <i class="fa-solid fa-pen-nib"></i>
+            <span>PHẦN 6: GÓP Ý THÊM TỪ BAN ĐIỀU HÀNH</span>
+          </div>
+          <h3 class="text-base sm:text-lg font-black text-slate-900 mb-1">
+            12. Ý kiến bổ sung hoặc lưu ý đặc biệt về Tone of Voice của Anh/Chị:
+          </h3>
+          <p class="text-xs text-slate-500 mb-3">
+            Những từ ngữ muốn cấm thêm, phong cách mong muốn riêng hoặc chỉ đạo bổ sung cho đội ngũ content.
+          </p>
+          <textarea name="q12_notes" 
+                    id="input-notes"
+                    rows="3" 
+                    placeholder="VD: Không so sánh học sinh với nhau; bài viết mầm non cần nhấn mạnh vào việc tắm ngôn ngữ tự nhiên..." 
+                    class="w-full p-4 rounded-2xl border border-slate-200 text-sm font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:border-potato-cyan focus:ring-4 focus:ring-potato-cyan/10 transition-all bg-slate-50/50 hover:bg-white focus:bg-white"></textarea>
+        </div>
+
+        <!-- Submit Button Bar -->
+        <div class="sticky bottom-4 z-30 p-3 sm:p-4 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div class="flex items-center gap-2 text-xs text-slate-500">
+            <i class="fa-solid fa-cloud-arrow-up text-emerald-500 text-sm"></i>
+            <span>Dữ liệu sẽ được lưu tự động vào Google Sheet tab 'Khảo sát Tone of Voice' (#gid=602562886)</span>
+          </div>
+
+          <div class="flex items-center gap-2 w-full sm:w-auto">
+            <button type="button" onclick="handleBackToIdentity()" class="w-1/3 sm:w-auto px-4 py-3 rounded-xl border border-slate-200 bg-slate-100 hover:bg-slate-200 font-bold text-xs text-slate-700 transition-all">
+              Đổi Tên
+            </button>
+            <button type="submit" 
+                    id="btn-submit-survey"
+                    class="flex-1 sm:flex-initial px-8 py-3.5 rounded-xl bg-potato-cyan hover:bg-potato-cyanHover text-white font-black text-sm shadow-md shadow-potato-cyan/20 transition-all flex items-center justify-center gap-2 hover:scale-[1.01] active:scale-[0.99]">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span id="btn-submit-text">Gửi Phiếu Khảo Sát</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+
+    <!-- ======================================================== -->
+    <!-- BƯỚC 3: MÀN HÌNH HOÀN THÀNH & XÁC NHẬN LƯU THÀNH CÔNG -->
+    <!-- ======================================================== -->
+    <section id="step-success" class="module-panel hidden fade-in">
+      <div class="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/90 shadow-card text-center max-w-2xl mx-auto">
+        
+        <!-- Animated Success Badge -->
+        <div class="w-20 h-20 rounded-3xl bg-emerald-50 text-emerald-500 border border-emerald-200 flex items-center justify-center text-3xl mx-auto mb-6 shadow-sm">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+
+        <span class="text-xs font-black uppercase tracking-wider bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full border border-emerald-200">
+          Ghi Nhận Thành Công
+        </span>
+
+        <h2 class="font-display font-black text-2xl sm:text-3xl text-slate-900 mt-3 tracking-tight">
+          Cảm Ơn <span id="success-name" class="text-potato-navy">Anh/Chị</span>!
+        </h2>
+        
+        <p class="text-xs sm:text-sm text-slate-500 mt-2 leading-relaxed max-w-lg mx-auto">
+          Phiếu định hướng Tone of Voice của vai trò <strong id="success-role" class="text-slate-800">Ban Điều Hành</strong> đã được ghi nhận trực tiếp vào cơ sở dữ liệu Google Sheet tab <strong class="text-slate-800">Khảo sát Tone of Voice (#gid=602562886)</strong>.
+        </p>
+
+        <!-- Status Card -->
+        <div class="mt-6 p-4 rounded-2xl bg-slate-50 border border-slate-200 text-left space-y-2 text-xs">
+          <div class="flex justify-between">
+            <span class="text-slate-400">Thời gian gửi:</span>
+            <span id="success-time" class="font-bold text-slate-700">12/09/2026</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-400">Trạng thái Google Sheet:</span>
+            <span id="success-gs-status" class="font-bold text-emerald-600 flex items-center gap-1">
+              <i class="fa-solid fa-circle-check text-[10px]"></i> Đã đồng bộ trực tiếp Live
+            </span>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=602562886" 
+             target="_blank" 
+             rel="noopener noreferrer"
+             class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs shadow-md shadow-emerald-500/20 transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-table"></i>
+            <span>Mở Bảng Tính Google Sheet</span>
+          </a>
+
+          <button type="button" 
+                  onclick="copyMyAnswers()" 
+                  class="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs border border-slate-200 transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-copy"></i>
+            <span id="btn-copy-text">Sao Chép Câu Trả Lời</span>
+          </button>
+
+          <a href="index.html" 
+             class="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-potato-navy hover:bg-potato-navyDark text-white font-bold text-xs transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-house"></i>
+            <span>Trở Về Webapp</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER (RULE[user_global] Invariant 2: Luôn nằm ở vị trí cuối cùng bên dưới tất cả các module panels) -->
+  <footer class="mt-auto border-t border-slate-200 bg-white py-6">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center text-xs text-slate-400 space-y-1.5">
+      <p class="font-bold text-slate-600">
+        © 2026 POTATO ENGLISH - MARKETING COMMAND CENTER
+      </p>
+      <p>
+        Hệ thống Định vị Thương hiệu & Khảo Sát Tone of Voice Đa Kênh • Kết nối Google Sheet (#gid=602562886)
+      </p>
+      <div class="flex items-center justify-center gap-4 text-[11px] pt-1 text-slate-500">
+        <span>Cơ sở 1: 37 Ngô Quyền, P. Phú Cường</span>
+        <span>•</span>
+        <span>Cơ sở 2: 9 KP Hưng Phước, P. Hưng Định</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- CLIENT-SIDE SCRIPT -->
+  <script>
+    // State Store
+    let currentUser = {
+      fullName: '',
+      role: ''
+    };
+    let latestSubmission = null;
+
+    const INTIMACY_LABELS = {
+      '1': 'Mức 1: Rất trang trọng, mực thước sư phạm',
+      '2': 'Mức 2: Lịch sự, ấm áp, nhã nhặn',
+      '3': 'Mức 3: Thân mật như người thân trong gia đình',
+      '4': 'Mức 4: Tự nhiên, gần gũi đời thường',
+      '5': 'Mức 5: Thoải mái, suồng sã, trẻ trung'
+    };
+
+    const ACADEMIC_LABELS = {
+      '1': 'Mức 1: Hoàn toàn bình dân, mộc mạc, dễ hiểu',
+      '2': 'Mức 2: Tối giản thuật ngữ, giải thích dễ hiểu',
+      '3': 'Mức 3: Cân bằng giữa học thuật và trải nghiệm',
+      '4': 'Mức 4: Chuẩn mực Cambridge, CEFR bài bản',
+      '5': 'Mức 5: Đậm tính học thuật chuyên sâu'
+    };
+
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+
+      const toast = document.createElement('div');
+      const bgColors = {
+        success: 'bg-emerald-600 text-white border-emerald-700',
+        error: 'bg-rose-600 text-white border-rose-700',
+        warning: 'bg-amber-600 text-white border-amber-700',
+        info: 'bg-slate-800 text-white border-slate-900'
+      };
+
+      toast.className = `${bgColors[type] || bgColors.info} border px-4 py-3 rounded-2xl shadow-xl text-xs font-bold flex items-center gap-2.5 pointer-events-auto transform transition-all duration-300 translate-y-[-10px] opacity-0`;
+      toast.innerHTML = `
+        <i class="fa-solid ${type === 'success' ? 'fa-circle-check' : (type === 'error' ? 'fa-triangle-exclamation' : 'fa-circle-info')}"></i>
+        <span>${message}</span>
+      `;
+
+      container.appendChild(toast);
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-[-10px]', 'opacity-0');
+      });
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-[-10px]');
+        setTimeout(() => toast.remove(), 300);
+      }, 4000);
+    }
+
+    // Role quick chips
+    function selectRoleChip(roleText) {
+      const roleInput = document.getElementById('input-role');
+      if (roleInput) {
+        roleInput.value = roleText;
+        validateGatekeeper();
+      }
+    }
+
+    function validateGatekeeper() {
+      const name = (document.getElementById('input-fullname')?.value || '').trim();
+      const role = (document.getElementById('input-role')?.value || '').trim();
+      const btn = document.getElementById('btn-start-survey');
+
+      if (btn) {
+        if (name.length >= 2 && role.length >= 2) {
+          btn.disabled = false;
+          btn.className = 'w-full py-4 rounded-2xl font-extrabold text-sm text-white bg-potato-cyan hover:bg-potato-cyanHover cursor-pointer transition-all duration-200 shadow-md shadow-potato-cyan/25 hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2';
+        } else {
+          btn.disabled = true;
+          btn.className = 'w-full py-4 rounded-2xl font-extrabold text-sm text-white bg-slate-300 cursor-not-allowed transition-all duration-200 shadow-md flex items-center justify-center gap-2';
+        }
+      }
+    }
+
+    function handleEnterSurvey(e) {
+      if (e) e.preventDefault();
+      const name = (document.getElementById('input-fullname')?.value || '').trim();
+      const role = (document.getElementById('input-role')?.value || '').trim();
+
+      if (!name || !role) {
+        showToast('Vui lòng điền đầy đủ Họ và tên cùng Chức vụ', 'warning');
+        return;
+      }
+
+      currentUser.fullName = name;
+      currentUser.role = role;
+
+      // Update display badges
+      document.getElementById('display-fullname').textContent = name;
+      document.getElementById('display-role').textContent = role;
+
+      // Switch screens
+      document.getElementById('step-identity').classList.add('hidden');
+      document.getElementById('step-questions').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      updateSurveyProgress();
+      showToast(`Xin chào ${name}! Mời bạn trả lời các câu hỏi định hướng.`, 'info');
+    }
+
+    function handleBackToIdentity() {
+      document.getElementById('step-questions').classList.add('hidden');
+      document.getElementById('step-identity').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function handleSliderChange(type, val) {
+      if (type === 'intimacy') {
+        const lbl = document.getElementById('slider-val-intimacy');
+        if (lbl) lbl.textContent = INTIMACY_LABELS[val] || `Mức ${val}`;
+      } else if (type === 'academic') {
+        const lbl = document.getElementById('slider-val-academic');
+        if (lbl) lbl.textContent = ACADEMIC_LABELS[val] || `Mức ${val}`;
+      }
+      updateSurveyProgress();
+    }
+
+    function updateSurveyProgress() {
+      const form = document.getElementById('form-survey');
+      if (!form) return;
+
+      const fd = new FormData(form);
+      let answeredCount = 0;
+      const totalRequired = 8; // Archetype, POV, Intimacy, Academic, Length, Parents, Potato, Students
+
+      if (fd.get('q1_archetype')) answeredCount++;
+      if (fd.get('q2_pov')) answeredCount++;
+      if (fd.get('q3_intimacy')) answeredCount++;
+      if (fd.get('q4_academic')) answeredCount++;
+      if (fd.get('q5_length')) answeredCount++;
+      if (fd.get('q6_parents')) answeredCount++;
+      if (fd.get('q7_potato')) answeredCount++;
+      if (fd.get('q8_students')) answeredCount++;
+
+      const percent = Math.min(100, Math.round((answeredCount / totalRequired) * 100));
+      const fill = document.getElementById('progress-bar-fill');
+      const text = document.getElementById('progress-percent');
+      if (fill) fill.style.width = `${percent}%`;
+      if (text) text.textContent = `${percent}%`;
+    }
+
+    async function handleSubmitSurvey(e) {
+      if (e) e.preventDefault();
+
+      if (!currentUser.fullName || !currentUser.role) {
+        showToast('Chưa xác thực thông tin người trả lời', 'error');
+        handleBackToIdentity();
+        return;
+      }
+
+      const form = document.getElementById('form-survey');
+      const fd = new FormData(form);
+
+      const taboosList = fd.getAll('q9_taboos');
+
+      const now = new Date();
+      const pad = n => String(n).padStart(2, '0');
+      const timestamp = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())} ${pad(now.getDate())}/${pad(now.getMonth() + 1)}/${now.getFullYear()}`;
+
+      const payload = {
+        fullName: currentUser.fullName,
+        role: currentUser.role,
+        timestamp: timestamp,
+        q1_archetype: fd.get('q1_archetype') || '',
+        q2_pov: fd.get('q2_pov') || '',
+        q3_intimacy: fd.get('q3_intimacy') || '3',
+        q4_academic: fd.get('q4_academic') || '1',
+        q5_length: fd.get('q5_length') || '',
+        q6_parents: fd.get('q6_parents') || '',
+        q7_potato: fd.get('q7_potato') || '',
+        q8_students: fd.get('q8_students') || '',
+        q9_taboos: taboosList,
+        q10_top_student: fd.get('q10_top_student') || '',
+        q11_signoff: fd.get('q11_signoff') || '',
+        q12_notes: (document.getElementById('input-notes')?.value || '').trim()
+      };
+
+      latestSubmission = payload;
+
+      const submitBtn = document.getElementById('btn-submit-survey');
+      const submitText = document.getElementById('btn-submit-text');
+      if (submitBtn) submitBtn.disabled = true;
+      if (submitText) submitText.textContent = 'Đang gửi và ghi nhận dữ liệu...';
+
+      let isSyncedToGS = false;
+
+      // 1. Instant Telegram Alert to Management
+      try {
+        const tgMsg = `🥔 PHIẾU KHẢO SÁT TONE OF VOICE MỚI!\n\n👤 Người gửi: ${payload.fullName}\n💼 Chức vụ: ${payload.role}\n⏰ Thời gian: ${payload.timestamp}\n\n1. Hình mẫu: ${payload.q1_archetype}\n2. Vị thế: ${payload.q2_pov}\n3. Thân mật: Mức ${payload.q3_intimacy}/5\n4. Học thuật: Mức ${payload.q4_academic}/5\n5. Độ dài FB: ${payload.q5_length}\n6. Gọi PH: ${payload.q6_parents}\n7. Xưng Potato: ${payload.q7_potato}\n8. Gọi học sinh: ${payload.q8_students}\n9. Ranh giới: ${(payload.q9_taboos || []).join('; ')}\n10. Case Vinh danh: ${payload.q10_top_student}\n11. Case Lời kết: ${payload.q11_signoff}\n12. Ghi chú: ${payload.q12_notes || '(Không)'}\n\n📊 Xem Google Sheet: https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=602562886`;
+
+        fetch('https://api.telegram.org/bot8840800690:AAEwV3rEULTmB2odH9nHRFEiTwEny4Mh1_E/sendMessage', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: '1730306144',
+            text: tgMsg
+          })
+        }).catch(() => {});
+      } catch (tgErr) {}
+
+      // 2. Google Apps Script Web App (if configured)
+      const GOOGLE_APPS_SCRIPT_URL = "";
+      if (GOOGLE_APPS_SCRIPT_URL) {
+        try {
+          await fetch(GOOGLE_APPS_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          isSyncedToGS = true;
+        } catch (gasErr) {}
+      }
+
+      // 3. Local Backend API (if running via Python server)
+      try {
+        const res = await fetch('/api/survey/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+        if (data.success && data.gs_synced) {
+          isSyncedToGS = true;
+          showToast(data.message || 'Đã ghi nhận thành công vào Google Sheet!', 'success');
+        } else if (data.success) {
+          showToast('Đã lưu an toàn vào bộ nhớ hệ thống!', 'info');
+        }
+      } catch (err) {
+        // Offline / external static website: cache into localStorage
+        try {
+          const cached = JSON.parse(localStorage.getItem('potato_survey_submissions') || '[]');
+          cached.push(payload);
+          localStorage.setItem('potato_survey_submissions', JSON.stringify(cached));
+        } catch (storageErr) {}
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+        if (submitText) submitText.textContent = 'Gửi Phiếu Khảo Sát';
+      }
+
+      // Show Success Screen
+      document.getElementById('success-name').textContent = currentUser.fullName;
+      document.getElementById('success-role').textContent = currentUser.role;
+      document.getElementById('success-time').textContent = timestamp;
+
+      const gsStatus = document.getElementById('success-gs-status');
+      if (gsStatus) {
+        if (isSyncedToGS) {
+          gsStatus.innerHTML = '<i class="fa-solid fa-circle-check text-[10px] text-emerald-600"></i> Đã đồng bộ trực tiếp Live vào Google Sheet (#gid=602562886)';
+          gsStatus.className = 'font-bold text-emerald-600 flex items-center gap-1';
+        } else {
+          gsStatus.innerHTML = '<i class="fa-solid fa-floppy-disk text-[10px] text-sky-600"></i> Đã lưu bộ nhớ thiết bị (Đồng bộ khi kết nối server)';
+          gsStatus.className = 'font-bold text-sky-600 flex items-center gap-1';
+        }
+      }
+
+      document.getElementById('step-questions').classList.add('hidden');
+      document.getElementById('step-success').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function copyMyAnswers() {
+      if (!latestSubmission) {
+        showToast('Không tìm thấy dữ liệu vừa gửi', 'warning');
+        return;
+      }
+
+      const text = `📋 KẾT QUẢ KHẢO SÁT TONE OF VOICE - POTATO ENGLISH
+Người trả lời: ${latestSubmission.fullName}
+Chức vụ: ${latestSubmission.role}
+Thời gian: ${latestSubmission.timestamp}
+----------------------------------------
+1. Hình mẫu thương hiệu: ${latestSubmission.q1_archetype}
+2. Vị thế phát ngôn: ${latestSubmission.q2_pov}
+3. Thước đo thân mật: Mức ${latestSubmission.q3_intimacy}/5
+4. Thước đo học thuật: Mức ${latestSubmission.q4_academic}/5
+5. Độ dài bài viết FB: ${latestSubmission.q5_length}
+6. Xưng hô Phụ huynh: ${latestSubmission.q6_parents}
+7. Xưng hô Potato: ${latestSubmission.q7_potato}
+8. Cách gọi học viên: ${latestSubmission.q8_students}
+9. Ranh giới xác nhận: ${(latestSubmission.q9_taboos || []).join('; ')}
+10. Case Study Vinh danh: ${latestSubmission.q10_top_student}
+11. Case Study Lời kết: ${latestSubmission.q11_signoff}
+12. Góp ý bổ sung: ${latestSubmission.q12_notes || '(Không có)'}
+----------------------------------------
+Link Google Sheet Live: https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=602562886`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        const btnText = document.getElementById('btn-copy-text');
+        if (btnText) btnText.textContent = '✓ Đã Sao Chép';
+        showToast('Đã sao chép toàn bộ câu trả lời vào Clipboard!', 'success');
+        setTimeout(() => {
+          if (btnText) btnText.textContent = 'Sao Chép Câu Trả Lời';
+        }, 3000);
+      }).catch(() => {
+        showToast('Không thể tự động sao chép', 'warning');
+      });
+    }
+
+    // Auto check if URL has name and role params (e.g. ?name=AnhTri&role=CoFounder)
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const nameParam = urlParams.get('name');
+      const roleParam = urlParams.get('role');
+
+      if (nameParam) {
+        const inputName = document.getElementById('input-fullname');
+        if (inputName) inputName.value = nameParam;
+      }
+      if (roleParam) {
+        const inputRole = document.getElementById('input-role');
+        if (inputRole) inputRole.value = roleParam;
+      }
+      validateGatekeeper();
+    });
+  </script>
+</body>
+</html>
