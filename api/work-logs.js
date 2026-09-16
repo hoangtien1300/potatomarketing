@@ -80,7 +80,6 @@ module.exports = async (req, res) => {
       const action = (r[3] || '').trim();
       const description = (r[4] || '').trim();
       const executor = (r[5] || 'Potato Dev').trim();
-      const status = (r[6] || '🟢 Hoàn thành').trim();
 
       if (!action && !description) continue;
 
@@ -91,8 +90,7 @@ module.exports = async (req, res) => {
         category: category,
         action: action,
         description: description,
-        executor: executor,
-        status: status
+        executor: executor
       });
     }
 
