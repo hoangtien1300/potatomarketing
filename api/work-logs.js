@@ -94,6 +94,8 @@ module.exports = async (req, res) => {
       });
     }
 
+    logs.sort((a, b) => (b.time || '').localeCompare(a.time || ''));
+
     return res.status(200).json({
       success: true,
       source: 'Google Sheet (Live)',

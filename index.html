@@ -619,57 +619,6 @@
           </div>
         </div>
 
-        <!-- Stat KPI Metrics Grid -->
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-          <!-- Card 1: Tổng số Logs -->
-          <div class="bg-white p-3.5 sm:p-4 rounded-2xl border border-slate-200/80 shadow-xs flex items-center gap-3 sm:gap-4">
-            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg sm:text-xl flex-shrink-0">
-              <i class="fa-solid fa-clipboard-check"></i>
-            </div>
-            <div>
-              <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Tổng Việc Đã Làm</p>
-              <h3 class="text-xl sm:text-2xl font-black text-slate-900 mt-0.5" id="stat-worklog-total">--</h3>
-              <span class="text-[10px] text-slate-500">Đã hoàn thành</span>
-            </div>
-          </div>
-
-          <!-- Card 2: Hệ thống & Kỹ thuật -->
-          <div class="bg-white p-3.5 sm:p-4 rounded-2xl border border-slate-200/80 shadow-xs flex items-center gap-3 sm:gap-4">
-            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg sm:text-xl flex-shrink-0">
-              <i class="fa-solid fa-server"></i>
-            </div>
-            <div>
-              <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Hệ Thống & Kỹ Thuật</p>
-              <h3 class="text-xl sm:text-2xl font-black text-indigo-600 mt-0.5" id="stat-worklog-tech">--</h3>
-              <span class="text-[10px] text-indigo-600 font-medium">Code, API & WebApp</span>
-            </div>
-          </div>
-
-          <!-- Card 3: Marketing & Nội dung -->
-          <div class="bg-white p-3.5 sm:p-4 rounded-2xl border border-slate-200/80 shadow-xs flex items-center gap-3 sm:gap-4">
-            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg sm:text-xl flex-shrink-0">
-              <i class="fa-solid fa-bullhorn"></i>
-            </div>
-            <div>
-              <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Marketing & Content</p>
-              <h3 class="text-xl sm:text-2xl font-black text-emerald-600 mt-0.5" id="stat-worklog-mkt">--</h3>
-              <span class="text-[10px] text-emerald-600 font-medium">FB, TikTok, SEO</span>
-            </div>
-          </div>
-
-          <!-- Card 4: Thành viên tham gia -->
-          <div class="bg-white p-3.5 sm:p-4 rounded-2xl border border-slate-200/80 shadow-xs flex items-center gap-3 sm:gap-4">
-            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-lg sm:text-xl flex-shrink-0">
-              <i class="fa-solid fa-users"></i>
-            </div>
-            <div>
-              <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Thành Viên Đóng Góp</p>
-              <h3 class="text-xl sm:text-2xl font-black text-amber-600 mt-0.5" id="stat-worklog-executors">--</h3>
-              <span class="text-[10px] text-amber-600 font-medium">Nhân sự & AI Agents</span>
-            </div>
-          </div>
-        </div>
-
         <!-- Filter & Search Controls Bar -->
         <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs space-y-3">
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 flex-wrap">
@@ -751,11 +700,10 @@
               <thead>
                 <tr class="bg-slate-50 text-slate-500 font-bold border-b border-slate-200 text-[11px] uppercase tracking-wider">
                   <th class="py-3 px-3.5 w-32">ID Log</th>
-                  <th class="py-3 px-3 w-36">Thời Gian</th>
-                  <th class="py-3 px-3 w-36">Hạng Mục</th>
-                  <th class="py-3 px-3 min-w-[180px]">Hành Động</th>
-                  <th class="py-3 px-4 min-w-[340px]">Mô Tả Ngắn (Chi Tiết)</th>
+                  <th class="py-3 px-3 min-w-[200px]">Hành Động</th>
+                  <th class="py-3 px-4 min-w-[340px]">Mô Tả</th>
                   <th class="py-3 px-3 w-44">Người Thực Hiện</th>
+                  <th class="py-3 px-3 w-36 whitespace-nowrap">Thời Gian</th>
                 </tr>
               </thead>
               <tbody id="worklog-table-body" class="divide-y divide-slate-100 font-medium text-slate-700">
@@ -3170,27 +3118,7 @@
     }
 
     function updateWorkLogKPIs(logs) {
-      const total = logs.length;
-      let techCount = 0;
-      let mktCount = 0;
-      const executorsSet = new Set();
-
-      logs.forEach(log => {
-        const cat = (log.category || '').toLowerCase();
-        if (cat.includes('hệ thống') || cat.includes('kỹ thuật')) techCount++;
-        else if (cat.includes('facebook') || cat.includes('tiktok') || cat.includes('seo') || cat.includes('marketing') || cat.includes('design') || cat.includes('media')) mktCount++;
-        if (log.executor) executorsSet.add(log.executor.trim());
-      });
-
-      const elTotal = document.getElementById('stat-worklog-total');
-      const elTech = document.getElementById('stat-worklog-tech');
-      const elMkt = document.getElementById('stat-worklog-mkt');
-      const elExecutors = document.getElementById('stat-worklog-executors');
-
-      if (elTotal) elTotal.textContent = total;
-      if (elTech) elTech.textContent = techCount;
-      if (elMkt) elMkt.textContent = mktCount;
-      if (elExecutors) elExecutors.textContent = executorsSet.size;
+      // KPI cards removed per user request
     }
 
     function renderWorkLogs(logs) {
@@ -3212,34 +3140,40 @@
       if (emptyState) emptyState.classList.add('hidden');
       if (tableContainer) tableContainer.classList.remove('hidden');
 
-      // 1. Render Desktop Table Rows
+      // Sort by time descending (mới nhất đến cũ nhất)
+      const sortedLogs = [...logs].sort((a, b) => (b.time || '').localeCompare(a.time || ''));
+
+      // 1. Render Desktop Table Rows (Order: ID Log | Hành Động | Mô Tả | Người Thực Hiện | Thời Gian)
       if (tableBody) {
-        tableBody.innerHTML = logs.map(log => {
+        tableBody.innerHTML = sortedLogs.map(log => {
           const categoryBadge = getWorkLogCategoryBadge(log.category);
           const executorBadge = getWorkLogExecutorBadge(log.executor);
           const descHtml = formatWorkLogDesc(log.description);
 
           return `<tr class="hover:bg-slate-50/80 transition-colors">
+            <!-- 1. ID Log -->
             <td class="py-3 px-3.5 font-mono text-[11px] font-bold text-potato-navy whitespace-nowrap align-top">
               <span class="bg-slate-100 px-2 py-0.5 rounded border border-slate-200/80 inline-block">${escapeHtml(log.id)}</span>
             </td>
+            <!-- 2. Hành Động -->
+            <td class="py-3 px-3 align-top min-w-[180px]">
+              <div class="font-bold text-slate-900 text-xs leading-snug">${escapeHtml(log.action)}</div>
+              ${categoryBadge ? `<div class="mt-1">${categoryBadge}</div>` : ''}
+            </td>
+            <!-- 3. Mô Tả -->
+            <td class="py-3 px-4 align-top text-xs leading-relaxed min-w-[300px]">
+              ${descHtml}
+            </td>
+            <!-- 4. Người Thực Hiện -->
+            <td class="py-3 px-3 align-top whitespace-nowrap">
+              ${executorBadge}
+            </td>
+            <!-- 5. Thời Gian -->
             <td class="py-3 px-3 text-[11px] text-slate-500 whitespace-nowrap align-top">
               <div class="flex items-center gap-1.5">
                 <i class="fa-regular fa-clock text-slate-400 text-[10px]"></i>
                 <span>${escapeHtml(log.time)}</span>
               </div>
-            </td>
-            <td class="py-3 px-3 align-top whitespace-nowrap">
-              ${categoryBadge}
-            </td>
-            <td class="py-3 px-3 align-top font-bold text-slate-900 text-xs">
-              ${escapeHtml(log.action)}
-            </td>
-            <td class="py-3 px-4 align-top text-xs leading-relaxed">
-              ${descHtml}
-            </td>
-            <td class="py-3 px-3 align-top whitespace-nowrap">
-              ${executorBadge}
             </td>
           </tr>`;
         }).join('');
@@ -3247,7 +3181,7 @@
 
       // 2. Render Mobile Cards (< 640px)
       if (mobileContainer) {
-        mobileContainer.innerHTML = logs.map(log => {
+        mobileContainer.innerHTML = sortedLogs.map(log => {
           const categoryBadge = getWorkLogCategoryBadge(log.category);
           const executorBadge = getWorkLogExecutorBadge(log.executor);
           const descHtml = formatWorkLogDesc(log.description);
@@ -3255,14 +3189,14 @@
           return `<div class="bg-white p-3.5 rounded-2xl border border-slate-200/90 shadow-xs space-y-2.5">
             <div class="flex items-center justify-between gap-2">
               <span class="font-mono text-[11px] font-bold text-potato-navy bg-slate-100 px-2 py-0.5 rounded border border-slate-200">${escapeHtml(log.id)}</span>
-              ${categoryBadge}
-            </div>
-            <div>
-              <div class="flex items-center gap-2 flex-wrap mb-1 text-[10.5px] text-slate-400">
-                <i class="fa-regular fa-clock"></i>
+              <div class="flex items-center gap-1.5 text-[11px] text-slate-400">
+                <i class="fa-regular fa-clock text-[10px]"></i>
                 <span>${escapeHtml(log.time)}</span>
               </div>
+            </div>
+            <div>
               <h4 class="font-extrabold text-xs text-slate-900 leading-snug">${escapeHtml(log.action)}</h4>
+              ${categoryBadge ? `<div class="mt-1">${categoryBadge}</div>` : ''}
             </div>
             <div class="bg-slate-50/80 p-2.5 rounded-xl border border-slate-100 text-xs">
               ${descHtml}
