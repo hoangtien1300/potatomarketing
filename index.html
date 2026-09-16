@@ -606,12 +606,12 @@
               </div>
             </div>
             
-            <div class="flex items-center gap-2 flex-wrap">
-              <button onclick="syncWorkLogs(true)" id="btn-sync-worklogs" class="px-3.5 py-2 rounded-xl bg-white text-potato-navy hover:bg-sky-50 font-bold text-xs shadow-sm transition-all flex items-center gap-2" title="Đồng bộ lại từ Google Sheet">
+            <div class="flex items-center gap-2 flex-wrap w-full md:w-auto">
+              <button onclick="syncWorkLogs(true)" id="btn-sync-worklogs" class="flex-1 sm:flex-initial justify-center px-3.5 py-2.5 rounded-xl bg-white text-potato-navy hover:bg-sky-50 font-bold text-xs shadow-sm transition-all flex items-center gap-2" title="Đồng bộ lại từ Google Sheet">
                 <i class="fa-solid fa-arrows-rotate text-potato-cyan" id="icon-sync-worklogs"></i>
                 <span>Đồng bộ Sheet</span>
               </button>
-              <a href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=1776016196" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-potato-cyan/90 hover:bg-potato-cyan text-white font-bold text-xs shadow-sm transition-all flex items-center gap-2">
+              <a href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=1776016196" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial justify-center px-3.5 py-2.5 rounded-xl bg-potato-cyan/90 hover:bg-potato-cyan text-white font-bold text-xs shadow-sm transition-all flex items-center gap-2">
                 <i class="fa-solid fa-table"></i>
                 <span>Mở Sheet</span>
               </a>
@@ -620,47 +620,47 @@
         </div>
 
         <!-- Filter & Search Controls Bar -->
-        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs space-y-3">
-          <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 flex-wrap">
+        <div class="bg-white p-3.5 sm:p-4 rounded-2xl border border-slate-200/80 shadow-xs space-y-3">
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-3 flex-wrap">
             
             <!-- Search Input -->
-            <div class="relative flex-1 min-w-[220px]">
+            <div class="relative w-full sm:flex-1 min-w-[200px]">
               <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400 text-xs"></i>
-              <input type="text" id="worklog-search-input" oninput="filterWorkLogs()" placeholder="Tìm theo ID Log, hành động, nội dung, người thực hiện..." class="w-full pl-9 pr-3 py-2 text-xs border border-slate-200 rounded-xl focus:outline-none focus:border-potato-cyan font-medium transition-all">
+              <input type="text" id="worklog-search-input" oninput="filterWorkLogs()" placeholder="Tìm theo ID Log, hành động, nội dung, người làm..." class="w-full pl-9 pr-3 py-2.5 text-xs border border-slate-200 rounded-xl focus:outline-none focus:border-potato-cyan font-medium transition-all bg-slate-50/50 sm:bg-white">
             </div>
 
             <!-- Filters Group -->
-            <div class="flex items-center gap-2 flex-wrap">
+            <div class="grid grid-cols-[1fr_1fr_auto] sm:flex sm:items-center gap-2 w-full sm:w-auto">
               <!-- Category Filter -->
-              <select id="worklog-category-filter" onchange="filterWorkLogs()" class="px-2.5 py-2 text-xs border border-slate-200 rounded-xl bg-white text-slate-700 font-medium focus:outline-none focus:border-potato-cyan">
+              <select id="worklog-category-filter" onchange="filterWorkLogs()" class="py-2.5 px-2.5 sm:px-3 text-xs border border-slate-200 rounded-xl bg-white text-slate-700 font-medium focus:outline-none focus:border-potato-cyan truncate">
                 <option value="all">Tất cả Hạng mục</option>
                 <option value="Facebook">Facebook</option>
                 <option value="TikTok">TikTok</option>
                 <option value="SEO Website">SEO Website</option>
                 <option value="Media & Design">Media & Design</option>
                 <option value="Hệ thống & Kỹ thuật">Hệ thống & Kỹ thuật</option>
-                <option value="Chiến dịch Marketing">Chiến dịch Marketing</option>
-                <option value="Vận hành & Báo cáo">Vận hành & Báo cáo</option>
+                <option value="Chiến dịch Marketing">Chiến dịch</option>
+                <option value="Vận hành & Báo cáo">Vận hành</option>
                 <option value="Khác">Khác</option>
               </select>
 
               <!-- Executor Filter -->
-              <select id="worklog-executor-filter" onchange="filterWorkLogs()" class="px-2.5 py-2 text-xs border border-slate-200 rounded-xl bg-white text-slate-700 font-medium focus:outline-none focus:border-potato-cyan">
-                <option value="all">Tất cả Người thực hiện</option>
+              <select id="worklog-executor-filter" onchange="filterWorkLogs()" class="py-2.5 px-2.5 sm:px-3 text-xs border border-slate-200 rounded-xl bg-white text-slate-700 font-medium focus:outline-none focus:border-potato-cyan truncate">
+                <option value="all">Tất cả Người làm</option>
                 <option value="Phạm Hoàng Tiến">Phạm Hoàng Tiến</option>
                 <option value="Potato CMO">Potato CMO</option>
                 <option value="Potato Dev">Potato Dev</option>
-                <option value="Potato Facebook Specialist">Potato Facebook Specialist</option>
-                <option value="Potato TikTok Creator">Potato TikTok Creator</option>
-                <option value="Potato SEO & Web Specialist">Potato SEO & Web Specialist</option>
-                <option value="Potato Creative Director">Potato Creative Director</option>
-                <option value="Potato Graphic Designer">Potato Graphic Designer</option>
-                <option value="Potato Video Director">Potato Video Director</option>
-                <option value="Potato Scheduler & Ops">Potato Scheduler & Ops</option>
+                <option value="Potato Facebook Specialist">FB Specialist</option>
+                <option value="Potato TikTok Creator">TikTok Creator</option>
+                <option value="Potato SEO & Web Specialist">SEO Specialist</option>
+                <option value="Potato Creative Director">Creative Director</option>
+                <option value="Potato Graphic Designer">Graphic Designer</option>
+                <option value="Potato Video Director">Video Director</option>
+                <option value="Potato Scheduler & Ops">Scheduler & Ops</option>
               </select>
 
               <!-- Reset button -->
-              <button onclick="resetWorkLogFilters()" title="Đặt lại bộ lọc" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all text-xs">
+              <button onclick="resetWorkLogFilters()" title="Đặt lại bộ lọc" class="p-2.5 rounded-xl text-slate-400 hover:text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all text-xs flex items-center justify-center flex-shrink-0">
                 <i class="fa-solid fa-rotate-left"></i>
               </button>
             </div>
@@ -1878,16 +1878,16 @@
           </div>
 
           <!-- Right Action Controls -->
-          <div class="flex items-center gap-2.5 flex-wrap">
-            <button onclick="syncTasksLive()" id="btn-sync-tasks" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center gap-2 transition-all active:scale-95 shadow-2xs">
+          <div class="flex items-center gap-2 flex-wrap w-full md:w-auto">
+            <button onclick="syncTasksLive()" id="btn-sync-tasks" class="flex-1 sm:flex-initial justify-center px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center gap-2 transition-all active:scale-95 shadow-2xs min-h-[40px]">
               <i class="fa-solid fa-rotate text-potato-blue" id="sync-tasks-icon"></i>
               <span>Đồng bộ Sheet</span>
             </button>
-            <a href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=1736184326" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 font-bold text-xs flex items-center gap-2 transition-all active:scale-95">
+            <a href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=1736184326" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial justify-center px-3.5 py-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 font-bold text-xs flex items-center gap-2 transition-all active:scale-95 min-h-[40px]">
               <i class="fa-solid fa-table-cells"></i>
               <span>Mở Sheet</span>
             </a>
-            <button onclick="openAddTaskModal()" class="px-4 py-2 rounded-xl bg-potato-cyan hover:bg-potato-cyanHover text-white font-extrabold text-xs shadow-xs flex items-center gap-2 transition-all active:scale-95">
+            <button onclick="openAddTaskModal()" class="w-full sm:w-auto justify-center px-4 py-2.5 rounded-xl bg-potato-cyan hover:bg-potato-cyanHover text-white font-extrabold text-xs shadow-xs flex items-center gap-2 transition-all active:scale-95 min-h-[40px]">
               <i class="fa-solid fa-plus"></i>
               <span>Thêm nhiệm vụ</span>
             </button>
@@ -1919,10 +1919,10 @@
 
           <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-2xs flex items-center gap-3.5">
             <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center text-lg flex-shrink-0">
-              <i class="fa-regular fa-clock"></i>
+              <i class="fa-regular fa-circle-pause"></i>
             </div>
             <div>
-              <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Chưa bắt đầu</p>
+              <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Chưa làm</p>
               <h3 class="text-xl font-black text-slate-700 leading-tight" id="stat-tasks-todo">6</h3>
             </div>
           </div>
@@ -1932,12 +1932,12 @@
               <i class="fa-solid fa-circle-check"></i>
             </div>
             <div>
-              <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Hoàn thành</p>
-              <h3 class="text-xl font-black text-emerald-600 leading-tight" id="stat-tasks-done">1</h3>
+              <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Đã xong</p>
+              <h3 class="text-xl font-black text-emerald-600 leading-tight" id="stat-tasks-completed">1</h3>
             </div>
           </div>
 
-          <div class="col-span-2 sm:col-span-1 bg-white p-4 rounded-2xl border border-slate-200/80 shadow-2xs flex items-center gap-3.5">
+          <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-2xs flex items-center gap-3.5 col-span-2 sm:col-span-1">
             <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0">
               <i class="fa-solid fa-fire"></i>
             </div>
@@ -1950,61 +1950,64 @@
         </div>
 
         <!-- 2. FILTER, SEARCH & VIEW CONTROLS -->
-        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-3.5">
+        <div class="bg-white p-3.5 sm:p-4 rounded-2xl border border-slate-200/80 shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-3">
           
           <!-- Search Bar & Filters -->
-          <div class="flex flex-wrap items-center gap-2.5 flex-1">
+          <div class="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2.5 flex-1">
             <!-- Search -->
-            <div class="relative min-w-[220px] flex-1 sm:flex-initial">
+            <div class="relative w-full sm:w-auto sm:min-w-[220px] sm:flex-1">
               <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400 text-xs"></i>
-              <input type="text" id="task-search-input" oninput="handleTaskSearch(this.value)" placeholder="Tìm tên việc, mã task, người làm..." class="w-full pl-9 pr-8 py-2 text-xs border border-slate-200 rounded-xl focus:outline-none focus:border-potato-cyan font-medium bg-slate-50/50">
-              <button onclick="clearTaskSearch()" id="task-search-clear" class="hidden absolute right-2.5 top-2.5 text-slate-400 hover:text-slate-600 text-xs">
+              <input type="text" id="task-search-input" oninput="handleTaskSearch(this.value)" placeholder="Tìm tên việc, người làm..." class="w-full pl-9 pr-8 py-2.5 text-xs border border-slate-200 rounded-xl focus:outline-none focus:border-potato-cyan font-medium bg-slate-50/50 sm:bg-white min-h-[40px]">
+              <button onclick="clearTaskSearch()" id="task-search-clear" class="hidden absolute right-2.5 top-3 text-slate-400 hover:text-slate-600 text-xs">
                 <i class="fa-solid fa-xmark"></i>
               </button>
             </div>
 
-            <!-- Filter: Category -->
-            <select id="task-filter-category" onchange="handleTaskFilterChange()" class="py-2 px-3 text-xs border border-slate-200 rounded-xl bg-white font-medium text-slate-700 focus:outline-none focus:border-potato-cyan">
-              <option value="all">Tất cả Hạng mục</option>
-              <option value="Facebook">Facebook</option>
-              <option value="Tiktok">Tiktok</option>
-              <option value="SEO Website">SEO Website</option>
-              <option value="Design">Design</option>
-              <option value="Hệ thống">Hệ thống</option>
-            </select>
+            <!-- Filters Grid for Mobile, flex on desktop -->
+            <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 w-full sm:w-auto">
+              <!-- Filter: Category -->
+              <select id="task-filter-category" onchange="handleTaskFilterChange()" class="py-2.5 px-3 text-xs border border-slate-200 rounded-xl bg-white font-medium text-slate-700 focus:outline-none focus:border-potato-cyan min-h-[40px] truncate">
+                <option value="all">Tất cả Hạng mục</option>
+                <option value="Facebook">Facebook</option>
+                <option value="Tiktok">Tiktok</option>
+                <option value="SEO Website">SEO Website</option>
+                <option value="Design">Design</option>
+                <option value="Hệ thống">Hệ thống</option>
+              </select>
 
-            <!-- Filter: Channel -->
-            <select id="task-filter-channel" onchange="handleTaskFilterChange()" class="py-2 px-3 text-xs border border-slate-200 rounded-xl bg-white font-medium text-slate-700 focus:outline-none focus:border-potato-cyan">
-              <option value="all">Tất cả Kênh</option>
-              <option value="Fanpage Potato English">Fanpage Potato English</option>
-              <option value="Tiktok (@potatoenglish)">Tiktok (@potatoenglish)</option>
-              <option value="Website potatoenglish.edu.vn">Website potatoenglish.edu.vn</option>
-            </select>
+              <!-- Filter: Channel -->
+              <select id="task-filter-channel" onchange="handleTaskFilterChange()" class="py-2.5 px-3 text-xs border border-slate-200 rounded-xl bg-white font-medium text-slate-700 focus:outline-none focus:border-potato-cyan min-h-[40px] truncate">
+                <option value="all">Tất cả Kênh</option>
+                <option value="Fanpage Potato English">Fanpage Potato English</option>
+                <option value="Tiktok (@potatoenglish)">Tiktok (@potatoenglish)</option>
+                <option value="Website potatoenglish.edu.vn">Website potatoenglish.edu.vn</option>
+              </select>
 
-            <!-- Filter: Priority -->
-            <select id="task-filter-priority" onchange="handleTaskFilterChange()" class="py-2 px-3 text-xs border border-slate-200 rounded-xl bg-white font-medium text-slate-700 focus:outline-none focus:border-potato-cyan">
-              <option value="all">Tất cả Mức ưu tiên</option>
-              <option value="Cao">🔴 Ưu tiên Cao</option>
-              <option value="Trung bình">🟡 Ưu tiên Trung bình</option>
-              <option value="Thấp">🟢 Ưu tiên Thấp</option>
-            </select>
+              <!-- Filter: Priority -->
+              <select id="task-filter-priority" onchange="handleTaskFilterChange()" class="py-2.5 px-3 text-xs border border-slate-200 rounded-xl bg-white font-medium text-slate-700 focus:outline-none focus:border-potato-cyan min-h-[40px] truncate">
+                <option value="all">Tất cả Mức ưu tiên</option>
+                <option value="Cao">🔴 Ưu tiên Cao</option>
+                <option value="Trung bình">🟡 Ưu tiên TB</option>
+                <option value="Thấp">🟢 Ưu tiên Thấp</option>
+              </select>
 
-            <!-- Filter: Status -->
-            <select id="task-filter-status" onchange="handleTaskFilterChange()" class="py-2 px-3 text-xs border border-slate-200 rounded-xl bg-white font-medium text-slate-700 focus:outline-none focus:border-potato-cyan">
-              <option value="all">Tất cả Trạng thái</option>
-              <option value="Đang tiến hành">🔵 Đang tiến hành</option>
-              <option value="Chưa bắt đầu">⚪ Chưa bắt đầu</option>
-              <option value="Hoàn thành">🟢 Đã hoàn thành</option>
-            </select>
+              <!-- Filter: Status -->
+              <select id="task-filter-status" onchange="handleTaskFilterChange()" class="py-2.5 px-3 text-xs border border-slate-200 rounded-xl bg-white font-medium text-slate-700 focus:outline-none focus:border-potato-cyan min-h-[40px] truncate">
+                <option value="all">Tất cả Trạng thái</option>
+                <option value="Đang tiến hành">🔵 Đang làm</option>
+                <option value="Chưa bắt đầu">⚪ Chưa làm</option>
+                <option value="Hoàn thành">🟢 Hoàn thành</option>
+              </select>
+            </div>
           </div>
 
           <!-- View Mode Toggles -->
-          <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl self-start md:self-auto flex-shrink-0">
-            <button onclick="switchTaskViewMode('table')" id="btn-task-view-table" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-white text-potato-navy shadow-2xs flex items-center gap-1.5">
+          <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl w-full sm:w-auto justify-center sm:justify-start flex-shrink-0">
+            <button onclick="switchTaskViewMode('table')" id="btn-task-view-table" class="flex-1 sm:flex-initial px-3 py-2 rounded-lg text-xs font-bold transition-all bg-white text-potato-navy shadow-2xs flex items-center justify-center gap-1.5 min-h-[36px]">
               <i class="fa-solid fa-table-list"></i>
               <span>Dạng Bảng</span>
             </button>
-            <button onclick="switchTaskViewMode('kanban')" id="btn-task-view-kanban" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-potato-navy flex items-center gap-1.5">
+            <button onclick="switchTaskViewMode('kanban')" id="btn-task-view-kanban" class="flex-1 sm:flex-initial px-3 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-potato-navy flex items-center justify-center gap-1.5 min-h-[36px]">
               <i class="fa-solid fa-table-columns"></i>
               <span>Kanban</span>
             </button>
@@ -2702,21 +2705,21 @@
       </div>
 
       <!-- Modal Footer -->
-      <div class="px-5 py-3.5 border-t border-slate-100 bg-slate-50/70 flex items-center justify-between">
-        <a href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=1736184326" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-slate-500 hover:text-potato-navy flex items-center gap-1.5 transition-all">
+      <div class="px-5 py-3.5 border-t border-slate-100 bg-slate-50/70 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 flex-shrink-0">
+        <a href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=1736184326" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-slate-500 hover:text-potato-navy flex items-center justify-center sm:justify-start gap-1.5 transition-all py-1">
           <i class="fa-solid fa-table"></i>
           <span>Mở trên Google Sheet (#gid=1736184326)</span>
         </a>
-        <div class="flex items-center gap-2">
-          <button type="button" onclick="deleteTaskFromDetail()" class="px-3.5 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold text-xs transition-all flex items-center gap-1.5">
+        <div class="flex items-center gap-2 flex-wrap">
+          <button type="button" onclick="deleteTaskFromDetail()" class="flex-1 sm:flex-initial px-3.5 py-2.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold text-xs transition-all flex items-center justify-center gap-1.5 min-h-[40px]">
             <i class="fa-solid fa-trash-can"></i>
             <span>Xóa</span>
           </button>
-          <button type="button" onclick="openEditTaskModalFromDetail()" class="px-4 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5">
+          <button type="button" onclick="openEditTaskModalFromDetail()" class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs transition-all flex items-center justify-center gap-1.5 min-h-[40px]">
             <i class="fa-solid fa-pen-to-square"></i>
             <span>Chỉnh sửa</span>
           </button>
-          <button type="button" onclick="closeTaskDetailModal()" class="px-4 py-2 rounded-xl bg-potato-navy hover:bg-slate-900 text-white font-bold text-xs transition-all">
+          <button type="button" onclick="closeTaskDetailModal()" class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-potato-navy hover:bg-slate-900 text-white font-bold text-xs transition-all flex items-center justify-center min-h-[40px]">
             Đóng
           </button>
         </div>
@@ -2915,10 +2918,10 @@
 
         <!-- Footer -->
         <div class="px-5 py-3.5 border-t border-slate-100 bg-slate-50/70 flex items-center justify-end gap-2 flex-shrink-0">
-          <button type="button" onclick="closeTaskFormModal()" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold transition-all">
+          <button type="button" onclick="closeTaskFormModal()" class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs transition-all min-h-[40px] flex items-center justify-center">
             Hủy
           </button>
-          <button type="submit" id="btn-save-task" class="px-5 py-2 rounded-xl bg-potato-cyan hover:bg-potato-cyanHover text-white font-extrabold shadow-sm flex items-center gap-2 transition-all active:scale-95">
+          <button type="submit" id="btn-save-task" class="flex-1 sm:flex-initial px-5 py-2.5 rounded-xl bg-potato-cyan hover:bg-potato-cyanHover text-white font-extrabold text-xs shadow-sm flex items-center justify-center gap-2 transition-all active:scale-95 min-h-[40px]">
             <i class="fa-solid fa-floppy-disk"></i>
             <span>Lưu Nhiệm Vụ</span>
           </button>
@@ -5231,6 +5234,9 @@
         activeMobileBtn.classList.remove('text-slate-500');
         activeMobileBtn.classList.add('text-potato-cyan', 'font-bold');
       }
+
+      // Auto close mobile drawer when any tab is selected
+      closeSidebarMobile();
 
       // 3. Handle Cài đặt 1.1 Giới thiệu
       if (tabId === 'settings-intro') {
