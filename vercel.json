@@ -11,6 +11,22 @@
       "destination": "/api/calendar-sync"
     },
     {
+      "source": "/api/tasks",
+      "destination": "/api/tasks"
+    },
+    {
+      "source": "/api/tasks/(.*)",
+      "destination": "/api/tasks"
+    },
+    {
+      "source": "/api/work-logs",
+      "destination": "/api/work-logs"
+    },
+    {
+      "source": "/api/work-logs/(.*)",
+      "destination": "/api/work-logs"
+    },
+    {
       "source": "/api/survey/submit",
       "destination": "/api/survey"
     },
