@@ -18,6 +18,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
   <script src="potato_logo_base64.js"></script>
+  <!-- Chart.js for Marketing Analytics Dashboard -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
     tailwind.config = {
@@ -218,7 +220,46 @@
             </div>
           </div>
 
-          <!-- 2. Tasks (Nhiệm Vụ Marketing Hub) -->
+          <!-- 2. Báo Cáo (Level 1) -->
+          <div class="sidebar-group">
+            <button onclick="switchTab('reports-marketing')" id="nav-reports" class="sidebar-item nav-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-potato-navy transition-all whitespace-nowrap">
+              <div class="flex items-center gap-2 min-w-0">
+                <i class="fa-solid fa-chart-pie text-sm w-4 text-center text-potato-cyan flex-shrink-0"></i>
+                <span class="sidebar-label font-bold text-xs whitespace-nowrap truncate">Báo cáo</span>
+              </div>
+              <i class="menu-chevron fa-solid fa-chevron-right text-[9px] text-slate-400 transition-transform flex-shrink-0 ml-1"></i>
+            </button>
+            <div id="submenu-reports" class="sidebar-submenu hidden pl-6 pr-1 py-1 space-y-0.5">
+              <!-- 2.1 Báo cáo Marketing -->
+              <button type="button" id="subnav-reports-marketing" onclick="switchTab('reports-marketing')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
+                <span class="w-1.5 h-1.5 rounded-full bg-potato-cyan flex-shrink-0"></span>
+                <span class="truncate">Báo cáo Marketing</span>
+              </button>
+              <div class="border-t border-slate-100 my-1"></div>
+              <!-- 2.2 Chỉ số Fanpage -->
+              <button type="button" onclick="switchTab('reports-marketing'); filterReportContentChannel('facebook');" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 flex-shrink-0"></span>
+                <span class="truncate">Chỉ số Fanpage</span>
+              </button>
+              <!-- 2.3 Website GSC & GA4 -->
+              <button type="button" onclick="switchTab('reports-marketing'); filterReportContentChannel('website');" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 flex-shrink-0"></span>
+                <span class="truncate">Website GSC & GA4</span>
+              </button>
+              <!-- 2.4 Kênh TikTok -->
+              <button type="button" onclick="switchTab('reports-marketing'); filterReportContentChannel('tiktok');" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-900 flex-shrink-0"></span>
+                <span class="truncate">Kênh TikTok</span>
+              </button>
+              <!-- 2.5 Kênh YouTube -->
+              <button type="button" onclick="switchTab('reports-marketing'); filterReportContentChannel('youtube');" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
+                <span class="w-1.5 h-1.5 rounded-full bg-red-600 flex-shrink-0"></span>
+                <span class="truncate">Kênh YouTube</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 3. Tasks (Nhiệm Vụ Marketing Hub) -->
           <div class="sidebar-group">
             <button onclick="switchTab('tasks')" id="nav-tasks" class="sidebar-item nav-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-potato-navy transition-all whitespace-nowrap">
               <div class="flex items-center gap-2 min-w-0">
@@ -2094,6 +2135,534 @@
         </div>
 
       </section>
+
+      <!-- =============================================================== -->
+      <!-- [MODULE 10]: MARKETING MULTI-CHANNEL ANALYTICS DASHBOARD -->
+      <!-- =============================================================== -->
+      <section id="panel-reports-marketing" class="module-panel hidden p-4 sm:p-6 max-w-7xl mx-auto w-full space-y-6">
+
+        <!-- [INVARIANT 1]: MODULE BANNER / HEADER -->
+        <div class="bg-gradient-to-r from-potato-navy via-[#004A8B] to-potato-blue text-white rounded-3xl p-5 sm:p-6 shadow-card relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <!-- Background decorative circles -->
+          <div class="absolute -right-10 -bottom-10 w-48 h-48 rounded-full bg-potato-cyan/10 pointer-events-none blur-2xl"></div>
+          <div class="absolute right-32 -top-10 w-36 h-36 rounded-full bg-potato-yellow/10 pointer-events-none blur-xl"></div>
+
+          <div class="relative z-10 flex items-start gap-4 min-w-0">
+            <div class="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-potato-cyan text-xl flex-shrink-0 shadow-xs">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <div>
+              <div class="flex flex-wrap items-center gap-2 mb-1">
+                <h2 class="font-extrabold text-lg sm:text-xl text-white tracking-tight">Báo Cáo Hiệu Suất Marketing Đa Kênh</h2>
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                  Dữ liệu trực tiếp
+                </span>
+              </div>
+              <p class="text-xs sm:text-[13px] text-blue-100/90 leading-relaxed max-w-2xl">
+                Bảng điều khiển hợp nhất đo lường chỉ số <strong>Fanpage • Website (GSC & GA4) • TikTok • YouTube</strong> của hệ thống Potato English.
+              </p>
+            </div>
+          </div>
+
+          <!-- Quick Campus Filter & Sync Info -->
+          <div class="relative z-10 flex flex-wrap items-center gap-2.5 flex-shrink-0">
+            <div class="flex items-center bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-1">
+              <i class="fa-solid fa-location-dot text-potato-yellow text-xs ml-2.5 mr-1.5"></i>
+              <select id="report-campus-filter" onchange="handleCampusFilterChange(this.value)" class="bg-transparent text-white text-xs font-bold py-1.5 pr-3 pl-1 focus:outline-none cursor-pointer">
+                <option value="all" class="text-slate-800 font-semibold">Tất cả cơ sở</option>
+                <option value="cs1" class="text-slate-800 font-semibold">CS1: Phú Cường</option>
+                <option value="cs2" class="text-slate-800 font-semibold">CS2: Hưng Định</option>
+              </select>
+            </div>
+
+            <button onclick="refreshReportData()" class="px-3 py-2 rounded-2xl bg-white/15 hover:bg-white/25 active:scale-95 text-white font-bold text-xs transition-all flex items-center gap-1.5 border border-white/20 shadow-xs" title="Đồng bộ lại dữ liệu">
+              <i class="fa-solid fa-arrows-rotate text-xs" id="report-refresh-icon"></i>
+              <span class="hidden sm:inline">Làm mới</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. GLOBAL TIMEFRAME FILTER BAR & QUICK EXPORT -->
+        <div class="bg-white rounded-2xl border border-slate-200/90 p-3 sm:p-4 shadow-subtle flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+          <!-- Timeframe Segmented Control -->
+          <div class="flex items-center bg-slate-100/90 p-1 rounded-2xl overflow-x-auto custom-scrollbar flex-shrink-0" id="report-timeframe-btns">
+            <button type="button" onclick="switchReportTimeframe('week')" data-timeframe="week" class="timeframe-btn active flex-1 sm:flex-none px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 bg-white text-potato-navy shadow-xs border border-slate-200/60 whitespace-nowrap">
+              <i class="fa-regular fa-calendar-check text-[11px] text-potato-cyan"></i>
+              <span>Tuần này</span>
+              <span class="text-[9px] px-1 py-0.2 rounded bg-potato-softBlue text-potato-blue font-black">WoW</span>
+            </button>
+            <button type="button" onclick="switchReportTimeframe('month')" data-timeframe="month" class="timeframe-btn flex-1 sm:flex-none px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all flex items-center justify-center gap-1.5 whitespace-nowrap">
+              <i class="fa-regular fa-calendar text-[11px]"></i>
+              <span>Tháng này</span>
+              <span class="text-[9px] px-1 py-0.2 rounded bg-slate-200/70 text-slate-600 font-bold">MoM</span>
+            </button>
+            <button type="button" onclick="switchReportTimeframe('quarter')" data-timeframe="quarter" class="timeframe-btn flex-1 sm:flex-none px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all flex items-center justify-center gap-1.5 whitespace-nowrap">
+              <i class="fa-solid fa-chart-pie text-[11px]"></i>
+              <span>3 Tháng (Quý)</span>
+              <span class="text-[9px] px-1 py-0.2 rounded bg-slate-200/70 text-slate-600 font-bold">QoQ</span>
+            </button>
+            <button type="button" onclick="switchReportTimeframe('year')" data-timeframe="year" class="timeframe-btn flex-1 sm:flex-none px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all flex items-center justify-center gap-1.5 whitespace-nowrap">
+              <i class="fa-solid fa-calendar-days text-[11px]"></i>
+              <span>Năm nay</span>
+              <span class="text-[9px] px-1 py-0.2 rounded bg-slate-200/70 text-slate-600 font-bold">YoY</span>
+            </button>
+          </div>
+
+          <!-- Right side: Date interval display & Export Actions -->
+          <div class="flex items-center justify-between sm:justify-end gap-2 text-xs">
+            <span id="report-period-label" class="text-slate-500 font-medium px-2 py-1 rounded-lg bg-slate-50 border border-slate-200/60 truncate">
+              📅 Kỳ: Thứ 2, 16/09 - Chủ nhật, 22/09/2026
+            </span>
+
+            <button onclick="exportMarketingReport()" class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 font-bold text-xs transition-all flex items-center gap-1.5 border border-slate-200/80 whitespace-nowrap shadow-2xs" title="In hoặc xuất PDF báo cáo">
+              <i class="fa-solid fa-download text-potato-cyan"></i>
+              <span class="hidden md:inline">Xuất Báo Cáo</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. NORTH STAR KPI SCORECARDS (4 THẺ TỔNG HỢP TOÀN KÊNH) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Card 1: Tổng Tiếp Cận -->
+          <div class="bg-white rounded-3xl p-5 border border-slate-200/90 shadow-card hover:shadow-float transition-all group">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Tổng Tiếp Cận</span>
+              <div class="w-10 h-10 rounded-2xl bg-cyan-50 text-potato-cyan flex items-center justify-center text-sm group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-eye"></i>
+              </div>
+            </div>
+            <div class="flex items-baseline gap-2 mb-1">
+              <h3 id="kpi-total-reach" class="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight">145,280</h3>
+              <span id="kpi-total-reach-badge" class="text-xs font-black text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/60 flex items-center gap-0.5">
+                <i class="fa-solid fa-arrow-trend-up"></i> +18.4%
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-400">FB Reach, TikTok Views, YouTube & GSC</p>
+          </div>
+
+          <!-- Card 2: Tổng Tương Tác -->
+          <div class="bg-white rounded-3xl p-5 border border-slate-200/90 shadow-card hover:shadow-float transition-all group">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Tổng Tương Tác</span>
+              <div class="w-10 h-10 rounded-2xl bg-amber-50 text-amber-500 flex items-center justify-center text-sm group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-heart-circle-check"></i>
+              </div>
+            </div>
+            <div class="flex items-baseline gap-2 mb-1">
+              <h3 id="kpi-total-engagements" class="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight">12,450</h3>
+              <span id="kpi-total-engagements-badge" class="text-xs font-black text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/60 flex items-center gap-0.5">
+                <i class="fa-solid fa-arrow-trend-up"></i> +8.2%
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-400">Like, Comment, Share, Save & Clicks</p>
+          </div>
+
+          <!-- Card 3: Lượt Truy Cập Website -->
+          <div class="bg-white rounded-3xl p-5 border border-slate-200/90 shadow-card hover:shadow-float transition-all group">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Website Visits</span>
+              <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-globe"></i>
+              </div>
+            </div>
+            <div class="flex items-baseline gap-2 mb-1">
+              <h3 id="kpi-website-visits" class="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight">8,920</h3>
+              <span id="kpi-website-visits-badge" class="text-xs font-black text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/60 flex items-center gap-0.5">
+                <i class="fa-solid fa-arrow-trend-up"></i> +24.1%
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-400">GA4 Sessions & Google Search Clicks</p>
+          </div>
+
+          <!-- Card 4: Tổng Leads & Khách Tư Vấn -->
+          <div class="bg-white rounded-3xl p-5 border border-potato-cyan/40 bg-gradient-to-br from-white to-potato-softBlue/40 shadow-card hover:shadow-float transition-all group">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold text-potato-navy uppercase tracking-wider">Inbound Leads Mới</span>
+              <div class="w-10 h-10 rounded-2xl bg-potato-cyan text-white flex items-center justify-center text-sm group-hover:scale-110 transition-transform shadow-xs">
+                <i class="fa-solid fa-user-graduate"></i>
+              </div>
+            </div>
+            <div class="flex items-baseline gap-2 mb-1">
+              <h3 id="kpi-total-leads" class="text-2xl sm:text-3xl font-black text-potato-navy tracking-tight">185</h3>
+              <span id="kpi-total-leads-badge" class="text-xs font-black text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full border border-emerald-300 flex items-center gap-0.5">
+                <i class="fa-solid fa-arrow-trend-up"></i> +15.6%
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-500 font-medium">Messenger, Form Test 0đ, Zalo & Hotline</p>
+          </div>
+        </div>
+
+        <!-- 4. MA TRẬN 4 KÊNH TRỌNG ĐIỂM (GRID 4 CỘT CHUYÊN SÂU) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+
+          <!-- KÊNH 1: FACEBOOK FANPAGE -->
+          <div class="bg-white rounded-3xl border border-slate-200/90 p-5 shadow-card flex flex-col justify-between hover:border-blue-300 transition-all">
+            <div>
+              <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center text-sm">
+                    <i class="fa-brands fa-facebook-f"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-extrabold text-xs text-slate-800">Fanpage Facebook</h4>
+                    <span class="text-[10px] text-slate-400">@potatoenglish</span>
+                  </div>
+                </div>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-blue-50 text-blue-600 border border-blue-200/60">
+                  Tương tác cao
+                </span>
+              </div>
+
+              <!-- Metrics List -->
+              <div class="space-y-2.5 text-xs">
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500">Lượt tiếp cận (Reach):</span>
+                  <strong class="text-slate-800 font-black" id="fb-reach-val">68,500</strong>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500">Lượt tương tác bài viết:</span>
+                  <strong class="text-slate-800 font-black" id="fb-eng-val">5,840</strong>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500">Người theo dõi mới:</span>
+                  <strong class="text-emerald-600 font-black" id="fb-followers-val">+310 fan</strong>
+                </div>
+                <div class="flex items-center justify-between bg-blue-50/70 p-2 rounded-xl border border-blue-100">
+                  <span class="text-blue-900 font-semibold flex items-center gap-1.5">
+                    <i class="fa-solid fa-comment-dots text-blue-600"></i> Inbox tư vấn mới:
+                  </span>
+                  <strong class="text-blue-700 font-black" id="fb-leads-val">92 leads</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Top Content Snippet -->
+            <div class="mt-4 pt-3 border-t border-slate-100">
+              <span class="text-[10px] font-bold uppercase text-slate-400 tracking-wider block mb-1">Top bài viết nổi bật:</span>
+              <p class="text-xs font-bold text-slate-700 hover:text-potato-cyan transition-colors line-clamp-2" id="fb-top-post">
+                🎉 Album Khai Giảng 2026 - Tự hào học viên nhí Potato English
+              </p>
+            </div>
+          </div>
+
+          <!-- KÊNH 2: WEBSITE (GSC & GA4) -->
+          <div class="bg-white rounded-3xl border border-slate-200/90 p-5 shadow-card flex flex-col justify-between hover:border-emerald-300 transition-all">
+            <div>
+              <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-sm">
+                    <i class="fa-solid fa-chart-simple"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-extrabold text-xs text-slate-800">Website GSC & GA4</h4>
+                    <span class="text-[10px] text-slate-400">potatoenglish.edu.vn</span>
+                  </div>
+                </div>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-50 text-emerald-600 border border-emerald-200/60">
+                  SEO Top 10
+                </span>
+              </div>
+
+              <!-- Metrics List -->
+              <div class="space-y-2.5 text-xs">
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500">GSC Organic Clicks:</span>
+                  <strong class="text-slate-800 font-black" id="web-gsc-clicks-val">3,240 nhấp</strong>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500">GSC Lượt hiển thị:</span>
+                  <strong class="text-slate-800 font-black" id="web-gsc-impr-val">45,800</strong>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500">GA4 Người dùng (Users):</span>
+                  <strong class="text-slate-800 font-black" id="web-ga4-users-val">4,850 khách</strong>
+                </div>
+                <div class="flex items-center justify-between bg-emerald-50/70 p-2 rounded-xl border border-emerald-100">
+                  <span class="text-emerald-900 font-semibold flex items-center gap-1.5">
+                    <i class="fa-solid fa-file-pen text-emerald-600"></i> Form & Hotline Clicks:
+                  </span>
+                  <strong class="text-emerald-700 font-black" id="web-leads-val">52 leads</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Top Keyword Snippet -->
+            <div class="mt-4 pt-3 border-t border-slate-100">
+              <span class="text-[10px] font-bold uppercase text-slate-400 tracking-wider block mb-1">Từ khóa SEO top ranking:</span>
+              <p class="text-xs font-bold text-slate-700 line-clamp-1" id="web-top-keyword">
+                🔍 "tiếng anh trẻ em thủ dầu một" <span class="text-emerald-600 font-black">(Top 3)</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- KÊNH 3: TIKTOK -->
+          <div class="bg-white rounded-3xl border border-slate-200/90 p-5 shadow-card flex flex-col justify-between hover:border-slate-800 transition-all">
+            <div>
+              <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded-xl bg-slate-900 text-white flex items-center justify-center text-sm">
+                    <i class="fa-brands fa-tiktok"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-extrabold text-xs text-slate-800">Kênh TikTok</h4>
+                    <span class="text-[10px] text-slate-400">@potato_english</span>
+                  </div>
+                </div>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-slate-100 text-slate-800 border border-slate-300">
+                  Viral Reels
+                </span>
+              </div>
+
+              <!-- Metrics List -->
+              <div class="space-y-2.5 text-xs">
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500">Lượt xem video (Views):</span>
+                  <strong class="text-slate-800 font-black" id="tt-views-val">52,300</strong>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500">Tỷ lệ xem hết (Completion):</span>
+                  <strong class="text-slate-800 font-black" id="tt-retention-val">42.5%</strong>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500">Follower mới:</span>
+                  <strong class="text-emerald-600 font-black" id="tt-followers-val">+620 follow</strong>
+                </div>
+                <div class="flex items-center justify-between bg-slate-50 p-2 rounded-xl border border-slate-200">
+                  <span class="text-slate-700 font-semibold flex items-center gap-1.5">
+                    <i class="fa-solid fa-arrow-up-right-from-square text-slate-800"></i> Clicks link Bio học thử:
+                  </span>
+                  <strong class="text-slate-900 font-black" id="tt-leads-val">26 clicks</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Top Viral Clip Snippet -->
+            <div class="mt-4 pt-3 border-t border-slate-100">
+              <span class="text-[10px] font-bold uppercase text-slate-400 tracking-wider block mb-1">Video viral nhất kỳ:</span>
+              <p class="text-xs font-bold text-slate-700 hover:text-slate-900 line-clamp-2" id="tt-top-clip">
+                🎬 Cùng Mascot Leo học 5 từ vựng giao thông siêu dễ nhớ
+              </p>
+            </div>
+          </div>
+
+          <!-- KÊNH 4: YOUTUBE -->
+          <div class="bg-white rounded-3xl border border-slate-200/90 p-5 shadow-card flex flex-col justify-between hover:border-red-300 transition-all">
+            <div>
+              <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded-xl bg-red-600 text-white flex items-center justify-center text-sm">
+                    <i class="fa-brands fa-youtube"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-extrabold text-xs text-slate-800">Kênh YouTube</h4>
+                    <span class="text-[10px] text-slate-400">@PotatoEnglishAcademy</span>
+                  </div>
+                </div>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-red-50 text-red-600 border border-red-200/60">
+                  Evergreen
+                </span>
+              </div>
+
+              <!-- Metrics List -->
+              <div class="space-y-2.5 text-xs">
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500">Lượt xem (Shorts + Video):</span>
+                  <strong class="text-slate-800 font-black" id="yt-views-val">18,400</strong>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500">Tổng giờ xem (Watch time):</span>
+                  <strong class="text-slate-800 font-black" id="yt-watch-val">542.5 giờ</strong>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500">Subscribers mới:</span>
+                  <strong class="text-emerald-600 font-black" id="yt-sub-val">+145 sub</strong>
+                </div>
+                <div class="flex items-center justify-between bg-red-50/70 p-2 rounded-xl border border-red-100">
+                  <span class="text-red-900 font-semibold flex items-center gap-1.5">
+                    <i class="fa-solid fa-link text-red-600"></i> Leads mô tả & Hotline:
+                  </span>
+                  <strong class="text-red-700 font-black" id="yt-leads-val">15 leads</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Top Video Snippet -->
+            <div class="mt-4 pt-3 border-t border-slate-100">
+              <span class="text-[10px] font-bold uppercase text-slate-400 tracking-wider block mb-1">Video giữ chân tốt nhất:</span>
+              <p class="text-xs font-bold text-slate-700 hover:text-red-600 line-clamp-2" id="yt-top-video">
+                🎥 Luyện phát âm chuẩn IPA cho bé từ 4-6 tuổi tại nhà
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 5. VISUAL ANALYTICS (2 BIỂU ĐỒ CHART.JS TƯƠNG TÁC) -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          
+          <!-- Chart 1: Xu hướng Tiếp cận Đa Kênh theo mốc thời gian (2/3 width) -->
+          <div class="lg:col-span-2 bg-white rounded-3xl border border-slate-200/90 p-5 sm:p-6 shadow-card flex flex-col justify-between">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+              <div>
+                <h3 class="font-extrabold text-sm sm:text-base text-slate-800 flex items-center gap-2">
+                  <i class="fa-solid fa-chart-line text-potato-cyan"></i>
+                  Xu Hướng Tiếp Cận & Lưu Lượng Đa Kênh
+                </h3>
+                <p class="text-xs text-slate-400">So sánh biến động số lượt tiếp cận/xem giữa Facebook, TikTok, YouTube và Website</p>
+              </div>
+
+              <!-- Mini Legend Indicator -->
+              <div class="flex flex-wrap items-center gap-2.5 text-[11px] font-semibold text-slate-600">
+                <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span> Facebook</span>
+                <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-slate-900"></span> TikTok</span>
+                <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-red-600"></span> YouTube</span>
+                <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span> Website</span>
+              </div>
+            </div>
+
+            <div class="relative w-full h-[280px] sm:h-[320px]">
+              <canvas id="chart-marketing-trend"></canvas>
+            </div>
+          </div>
+
+          <!-- Chart 2: Tỷ Trọng Nguồn Lead & Tư Vấn (1/3 width) -->
+          <div class="bg-white rounded-3xl border border-slate-200/90 p-5 sm:p-6 shadow-card flex flex-col justify-between">
+            <div class="mb-4">
+              <h3 class="font-extrabold text-sm sm:text-base text-slate-800 flex items-center gap-2">
+                <i class="fa-solid fa-chart-pie text-potato-tan"></i>
+                Tỷ Trọng Nguồn Leads
+              </h3>
+              <p class="text-xs text-slate-400">Tỷ lệ đóng góp khách quan tâm theo từng kênh</p>
+            </div>
+
+            <div class="relative w-full h-[220px] sm:h-[240px] flex items-center justify-center">
+              <canvas id="chart-leads-attribution"></canvas>
+            </div>
+
+            <!-- Breakdown Legend Summary -->
+            <div class="grid grid-cols-2 gap-2 pt-3 border-t border-slate-100 text-xs mt-2" id="leads-breakdown-legend">
+              <div class="p-2 rounded-xl bg-blue-50/60 border border-blue-100">
+                <span class="text-slate-500 text-[10px] block">Fanpage FB</span>
+                <strong class="text-blue-700 font-bold" id="lead-legend-fb">92 leads (50%)</strong>
+              </div>
+              <div class="p-2 rounded-xl bg-emerald-50/60 border border-emerald-100">
+                <span class="text-slate-500 text-[10px] block">Website Form</span>
+                <strong class="text-emerald-700 font-bold" id="lead-legend-web">52 leads (28%)</strong>
+              </div>
+              <div class="p-2 rounded-xl bg-slate-50 border border-slate-200">
+                <span class="text-slate-500 text-[10px] block">TikTok Bio</span>
+                <strong class="text-slate-800 font-bold" id="lead-legend-tt">26 leads (14%)</strong>
+              </div>
+              <div class="p-2 rounded-xl bg-red-50/60 border border-red-100">
+                <span class="text-slate-500 text-[10px] block">YouTube</span>
+                <strong class="text-red-700 font-bold" id="lead-legend-yt">15 leads (8%)</strong>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 6. TOP PERFORMING CONTENT (BẢNG XẾP HẠNG NỘI DUNG XUẤT SẮC NHẤT KỲ) -->
+        <div class="bg-white rounded-3xl border border-slate-200/90 p-5 sm:p-6 shadow-card space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <h3 class="font-extrabold text-sm sm:text-base text-slate-800 flex items-center gap-2">
+                <i class="fa-solid fa-ranking-star text-potato-yellow"></i>
+                Bảng Xếp Hạng Nội Dung Xuất Sắc Nhất Kỳ
+              </h3>
+              <p class="text-xs text-slate-400">Các bài viết, video và landing page đem lại tỷ lệ tương tác & chuyển đổi cao nhất</p>
+            </div>
+
+            <!-- Content Channel Switcher Tabs -->
+            <div class="flex items-center bg-slate-100 p-1 rounded-2xl overflow-x-auto custom-scrollbar flex-shrink-0" id="report-content-channel-tabs">
+              <button onclick="filterReportContentChannel('all', this)" class="content-tab-btn active px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-potato-navy shadow-xs transition-all whitespace-nowrap">
+                Tất cả kênh
+              </button>
+              <button onclick="filterReportContentChannel('facebook', this)" class="content-tab-btn px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all whitespace-nowrap">
+                📘 Fanpage
+              </button>
+              <button onclick="filterReportContentChannel('website', this)" class="content-tab-btn px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all whitespace-nowrap">
+                🌐 Website
+              </button>
+              <button onclick="filterReportContentChannel('tiktok', this)" class="content-tab-btn px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all whitespace-nowrap">
+                🎵 TikTok
+              </button>
+              <button onclick="filterReportContentChannel('youtube', this)" class="content-tab-btn px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all whitespace-nowrap">
+                📺 YouTube
+              </button>
+            </div>
+          </div>
+
+          <!-- [INVARIANT 4]: RESPONSIVE DATA TABLE (DESKTOP/TABLET >= 640px) -->
+          <div class="hidden sm:block overflow-x-auto custom-scrollbar rounded-2xl border border-slate-200/70">
+            <table class="w-full text-left text-xs text-slate-600">
+              <thead class="bg-slate-50/90 text-slate-700 font-extrabold uppercase text-[10px] tracking-wider border-b border-slate-200/80">
+                <tr>
+                  <th class="py-3 px-4">Nội Dung / Tiêu Đề</th>
+                  <th class="py-3 px-3">Kênh & Định Dạng</th>
+                  <th class="py-3 px-3 text-right">Lượt Tiếp Cận / Views</th>
+                  <th class="py-3 px-3 text-right">Tương Tác</th>
+                  <th class="py-3 px-3 text-right">Leads / Chuyển Đổi</th>
+                  <th class="py-3 px-4 text-center">Hiệu Suất</th>
+                </tr>
+              </thead>
+              <tbody id="report-content-table-body" class="divide-y divide-slate-100">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- [INVARIANT 4]: MOBILE CARD LIST VIEW (< 640px) -->
+          <div id="report-content-mobile-cards" class="block sm:hidden space-y-3">
+            <!-- Dynamically populated on mobile -->
+          </div>
+        </div>
+
+        <!-- 7. ACTIONABLE STRATEGIC INSIGHTS & NEXT STEPS -->
+        <div class="bg-gradient-to-br from-potato-cream via-white to-amber-50/50 rounded-3xl border border-potato-tan/40 p-5 sm:p-6 shadow-subtle">
+          <div class="flex items-center gap-2.5 mb-3">
+            <div class="w-8 h-8 rounded-xl bg-potato-tan text-white flex items-center justify-center text-xs shadow-2xs">
+              <i class="fa-solid fa-lightbulb"></i>
+            </div>
+            <div>
+              <h4 class="font-extrabold text-xs sm:text-sm text-potato-navy uppercase tracking-wider">Khuyến Nghị & Đề Xuất Chiến Lược (AI Executive Insights)</h4>
+              <span class="text-[11px] text-slate-500">Tự động tổng hợp dựa trên số liệu kỳ hiện tại</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs" id="report-actionable-insights">
+            <div class="p-3.5 rounded-2xl bg-white/90 border border-slate-200/80 shadow-2xs space-y-1.5">
+              <span class="font-bold text-blue-700 flex items-center gap-1.5">
+                <i class="fa-brands fa-facebook text-sm"></i> Tối ưu Fanpage Facebook
+              </span>
+              <p class="text-slate-600 leading-relaxed text-[11.5px]" id="insight-fb">
+                Định dạng <strong>Album 4 ảnh 1:1</strong> mang lại tương tác cao gấp 2.4 lần bài viết thường. Cần duy trì micro-copywriting dưới 80 từ theo chỉ đạo và tiếp tục vinh danh học viên nhí.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-white/90 border border-slate-200/80 shadow-2xs space-y-1.5">
+              <span class="font-bold text-emerald-700 flex items-center gap-1.5">
+                <i class="fa-solid fa-magnifying-glass-chart text-sm"></i> Tối ưu Website & SEO
+              </span>
+              <p class="text-slate-600 leading-relaxed text-[11.5px]" id="insight-web">
+                Từ khóa <em>"tiếng anh trẻ em thủ dầu một"</em> đã đạt Top 3. Nên bổ sung bài viết giải đáp thắc mắc phụ huynh xoay quanh chứng chỉ Cambridge Starters/Movers để đón đầu chuyển đổi.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-white/90 border border-slate-200/80 shadow-2xs space-y-1.5">
+              <span class="font-bold text-slate-900 flex items-center gap-1.5">
+                <i class="fa-brands fa-tiktok text-sm"></i> Đẩy mạnh Video Ngắn
+              </span>
+              <p class="text-slate-600 leading-relaxed text-[11.5px]" id="insight-video">
+                Video có sự xuất hiện của Mascot Leo đạt tỷ lệ giữ chân 42.5%. Cần sản xuất thêm 2 clip/tuần tập trung vào tình huống giao tiếp vui nhộn giữa học viên và giáo viên bản ngữ.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
       <!-- =============================================================== -->
       <!-- [INVARIANT 2]: GLOBAL FOOTER (AT THE VERY END OF ALL PANELS) -->
       <!-- =============================================================== -->
@@ -5352,6 +5921,46 @@
         return;
       }
 
+      // 4.6 Handle Báo cáo: Marketing
+      if (tabId === 'reports-marketing' || tabId === 'reports') {
+        const targetPanel = document.getElementById('panel-reports-marketing');
+        if (targetPanel) targetPanel.classList.remove('hidden');
+
+        // Highlight Báo cáo parent
+        const navReports = document.getElementById('nav-reports');
+        if (navReports) {
+          navReports.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold', 'border', 'border-potato-cyan/20');
+          navReports.classList.remove('text-slate-600');
+          const ch = navReports.querySelector('.menu-chevron');
+          if (ch) {
+            ch.classList.remove('fa-chevron-right');
+            ch.classList.add('fa-chevron-down');
+          }
+        }
+
+        // Open submenu-reports, close others
+        const submenus = document.querySelectorAll('.sidebar-submenu');
+        submenus.forEach(sm => {
+          if (sm.id === 'submenu-reports') sm.classList.remove('hidden');
+          else sm.classList.add('hidden');
+        });
+
+        // Highlight subnav-reports-marketing
+        const subMarketing = document.getElementById('subnav-reports-marketing');
+        if (subMarketing) {
+          subMarketing.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold');
+          subMarketing.classList.remove('text-slate-500');
+        }
+
+        if (typeof initMarketingDashboard === 'function') {
+          initMarketingDashboard();
+        }
+
+        const mainElem = document.querySelector('main');
+        if (mainElem) mainElem.scrollTop = 0;
+        return;
+      }
+
       // 5. Close submenu for all other main tabs
       const submenus = document.querySelectorAll('.sidebar-submenu');
       submenus.forEach(sm => sm.classList.add('hidden'));
@@ -8393,6 +9002,860 @@
         showToast(`Không thể gửi tới n8n: ${err.message}. Hãy kiểm tra lại Webhook URL và trạng thái Active của workflow trong n8n.`, 'danger');
         openN8nConfigModal();
       }
+    }
+
+    // =========================================================================
+    // MARKETING MULTI-CHANNEL ANALYTICS DASHBOARD SYSTEM
+    // =========================================================================
+
+    const MARKETING_REPORT_DATA = {
+      week: {
+        periodLabel: '📅 Kỳ: Thứ 2, 16/09 - Chủ nhật, 22/09/2026 (Tuần này)',
+        kpi: {
+          totalReach: '145,280',
+          totalReachBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +18.4%',
+          reachIsPositive: true,
+          totalEngagements: '12,450',
+          totalEngagementsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +8.2%',
+          engIsPositive: true,
+          websiteVisits: '8,920',
+          websiteVisitsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +24.1%',
+          webIsPositive: true,
+          totalLeads: '185',
+          totalLeadsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +15.6%',
+          leadsIsPositive: true,
+        },
+        channels: {
+          fb: {
+            reach: '68,500',
+            eng: '5,840',
+            followers: '+310 fan',
+            leads: '92 leads',
+            topPost: '🎉 Album Khai Giảng 2026 - Tự hào học viên nhí Potato English'
+          },
+          web: {
+            gscClicks: '3,240 nhấp',
+            gscImpr: '45,800',
+            ga4Users: '4,850 khách',
+            leads: '52 leads',
+            topKeyword: '🔍 "tiếng anh trẻ em thủ dầu một" (Top 3)'
+          },
+          tt: {
+            views: '52,300',
+            retention: '42.5%',
+            followers: '+620 follow',
+            leads: '26 clicks',
+            topClip: '🎬 Cùng Mascot Leo học 5 từ vựng giao thông siêu dễ nhớ'
+          },
+          yt: {
+            views: '18,400',
+            watchTime: '542.5 giờ',
+            subs: '+145 sub',
+            leads: '15 leads',
+            topVideo: '🎥 Luyện phát âm chuẩn IPA cho bé từ 4-6 tuổi tại nhà'
+          }
+        },
+        trendChart: {
+          labels: ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'],
+          facebook: [8200, 9500, 11200, 8900, 10400, 12800, 14500],
+          tiktok: [6100, 7200, 8400, 6800, 7900, 9600, 11300],
+          youtube: [2100, 2400, 2800, 2300, 2700, 3400, 3900],
+          website: [1100, 1350, 1500, 1250, 1400, 1620, 1800]
+        },
+        leadsAttribution: {
+          values: [92, 52, 26, 15],
+          legend: {
+            fb: '92 leads (50%)',
+            web: '52 leads (28%)',
+            tt: '26 leads (14%)',
+            yt: '15 leads (8%)'
+          }
+        },
+        insights: {
+          fb: 'Định dạng <strong>Album 4 ảnh 1:1</strong> mang lại tương tác cao gấp 2.4 lần bài viết thường. Cần duy trì micro-copywriting dưới 80 từ theo chỉ đạo và tiếp tục vinh danh học viên nhí.',
+          web: 'Từ khóa <em>"tiếng anh trẻ em thủ dầu một"</em> đã đạt Top 3. Nên bổ sung bài viết giải đáp thắc mắc phụ huynh xoay quanh chứng chỉ Cambridge Starters/Movers để đón đầu chuyển đổi.',
+          video: 'Video có sự xuất hiện của Mascot Leo đạt tỷ lệ giữ chân 42.5%. Cần sản xuất thêm 2 clip/tuần tập trung vào tình huống giao tiếp vui nhộn giữa học viên và giáo viên bản ngữ.'
+        },
+        topContents: [
+          {
+            title: '🎉 Album Khai Giảng 2026 - Tự hào học viên nhí Potato English',
+            channel: 'Fanpage Facebook',
+            channelKey: 'facebook',
+            format: 'Album 4 ảnh 1:1',
+            formatBadge: 'bg-blue-50 text-blue-700 border-blue-200',
+            reach: '24,500',
+            engagement: '1,820 (7.4%)',
+            leads: '28 leads',
+            score: 'Xuất sắc',
+            scoreBadge: 'bg-emerald-100 text-emerald-800'
+          },
+          {
+            title: '🎬 Cùng Mascot Leo học 5 từ vựng giao thông siêu dễ nhớ',
+            channel: 'TikTok',
+            channelKey: 'tiktok',
+            format: 'Short Video 32s',
+            formatBadge: 'bg-slate-100 text-slate-800 border-slate-300',
+            reach: '35,200',
+            engagement: '3,100 (8.8%)',
+            leads: '16 clicks Bio',
+            score: 'Viral',
+            scoreBadge: 'bg-purple-100 text-purple-800'
+          },
+          {
+            title: '📖 Lộ trình học tiếng Anh cho bé 4-12 tuổi chuẩn Cambridge',
+            channel: 'Website SEO',
+            channelKey: 'website',
+            format: 'Bài Viết Chuẩn SEO',
+            formatBadge: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+            reach: '4,100 clicks',
+            engagement: '2m 45s TB',
+            leads: '19 form đăng ký',
+            score: 'Chuyển đổi cao',
+            scoreBadge: 'bg-blue-100 text-blue-800'
+          },
+          {
+            title: '🎥 Luyện phát âm chuẩn IPA cho bé từ 4-6 tuổi tại nhà',
+            channel: 'YouTube',
+            channelKey: 'youtube',
+            format: 'Video dài 8m 30s',
+            formatBadge: 'bg-red-50 text-red-700 border-red-200',
+            reach: '7,800 views',
+            engagement: '185h xem',
+            leads: '9 hotline leads',
+            score: 'Evergreen',
+            scoreBadge: 'bg-amber-100 text-amber-800'
+          },
+          {
+            title: '📸 Góc Phụ Huynh: Con tự tin thuyết trình tiếng Anh sau 3 tháng',
+            channel: 'Fanpage Facebook',
+            channelKey: 'facebook',
+            format: 'Proof of Life (UGC)',
+            formatBadge: 'bg-blue-50 text-blue-700 border-blue-200',
+            reach: '18,200',
+            engagement: '1,430 (7.8%)',
+            leads: '22 leads',
+            score: 'Xuất sắc',
+            scoreBadge: 'bg-emerald-100 text-emerald-800'
+          }
+        ]
+      },
+      month: {
+        periodLabel: '📅 Kỳ: Tháng 09/2026 (Tháng này)',
+        kpi: {
+          totalReach: '584,600',
+          totalReachBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +22.5%',
+          reachIsPositive: true,
+          totalEngagements: '49,800',
+          totalEngagementsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +14.2%',
+          engIsPositive: true,
+          websiteVisits: '35,400',
+          websiteVisitsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +19.8%',
+          webIsPositive: true,
+          totalLeads: '742',
+          totalLeadsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +18.0%',
+          leadsIsPositive: true,
+        },
+        channels: {
+          fb: {
+            reach: '275,000',
+            eng: '23,400',
+            followers: '+1,240 fan',
+            leads: '368 leads',
+            topPost: '🌟 Vinh Danh Top Student Tháng 8 Cả 2 Cơ Sở Potato'
+          },
+          web: {
+            gscClicks: '12,800 nhấp',
+            gscImpr: '182,000',
+            ga4Users: '19,400 khách',
+            leads: '208 leads',
+            topKeyword: '🔍 "học tiếng anh thiếu nhi bình dương" (Top 4)'
+          },
+          tt: {
+            views: '210,000',
+            retention: '45.1%',
+            followers: '+2,450 follow',
+            leads: '111 clicks',
+            topClip: '🎬 Thử thách phát âm từ khó cùng giáo viên bản ngữ'
+          },
+          yt: {
+            views: '74,000',
+            watchTime: '2,180 giờ',
+            subs: '+580 sub',
+            leads: '55 leads',
+            topVideo: '🎥 Series 10 câu giao tiếp tiếng Anh ba mẹ nói cùng con'
+          }
+        },
+        trendChart: {
+          labels: ['Tuần 1 (01-07/9)', 'Tuần 2 (08-14/9)', 'Tuần 3 (15-21/9)', 'Tuần 4 (22-28/9)'],
+          facebook: [62000, 71000, 68500, 73500],
+          tiktok: [46000, 53000, 52300, 58700],
+          youtube: [16500, 18200, 18400, 20900],
+          website: [8100, 8900, 8920, 9480]
+        },
+        leadsAttribution: {
+          values: [368, 208, 111, 55],
+          legend: {
+            fb: '368 leads (50%)',
+            web: '208 leads (28%)',
+            tt: '111 leads (15%)',
+            yt: '55 leads (7%)'
+          }
+        },
+        insights: {
+          fb: 'Chiến dịch tuyển sinh Back to School tháng 9 thu hút lượng inbox tăng trưởng 18%. Lưu ý duy trì lịch đăng Top Student cố định ngày 12 hàng tháng không để sót học viên.',
+          web: 'Lưu lượng truy cập Organic Search từ phụ huynh Bình Dương chiếm 62% toàn web. Nên phát triển thêm cụm bài viết so sánh các kỳ thi Cambridge Starters/Movers/Flyers.',
+          video: 'Các video ngắn phản ánh biểu cảm tự nhiên của học sinh Friendly Kid (4-6 tuổi) tạo thiện cảm lớn nhất cho phụ huynh. Cần chuẩn hóa kịch bản ngắn 20-30 giây.'
+        },
+        topContents: [
+          {
+            title: '🌟 Vinh Danh Top Student Tháng 8 Cả 2 Cơ Sở Potato English',
+            channel: 'Fanpage Facebook',
+            channelKey: 'facebook',
+            format: 'Album Vinh Danh 1:1',
+            formatBadge: 'bg-blue-50 text-blue-700 border-blue-200',
+            reach: '48,200',
+            engagement: '4,350 (9.0%)',
+            leads: '64 leads',
+            score: 'Đỉnh cao',
+            scoreBadge: 'bg-emerald-100 text-emerald-800'
+          },
+          {
+            title: '🎬 Thử thách phát âm từ khó cùng giáo viên bản ngữ Potato',
+            channel: 'TikTok',
+            channelKey: 'tiktok',
+            format: 'Reels ngắn 28s',
+            formatBadge: 'bg-slate-100 text-slate-800 border-slate-300',
+            reach: '72,000',
+            engagement: '6,400 (8.9%)',
+            leads: '42 clicks',
+            score: 'Viral',
+            scoreBadge: 'bg-purple-100 text-purple-800'
+          },
+          {
+            title: '📝 Bảng giá học phí và ưu đãi học bổng Potato English 2026',
+            channel: 'Website SEO',
+            channelKey: 'website',
+            format: 'Landing Page Học Phí',
+            formatBadge: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+            reach: '11,400 clicks',
+            engagement: '3m 15s TB',
+            leads: '78 form đăng ký',
+            score: 'Chuyển đổi cao',
+            scoreBadge: 'bg-blue-100 text-blue-800'
+          },
+          {
+            title: '🎥 Series 10 câu giao tiếp tiếng Anh ba mẹ nói cùng con mỗi tối',
+            channel: 'YouTube',
+            channelKey: 'youtube',
+            format: 'Video học tập 12m',
+            formatBadge: 'bg-red-50 text-red-700 border-red-200',
+            reach: '29,500 views',
+            engagement: '890h xem',
+            leads: '24 tư vấn',
+            score: 'Evergreen',
+            scoreBadge: 'bg-amber-100 text-amber-800'
+          }
+        ]
+      },
+      quarter: {
+        periodLabel: '📅 Kỳ: Quý 3/2026 (Tháng 7, 8, 9 - 3 Tháng Tuyển Sinh)',
+        kpi: {
+          totalReach: '1,750,000',
+          totalReachBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +28.4%',
+          reachIsPositive: true,
+          totalEngagements: '152,000',
+          totalEngagementsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +19.1%',
+          engIsPositive: true,
+          websiteVisits: '108,000',
+          websiteVisitsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +26.5%',
+          webIsPositive: true,
+          totalLeads: '2,250',
+          totalLeadsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +21.4%',
+          leadsIsPositive: true,
+        },
+        channels: {
+          fb: {
+            reach: '820,000',
+            eng: '72,000',
+            followers: '+3,800 fan',
+            leads: '1,120 leads',
+            topPost: '☀️ Chiến Dịch Trại Hè Tiếng Anh & Khai Giảng Năm Học Mới'
+          },
+          web: {
+            gscClicks: '38,500 nhấp',
+            gscImpr: '540,000',
+            ga4Users: '59,000 khách',
+            leads: '630 leads',
+            topKeyword: '🔍 "trung tâm tiếng anh trẻ em bình dương" (Top 2)'
+          },
+          tt: {
+            views: '630,000',
+            retention: '44.8%',
+            followers: '+7,200 follow',
+            leads: '335 clicks',
+            topClip: '🎬 Series Những hiểu lầm hài hước khi bé học phát âm'
+          },
+          yt: {
+            views: '225,000',
+            watchTime: '6,650 giờ',
+            subs: '+1,780 sub',
+            leads: '165 leads',
+            topVideo: '🎥 Lộ trình chinh phục Cambridge Starters - Movers - Flyers'
+          }
+        },
+        trendChart: {
+          labels: ['Tháng 7 (Hè)', 'Tháng 8 (Tập huấn & Thi)', 'Tháng 9 (Khai giảng BTS)'],
+          facebook: [255000, 290000, 275000],
+          tiktok: [195000, 225000, 210000],
+          youtube: [69000, 82000, 74000],
+          website: [32000, 40600, 35400]
+        },
+        leadsAttribution: {
+          values: [1120, 630, 335, 165],
+          legend: {
+            fb: '1,120 leads (50%)',
+            web: '630 leads (28%)',
+            tt: '335 leads (15%)',
+            yt: '165 leads (7%)'
+          }
+        },
+        insights: {
+          fb: 'Quý 3 là cao điểm tuyển sinh, Fanpage đạt 1,120 leads, trong đó 68% chuyển đổi thành công sang buổi đánh giá năng lực & học thử 0đ.',
+          web: 'Organic Search duy trì vị trí top 1-3 cho 8 từ khóa trọng điểm khu vực Thủ Dầu Một & Hưng Định.',
+          video: 'Kênh TikTok đã vượt mốc 18K followers, trở thành kênh lan tỏa nhận diện thương hiệu hàng đầu cho thế hệ phụ huynh Gen Z/Millennials.'
+        },
+        topContents: [
+          {
+            title: '☀️ Trại Hè Tiếng Anh 2026 - Tự tin giao tiếp và khám phá thế giới',
+            channel: 'Fanpage Facebook',
+            channelKey: 'facebook',
+            format: 'Album Chiến Dịch Hè',
+            formatBadge: 'bg-blue-50 text-blue-700 border-blue-200',
+            reach: '115,000',
+            engagement: '11,200 (9.7%)',
+            leads: '182 leads',
+            score: 'Kỷ lục',
+            scoreBadge: 'bg-emerald-100 text-emerald-800'
+          },
+          {
+            title: '🎬 Series: Những hiểu lầm hài hước khi bé học phát âm',
+            channel: 'TikTok',
+            channelKey: 'tiktok',
+            format: 'Series 3 Tập (25s)',
+            formatBadge: 'bg-slate-100 text-slate-800 border-slate-300',
+            reach: '185,000',
+            engagement: '16,800 (9.1%)',
+            leads: '95 clicks',
+            score: 'Viral',
+            scoreBadge: 'bg-purple-100 text-purple-800'
+          },
+          {
+            title: '🎯 Đánh giá năng lực tiếng Anh & Trải nghiệm học thử 0đ tại Potato',
+            channel: 'Website SEO',
+            channelKey: 'website',
+            format: 'Form Đăng Ký Test',
+            formatBadge: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+            reach: '32,000 clicks',
+            engagement: '4m 05s TB',
+            leads: '245 đăng ký',
+            score: 'Chuyển đổi cao',
+            scoreBadge: 'bg-blue-100 text-blue-800'
+          }
+        ]
+      },
+      year: {
+        periodLabel: '📅 Toàn Niên Độ: Năm 2026 (YTD)',
+        kpi: {
+          totalReach: '6,920,000',
+          totalReachBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +42.6%',
+          reachIsPositive: true,
+          totalEngagements: '610,000',
+          totalEngagementsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +35.8%',
+          engIsPositive: true,
+          websiteVisits: '430,000',
+          websiteVisitsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +38.2%',
+          webIsPositive: true,
+          totalLeads: '8,940',
+          totalLeadsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +32.5%',
+          leadsIsPositive: true,
+        },
+        channels: {
+          fb: {
+            reach: '3,250,000',
+            eng: '286,000',
+            followers: '+14,800 fan',
+            leads: '4,450 leads',
+            topPost: '🏆 Tổng Kết Năm Học: 98% Học Viên Đạt Chuẩn Cambridge'
+          },
+          web: {
+            gscClicks: '152,000 nhấp',
+            gscImpr: '2,140,000',
+            ga4Users: '235,000 khách',
+            leads: '2,510 leads',
+            topKeyword: '🔍 "tiếng anh trẻ em bình dương potato english"'
+          },
+          tt: {
+            views: '2,480,000',
+            retention: '43.6%',
+            followers: '+28,500 follow',
+            leads: '1,320 clicks',
+            topClip: '🎬 Hành trình vượt qua nỗi sợ nói tiếng Anh của học viên nhí'
+          },
+          yt: {
+            views: '890,000',
+            watchTime: '26,400 giờ',
+            subs: '+7,100 sub',
+            leads: '660 leads',
+            topVideo: '🎥 Khóa học tiếng Anh nền tảng 100 bài học miễn phí cho trẻ em'
+          }
+        },
+        trendChart: {
+          labels: ['Quý 1', 'Quý 2', 'Quý 3', 'Quý 4 (Dự phóng)'],
+          facebook: [720000, 810000, 820000, 900000],
+          tiktok: [520000, 610000, 630000, 720000],
+          youtube: [195000, 220000, 225000, 250000],
+          website: [95000, 110000, 108000, 117000]
+        },
+        leadsAttribution: {
+          values: [4450, 2510, 1320, 660],
+          legend: {
+            fb: '4,450 leads (50%)',
+            web: '2,510 leads (28%)',
+            tt: '1,320 leads (15%)',
+            yt: '660 leads (7%)'
+          }
+        },
+        insights: {
+          fb: 'Hệ thống Marketing Đa Kênh vận hành đúng chiến lược Flywheel: dữ liệu thực tế tại lớp chuyển hóa thành nội dung hấp dẫn, thu hút học viên mới liên tục.',
+          web: 'Website trở thành tài sản số uy tín hàng đầu khu vực Bình Dương, tỷ lệ phụ huynh tìm kiếm trực tiếp thương hiệu Potato English tăng 48%.',
+          video: 'Hệ sinh thái video ngắn (TikTok + YouTube Shorts + FB Reels) khẳng định ưu thế vượt trội về chi phí tiếp cận (CPM rẻ hơn 60% so với quảng cáo truyền thống).'
+        },
+        topContents: [
+          {
+            title: '🏆 Vinh Danh 98% Học Viên Potato Đạt Điểm Tuyệt Đối Cambridge 2026',
+            channel: 'Fanpage Facebook',
+            channelKey: 'facebook',
+            format: 'Album Vinh Danh Toàn Hệ Thống',
+            formatBadge: 'bg-blue-50 text-blue-700 border-blue-200',
+            reach: '420,000',
+            engagement: '38,500 (9.2%)',
+            leads: '512 leads',
+            score: 'Kỷ lục năm',
+            scoreBadge: 'bg-emerald-100 text-emerald-800'
+          },
+          {
+            title: '🎬 Hành trình vượt qua nỗi sợ nói tiếng Anh của học viên nhí',
+            channel: 'TikTok',
+            channelKey: 'tiktok',
+            format: 'Mini Documentary 45s',
+            formatBadge: 'bg-slate-100 text-slate-800 border-slate-300',
+            reach: '540,000',
+            engagement: '48,000 (8.9%)',
+            leads: '320 clicks',
+            score: 'Viral Toàn Quốc',
+            scoreBadge: 'bg-purple-100 text-purple-800'
+          },
+          {
+            title: '📖 Hệ thống 3 cơ sở đào tạo tiếng Anh chuẩn quốc tế tại Bình Dương',
+            channel: 'Website SEO',
+            channelKey: 'website',
+            format: 'Trang Giới Thiệu & Cơ Sở',
+            formatBadge: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+            reach: '89,000 clicks',
+            engagement: '3m 40s TB',
+            leads: '640 form đăng ký',
+            score: 'Chuyển đổi cao',
+            scoreBadge: 'bg-blue-100 text-blue-800'
+          }
+        ]
+      }
+    };
+
+    let currentReportTimeframe = 'week';
+    let currentContentChannelFilter = 'all';
+    let marketingTrendChartInstance = null;
+    let leadsAttributionChartInstance = null;
+
+    function initMarketingDashboard() {
+      switchReportTimeframe(currentReportTimeframe || 'week');
+    }
+
+    function switchReportTimeframe(timeframe) {
+      if (!MARKETING_REPORT_DATA[timeframe]) return;
+      currentReportTimeframe = timeframe;
+
+      // Update button styling
+      const buttons = document.querySelectorAll('#report-timeframe-btns .timeframe-btn');
+      buttons.forEach(btn => {
+        if (btn.dataset.timeframe === timeframe) {
+          btn.classList.add('active', 'bg-white', 'text-potato-navy', 'shadow-xs', 'border', 'border-slate-200/60');
+          btn.classList.remove('text-slate-600', 'font-semibold');
+          btn.classList.add('font-bold');
+        } else {
+          btn.classList.remove('active', 'bg-white', 'text-potato-navy', 'shadow-xs', 'border', 'border-slate-200/60', 'font-bold');
+          btn.classList.add('text-slate-600', 'font-semibold');
+        }
+      });
+
+      const data = MARKETING_REPORT_DATA[timeframe];
+
+      // Update period label
+      const periodLabel = document.getElementById('report-period-label');
+      if (periodLabel) periodLabel.textContent = data.periodLabel;
+
+      // Update KPI Cards
+      const kpiReach = document.getElementById('kpi-total-reach');
+      const kpiReachBadge = document.getElementById('kpi-total-reach-badge');
+      if (kpiReach) kpiReach.textContent = data.kpi.totalReach;
+      if (kpiReachBadge) kpiReachBadge.innerHTML = data.kpi.totalReachBadge;
+
+      const kpiEng = document.getElementById('kpi-total-engagements');
+      const kpiEngBadge = document.getElementById('kpi-total-engagements-badge');
+      if (kpiEng) kpiEng.textContent = data.kpi.totalEngagements;
+      if (kpiEngBadge) kpiEngBadge.innerHTML = data.kpi.totalEngagementsBadge;
+
+      const kpiWeb = document.getElementById('kpi-website-visits');
+      const kpiWebBadge = document.getElementById('kpi-website-visits-badge');
+      if (kpiWeb) kpiWeb.textContent = data.kpi.websiteVisits;
+      if (kpiWebBadge) kpiWebBadge.innerHTML = data.kpi.websiteVisitsBadge;
+
+      const kpiLeads = document.getElementById('kpi-total-leads');
+      const kpiLeadsBadge = document.getElementById('kpi-total-leads-badge');
+      if (kpiLeads) kpiLeads.textContent = data.kpi.totalLeads;
+      if (kpiLeadsBadge) kpiLeadsBadge.innerHTML = data.kpi.totalLeadsBadge;
+
+      // Update Channels
+      const fbReach = document.getElementById('fb-reach-val');
+      const fbEng = document.getElementById('fb-eng-val');
+      const fbFollowers = document.getElementById('fb-followers-val');
+      const fbLeads = document.getElementById('fb-leads-val');
+      const fbTopPost = document.getElementById('fb-top-post');
+      if (fbReach) fbReach.textContent = data.channels.fb.reach;
+      if (fbEng) fbEng.textContent = data.channels.fb.eng;
+      if (fbFollowers) fbFollowers.textContent = data.channels.fb.followers;
+      if (fbLeads) fbLeads.textContent = data.channels.fb.leads;
+      if (fbTopPost) fbTopPost.textContent = data.channels.fb.topPost;
+
+      const webGscClicks = document.getElementById('web-gsc-clicks-val');
+      const webGscImpr = document.getElementById('web-gsc-impr-val');
+      const webGa4Users = document.getElementById('web-ga4-users-val');
+      const webLeads = document.getElementById('web-leads-val');
+      const webTopKeyword = document.getElementById('web-top-keyword');
+      if (webGscClicks) webGscClicks.textContent = data.channels.web.gscClicks;
+      if (webGscImpr) webGscImpr.textContent = data.channels.web.gscImpr;
+      if (webGa4Users) webGa4Users.textContent = data.channels.web.ga4Users;
+      if (webLeads) webLeads.textContent = data.channels.web.leads;
+      if (webTopKeyword) webTopKeyword.textContent = data.channels.web.topKeyword;
+
+      const ttViews = document.getElementById('tt-views-val');
+      const ttRetention = document.getElementById('tt-retention-val');
+      const ttFollowers = document.getElementById('tt-followers-val');
+      const ttLeads = document.getElementById('tt-leads-val');
+      const ttTopClip = document.getElementById('tt-top-clip');
+      if (ttViews) ttViews.textContent = data.channels.tt.views;
+      if (ttRetention) ttRetention.textContent = data.channels.tt.retention;
+      if (ttFollowers) ttFollowers.textContent = data.channels.tt.followers;
+      if (ttLeads) ttLeads.textContent = data.channels.tt.leads;
+      if (ttTopClip) ttTopClip.textContent = data.channels.tt.topClip;
+
+      const ytViews = document.getElementById('yt-views-val');
+      const ytWatch = document.getElementById('yt-watch-val');
+      const ytSub = document.getElementById('yt-sub-val');
+      const ytLeads = document.getElementById('yt-leads-val');
+      const ytTopVideo = document.getElementById('yt-top-video');
+      if (ytViews) ytViews.textContent = data.channels.yt.views;
+      if (ytWatch) ytWatch.textContent = data.channels.yt.watchTime;
+      if (ytSub) ytSub.textContent = data.channels.yt.subs;
+      if (ytLeads) ytLeads.textContent = data.channels.yt.leads;
+      if (ytTopVideo) ytTopVideo.textContent = data.channels.yt.topVideo;
+
+      // Update Insights
+      const insightFb = document.getElementById('insight-fb');
+      const insightWeb = document.getElementById('insight-web');
+      const insightVideo = document.getElementById('insight-video');
+      if (insightFb) insightFb.innerHTML = data.insights.fb;
+      if (insightWeb) insightWeb.innerHTML = data.insights.web;
+      if (insightVideo) insightVideo.innerHTML = data.insights.video;
+
+      // Update Leads Breakdown Legend
+      const leadLegFb = document.getElementById('lead-legend-fb');
+      const leadLegWeb = document.getElementById('lead-legend-web');
+      const leadLegTt = document.getElementById('lead-legend-tt');
+      const leadLegYt = document.getElementById('lead-legend-yt');
+      if (leadLegFb) leadLegFb.textContent = data.leadsAttribution.legend.fb;
+      if (leadLegWeb) leadLegWeb.textContent = data.leadsAttribution.legend.web;
+      if (leadLegTt) leadLegTt.textContent = data.leadsAttribution.legend.tt;
+      if (leadLegYt) leadLegYt.textContent = data.leadsAttribution.legend.yt;
+
+      // Render Charts & Tables
+      renderMarketingCharts(data);
+      renderReportContentList(data.topContents);
+    }
+
+    function renderMarketingCharts(data) {
+      if (typeof Chart === 'undefined') {
+        console.warn('Chart.js chưa sẵn sàng.');
+        return;
+      }
+
+      // Chart 1: Multi-Channel Trendlines
+      const trendCanvas = document.getElementById('chart-marketing-trend');
+      if (trendCanvas) {
+        const trendCtx = trendCanvas.getContext('2d');
+        if (marketingTrendChartInstance) {
+          marketingTrendChartInstance.destroy();
+        }
+
+        marketingTrendChartInstance = new Chart(trendCtx, {
+          type: 'line',
+          data: {
+            labels: data.trendChart.labels,
+            datasets: [
+              {
+                label: 'Facebook Reach',
+                data: data.trendChart.facebook,
+                borderColor: '#1877F2',
+                backgroundColor: 'rgba(24, 119, 242, 0.08)',
+                borderWidth: 2.5,
+                fill: true,
+                tension: 0.35,
+                pointRadius: 4,
+                pointHoverRadius: 6
+              },
+              {
+                label: 'TikTok Views',
+                data: data.trendChart.tiktok,
+                borderColor: '#0F172A',
+                backgroundColor: 'rgba(15, 23, 42, 0.04)',
+                borderWidth: 2.5,
+                fill: true,
+                tension: 0.35,
+                pointRadius: 4,
+                pointHoverRadius: 6
+              },
+              {
+                label: 'YouTube Views',
+                data: data.trendChart.youtube,
+                borderColor: '#EF4444',
+                backgroundColor: 'transparent',
+                borderWidth: 2,
+                borderDash: [5, 5],
+                tension: 0.35,
+                pointRadius: 3,
+                pointHoverRadius: 5
+              },
+              {
+                label: 'Website Visits',
+                data: data.trendChart.website,
+                borderColor: '#10B981',
+                backgroundColor: 'transparent',
+                borderWidth: 2,
+                tension: 0.35,
+                pointRadius: 3,
+                pointHoverRadius: 5
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+              mode: 'index',
+              intersect: false,
+            },
+            plugins: {
+              legend: {
+                display: false
+              },
+              tooltip: {
+                backgroundColor: '#1E293B',
+                titleFont: { family: 'Plus Jakarta Sans', size: 12, weight: 'bold' },
+                bodyFont: { family: 'Plus Jakarta Sans', size: 11 },
+                padding: 10,
+                cornerRadius: 12
+              }
+            },
+            scales: {
+              x: {
+                grid: { display: false },
+                ticks: { font: { family: 'Plus Jakarta Sans', size: 11 }, color: '#64748B' }
+              },
+              y: {
+                grid: { color: '#F1F5F9' },
+                ticks: {
+                  font: { family: 'Plus Jakarta Sans', size: 11 },
+                  color: '#64748B',
+                  callback: function(value) {
+                    if (value >= 1000) return (value / 1000) + 'K';
+                    return value;
+                  }
+                }
+              }
+            }
+          }
+        });
+      }
+
+      // Chart 2: Leads Attribution Donut
+      const donutCanvas = document.getElementById('chart-leads-attribution');
+      if (donutCanvas) {
+        const donutCtx = donutCanvas.getContext('2d');
+        if (leadsAttributionChartInstance) {
+          leadsAttributionChartInstance.destroy();
+        }
+
+        leadsAttributionChartInstance = new Chart(donutCtx, {
+          type: 'doughnut',
+          data: {
+            labels: ['Facebook Messenger', 'Website Form / Zalo', 'TikTok Bio Link', 'YouTube Links'],
+            datasets: [{
+              data: data.leadsAttribution.values,
+              backgroundColor: ['#1877F2', '#10B981', '#0F172A', '#EF4444'],
+              borderWidth: 3,
+              borderColor: '#FFFFFF',
+              hoverOffset: 6
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '70%',
+            plugins: {
+              legend: {
+                display: false
+              },
+              tooltip: {
+                backgroundColor: '#1E293B',
+                titleFont: { family: 'Plus Jakarta Sans', size: 12, weight: 'bold' },
+                bodyFont: { family: 'Plus Jakarta Sans', size: 11 },
+                padding: 10,
+                cornerRadius: 12
+              }
+            }
+          }
+        });
+      }
+    }
+
+    function renderReportContentList(items) {
+      const filtered = (currentContentChannelFilter === 'all')
+        ? items
+        : items.filter(item => item.channelKey === currentContentChannelFilter);
+
+      // Desktop Table Body
+      const tableBody = document.getElementById('report-content-table-body');
+      if (tableBody) {
+        if (filtered.length === 0) {
+          tableBody.innerHTML = `<tr><td colspan="6" class="py-8 text-center text-slate-400 font-medium">Không có nội dung nào trong kênh này kỳ này.</td></tr>`;
+        } else {
+          tableBody.innerHTML = filtered.map(item => `
+            <tr class="hover:bg-slate-50/80 transition-colors">
+              <td class="py-3 px-4 font-bold text-slate-800 max-w-xs sm:max-w-sm truncate">
+                ${item.title}
+              </td>
+              <td class="py-3 px-3">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold border ${item.formatBadge}">
+                  ${item.format}
+                </span>
+              </td>
+              <td class="py-3 px-3 text-right font-black text-slate-700">
+                ${item.reach}
+              </td>
+              <td class="py-3 px-3 text-right font-bold text-slate-600">
+                ${item.engagement}
+              </td>
+              <td class="py-3 px-3 text-right font-black text-emerald-600">
+                ${item.leads}
+              </td>
+              <td class="py-3 px-4 text-center">
+                <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-black ${item.scoreBadge}">
+                  ${item.score}
+                </span>
+              </td>
+            </tr>
+          `).join('');
+        }
+      }
+
+      // Mobile Card List
+      const mobileList = document.getElementById('report-content-mobile-cards');
+      if (mobileList) {
+        if (filtered.length === 0) {
+          mobileList.innerHTML = `<div class="p-6 text-center text-slate-400 text-xs">Không có nội dung phù hợp bộ lọc.</div>`;
+        } else {
+          mobileList.innerHTML = filtered.map(item => `
+            <div class="p-4 rounded-2xl bg-slate-50/80 border border-slate-200/80 space-y-2">
+              <div class="flex items-start justify-between gap-2">
+                <h5 class="font-bold text-xs text-slate-800 leading-snug">${item.title}</h5>
+                <span class="px-2 py-0.5 rounded-full text-[9px] font-black flex-shrink-0 ${item.scoreBadge}">
+                  ${item.score}
+                </span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[9.5px] font-bold border ${item.formatBadge}">
+                  ${item.format}
+                </span>
+                <span class="text-[10px] text-slate-400 font-semibold">${item.channel}</span>
+              </div>
+              <div class="grid grid-cols-3 gap-2 pt-2 border-t border-slate-200/60 text-center text-[10px]">
+                <div>
+                  <span class="text-slate-400 block">Lượt xem</span>
+                  <strong class="text-slate-700 font-bold">${item.reach}</strong>
+                </div>
+                <div>
+                  <span class="text-slate-400 block">Tương tác</span>
+                  <strong class="text-slate-700 font-bold">${item.engagement}</strong>
+                </div>
+                <div>
+                  <span class="text-slate-400 block">Leads</span>
+                  <strong class="text-emerald-600 font-bold">${item.leads}</strong>
+                </div>
+              </div>
+            </div>
+          `).join('');
+        }
+      }
+    }
+
+    function filterReportContentChannel(channel, btn) {
+      currentContentChannelFilter = channel;
+      const btns = document.querySelectorAll('#report-content-channel-tabs .content-tab-btn');
+      btns.forEach(b => {
+        b.classList.remove('active', 'bg-white', 'text-potato-navy', 'shadow-xs', 'font-bold');
+        b.classList.add('text-slate-600', 'font-semibold');
+      });
+      if (btn) {
+        btn.classList.add('active', 'bg-white', 'text-potato-navy', 'shadow-xs', 'font-bold');
+        btn.classList.remove('text-slate-600', 'font-semibold');
+      }
+
+      const data = MARKETING_REPORT_DATA[currentReportTimeframe] || MARKETING_REPORT_DATA.week;
+      renderReportContentList(data.topContents);
+    }
+
+    function handleCampusFilterChange(campusId) {
+      const campusNames = {
+        all: 'Tất cả cơ sở',
+        cs1: 'CS1: Phú Cường (37 Ngô Quyền)',
+        cs2: 'CS2: Hưng Định (9 KP Hưng Phước)'
+      };
+      showToast(`Đã lọc dữ liệu báo cáo theo: ${campusNames[campusId] || campusId}`, 'info');
+      switchReportTimeframe(currentReportTimeframe);
+    }
+
+    function refreshReportData() {
+      const icon = document.getElementById('report-refresh-icon');
+      if (icon) icon.classList.add('fa-spin');
+
+      setTimeout(() => {
+        if (icon) icon.classList.remove('fa-spin');
+        switchReportTimeframe(currentReportTimeframe);
+        showToast('✓ Đã cập nhật và đồng bộ số liệu Marketing mới nhất từ các kênh!', 'success');
+      }, 500);
+    }
+
+    function exportMarketingReport() {
+      window.print();
     }
 
     // Initialize on DOM ready
