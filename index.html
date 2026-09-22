@@ -2160,7 +2160,7 @@
                 </span>
               </div>
               <p class="text-xs sm:text-[13px] text-blue-100/90 leading-relaxed max-w-2xl">
-                Bảng điều khiển hợp nhất đo lường chỉ số <strong>Fanpage • Website (GSC & GA4) • TikTok • YouTube</strong> của hệ thống Potato English.
+                Bảng điều khiển hợp nhất đo lường chỉ số <strong>Fanpage • Website (GSC & GA4) • Google Business (Maps) • TikTok • YouTube</strong> của hệ thống Potato English.
               </p>
             </div>
           </div>
@@ -2293,8 +2293,8 @@
           </div>
         </div>
 
-        <!-- 4. MA TRẬN 4 KÊNH TRỌNG ĐIỂM (GRID 4 CỘT CHUYÊN SÂU) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+        <!-- 4. MA TRẬN 5 KÊNH TRỌNG ĐIỂM (GRID 5 CỘT RESPONSIVE) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
 
           <!-- KÊNH 1: FACEBOOK FANPAGE -->
           <div class="bg-white rounded-3xl border border-slate-200/90 p-5 shadow-card flex flex-col justify-between hover:border-blue-300 transition-all">
@@ -2396,7 +2396,57 @@
             </div>
           </div>
 
-          <!-- KÊNH 3: TIKTOK -->
+          <!-- KÊNH 3: GOOGLE BUSINESS PROFILE (MAPS) -->
+          <div class="bg-white rounded-3xl border border-slate-200/90 p-5 shadow-card flex flex-col justify-between hover:border-amber-300 transition-all">
+            <div>
+              <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center text-sm">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-extrabold text-xs text-slate-800">Google Business</h4>
+                    <span class="text-[10px] text-slate-400">Maps CS1 & CS2</span>
+                  </div>
+                </div>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-50 text-amber-600 border border-amber-200/60 flex items-center gap-1">
+                  <i class="fa-solid fa-star text-[9px] text-amber-500"></i> 4.9 (128★)
+                </span>
+              </div>
+
+              <!-- Metrics List -->
+              <div class="space-y-2.5 text-xs">
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500">Lượt xem hồ sơ & Maps:</span>
+                  <strong class="text-slate-800 font-black" id="gbp-views-val">16,800 lượt</strong>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500">Yêu cầu chỉ đường:</span>
+                  <strong class="text-slate-800 font-black" id="gbp-directions-val">340 lượt</strong>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-slate-500">Lượt gọi trực tiếp:</span>
+                  <strong class="text-emerald-600 font-black" id="gbp-calls-val">85 cuộc gọi</strong>
+                </div>
+                <div class="flex items-center justify-between bg-amber-50/70 p-2 rounded-xl border border-amber-100">
+                  <span class="text-amber-900 font-semibold flex items-center gap-1.5">
+                    <i class="fa-solid fa-phone-volume text-amber-600"></i> Leads gọi & ghé thăm:
+                  </span>
+                  <strong class="text-amber-700 font-black" id="gbp-leads-val">42 leads</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Top Location Snippet -->
+            <div class="mt-4 pt-3 border-t border-slate-100">
+              <span class="text-[10px] font-bold uppercase text-slate-400 tracking-wider block mb-1">Cơ sở tương tác cao nhất:</span>
+              <p class="text-xs font-bold text-slate-700 line-clamp-2" id="gbp-top-branch">
+                📍 CS1: 37 Ngô Quyền, P. Phú Cường (58% tương tác)
+              </p>
+            </div>
+          </div>
+
+          <!-- KÊNH 4: TIKTOK -->
           <div class="bg-white rounded-3xl border border-slate-200/90 p-5 shadow-card flex flex-col justify-between hover:border-slate-800 transition-all">
             <div>
               <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
@@ -2515,9 +2565,10 @@
               <!-- Mini Legend Indicator -->
               <div class="flex flex-wrap items-center gap-2.5 text-[11px] font-semibold text-slate-600">
                 <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span> Facebook</span>
+                <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span> Website</span>
+                <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Google Maps</span>
                 <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-slate-900"></span> TikTok</span>
                 <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-red-600"></span> YouTube</span>
-                <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span> Website</span>
               </div>
             </div>
 
@@ -2541,22 +2592,26 @@
             </div>
 
             <!-- Breakdown Legend Summary -->
-            <div class="grid grid-cols-2 gap-2 pt-3 border-t border-slate-100 text-xs mt-2" id="leads-breakdown-legend">
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-3 border-t border-slate-100 text-xs mt-2" id="leads-breakdown-legend">
               <div class="p-2 rounded-xl bg-blue-50/60 border border-blue-100">
                 <span class="text-slate-500 text-[10px] block">Fanpage FB</span>
-                <strong class="text-blue-700 font-bold" id="lead-legend-fb">92 leads (50%)</strong>
+                <strong class="text-blue-700 font-bold" id="lead-legend-fb">92 leads (40%)</strong>
               </div>
               <div class="p-2 rounded-xl bg-emerald-50/60 border border-emerald-100">
                 <span class="text-slate-500 text-[10px] block">Website Form</span>
-                <strong class="text-emerald-700 font-bold" id="lead-legend-web">52 leads (28%)</strong>
+                <strong class="text-emerald-700 font-bold" id="lead-legend-web">52 leads (23%)</strong>
+              </div>
+              <div class="p-2 rounded-xl bg-amber-50/60 border border-amber-100">
+                <span class="text-slate-500 text-[10px] block">Google Maps</span>
+                <strong class="text-amber-700 font-bold" id="lead-legend-gbp">42 leads (18%)</strong>
               </div>
               <div class="p-2 rounded-xl bg-slate-50 border border-slate-200">
                 <span class="text-slate-500 text-[10px] block">TikTok Bio</span>
-                <strong class="text-slate-800 font-bold" id="lead-legend-tt">26 leads (14%)</strong>
+                <strong class="text-slate-800 font-bold" id="lead-legend-tt">26 leads (12%)</strong>
               </div>
-              <div class="p-2 rounded-xl bg-red-50/60 border border-red-100">
+              <div class="p-2 rounded-xl bg-red-50/60 border border-red-100 col-span-2 sm:col-span-1">
                 <span class="text-slate-500 text-[10px] block">YouTube</span>
-                <strong class="text-red-700 font-bold" id="lead-legend-yt">15 leads (8%)</strong>
+                <strong class="text-red-700 font-bold" id="lead-legend-yt">15 leads (7%)</strong>
               </div>
             </div>
           </div>
@@ -2571,7 +2626,7 @@
                 <i class="fa-solid fa-ranking-star text-potato-yellow"></i>
                 Bảng Xếp Hạng Nội Dung Xuất Sắc Nhất Kỳ
               </h3>
-              <p class="text-xs text-slate-400">Các bài viết, video và landing page đem lại tỷ lệ tương tác & chuyển đổi cao nhất</p>
+              <p class="text-xs text-slate-400">Các bài viết, video, địa điểm Maps và landing page đem lại hiệu quả cao nhất</p>
             </div>
 
             <!-- Content Channel Switcher Tabs -->
@@ -2584,6 +2639,9 @@
               </button>
               <button onclick="filterReportContentChannel('website', this)" class="content-tab-btn px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all whitespace-nowrap">
                 🌐 Website
+              </button>
+              <button onclick="filterReportContentChannel('gbp', this)" class="content-tab-btn px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all whitespace-nowrap">
+                📍 Google Maps
               </button>
               <button onclick="filterReportContentChannel('tiktok', this)" class="content-tab-btn px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all whitespace-nowrap">
                 🎵 TikTok
@@ -2631,7 +2689,7 @@
             </div>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs" id="report-actionable-insights">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 text-xs" id="report-actionable-insights">
             <div class="p-3.5 rounded-2xl bg-white/90 border border-slate-200/80 shadow-2xs space-y-1.5">
               <span class="font-bold text-blue-700 flex items-center gap-1.5">
                 <i class="fa-brands fa-facebook text-sm"></i> Tối ưu Fanpage Facebook
@@ -2647,6 +2705,15 @@
               </span>
               <p class="text-slate-600 leading-relaxed text-[11.5px]" id="insight-web">
                 Từ khóa <em>"tiếng anh trẻ em thủ dầu một"</em> đã đạt Top 3. Nên bổ sung bài viết giải đáp thắc mắc phụ huynh xoay quanh chứng chỉ Cambridge Starters/Movers để đón đầu chuyển đổi.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-white/90 border border-slate-200/80 shadow-2xs space-y-1.5">
+              <span class="font-bold text-amber-700 flex items-center gap-1.5">
+                <i class="fa-solid fa-map-location-dot text-sm"></i> Google Business Profile
+              </span>
+              <p class="text-slate-600 leading-relaxed text-[11.5px]" id="insight-gbp">
+                Điểm đánh giá duy trì 4.9⭐ tại cả 2 cơ sở. Cần chủ động gửi tin nhắn cảm ơn và xin review từ phụ huynh các bé vừa hoàn thành khóa hè hoặc đạt điểm cao Starters/Movers để tăng uy tín tìm kiếm địa phương.
               </p>
             </div>
 
@@ -9012,17 +9079,17 @@
       week: {
         periodLabel: '📅 Kỳ: Thứ 2, 16/09 - Chủ nhật, 22/09/2026 (Tuần này)',
         kpi: {
-          totalReach: '145,280',
-          totalReachBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +18.4%',
+          totalReach: '162,080',
+          totalReachBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +21.2%',
           reachIsPositive: true,
-          totalEngagements: '12,450',
-          totalEngagementsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +8.2%',
+          totalEngagements: '13,275',
+          totalEngagementsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +10.5%',
           engIsPositive: true,
           websiteVisits: '8,920',
           websiteVisitsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +24.1%',
           webIsPositive: true,
-          totalLeads: '185',
-          totalLeadsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +15.6%',
+          totalLeads: '227',
+          totalLeadsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +18.5%',
           leadsIsPositive: true,
         },
         channels: {
@@ -9039,6 +9106,13 @@
             ga4Users: '4,850 khách',
             leads: '52 leads',
             topKeyword: '🔍 "tiếng anh trẻ em thủ dầu một" (Top 3)'
+          },
+          gbp: {
+            views: '16,800 lượt',
+            directions: '340 yêu cầu',
+            calls: '85 cuộc gọi',
+            leads: '42 leads',
+            topBranch: '📍 Cơ sở 1: Phú Cường (Thủ Dầu Một) - 4.9⭐ (128 đánh giá)'
           },
           tt: {
             views: '52,300',
@@ -9060,20 +9134,23 @@
           facebook: [8200, 9500, 11200, 8900, 10400, 12800, 14500],
           tiktok: [6100, 7200, 8400, 6800, 7900, 9600, 11300],
           youtube: [2100, 2400, 2800, 2300, 2700, 3400, 3900],
-          website: [1100, 1350, 1500, 1250, 1400, 1620, 1800]
+          website: [1100, 1350, 1500, 1250, 1400, 1620, 1800],
+          gbp: [1900, 2100, 2400, 2200, 2500, 2900, 2800]
         },
         leadsAttribution: {
-          values: [92, 52, 26, 15],
+          values: [92, 52, 42, 26, 15],
           legend: {
-            fb: '92 leads (50%)',
-            web: '52 leads (28%)',
-            tt: '26 leads (14%)',
-            yt: '15 leads (8%)'
+            fb: '92 leads (40%)',
+            web: '52 leads (23%)',
+            gbp: '42 leads (19%)',
+            tt: '26 leads (11%)',
+            yt: '15 leads (7%)'
           }
         },
         insights: {
           fb: 'Định dạng <strong>Album 4 ảnh 1:1</strong> mang lại tương tác cao gấp 2.4 lần bài viết thường. Cần duy trì micro-copywriting dưới 80 từ theo chỉ đạo và tiếp tục vinh danh học viên nhí.',
           web: 'Từ khóa <em>"tiếng anh trẻ em thủ dầu một"</em> đã đạt Top 3. Nên bổ sung bài viết giải đáp thắc mắc phụ huynh xoay quanh chứng chỉ Cambridge Starters/Movers để đón đầu chuyển đổi.',
+          gbp: 'Google Maps ghi nhận <strong>340 lượt hỏi đường</strong> và <strong>85 cuộc gọi trực tiếp</strong>. Cơ sở 1 Phú Cường dẫn đầu với 128 đánh giá 5⭐. Cần duy trì phản hồi 100% review trong 24h và đăng ảnh hoạt động ngoại khóa lên Google Updates hàng tuần.',
           video: 'Video có sự xuất hiện của Mascot Leo đạt tỷ lệ giữ chân 42.5%. Cần sản xuất thêm 2 clip/tuần tập trung vào tình huống giao tiếp vui nhộn giữa học viên và giáo viên bản ngữ.'
         },
         topContents: [
@@ -9087,6 +9164,18 @@
             engagement: '1,820 (7.4%)',
             leads: '28 leads',
             score: 'Xuất sắc',
+            scoreBadge: 'bg-emerald-100 text-emerald-800'
+          },
+          {
+            title: '📍 Hồ sơ Cơ sở 1: 30-32 Huỳnh Văn Lũy, P. Phú Cường, TP. Thủ Dầu Một',
+            channel: 'Google Business Profile',
+            channelKey: 'gbp',
+            format: 'Google Maps Profile',
+            formatBadge: 'bg-amber-50 text-amber-700 border-amber-200',
+            reach: '11,200 views',
+            engagement: '235 chỉ đường / gọi',
+            leads: '28 hotline leads',
+            score: 'Xuất sắc (4.9⭐)',
             scoreBadge: 'bg-emerald-100 text-emerald-800'
           },
           {
@@ -9111,6 +9200,18 @@
             engagement: '2m 45s TB',
             leads: '19 form đăng ký',
             score: 'Chuyển đổi cao',
+            scoreBadge: 'bg-blue-100 text-blue-800'
+          },
+          {
+            title: '📍 Hồ sơ Cơ sở 2: 45A Đường CMT8, P. Hưng Định, TP. Thuận An',
+            channel: 'Google Business Profile',
+            channelKey: 'gbp',
+            format: 'Google Maps Profile',
+            formatBadge: 'bg-amber-50 text-amber-700 border-amber-200',
+            reach: '5,600 views',
+            engagement: '105 chỉ đường / gọi',
+            leads: '14 hotline leads',
+            score: 'Tăng trưởng tốt',
             scoreBadge: 'bg-blue-100 text-blue-800'
           },
           {
@@ -9142,17 +9243,17 @@
       month: {
         periodLabel: '📅 Kỳ: Tháng 09/2026 (Tháng này)',
         kpi: {
-          totalReach: '584,600',
-          totalReachBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +22.5%',
+          totalReach: '652,000',
+          totalReachBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +24.8%',
           reachIsPositive: true,
-          totalEngagements: '49,800',
-          totalEngagementsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +14.2%',
+          totalEngagements: '53,200',
+          totalEngagementsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +16.5%',
           engIsPositive: true,
           websiteVisits: '35,400',
           websiteVisitsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +19.8%',
           webIsPositive: true,
-          totalLeads: '742',
-          totalLeadsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +18.0%',
+          totalLeads: '912',
+          totalLeadsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +22.0%',
           leadsIsPositive: true,
         },
         channels: {
@@ -9169,6 +9270,13 @@
             ga4Users: '19,400 khách',
             leads: '208 leads',
             topKeyword: '🔍 "học tiếng anh thiếu nhi bình dương" (Top 4)'
+          },
+          gbp: {
+            views: '67,400 lượt',
+            directions: '1,420 yêu cầu',
+            calls: '348 cuộc gọi',
+            leads: '170 leads',
+            topBranch: '📍 Cơ sở 1 Phú Cường (65% lượt tương tác), Cơ sở 2 Hưng Định (35%)'
           },
           tt: {
             views: '210,000',
@@ -9190,20 +9298,23 @@
           facebook: [62000, 71000, 68500, 73500],
           tiktok: [46000, 53000, 52300, 58700],
           youtube: [16500, 18200, 18400, 20900],
-          website: [8100, 8900, 8920, 9480]
+          website: [8100, 8900, 8920, 9480],
+          gbp: [15200, 16800, 17400, 18000]
         },
         leadsAttribution: {
-          values: [368, 208, 111, 55],
+          values: [368, 208, 170, 111, 55],
           legend: {
-            fb: '368 leads (50%)',
-            web: '208 leads (28%)',
-            tt: '111 leads (15%)',
-            yt: '55 leads (7%)'
+            fb: '368 leads (40%)',
+            web: '208 leads (23%)',
+            gbp: '170 leads (19%)',
+            tt: '111 leads (12%)',
+            yt: '55 leads (6%)'
           }
         },
         insights: {
           fb: 'Chiến dịch tuyển sinh Back to School tháng 9 thu hút lượng inbox tăng trưởng 18%. Lưu ý duy trì lịch đăng Top Student cố định ngày 12 hàng tháng không để sót học viên.',
           web: 'Lưu lượng truy cập Organic Search từ phụ huynh Bình Dương chiếm 62% toàn web. Nên phát triển thêm cụm bài viết so sánh các kỳ thi Cambridge Starters/Movers/Flyers.',
+          gbp: 'Google Maps là kênh chuyển đổi tại chỗ mạnh nhất: 1,420 phụ huynh tìm đường ghé trung tâm trong tháng. Tỷ lệ chuyển đổi từ cuộc gọi Maps sang lịch hẹn test đạt 48.8%.',
           video: 'Các video ngắn phản ánh biểu cảm tự nhiên của học sinh Friendly Kid (4-6 tuổi) tạo thiện cảm lớn nhất cho phụ huynh. Cần chuẩn hóa kịch bản ngắn 20-30 giây.'
         },
         topContents: [
@@ -9217,6 +9328,18 @@
             engagement: '4,350 (9.0%)',
             leads: '64 leads',
             score: 'Đỉnh cao',
+            scoreBadge: 'bg-emerald-100 text-emerald-800'
+          },
+          {
+            title: '📍 Hồ sơ Cơ sở 1: 30-32 Huỳnh Văn Lũy, P. Phú Cường, TP. Thủ Dầu Một',
+            channel: 'Google Business Profile',
+            channelKey: 'gbp',
+            format: 'Google Maps Profile',
+            formatBadge: 'bg-amber-50 text-amber-700 border-amber-200',
+            reach: '44,800 views',
+            engagement: '980 chỉ đường / gọi',
+            leads: '115 hotline leads',
+            score: 'Top Địa Phương',
             scoreBadge: 'bg-emerald-100 text-emerald-800'
           },
           {
@@ -9244,6 +9367,18 @@
             scoreBadge: 'bg-blue-100 text-blue-800'
           },
           {
+            title: '📍 Hồ sơ Cơ sở 2: 45A Đường CMT8, P. Hưng Định, TP. Thuận An',
+            channel: 'Google Business Profile',
+            channelKey: 'gbp',
+            format: 'Google Maps Profile',
+            formatBadge: 'bg-amber-50 text-amber-700 border-amber-200',
+            reach: '22,600 views',
+            engagement: '440 chỉ đường / gọi',
+            leads: '55 hotline leads',
+            score: 'Tăng trưởng tốt',
+            scoreBadge: 'bg-blue-100 text-blue-800'
+          },
+          {
             title: '🎥 Series 10 câu giao tiếp tiếng Anh ba mẹ nói cùng con mỗi tối',
             channel: 'YouTube',
             channelKey: 'youtube',
@@ -9260,17 +9395,17 @@
       quarter: {
         periodLabel: '📅 Kỳ: Quý 3/2026 (Tháng 7, 8, 9 - 3 Tháng Tuyển Sinh)',
         kpi: {
-          totalReach: '1,750,000',
-          totalReachBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +28.4%',
+          totalReach: '1,960,000',
+          totalReachBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +31.5%',
           reachIsPositive: true,
-          totalEngagements: '152,000',
-          totalEngagementsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +19.1%',
+          totalEngagements: '163,500',
+          totalEngagementsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +22.4%',
           engIsPositive: true,
           websiteVisits: '108,000',
           websiteVisitsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +26.5%',
           webIsPositive: true,
-          totalLeads: '2,250',
-          totalLeadsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +21.4%',
+          totalLeads: '2,780',
+          totalLeadsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +25.8%',
           leadsIsPositive: true,
         },
         channels: {
@@ -9287,6 +9422,13 @@
             ga4Users: '59,000 khách',
             leads: '630 leads',
             topKeyword: '🔍 "trung tâm tiếng anh trẻ em bình dương" (Top 2)'
+          },
+          gbp: {
+            views: '210,000 lượt',
+            directions: '4,650 yêu cầu',
+            calls: '1,120 cuộc gọi',
+            leads: '530 leads',
+            topBranch: '📍 Cả 2 Cơ sở đều đạt huy hiệu Top Local Business trên Google Maps'
           },
           tt: {
             views: '630,000',
@@ -9308,20 +9450,23 @@
           facebook: [255000, 290000, 275000],
           tiktok: [195000, 225000, 210000],
           youtube: [69000, 82000, 74000],
-          website: [32000, 40600, 35400]
+          website: [32000, 40600, 35400],
+          gbp: [62000, 75000, 73000]
         },
         leadsAttribution: {
-          values: [1120, 630, 335, 165],
+          values: [1120, 630, 530, 335, 165],
           legend: {
-            fb: '1,120 leads (50%)',
-            web: '630 leads (28%)',
-            tt: '335 leads (15%)',
-            yt: '165 leads (7%)'
+            fb: '1,120 leads (40%)',
+            web: '630 leads (23%)',
+            gbp: '530 leads (19%)',
+            tt: '335 leads (12%)',
+            yt: '165 leads (6%)'
           }
         },
         insights: {
           fb: 'Quý 3 là cao điểm tuyển sinh, Fanpage đạt 1,120 leads, trong đó 68% chuyển đổi thành công sang buổi đánh giá năng lực & học thử 0đ.',
           web: 'Organic Search duy trì vị trí top 1-3 cho 8 từ khóa trọng điểm khu vực Thủ Dầu Một & Hưng Định.',
+          gbp: 'Trong quý 3 cao điểm tuyển sinh hè và năm học mới, 530 leads trực tiếp đến từ Google Maps và cuộc gọi hotline gắn định vị, tiết kiệm chi phí quảng cáo tìm kiếm địa phương.',
           video: 'Kênh TikTok đã vượt mốc 18K followers, trở thành kênh lan tỏa nhận diện thương hiệu hàng đầu cho thế hệ phụ huynh Gen Z/Millennials.'
         },
         topContents: [
@@ -9335,6 +9480,18 @@
             engagement: '11,200 (9.7%)',
             leads: '182 leads',
             score: 'Kỷ lục',
+            scoreBadge: 'bg-emerald-100 text-emerald-800'
+          },
+          {
+            title: '📍 Hồ sơ Cơ sở 1: 30-32 Huỳnh Văn Lũy, P. Phú Cường, TP. Thủ Dầu Một',
+            channel: 'Google Business Profile',
+            channelKey: 'gbp',
+            format: 'Google Maps Profile',
+            formatBadge: 'bg-amber-50 text-amber-700 border-amber-200',
+            reach: '142,000 views',
+            engagement: '3,200 chỉ đường / gọi',
+            leads: '360 hotline leads',
+            score: 'Top 1 Khu Vực',
             scoreBadge: 'bg-emerald-100 text-emerald-800'
           },
           {
@@ -9360,23 +9517,35 @@
             leads: '245 đăng ký',
             score: 'Chuyển đổi cao',
             scoreBadge: 'bg-blue-100 text-blue-800'
+          },
+          {
+            title: '📍 Hồ sơ Cơ sở 2: 45A Đường CMT8, P. Hưng Định, TP. Thuận An',
+            channel: 'Google Business Profile',
+            channelKey: 'gbp',
+            format: 'Google Maps Profile',
+            formatBadge: 'bg-amber-50 text-amber-700 border-amber-200',
+            reach: '68,000 views',
+            engagement: '1,450 chỉ đường / gọi',
+            leads: '170 hotline leads',
+            score: 'Tăng trưởng tốt',
+            scoreBadge: 'bg-blue-100 text-blue-800'
           }
         ]
       },
       year: {
         periodLabel: '📅 Toàn Niên Độ: Năm 2026 (YTD)',
         kpi: {
-          totalReach: '6,920,000',
-          totalReachBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +42.6%',
+          totalReach: '7,760,000',
+          totalReachBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +45.8%',
           reachIsPositive: true,
-          totalEngagements: '610,000',
-          totalEngagementsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +35.8%',
+          totalEngagements: '655,000',
+          totalEngagementsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +38.6%',
           engIsPositive: true,
           websiteVisits: '430,000',
           websiteVisitsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +38.2%',
           webIsPositive: true,
-          totalLeads: '8,940',
-          totalLeadsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +32.5%',
+          totalLeads: '11,040',
+          totalLeadsBadge: '<i class="fa-solid fa-arrow-trend-up"></i> +36.5%',
           leadsIsPositive: true,
         },
         channels: {
@@ -9393,6 +9562,13 @@
             ga4Users: '235,000 khách',
             leads: '2,510 leads',
             topKeyword: '🔍 "tiếng anh trẻ em bình dương potato english"'
+          },
+          gbp: {
+            views: '840,000 lượt',
+            directions: '18,500 yêu cầu',
+            calls: '4,480 cuộc gọi',
+            leads: '2,100 leads',
+            topBranch: '📍 Cơ sở 1: 180+ Review 5⭐ | Cơ sở 2: 95+ Review 5⭐'
           },
           tt: {
             views: '2,480,000',
@@ -9414,20 +9590,23 @@
           facebook: [720000, 810000, 820000, 900000],
           tiktok: [520000, 610000, 630000, 720000],
           youtube: [195000, 220000, 225000, 250000],
-          website: [95000, 110000, 108000, 117000]
+          website: [95000, 110000, 108000, 117000],
+          gbp: [180000, 220000, 210000, 230000]
         },
         leadsAttribution: {
-          values: [4450, 2510, 1320, 660],
+          values: [4450, 2510, 2100, 1320, 660],
           legend: {
-            fb: '4,450 leads (50%)',
-            web: '2,510 leads (28%)',
-            tt: '1,320 leads (15%)',
-            yt: '660 leads (7%)'
+            fb: '4,450 leads (40%)',
+            web: '2,510 leads (23%)',
+            gbp: '2,100 leads (19%)',
+            tt: '1,320 leads (12%)',
+            yt: '660 leads (6%)'
           }
         },
         insights: {
           fb: 'Hệ thống Marketing Đa Kênh vận hành đúng chiến lược Flywheel: dữ liệu thực tế tại lớp chuyển hóa thành nội dung hấp dẫn, thu hút học viên mới liên tục.',
           web: 'Website trở thành tài sản số uy tín hàng đầu khu vực Bình Dương, tỷ lệ phụ huynh tìm kiếm trực tiếp thương hiệu Potato English tăng 48%.',
+          gbp: 'Google Business Profile củng cố vị thế địa phương vững chắc cho Potato English tại Thủ Dầu Một và Thuận An, đóng góp 2,100 leads chất lượng cao với tỷ lệ đến lớp học thử trên 70%.',
           video: 'Hệ sinh thái video ngắn (TikTok + YouTube Shorts + FB Reels) khẳng định ưu thế vượt trội về chi phí tiếp cận (CPM rẻ hơn 60% so với quảng cáo truyền thống).'
         },
         topContents: [
@@ -9441,6 +9620,18 @@
             engagement: '38,500 (9.2%)',
             leads: '512 leads',
             score: 'Kỷ lục năm',
+            scoreBadge: 'bg-emerald-100 text-emerald-800'
+          },
+          {
+            title: '📍 Hồ sơ Cơ sở 1: 30-32 Huỳnh Văn Lũy, P. Phú Cường, TP. Thủ Dầu Một',
+            channel: 'Google Business Profile',
+            channelKey: 'gbp',
+            format: 'Google Maps Profile',
+            formatBadge: 'bg-amber-50 text-amber-700 border-amber-200',
+            reach: '560,000 views',
+            engagement: '12,800 chỉ đường / gọi',
+            leads: '1,420 hotline leads',
+            score: 'Top 1 Bình Dương',
             scoreBadge: 'bg-emerald-100 text-emerald-800'
           },
           {
@@ -9465,6 +9656,18 @@
             engagement: '3m 40s TB',
             leads: '640 form đăng ký',
             score: 'Chuyển đổi cao',
+            scoreBadge: 'bg-blue-100 text-blue-800'
+          },
+          {
+            title: '📍 Hồ sơ Cơ sở 2: 45A Đường CMT8, P. Hưng Định, TP. Thuận An',
+            channel: 'Google Business Profile',
+            channelKey: 'gbp',
+            format: 'Google Maps Profile',
+            formatBadge: 'bg-amber-50 text-amber-700 border-amber-200',
+            reach: '280,000 views',
+            engagement: '5,700 chỉ đường / gọi',
+            leads: '680 hotline leads',
+            score: 'Tăng trưởng tốt',
             scoreBadge: 'bg-blue-100 text-blue-800'
           }
         ]
@@ -9524,7 +9727,7 @@
       if (kpiLeads) kpiLeads.textContent = data.kpi.totalLeads;
       if (kpiLeadsBadge) kpiLeadsBadge.innerHTML = data.kpi.totalLeadsBadge;
 
-      // Update Channels
+      // Update Channels: Facebook
       const fbReach = document.getElementById('fb-reach-val');
       const fbEng = document.getElementById('fb-eng-val');
       const fbFollowers = document.getElementById('fb-followers-val');
@@ -9536,6 +9739,7 @@
       if (fbLeads) fbLeads.textContent = data.channels.fb.leads;
       if (fbTopPost) fbTopPost.textContent = data.channels.fb.topPost;
 
+      // Update Channels: Website
       const webGscClicks = document.getElementById('web-gsc-clicks-val');
       const webGscImpr = document.getElementById('web-gsc-impr-val');
       const webGa4Users = document.getElementById('web-ga4-users-val');
@@ -9547,6 +9751,19 @@
       if (webLeads) webLeads.textContent = data.channels.web.leads;
       if (webTopKeyword) webTopKeyword.textContent = data.channels.web.topKeyword;
 
+      // Update Channels: Google Business Profile (Maps)
+      const gbpViews = document.getElementById('gbp-views-val');
+      const gbpDirections = document.getElementById('gbp-directions-val');
+      const gbpCalls = document.getElementById('gbp-calls-val');
+      const gbpLeads = document.getElementById('gbp-leads-val');
+      const gbpTopBranch = document.getElementById('gbp-top-branch');
+      if (gbpViews) gbpViews.textContent = data.channels.gbp.views;
+      if (gbpDirections) gbpDirections.textContent = data.channels.gbp.directions;
+      if (gbpCalls) gbpCalls.textContent = data.channels.gbp.calls;
+      if (gbpLeads) gbpLeads.textContent = data.channels.gbp.leads;
+      if (gbpTopBranch) gbpTopBranch.textContent = data.channels.gbp.topBranch;
+
+      // Update Channels: TikTok
       const ttViews = document.getElementById('tt-views-val');
       const ttRetention = document.getElementById('tt-retention-val');
       const ttFollowers = document.getElementById('tt-followers-val');
@@ -9558,6 +9775,7 @@
       if (ttLeads) ttLeads.textContent = data.channels.tt.leads;
       if (ttTopClip) ttTopClip.textContent = data.channels.tt.topClip;
 
+      // Update Channels: YouTube
       const ytViews = document.getElementById('yt-views-val');
       const ytWatch = document.getElementById('yt-watch-val');
       const ytSub = document.getElementById('yt-sub-val');
@@ -9572,18 +9790,22 @@
       // Update Insights
       const insightFb = document.getElementById('insight-fb');
       const insightWeb = document.getElementById('insight-web');
+      const insightGbp = document.getElementById('insight-gbp');
       const insightVideo = document.getElementById('insight-video');
       if (insightFb) insightFb.innerHTML = data.insights.fb;
       if (insightWeb) insightWeb.innerHTML = data.insights.web;
+      if (insightGbp) insightGbp.innerHTML = data.insights.gbp;
       if (insightVideo) insightVideo.innerHTML = data.insights.video;
 
-      // Update Leads Breakdown Legend
+      // Update Leads Breakdown Legend (5 Kênh)
       const leadLegFb = document.getElementById('lead-legend-fb');
       const leadLegWeb = document.getElementById('lead-legend-web');
+      const leadLegGbp = document.getElementById('lead-legend-gbp');
       const leadLegTt = document.getElementById('lead-legend-tt');
       const leadLegYt = document.getElementById('lead-legend-yt');
       if (leadLegFb) leadLegFb.textContent = data.leadsAttribution.legend.fb;
       if (leadLegWeb) leadLegWeb.textContent = data.leadsAttribution.legend.web;
+      if (leadLegGbp) leadLegGbp.textContent = data.leadsAttribution.legend.gbp;
       if (leadLegTt) leadLegTt.textContent = data.leadsAttribution.legend.tt;
       if (leadLegYt) leadLegYt.textContent = data.leadsAttribution.legend.yt;
 
@@ -9598,7 +9820,7 @@
         return;
       }
 
-      // Chart 1: Multi-Channel Trendlines
+      // Chart 1: Multi-Channel Trendlines (5 Kênh)
       const trendCanvas = document.getElementById('chart-marketing-trend');
       if (trendCanvas) {
         const trendCtx = trendCanvas.getContext('2d');
@@ -9653,6 +9875,17 @@
                 tension: 0.35,
                 pointRadius: 3,
                 pointHoverRadius: 5
+              },
+              {
+                label: 'Google Maps Views',
+                data: data.trendChart.gbp,
+                borderColor: '#F59E0B',
+                backgroundColor: 'transparent',
+                borderWidth: 2,
+                borderDash: [3, 3],
+                tension: 0.35,
+                pointRadius: 3,
+                pointHoverRadius: 5
               }
             ]
           },
@@ -9696,7 +9929,7 @@
         });
       }
 
-      // Chart 2: Leads Attribution Donut
+      // Chart 2: Leads Attribution Donut (5 Kênh)
       const donutCanvas = document.getElementById('chart-leads-attribution');
       if (donutCanvas) {
         const donutCtx = donutCanvas.getContext('2d');
@@ -9707,10 +9940,10 @@
         leadsAttributionChartInstance = new Chart(donutCtx, {
           type: 'doughnut',
           data: {
-            labels: ['Facebook Messenger', 'Website Form / Zalo', 'TikTok Bio Link', 'YouTube Links'],
+            labels: ['Facebook Messenger', 'Website Form / Zalo', 'Google Maps / Hotline', 'TikTok Bio Link', 'YouTube Links'],
             datasets: [{
               data: data.leadsAttribution.values,
-              backgroundColor: ['#1877F2', '#10B981', '#0F172A', '#EF4444'],
+              backgroundColor: ['#1877F2', '#10B981', '#F59E0B', '#0F172A', '#EF4444'],
               borderWidth: 3,
               borderColor: '#FFFFFF',
               hoverOffset: 6
@@ -9833,24 +10066,15 @@
       renderReportContentList(data.topContents);
     }
 
-    function handleCampusFilterChange(campusId) {
-      const campusNames = {
-        all: 'Tất cả cơ sở',
-        cs1: 'CS1: Phú Cường (37 Ngô Quyền)',
-        cs2: 'CS2: Hưng Định (9 KP Hưng Phước)'
-      };
-      showToast(`Đã lọc dữ liệu báo cáo theo: ${campusNames[campusId] || campusId}`, 'info');
-      switchReportTimeframe(currentReportTimeframe);
-    }
-
-    function refreshReportData() {
-      const icon = document.getElementById('report-refresh-icon');
+    function refreshMarketingReportData() {
+      const btn = event.currentTarget;
+      const icon = btn.querySelector('i');
       if (icon) icon.classList.add('fa-spin');
 
       setTimeout(() => {
         if (icon) icon.classList.remove('fa-spin');
         switchReportTimeframe(currentReportTimeframe);
-        showToast('✓ Đã cập nhật và đồng bộ số liệu Marketing mới nhất từ các kênh!', 'success');
+        showToast('🔄 Đã cập nhật và đồng bộ số liệu Marketing mới nhất từ các kênh!', 'success');
       }, 500);
     }
 
