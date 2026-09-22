@@ -2176,9 +2176,14 @@
               </select>
             </div>
 
-            <button onclick="refreshReportData()" class="px-3 py-2 rounded-2xl bg-white/15 hover:bg-white/25 active:scale-95 text-white font-bold text-xs transition-all flex items-center gap-1.5 border border-white/20 shadow-xs" title="Đồng bộ lại dữ liệu">
+            <a href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=1072852790" target="_blank" rel="noopener noreferrer" class="px-3 py-2 rounded-2xl bg-white/15 hover:bg-white/25 active:scale-95 text-white font-bold text-xs transition-all flex items-center gap-1.5 border border-white/20 shadow-xs hover:scale-[1.02]" title="Mở Database Google Sheet (#gid=1072852790)">
+              <i class="fa-solid fa-table-cells text-potato-yellow text-xs"></i>
+              <span class="hidden sm:inline">Google Sheet</span>
+            </a>
+
+            <button type="button" onclick="refreshMarketingReportData(this)" id="btn-report-sync-sheet" class="px-3 py-2 rounded-2xl bg-white/15 hover:bg-white/25 active:scale-95 text-white font-bold text-xs transition-all flex items-center gap-1.5 border border-white/20 shadow-xs hover:scale-[1.02]" title="Đồng bộ dữ liệu trực tiếp từ Google Sheet">
               <i class="fa-solid fa-arrows-rotate text-xs" id="report-refresh-icon"></i>
-              <span class="hidden sm:inline">Làm mới</span>
+              <span class="hidden sm:inline" id="report-refresh-text">Đồng bộ Sheet</span>
             </button>
           </div>
         </div>
@@ -9075,7 +9080,13 @@
     // MARKETING MULTI-CHANNEL ANALYTICS DASHBOARD SYSTEM
     // =========================================================================
 
-    const MARKETING_REPORT_DATA = {
+    const SHEET_MARKETING_CSV_URLS = {
+      kpi: 'https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/export?format=csv&gid=1072852790',
+      trends: 'https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/export?format=csv&gid=1829606061',
+      contents: 'https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/export?format=csv&gid=621232528'
+    };
+
+    let MARKETING_REPORT_DATA = {
       week: {
         periodLabel: '📅 Kỳ: Thứ 2, 16/09 - Chủ nhật, 22/09/2026 (Tuần này)',
         kpi: {
@@ -9678,9 +9689,221 @@
     let currentContentChannelFilter = 'all';
     let marketingTrendChartInstance = null;
     let leadsAttributionChartInstance = null;
+    let isMarketingReportFetching = false;
 
     function initMarketingDashboard() {
       switchReportTimeframe(currentReportTimeframe || 'week');
+      // Fetch fresh data from Google Sheet in background
+      fetchMarketingReportFromGoogleSheets(false);
+    }
+
+    async function fetchMarketingReportFromGoogleSheets(showToastOnSuccess = true) {
+      if (isMarketingReportFetching) return;
+      isMarketingReportFetching = true;
+
+      const refreshIcon = document.getElementById('report-refresh-icon');
+      const refreshText = document.getElementById('report-refresh-text');
+      if (refreshIcon) refreshIcon.classList.add('fa-spin');
+      if (refreshText) refreshText.textContent = 'Đang đồng bộ...';
+
+      try {
+        const [kpiRes, trendsRes, contentsRes] = await Promise.all([
+          fetch(SHEET_MARKETING_CSV_URLS.kpi).then(r => r.ok ? r.text() : null),
+          fetch(SHEET_MARKETING_CSV_URLS.trends).then(r => r.ok ? r.text() : null),
+          fetch(SHEET_MARKETING_CSV_URLS.contents).then(r => r.ok ? r.text() : null)
+        ]);
+
+        if (kpiRes && typeof parseClientCSV === 'function') {
+          parseMarketingKpiCSV(kpiRes);
+        }
+        if (trendsRes && typeof parseClientCSV === 'function') {
+          parseMarketingTrendsCSV(trendsRes);
+        }
+        if (contentsRes && typeof parseClientCSV === 'function') {
+          parseMarketingContentsCSV(contentsRes);
+        }
+
+        // Re-render UI with newly fetched sheet data
+        switchReportTimeframe(currentReportTimeframe);
+
+        if (showToastOnSuccess && typeof showToast === 'function') {
+          showToast('✅ Đã đồng bộ số liệu Marketing mới nhất từ Google Sheet (#gid=1072852790)!', 'success');
+        }
+      } catch (err) {
+        console.warn('Lỗi đồng bộ Google Sheet trực tiếp, đang hiển thị cache:', err);
+        if (showToastOnSuccess && typeof showToast === 'function') {
+          showToast('⚠️ Không thể tải trực tiếp từ Sheet, đang hiển thị bản lưu gần nhất.', 'warning');
+        }
+      } finally {
+        isMarketingReportFetching = false;
+        if (refreshIcon) refreshIcon.classList.remove('fa-spin');
+        if (refreshText) refreshText.textContent = 'Đồng bộ Sheet';
+      }
+    }
+
+    function parseMarketingKpiCSV(csvText) {
+      const rows = parseClientCSV(csvText);
+      if (rows.length <= 1) return;
+
+      for (let i = 1; i < rows.length; i++) {
+        const r = rows[i];
+        if (!r || r.length < 5) continue;
+
+        const periodId = r[0];
+        const tf = r[1] ? r[1].toLowerCase().trim() : '';
+        const periodLabel = r[2];
+        const branch = r[3];
+        const channel = r[4] ? r[4].toLowerCase().trim() : '';
+        const reach = r[5] || '0';
+        const eng = r[6] || '0';
+        const followers = r[7] || '0';
+        const leads = r[8] || '0';
+        const rate = r[9] || '';
+        const highlight = r[10] || '';
+        const insights = r[11] || '';
+
+        if (!MARKETING_REPORT_DATA[tf]) continue;
+        const target = MARKETING_REPORT_DATA[tf];
+        if (periodLabel) target.periodLabel = `📅 Kỳ: ${periodLabel}`;
+
+        if (channel === 'all') {
+          target.kpi.totalReach = reach;
+          target.kpi.totalEngagements = eng;
+          target.kpi.totalLeads = leads;
+        } else if (channel === 'facebook' || channel === 'fb') {
+          target.channels.fb = { reach, eng, followers, leads: leads.includes('leads') ? leads : `${leads} leads`, topPost: highlight };
+          if (insights) target.insights.fb = insights;
+        } else if (channel === 'website' || channel === 'web') {
+          target.channels.web = { gscClicks: eng, gscImpr: reach, ga4Users: followers, leads: leads.includes('leads') ? leads : `${leads} leads`, topKeyword: highlight };
+          target.kpi.websiteVisits = followers.replace('khách', '').trim();
+          if (insights) target.insights.web = insights;
+        } else if (channel === 'gbp' || channel === 'maps') {
+          target.channels.gbp = { views: reach, directions: eng, calls: followers, leads: leads.includes('leads') ? leads : `${leads} leads`, topBranch: highlight };
+          if (insights) target.insights.gbp = insights;
+        } else if (channel === 'tiktok' || channel === 'tt') {
+          target.channels.tt = { views: reach, retention: rate, followers, leads: leads.includes('clicks') ? leads : `${leads} clicks`, topClip: highlight };
+          if (insights) target.insights.video = insights;
+        } else if (channel === 'youtube' || channel === 'yt') {
+          target.channels.yt = { views: reach, watchTime: eng, subs: followers, leads: leads.includes('leads') ? leads : `${leads} leads`, topVideo: highlight };
+        }
+      }
+
+      // Re-calculate Leads Attribution values
+      ['week', 'month', 'quarter', 'year'].forEach(tf => {
+        const item = MARKETING_REPORT_DATA[tf];
+        if (!item || !item.channels) return;
+        const fbNum = parseInt((item.channels.fb.leads || '0').replace(/\D/g, ''), 10) || 0;
+        const webNum = parseInt((item.channels.web.leads || '0').replace(/\D/g, ''), 10) || 0;
+        const gbpNum = parseInt((item.channels.gbp.leads || '0').replace(/\D/g, ''), 10) || 0;
+        const ttNum = parseInt((item.channels.tt.leads || '0').replace(/\D/g, ''), 10) || 0;
+        const ytNum = parseInt((item.channels.yt.leads || '0').replace(/\D/g, ''), 10) || 0;
+        const total = fbNum + webNum + gbpNum + ttNum + ytNum || 1;
+
+        item.leadsAttribution.values = [fbNum, webNum, gbpNum, ttNum, ytNum];
+        item.leadsAttribution.legend = {
+          fb: `${fbNum.toLocaleString()} leads (${Math.round(fbNum*100/total)}%)`,
+          web: `${webNum.toLocaleString()} leads (${Math.round(webNum*100/total)}%)`,
+          gbp: `${gbpNum.toLocaleString()} leads (${Math.round(gbpNum*100/total)}%)`,
+          tt: `${ttNum.toLocaleString()} leads (${Math.round(ttNum*100/total)}%)`,
+          yt: `${ytNum.toLocaleString()} leads (${Math.round(ytNum*100/total)}%)`
+        };
+      });
+    }
+
+    function parseMarketingTrendsCSV(csvText) {
+      const rows = parseClientCSV(csvText);
+      if (rows.length <= 1) return;
+
+      const grouped = { week: [], month: [], quarter: [], year: [] };
+      for (let i = 1; i < rows.length; i++) {
+        const r = rows[i];
+        if (!r || r.length < 8) continue;
+        const tf = r[0] ? r[0].toLowerCase().trim() : '';
+        if (!grouped[tf]) continue;
+        grouped[tf].push({
+          order: parseInt(r[1], 10) || 0,
+          label: r[2],
+          facebook: parseInt(r[3], 10) || 0,
+          tiktok: parseInt(r[4], 10) || 0,
+          youtube: parseInt(r[5], 10) || 0,
+          website: parseInt(r[6], 10) || 0,
+          gbp: parseInt(r[7], 10) || 0
+        });
+      }
+
+      Object.keys(grouped).forEach(tf => {
+        const arr = grouped[tf];
+        if (arr.length === 0 || !MARKETING_REPORT_DATA[tf]) return;
+        arr.sort((a, b) => a.order - b.order);
+        MARKETING_REPORT_DATA[tf].trendChart = {
+          labels: arr.map(x => x.label),
+          facebook: arr.map(x => x.facebook),
+          tiktok: arr.map(x => x.tiktok),
+          youtube: arr.map(x => x.youtube),
+          website: arr.map(x => x.website),
+          gbp: arr.map(x => x.gbp)
+        };
+      });
+    }
+
+    function parseMarketingContentsCSV(csvText) {
+      const rows = parseClientCSV(csvText);
+      if (rows.length <= 1) return;
+
+      const grouped = { week: [], month: [], quarter: [], year: [] };
+      for (let i = 1; i < rows.length; i++) {
+        const r = rows[i];
+        if (!r || r.length < 9) continue;
+        const tf = r[1] ? r[1].toLowerCase().trim() : '';
+        if (!grouped[tf]) continue;
+
+        const channelKey = r[2] ? r[2].toLowerCase().trim() : 'facebook';
+        let channelName = 'Fanpage Facebook';
+        let formatBadge = 'bg-blue-50 text-blue-700 border-blue-200';
+        if (channelKey === 'website' || channelKey === 'web') {
+          channelName = 'Website SEO';
+          formatBadge = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+        } else if (channelKey === 'gbp' || channelKey === 'maps') {
+          channelName = 'Google Business Profile';
+          formatBadge = 'bg-amber-50 text-amber-700 border-amber-200';
+        } else if (channelKey === 'tiktok' || channelKey === 'tt') {
+          channelName = 'TikTok';
+          formatBadge = 'bg-slate-100 text-slate-800 border-slate-300';
+        } else if (channelKey === 'youtube' || channelKey === 'yt') {
+          channelName = 'YouTube';
+          formatBadge = 'bg-red-50 text-red-700 border-red-200';
+        }
+
+        const score = r[8] || 'Tốt';
+        let scoreBadge = 'bg-blue-100 text-blue-800';
+        if (score.includes('Xuất sắc') || score.includes('Đỉnh cao') || score.includes('Kỷ lục') || score.includes('Top')) {
+          scoreBadge = 'bg-emerald-100 text-emerald-800';
+        } else if (score.includes('Viral')) {
+          scoreBadge = 'bg-purple-100 text-purple-800';
+        } else if (score.includes('Evergreen')) {
+          scoreBadge = 'bg-amber-100 text-amber-800';
+        }
+
+        grouped[tf].push({
+          title: r[3],
+          channel: channelName,
+          channelKey: channelKey,
+          format: r[4] || 'Tiêu chuẩn',
+          formatBadge: formatBadge,
+          reach: r[5] || '0',
+          engagement: r[6] || '0',
+          leads: r[7] || '0',
+          score: score,
+          scoreBadge: scoreBadge,
+          url: r[9] || ''
+        });
+      }
+
+      Object.keys(grouped).forEach(tf => {
+        if (grouped[tf].length > 0 && MARKETING_REPORT_DATA[tf]) {
+          MARKETING_REPORT_DATA[tf].topContents = grouped[tf];
+        }
+      });
     }
 
     function switchReportTimeframe(timeframe) {
@@ -9984,7 +10207,7 @@
           tableBody.innerHTML = filtered.map(item => `
             <tr class="hover:bg-slate-50/80 transition-colors">
               <td class="py-3 px-4 font-bold text-slate-800 max-w-xs sm:max-w-sm truncate">
-                ${item.title}
+                ${item.url ? `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="hover:text-potato-blue hover:underline flex items-center gap-1.5">${item.title} <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-400"></i></a>` : item.title}
               </td>
               <td class="py-3 px-3">
                 <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold border ${item.formatBadge}">
@@ -10019,7 +10242,9 @@
           mobileList.innerHTML = filtered.map(item => `
             <div class="p-4 rounded-2xl bg-slate-50/80 border border-slate-200/80 space-y-2">
               <div class="flex items-start justify-between gap-2">
-                <h5 class="font-bold text-xs text-slate-800 leading-snug">${item.title}</h5>
+                <h5 class="font-bold text-xs text-slate-800 leading-snug">
+                  ${item.url ? `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="hover:text-potato-blue">${item.title} <i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-slate-400"></i></a>` : item.title}
+                </h5>
                 <span class="px-2 py-0.5 rounded-full text-[9px] font-black flex-shrink-0 ${item.scoreBadge}">
                   ${item.score}
                 </span>
@@ -10066,16 +10291,8 @@
       renderReportContentList(data.topContents);
     }
 
-    function refreshMarketingReportData() {
-      const btn = event.currentTarget;
-      const icon = btn.querySelector('i');
-      if (icon) icon.classList.add('fa-spin');
-
-      setTimeout(() => {
-        if (icon) icon.classList.remove('fa-spin');
-        switchReportTimeframe(currentReportTimeframe);
-        showToast('🔄 Đã cập nhật và đồng bộ số liệu Marketing mới nhất từ các kênh!', 'success');
-      }, 500);
+    function refreshMarketingReportData(btn) {
+      fetchMarketingReportFromGoogleSheets(true);
     }
 
     function exportMarketingReport() {
