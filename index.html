@@ -281,25 +281,14 @@
             </button>
             <div id="submenu-about" class="sidebar-submenu hidden pl-6 pr-1 py-1 space-y-0.5">
               <!-- 1.1 Giới thiệu -->
-              <button type="button" id="subnav-settings-intro" onclick="switchTab('settings-intro'); switchIntroSubPage('general');" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
+              <button type="button" id="subnav-settings-intro" onclick="switchTab('settings-intro')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
                 <span class="w-1.5 h-1.5 rounded-full bg-blue-600 flex-shrink-0"></span>
                 <span class="truncate">Giới thiệu</span>
               </button>
-              <!-- 1.2 Khóa học -->
-              <button type="button" id="subnav-settings-course" onclick="switchTab('settings-intro'); switchIntroSubPage('courses');" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center justify-between whitespace-nowrap">
-                <div class="flex items-center gap-2 truncate">
-                  <span class="w-1.5 h-1.5 rounded-full bg-indigo-600 flex-shrink-0"></span>
-                  <span class="truncate">Khóa học (Courses)</span>
-                </div>
-                <span class="text-[9px] bg-indigo-100 text-indigo-700 font-extrabold px-1.5 py-0.2 rounded-full border border-indigo-200/60">33</span>
-              </button>
-              <!-- 1.3 Nội dung -->
+              <!-- 1.2 Nội dung -->
               <button type="button" id="subnav-settings-content" onclick="switchTab('settings-content')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
                 <span class="w-1.5 h-1.5 rounded-full bg-rose-600 flex-shrink-0"></span>
                 <span class="truncate">Nội dung</span>
-              </button>
-            </div>
-                <span class="text-[9px] bg-indigo-100 text-indigo-700 font-extrabold px-1.5 py-0.2 rounded-full border border-indigo-200/60">33</span>
               </button>
             </div>
           </div>
@@ -466,41 +455,6 @@
           </div>
         </div>
 
-        <!-- Settings In-module Navigation Pills -->
-        <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
-          <button type="button" onclick="switchTab('settings-intro')" class="px-4 py-2 rounded-xl font-bold text-xs transition-all flex items-center gap-2 border-2 border-blue-500 bg-blue-50 text-blue-900 shadow-2xs whitespace-nowrap min-h-[40px]">
-            <i class="fa-solid fa-circle-info text-blue-600"></i>
-            <span>1.1 Giới Thiệu Thương Hiệu</span>
-          </button>
-          <button type="button" onclick="switchTab('settings-content')" class="px-4 py-2 rounded-xl font-bold text-xs transition-all flex items-center gap-2 border border-slate-200 bg-white text-slate-600 hover:text-potato-navy hover:bg-slate-50 shadow-2xs whitespace-nowrap min-h-[40px]">
-            <i class="fa-solid fa-file-lines text-rose-500"></i>
-            <span>1.2 Quy Chuẩn Nội Dung</span>
-          </button>
-          <button type="button" onclick="switchTab('settings-course')" class="px-4 py-2 rounded-xl font-bold text-xs transition-all flex items-center gap-2 border border-slate-200 bg-white text-slate-600 hover:text-potato-navy hover:bg-slate-50 shadow-2xs whitespace-nowrap min-h-[40px]">
-            <i class="fa-solid fa-graduation-cap text-indigo-600"></i>
-            <span>1.3 Khóa Học & Lộ Trình</span>
-            <span class="bg-indigo-100 text-indigo-700 text-[10px] font-black px-1.5 py-0.2 rounded-full ml-1">33</span>
-          </button>
-        </div>
-    
-
-                <!-- Settings In-module Navigation Pills -->
-        <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none" id="settings-nav-pills-intro">
-          <button type="button" onclick="switchIntroSubPage('general')" class="settings-pill-intro px-4 py-2 rounded-xl font-bold text-xs transition-all flex items-center gap-2 border-2 border-blue-500 bg-blue-50 text-blue-900 shadow-2xs whitespace-nowrap min-h-[40px]" id="pill-intro-general">
-            <i class="fa-solid fa-circle-info text-blue-600"></i>
-            <span>1.1 Giới Thiệu Thương Hiệu</span>
-          </button>
-          <button type="button" onclick="switchIntroSubPage('courses')" class="settings-pill-intro px-4 py-2 rounded-xl font-bold text-xs transition-all flex items-center gap-2 border border-slate-200 bg-white text-slate-600 hover:text-potato-navy hover:bg-slate-50 shadow-2xs whitespace-nowrap min-h-[40px]" id="pill-intro-courses">
-            <i class="fa-solid fa-graduation-cap text-indigo-600"></i>
-            <span>1.2 Khóa Học & Lộ Trình</span>
-            <span class="bg-indigo-100 text-indigo-700 text-[10px] font-black px-1.5 py-0.2 rounded-full ml-1">33</span>
-          </button>
-          <button type="button" onclick="switchTab('settings-content')" class="px-4 py-2 rounded-xl font-bold text-xs transition-all flex items-center gap-2 border border-slate-200 bg-white text-slate-600 hover:text-potato-navy hover:bg-slate-50 shadow-2xs whitespace-nowrap min-h-[40px]">
-            <i class="fa-solid fa-file-lines text-rose-500"></i>
-            <span>1.3 Quy Chuẩn Nội Dung</span>
-          </button>
-        </div>
-
         <!-- Rank Math Style 2-Column Settings Widget for Giới thiệu -->
         <div class="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden flex flex-col lg:flex-row min-h-[580px]">
           
@@ -513,20 +467,16 @@
             <nav class="flex lg:flex-col overflow-x-auto lg:overflow-visible gap-1 pb-1 lg:pb-0" id="rankmath-intro-nav">
               <button type="button" onclick="switchIntroSubPage('general', this)" data-tab="general" id="rm-intro-general" class="rankmath-intro-btn flex-shrink-0 whitespace-nowrap lg:whitespace-normal w-auto lg:w-full text-left py-3 px-3.5 rounded-xl font-bold text-xs transition-all flex items-center gap-3 border-l-4 border-potato-cyan bg-sky-50 text-potato-navy shadow-2xs">
                 <i class="fa-solid fa-landmark text-potato-cyan text-sm w-5 text-center flex-shrink-0"></i>
-                <span class="flex-1">Tổng quan</span>
+                <span class="flex-1">Giới thiệu tổng quan</span>
               </button>
               <button type="button" onclick="switchIntroSubPage('contact', this)" data-tab="contact" id="rm-intro-contact" class="rankmath-intro-btn flex-shrink-0 whitespace-nowrap lg:whitespace-normal w-auto lg:w-full text-left py-3 px-3.5 rounded-xl font-medium text-xs text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all flex items-center gap-3 border-l-4 border-transparent">
                 <i class="fa-solid fa-address-book text-slate-400 text-sm w-5 text-center flex-shrink-0"></i>
                 <span class="flex-1">Thông tin liên hệ</span>
               </button>
-              <button type="button" onclick="switchIntroSubPage('visual', this)" data-tab="visual" id="rm-intro-visual" class="rankmath-intro-btn flex-shrink-0 whitespace-nowrap lg:whitespace-normal w-auto lg:w-full text-left py-3 px-3.5 rounded-xl font-medium text-xs text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all flex items-center gap-3 border-l-4 border-transparent">
-                <i class="fa-solid fa-palette text-slate-400 text-sm w-5 text-center flex-shrink-0"></i>
-                <span class="flex-1">Nhận diện thương hiệu</span>
-              </button>
               <button type="button" onclick="switchIntroSubPage('courses', this)" data-tab="courses" id="rm-intro-courses" class="rankmath-intro-btn flex-shrink-0 whitespace-nowrap lg:whitespace-normal w-auto lg:w-full text-left py-3 px-3.5 rounded-xl font-medium text-xs text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all flex items-center justify-between gap-2 border-l-4 border-transparent">
                 <div class="flex items-center gap-3 truncate">
                   <i class="fa-solid fa-graduation-cap text-slate-400 text-sm w-5 text-center flex-shrink-0"></i>
-                  <span class="truncate">Khóa học (Courses)</span>
+                  <span class="truncate">Course</span>
                 </div>
                 <span class="text-[9px] bg-indigo-100 text-indigo-700 font-extrabold px-1.5 py-0.2 rounded-full border border-indigo-200/60">33</span>
               </button>
@@ -618,24 +568,6 @@
             </a>
           </div>
         </div>
-
-        <!-- Settings In-module Navigation Pills -->
-        <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
-          <button type="button" onclick="switchTab('settings-intro')" class="px-4 py-2 rounded-xl font-bold text-xs transition-all flex items-center gap-2 border border-slate-200 bg-white text-slate-600 hover:text-potato-navy hover:bg-slate-50 shadow-2xs whitespace-nowrap min-h-[40px]">
-            <i class="fa-solid fa-circle-info text-blue-500"></i>
-            <span>1.1 Giới Thiệu Thương Hiệu</span>
-          </button>
-          <button type="button" onclick="switchTab('settings-content')" class="px-4 py-2 rounded-xl font-bold text-xs transition-all flex items-center gap-2 border-2 border-rose-500 bg-rose-50 text-rose-900 shadow-2xs whitespace-nowrap min-h-[40px]">
-            <i class="fa-solid fa-file-lines text-rose-600"></i>
-            <span>1.2 Quy Chuẩn Nội Dung</span>
-          </button>
-          <button type="button" onclick="switchTab('settings-course')" class="px-4 py-2 rounded-xl font-bold text-xs transition-all flex items-center gap-2 border border-slate-200 bg-white text-slate-600 hover:text-potato-navy hover:bg-slate-50 shadow-2xs whitespace-nowrap min-h-[40px]">
-            <i class="fa-solid fa-graduation-cap text-indigo-600"></i>
-            <span>1.3 Khóa Học & Lộ Trình</span>
-            <span class="bg-indigo-100 text-indigo-700 text-[10px] font-black px-1.5 py-0.2 rounded-full ml-1">33</span>
-          </button>
-        </div>
-    
 
         <!-- Rank Math Style 2-Column Settings Widget for Nội dung -->
         <div class="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden flex flex-col lg:flex-row min-h-[580px]">
@@ -2038,97 +1970,178 @@
         <!-- MAIN 2-COLUMN GRID (Desktop: 6 cols - 6 cols | Mobile: Stacked) -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-          <!-- ==================== CỘT TRÁI (6 COLS): BỐI CẢNH & Ý TƯỞNG ==================== -->
+          <!-- ==================== CỘT TRÁI (6 COLS): PHẦN 1 - XÁC ĐỊNH INPUT ==================== -->
           <div class="lg:col-span-6 space-y-6">
 
-            <!-- THẺ 1: BỐI CẢNH & ĐỐI TƯỢNG -->
+            <!-- THẺ 1: PHẦN 1 - XÁC ĐỊNH INPUT (FORM THAM SỐ CHIẾN LƯỢC) -->
             <div class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200/90 shadow-sm space-y-4">
               <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                 <div class="flex items-center gap-2.5">
-                  <div class="w-8 h-8 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-sm font-bold">
+                  <div class="w-8 h-8 rounded-xl bg-purple-600 text-white flex items-center justify-center text-sm font-black shadow-sm">
                     1
                   </div>
                   <div>
-                    <h3 class="text-sm font-black text-slate-900">Bối Cảnh Lớp Học & Đối Tượng</h3>
-                    <p class="text-[11px] text-slate-500">Dữ liệu đời thực dẫn đường (Data-First Storytelling)</p>
+                    <h3 class="text-sm font-black text-slate-900">Phần 1: Xác Định Input</h3>
+                    <p class="text-[11px] text-slate-500">Thiết lập dữ liệu chuẩn từ Google Sheet Marketing</p>
                   </div>
                 </div>
-                <span class="text-[10px] font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-md border border-purple-100">
-                  Input Context
+                <span class="text-[10px] font-bold text-purple-700 bg-purple-50 px-2.5 py-0.5 rounded-full border border-purple-100">
+                  GS Master Data
                 </span>
               </div>
 
-              <!-- Lựa chọn Kênh Mục Tiêu -->
+              <!-- 1. Kênh Phân Phối (Platform từ GS Marketing) -->
               <div>
-                <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
-                  <i class="fa-solid fa-share-nodes text-purple-600 text-[11px]"></i>
-                  Kênh nội dung mục tiêu:
+                <label for="writer-platform-select" class="block text-xs font-bold text-slate-700 mb-1.5 flex items-center justify-between">
+                  <span class="flex items-center gap-1.5">
+                    <i class="fa-solid fa-share-nodes text-purple-600 text-[11px]"></i>
+                    Kênh phân phối (Platform):
+                  </span>
+                  <span id="writer-platform-badge" class="text-[10px] text-blue-700 font-bold bg-blue-50 px-2 py-0.2 rounded border border-blue-100">
+                    Micro-copy &lt; 80 từ
+                  </span>
                 </label>
-                <div class="grid grid-cols-3 gap-2 text-xs">
-                  <button type="button" onclick="selectWriterChannel('facebook', this)" class="writer-channel-btn active p-2.5 rounded-xl bg-blue-50 text-blue-800 font-extrabold border-2 border-blue-500 text-center transition-all">
-                    <i class="fa-brands fa-facebook-f text-xs block mb-1"></i>
-                    <span>Fanpage Post</span>
-                    <span class="block text-[9px] text-blue-600 font-normal">&lt; 80 từ</span>
-                  </button>
-                  <button type="button" onclick="selectWriterChannel('tiktok', this)" class="writer-channel-btn p-2.5 rounded-xl bg-slate-50 text-slate-600 font-semibold border border-slate-200 text-center hover:bg-slate-100 transition-all">
-                    <i class="fa-brands fa-tiktok text-xs block mb-1"></i>
-                    <span>TikTok Script</span>
-                    <span class="block text-[9px] text-slate-400 font-normal">15-30 giây</span>
-                  </button>
-                  <button type="button" onclick="selectWriterChannel('seo', this)" class="writer-channel-btn p-2.5 rounded-xl bg-slate-50 text-slate-600 font-semibold border border-slate-200 text-center hover:bg-slate-100 transition-all">
-                    <i class="fa-solid fa-globe text-xs block mb-1"></i>
-                    <span>Website SEO</span>
-                    <span class="block text-[9px] text-slate-400 font-normal">Dàn ý bài viết</span>
-                  </button>
+                <div class="relative">
+                  <select id="writer-platform-select" onchange="handleWriterPlatformChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:border-purple-500 min-h-[40px] appearance-none pr-8">
+                    <option value="Facebook Fanpage" selected>Facebook Fanpage (Micro-copy &lt; 80 từ, Album 4 ảnh 1:1)</option>
+                    <option value="TikTok">TikTok (Kịch bản video ngắn 15-45s, Hook 3s đầu)</option>
+                    <option value="Website">Website (Dàn ý bài viết chuẩn SEO 1.200 từ)</option>
+                  </select>
+                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-slate-500">
+                    <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                  </div>
                 </div>
               </div>
 
-              <!-- Cơ sở & Lứa tuổi -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                <div>
-                  <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
-                    <i class="fa-solid fa-location-dot text-potato-red text-[11px]"></i>
-                    Cơ sở Potato English:
-                  </label>
-                  <select id="writer-branch-select" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:border-purple-500 min-h-[40px]">
-                    <option value="cs1">CS1: 37 Ngô Quyền, P. Phú Cường</option>
-                    <option value="cs2">CS2: 9 KP Hưng Phước, P. Hưng Định</option>
-                    <option value="both">Cả 2 Cơ sở (Phú Cường & Hưng Định)</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
-                    <i class="fa-solid fa-graduation-cap text-potato-blue text-[11px]"></i>
-                    Nhóm học viên / Lứa tuổi:
-                  </label>
-                  <select id="writer-age-group-select" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:border-purple-500 min-h-[40px]">
-                    <option value="friendly_kid">Friendly Kid (Mầm non 4-6 tuổi)</option>
-                    <option value="happy_junior" selected>Happy Junior (Tiểu học 6-12 tuổi)</option>
-                    <option value="leading_teen">Leading Teen (Thiếu niên 12-16 tuổi)</option>
-                  </select>
-                </div>
-              </div>
-
-              <!-- Trụ cột nội dung -->
+              <!-- 2. Cơ Sở Triển Khai -->
               <div>
-                <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-center justify-between">
+                <label for="writer-branch-select" class="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
+                  <i class="fa-solid fa-location-dot text-rose-500 text-[11px]"></i>
+                  Cơ sở:
+                </label>
+                <div class="relative">
+                  <select id="writer-branch-select" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:border-purple-500 min-h-[40px] appearance-none pr-8">
+                    <option value="Cơ sở 1: 37 Ngô Quyền, P. Phú Cường" selected>Cơ sở 1 (37 Ngô Quyền, P. Phú Cường)</option>
+                    <option value="Cơ sở 2: 9 KP Hưng Phước, P. Hưng Định">Cơ sở 2 (9 KP Hưng Phước, P. Hưng Định)</option>
+                    <option value="Cả 2 cơ sở (Toàn hệ thống)">Cả 2 cơ sở (Phú Cường & Hưng Định)</option>
+                  </select>
+                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-slate-500">
+                    <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3. Nhóm Course (Multi-Select Course Data từ Master DB) -->
+              <div>
+                <div class="flex items-center justify-between mb-1.5">
+                  <label class="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                    <i class="fa-solid fa-graduation-cap text-potato-blue text-[11px]"></i>
+                    Nhóm Course (Khóa học):
+                  </label>
+                  <div class="flex items-center gap-1">
+                    <button type="button" onclick="quickSelectCourseGroup('all')" class="text-[10px] text-purple-600 hover:text-purple-800 font-bold px-1.5 py-0.5 rounded hover:bg-purple-50">Chọn hết</button>
+                    <span class="text-slate-300">|</span>
+                    <button type="button" onclick="clearAllSelectedCourses()" class="text-[10px] text-slate-400 hover:text-rose-600 font-semibold px-1.5 py-0.5 rounded hover:bg-slate-50">Xóa chọn</button>
+                  </div>
+                </div>
+
+                <!-- Custom Multi-select Dropdown Button -->
+                <div class="relative">
+                  <button type="button" id="writer-course-dropdown-btn" onclick="toggleCourseDropdown()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 flex items-center justify-between min-h-[40px] hover:border-purple-300 transition-all text-left">
+                    <span id="writer-course-btn-label" class="truncate font-semibold text-slate-700">Đã chọn: Friendly Kid (4 khóa)...</span>
+                    <div class="flex items-center gap-1 flex-shrink-0 ml-2">
+                      <span id="writer-course-count-badge" class="bg-purple-100 text-purple-700 text-[10px] font-black px-1.5 py-0.5 rounded-full">4</span>
+                      <i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
+                    </div>
+                  </button>
+
+                  <!-- Dropdown Popover Menu -->
+                  <div id="writer-course-popover" class="hidden absolute z-50 left-0 right-0 mt-1.5 bg-white border border-slate-200 rounded-2xl shadow-xl p-3 space-y-2 max-h-72 overflow-y-auto">
+                    <!-- Quick Group Selectors -->
+                    <div class="flex items-center gap-1 flex-wrap pb-2 border-b border-slate-100 text-[10.5px]">
+                      <span class="text-[10px] text-slate-400 font-bold mr-1">Khối:</span>
+                      <button type="button" onclick="quickSelectCourseGroup('kid')" class="px-2 py-0.5 rounded bg-sky-50 text-sky-700 hover:bg-sky-100 font-bold">Kid (3-5t)</button>
+                      <button type="button" onclick="quickSelectCourseGroup('junior')" class="px-2 py-0.5 rounded bg-amber-50 text-amber-700 hover:bg-amber-100 font-bold">Junior (5-11t)</button>
+                      <button type="button" onclick="quickSelectCourseGroup('teen')" class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 hover:bg-emerald-100 font-bold">Teen (10-16t)</button>
+                      <button type="button" onclick="quickSelectCourseGroup('ielts')" class="px-2 py-0.5 rounded bg-purple-50 text-purple-700 hover:bg-purple-100 font-bold">IELTS</button>
+                    </div>
+
+                    <!-- Search Course Filter -->
+                    <div class="relative">
+                      <input type="text" id="writer-course-search" oninput="filterCourseList()" placeholder="Tìm nhanh khóa học..." class="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-[11px] focus:outline-none focus:border-purple-500">
+                      <i class="fa-solid fa-magnifying-glass text-[10px] text-slate-400 absolute right-2.5 top-2.5"></i>
+                    </div>
+
+                    <!-- Course Checkbox Groups Container -->
+                    <div id="writer-course-list-container" class="space-y-2 pt-1 text-xs text-slate-700">
+                      <!-- Rendered by JS -->
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Selected Badges Container -->
+                <div id="writer-course-tags-container" class="flex flex-wrap gap-1.5 mt-2">
+                  <!-- Badges inserted by JS -->
+                </div>
+              </div>
+
+              <!-- 4. Trụ Cột Nội Dung Chính (Main Pillar) -->
+              <div>
+                <label for="writer-main-pillar-select" class="block text-xs font-bold text-slate-700 mb-1.5 flex items-center justify-between">
                   <span class="flex items-center gap-1.5">
                     <i class="fa-solid fa-layer-group text-amber-500 text-[11px]"></i>
-                    Trụ cột nội dung (6 Content Pillars):
+                    Trụ cột nội dung chính:
                   </span>
-                  <span id="writer-pillar-badge" class="text-[10px] text-amber-700 font-extrabold bg-amber-50 px-2 py-0.2 rounded border border-amber-200">
-                    Mật độ: 25%
+                  <span id="writer-main-pillar-badge" class="text-[10px] text-amber-800 font-extrabold bg-amber-50 px-2 py-0.2 rounded border border-amber-200">
+                    Tỷ trọng: 25%
                   </span>
                 </label>
-                <select id="writer-pillar-select" onchange="handleWriterPillarChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:border-purple-500 min-h-[40px]">
-                  <option value="PIL_01">PIL_01: Story Spark & Tiếng Anh Mầm Non (4-5t) • 30%</option>
-                  <option value="PIL_02" selected>PIL_02: Học Qua Trải Nghiệm & Giao Tiếp Tự Nhiên (6-16t) • 25%</option>
-                  <option value="PIL_03">PIL_03: Vinh Danh Học Viên (Top Student - Cố định ngày 12) • 15%</option>
-                  <option value="PIL_04">PIL_04: Góc Phụ Huynh & Mẹo Nuôi Dạy Con Tại Nhà • 15%</option>
-                  <option value="PIL_05">PIL_05: Không Gian 2 Cơ Sở & Sự Tận Tâm Đội Ngũ • 10%</option>
-                  <option value="PIL_06">PIL_06: Sự Kiện Khai Giảng & Lời Mời Học Thử 0đ • 10%</option>
-                </select>
+                <div class="relative">
+                  <select id="writer-main-pillar-select" onchange="handleWriterMainPillarChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:border-purple-500 min-h-[40px] appearance-none pr-8">
+                    <option value="PIL_01: Story Spark & Tiếng Anh Mầm Non (4-6t)">PIL_01: Story Spark & Tiếng Anh Mầm Non (4-6t) • 25%</option>
+                    <option value="PIL_02: Học Qua Trải Nghiệm & Nền Tảng (6-12t)" selected>PIL_02: Học Qua Trải Nghiệm & Nền Tảng (6-12t) • 25%</option>
+                    <option value="PIL_03: Chinh Phục Học Thuật & Thiếu Niên (12-16t)">PIL_03: Chinh Phục Học Thuật & Thiếu Niên (12-16t) • 15%</option>
+                    <option value="PIL_04: Vinh Danh Học Viên & Tiến Bộ (Top Student)">PIL_04: Vinh Danh Học Viên & Tiến Bộ (Top Student - Cố định ngày 12) • 15%</option>
+                    <option value="PIL_05: Góc Phụ Huynh & Đồng Hành Cùng Con (Parenting)">PIL_05: Góc Phụ Huynh & Đồng Hành Cùng Con (Parenting) • 10%</option>
+                    <option value="PIL_06: Không Gian Lớp Học & Hoạt Động Cơ Sở (Proof of Life)">PIL_06: Không Gian Lớp Học & Hoạt Động Cơ Sở (Proof of Life) • 10%</option>
+                  </select>
+                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-slate-500">
+                    <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 5. Trụ Cột Nội Dung Phụ (Sub-Pillar Dynamic Cascade) -->
+              <div>
+                <label for="writer-sub-pillar-select" class="block text-xs font-bold text-slate-700 mb-1.5 flex items-center justify-between">
+                  <span class="flex items-center gap-1.5">
+                    <i class="fa-solid fa-diagram-project text-indigo-500 text-[11px]"></i>
+                    Trụ cột nội dung phụ:
+                  </span>
+                  <span class="text-[10px] text-indigo-600 bg-indigo-50 px-2 py-0.2 rounded border border-indigo-100">
+                    Cấp 2 Phân Loại
+                  </span>
+                </label>
+                <div class="relative">
+                  <select id="writer-sub-pillar-select" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:border-purple-500 min-h-[40px] appearance-none pr-8">
+                    <!-- Dynamic sub-pillars rendered by JS -->
+                  </select>
+                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-slate-500">
+                    <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 6. Mô Tả Ý Định Nội Dung (Text thô sơ ý tưởng vào) -->
+              <div>
+                <label for="writer-content-idea" class="block text-xs font-bold text-slate-700 mb-1.5 flex items-center justify-between">
+                  <span class="flex items-center gap-1.5">
+                    <i class="fa-solid fa-lightbulb text-amber-500 text-[11px]"></i>
+                    Mô tả ý định nội dung:
+                  </span>
+                  <span class="text-[10px] text-slate-400">Điền text thô sơ ý tưởng vào</span>
+                </label>
+                <textarea id="writer-content-idea" rows="3" placeholder="Điền text thô sơ ý tưởng vào (Ví dụ: Bạn nhỏ Tom 7 tuổi sau giờ vẽ sơ đồ tư duy động vật hào hứng khoe tranh với nụ cười rạng rỡ, tự tin nói 'The lion is so strong cô ơi!'...)" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-medium text-slate-800 focus:outline-none focus:border-purple-500 leading-relaxed shadow-2xs"></textarea>
               </div>
 
               <!-- 4 Góc nhìn Kể chuyện (Storytelling Angles) -->
@@ -2162,26 +2175,9 @@
                 </div>
               </div>
 
-              <!-- Tên nhân vật & Ghi chú khoảnh khắc lớp học -->
+              <!-- Nạp nhanh tình huống mẫu (Presets) -->
               <div>
-                <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-center justify-between">
-                  <span class="flex items-center gap-1.5">
-                    <i class="fa-solid fa-heart text-rose-500 text-[11px]"></i>
-                    Khoảnh khắc học viên thực tế (100% Student-Centric):
-                  </span>
-                  <span class="text-[10px] text-slate-400">Tâm điểm là nỗ lực của con</span>
-                </label>
-                <div class="relative">
-                  <input type="text" id="writer-student-note" placeholder="VD: Bé Su 4 tuổi sau giờ Story Spark chỉ vào mũi chú gấu rồi nói: Big nose cô ơi!..." value="Bạn nhỏ Tom hoàn thành buổi thuyết trình tiếng Anh chủ đề Animals với nụ cười rạng rỡ" class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-3 pr-20 py-2.5 text-xs font-medium text-slate-800 focus:outline-none focus:border-purple-500 min-h-[40px]">
-                  <button type="button" onclick="clearWriterStudentNote()" class="absolute right-2 top-2 text-[11px] text-slate-400 hover:text-slate-600 px-2 py-1 rounded">
-                    Xóa
-                  </button>
-                </div>
-              </div>
-
-              <!-- Presets gợi ý nhanh -->
-              <div>
-                <span class="text-[11px] font-bold text-slate-500 block mb-1.5">Nạp nhanh tình huống mẫu:</span>
+                <span class="text-[11px] font-bold text-slate-500 block mb-1.5">Nạp nhanh tình huống thực tế mẫu:</span>
                 <div class="flex items-center gap-2 flex-wrap">
                   <button type="button" onclick="applyWriterPreset('bin_story_spark')" class="px-2.5 py-1 rounded-lg bg-sky-50 hover:bg-sky-100 text-potato-blue text-[11px] font-semibold border border-sky-200/80 transition-all flex items-center gap-1">
                     <span>🥔 Bé Bin (5t) Story Spark</span>
@@ -6948,6 +6944,10 @@
       if (tabId === 'about') {
         tabId = 'settings-intro';
       }
+      if (tabId === 'settings-course') {
+        tabId = 'settings-intro';
+        setTimeout(() => switchIntroSubPage('courses'), 0);
+      }
 
       currentTab = tabId;
       if (typeof closeSidebarMobile === 'function') {
@@ -6993,10 +6993,7 @@
         activeMobileBtn.classList.add('text-potato-cyan', 'font-bold');
       }
 
-      // Auto close mobile drawer when any tab is selected
-      closeSidebarMobile();
-
-      // 3. Handle Cài đặt 1.1 Giới thiệu
+      // 4. Handle Cài đặt: Giới thiệu (settings-intro)
       if (tabId === 'settings-intro') {
         const targetPanel = document.getElementById('panel-settings-intro');
         if (targetPanel) targetPanel.classList.remove('hidden');
@@ -7033,7 +7030,7 @@
         return;
       }
 
-      // 4. Handle Cài đặt 1.2 Nội dung
+      // 4.1 Handle Cài đặt: Nội dung (settings-content)
       if (tabId === 'settings-content') {
         const targetPanel = document.getElementById('panel-settings-content');
         if (targetPanel) targetPanel.classList.remove('hidden');
@@ -7065,45 +7062,6 @@
         }
 
         switchContentSubPage(activeContentPageKey || 'voice');
-        const mainElem = document.querySelector('main');
-        if (mainElem) mainElem.scrollTop = 0;
-        return;
-      }
-
-      // 4.05 Handle Cài đặt 1.3 Khóa học
-      if (tabId === 'settings-course') {
-        const targetPanel = document.getElementById('panel-settings-course');
-        if (targetPanel) targetPanel.classList.remove('hidden');
-
-        // Highlight Cài đặt parent
-        const navAbout = document.getElementById('nav-about');
-        if (navAbout) {
-          navAbout.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold', 'border', 'border-potato-cyan/20');
-          navAbout.classList.remove('text-slate-600');
-          const ch = navAbout.querySelector('.menu-chevron');
-          if (ch) {
-            ch.classList.remove('fa-chevron-right');
-            ch.classList.add('fa-chevron-down');
-          }
-        }
-
-        // Open submenu-about, close others
-        const submenus = document.querySelectorAll('.sidebar-submenu');
-        submenus.forEach(sm => {
-          if (sm.id === 'submenu-about') sm.classList.remove('hidden');
-          else sm.classList.add('hidden');
-        });
-
-        // Highlight subnav-settings-course
-        const subCourse = document.getElementById('subnav-settings-course');
-        if (subCourse) {
-          subCourse.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold');
-          subCourse.classList.remove('text-slate-500');
-        }
-
-        if (typeof initCourseSettings === 'function') {
-          initCourseSettings();
-        }
         const mainElem = document.querySelector('main');
         if (mainElem) mainElem.scrollTop = 0;
         return;
@@ -8813,26 +8771,22 @@
     const INTRO_SUBPAGES = {
       'general': {
         group: '1. TỔNG QUAN & PHÁP LÝ',
-        title: 'Tổng Quan',
-        desc: 'Quản trị tên thương hiệu chính thức, slogan, định vị phân khúc và thông điệp cốt lõi Potato English.',
+        groups: ['1. TỔNG QUAN & PHÁP LÝ', '5. NHẬN DIỆN THỊ GIÁC'],
+        title: 'Giới Thiệu Tổng Quan',
+        desc: 'Quản trị tên thương hiệu chính thức, slogan, định vị phân khúc, thông điệp cốt lõi và nhận diện thương hiệu Potato English.',
         icon: 'fa-solid fa-landmark'
       },
       'contact': {
         group: '2. LIÊN HỆ & CƠ SỞ',
+        groups: ['2. LIÊN HỆ & CƠ SỞ'],
         title: 'Thông Tin Liên Hệ & Chi Nhánh',
         desc: 'Quản trị địa chỉ trụ sở, cơ sở đào tạo, hotline tuyển sinh, email, website và các liên kết mạng xã hội chính thức.',
         icon: 'fa-solid fa-address-book'
       },
-      'visual': {
-        group: '5. NHẬN DIỆN THỊ GIÁC',
-        title: 'Nhận Diện Thương Hiệu',
-        desc: 'Quản trị bảng màu sắc chuẩn Hex, font chữ thiết kế, tài nguyên logo và triết lý thương hiệu Potato English.',
-        icon: 'fa-solid fa-palette'
-      },
       'courses': {
         group: '4. CHƯƠNG TRÌNH HỌC',
-        title: 'Chương Trình Học',
-        desc: 'Quản trị thông tin các khóa học tiếng Anh mầm non, tiểu học, trung học và chứng chỉ quốc tế Potato English.',
+        title: 'Course (Khóa Học & Lộ Trình)',
+        desc: 'Hệ thống 33 khóa học chính thức từ CSDL Potato English 26, phân loại theo độ tuổi, giáo trình, thời lượng và lộ trình đào tạo.',
         icon: 'fa-solid fa-graduation-cap'
       }
     };
@@ -8870,19 +8824,6 @@
         activeBtn.className = 'rankmath-intro-btn flex-shrink-0 whitespace-nowrap lg:whitespace-normal w-auto lg:w-full text-left py-3 px-3.5 rounded-xl font-bold text-xs transition-all flex items-center justify-between gap-2 border-l-4 border-potato-cyan bg-sky-50 text-potato-navy shadow-2xs';
         const icon = activeBtn.querySelector('i');
         if (icon) icon.className = icon.className.replace(/text-slate-400/g, 'text-potato-cyan');
-      }
-
-      // Update Top Nav Pills
-      const pillGeneral = document.getElementById('pill-intro-general');
-      const pillCourses = document.getElementById('pill-intro-courses');
-      if (pillGeneral && pillCourses) {
-        if (pageKey === 'courses') {
-          pillCourses.className = 'settings-pill-intro px-4 py-2 rounded-xl font-bold text-xs transition-all flex items-center gap-2 border-2 border-indigo-500 bg-indigo-50 text-indigo-900 shadow-2xs whitespace-nowrap min-h-[40px]';
-          pillGeneral.className = 'settings-pill-intro px-4 py-2 rounded-xl font-bold text-xs transition-all flex items-center gap-2 border border-slate-200 bg-white text-slate-600 hover:text-potato-navy hover:bg-slate-50 shadow-2xs whitespace-nowrap min-h-[40px]';
-        } else {
-          pillGeneral.className = 'settings-pill-intro px-4 py-2 rounded-xl font-bold text-xs transition-all flex items-center gap-2 border-2 border-blue-500 bg-blue-50 text-blue-900 shadow-2xs whitespace-nowrap min-h-[40px]';
-          pillCourses.className = 'settings-pill-intro px-4 py-2 rounded-xl font-bold text-xs transition-all flex items-center gap-2 border border-slate-200 bg-white text-slate-600 hover:text-potato-navy hover:bg-slate-50 shadow-2xs whitespace-nowrap min-h-[40px]';
-        }
       }
 
       // Update Centered Title & Description
@@ -8936,7 +8877,10 @@
         return;
       }
 
-      const items = currentAboutUsData.filter(i => i.group === config.group && !isItemExcluded(i));
+      const items = currentAboutUsData.filter(i => {
+        if (config.groups) return config.groups.includes(i.group) && !isItemExcluded(i);
+        return i.group === config.group && !isItemExcluded(i);
+      });
 
       if (items.length === 0) {
         container.innerHTML = `
@@ -11573,12 +11517,264 @@
     // -------------------------------------------------------------------------
     // A. LOGIC TOOL 1: VIẾT BÀI AI (CONTENT STUDIO)
     // -------------------------------------------------------------------------
+        // =========================================================================
+    // DỮ LIỆU CHUẨN MASTER TỪ GOOGLE SHEET MARKETING (DATA SETTINGS)
+    // =========================================================================
+    const WRITER_MASTER_COURSES = [
+      { id: "K1", name: "Friendly Kid 1", age: "3 - 5 tuổi (Lớp Mầm)", group: "kid", groupLabel: "1. Khối Kid (3-5 tuổi)" },
+      { id: "K2", name: "Friendly Kid 2", age: "3 - 5 tuổi (Lớp Chồi)", group: "kid", groupLabel: "1. Khối Kid (3-5 tuổi)" },
+      { id: "K3", name: "Friendly Kid 3", age: "3 - 5 tuổi (Lớp Lá)", group: "kid", groupLabel: "1. Khối Kid (3-5 tuổi)" },
+      { id: "K4", name: "Friendly Kid 4", age: "3 - 5 tuổi (Lớp Lá lớn)", group: "kid", groupLabel: "1. Khối Kid (3-5 tuổi)" },
+      { id: "J1", name: "Happy Junior 1", age: "5 - 9 tuổi (Lớp 1)", group: "junior", groupLabel: "2. Khối Junior (5-11 tuổi)" },
+      { id: "J2", name: "Happy Junior 2", age: "5 - 9 tuổi (Lớp 1)", group: "junior", groupLabel: "2. Khối Junior (5-11 tuổi)" },
+      { id: "J2R", name: "Happy Junior 2+", age: "6 - 10 tuổi (Lớp 2)", group: "junior", groupLabel: "2. Khối Junior (5-11 tuổi)" },
+      { id: "J3", name: "Happy Junior 3", age: "6 - 10 tuổi (Lớp 2)", group: "junior", groupLabel: "2. Khối Junior (5-11 tuổi)" },
+      { id: "J4", name: "Happy Junior 4", age: "6 - 10 tuổi (Lớp 2)", group: "junior", groupLabel: "2. Khối Junior (5-11 tuổi)" },
+      { id: "J4S", name: "Starters", age: "6 - 10 tuổi (Lớp 3)", group: "junior", groupLabel: "2. Khối Junior (5-11 tuổi)" },
+      { id: "J4R", name: "Happy Junior 4+", age: "6 - 10 tuổi (Lớp 2-3)", group: "junior", groupLabel: "2. Khối Junior (5-11 tuổi)" },
+      { id: "J5", name: "Happy Junior 5", age: "7 - 11 tuổi (Lớp 3)", group: "junior", groupLabel: "2. Khối Junior (5-11 tuổi)" },
+      { id: "J6", name: "Happy Junior 6", age: "7 - 11 tuổi (Lớp 3-4)", group: "junior", groupLabel: "2. Khối Junior (5-11 tuổi)" },
+      { id: "J6M", name: "Movers", age: "8 - 11 tuổi (Lớp 4)", group: "junior", groupLabel: "2. Khối Junior (5-11 tuổi)" },
+      { id: "J7", name: "Happy Junior 7", age: "8 - 11 tuổi (Lớp 5)", group: "junior", groupLabel: "2. Khối Junior (5-11 tuổi)" },
+      { id: "J8", name: "Happy Junior 8", age: "8 - 11 tuổi (Lớp 5)", group: "junior", groupLabel: "2. Khối Junior (5-11 tuổi)" },
+      { id: "J8F", name: "Flyers", age: "8 - 11 tuổi (Lớp 5)", group: "junior", groupLabel: "2. Khối Junior (5-11 tuổi)" },
+      { id: "T1", name: "Leading Teen 1", age: "10 - 16 tuổi (Lớp 6)", group: "teen", groupLabel: "3. Khối Teen (10-16 tuổi)" },
+      { id: "T2", name: "Leading Teen 2", age: "10 - 16 tuổi (Lớp 6)", group: "teen", groupLabel: "3. Khối Teen (10-16 tuổi)" },
+      { id: "T2K", name: "KET", age: "10 - 16 tuổi (Lớp 7)", group: "teen", groupLabel: "3. Khối Teen (10-16 tuổi)" },
+      { id: "T3", name: "Leading Teen 3", age: "10 - 16 tuổi (Lớp 7)", group: "teen", groupLabel: "3. Khối Teen (10-16 tuổi)" },
+      { id: "T4", name: "Leading Teen 4", age: "10 - 16 tuổi (Lớp 8)", group: "teen", groupLabel: "3. Khối Teen (10-16 tuổi)" },
+      { id: "T4P", name: "PET", age: "10 - 16 tuổi (Lớp 8)", group: "teen", groupLabel: "3. Khối Teen (10-16 tuổi)" },
+      { id: "T5", name: "Leading Teen 5", age: "10 - 16 tuổi (Lớp 8-9)", group: "teen", groupLabel: "3. Khối Teen (10-16 tuổi)" },
+      { id: "I1", name: "IELTS 1 (Foundation)", age: "12 - 20 tuổi (Lớp 9)", group: "ielts", groupLabel: "4. Khối IELTS & Học Thuật" },
+      { id: "I2", name: "IELTS 2 (Foundation)", age: "12 - 20 tuổi (Lớp 10)", group: "ielts", groupLabel: "4. Khối IELTS & Học Thuật" },
+      { id: "I3", name: "IELTS 3 (Foundation)", age: "12 - 20 tuổi (Lớp 11)", group: "ielts", groupLabel: "4. Khối IELTS & Học Thuật" },
+      { id: "I4", name: "IELTS 4 (Exam)", age: "12 - 20 tuổi (Lớp 11-12)", group: "ielts", groupLabel: "4. Khối IELTS & Học Thuật" },
+      { id: "I5", name: "IELTS 5 (Exam)", age: "20 - 60 tuổi", group: "ielts", groupLabel: "4. Khối IELTS & Học Thuật" },
+      { id: "I6", name: "IELTS 6 (Exam)", age: "20 - 60 tuổi", group: "ielts", groupLabel: "4. Khối IELTS & Học Thuật" },
+      { id: "TEST", name: "Đánh Giá Năng Lực 1-1", age: "3 - 16 tuổi (Học viên mới)", group: "entry", groupLabel: "5. Trải Nghiệm Đầu Vào" },
+      { id: "TRIAL", name: "Học Thử Trải Nghiệm 0đ", age: "3 - 16 tuổi (Học viên mới)", group: "entry", groupLabel: "5. Trải Nghiệm Đầu Vào" }
+    ];
+
+    const WRITER_SUB_PILLARS = {
+      "PIL_01: Story Spark & Tiếng Anh Mầm Non (4-6t)": [
+        "Âm Nhạc & Nhập Vai Nhân Vật (Story & Music)",
+        "Thẩm Thấu Ngôn Ngữ Tự Nhiên (Natural Acquisition)"
+      ],
+      "PIL_02: Học Qua Trải Nghiệm & Nền Tảng (6-12t)": [
+        "Đánh Vần Phonics & Chuẩn Hóa Phát Âm",
+        "Học Qua Dự Án & Sơ Đồ Tư Duy (Project-Based)",
+        "Giao Tiếp & Phản Xạ Đời Thực (Real-life Reflex)"
+      ],
+      "PIL_03: Chinh Phục Học Thuật & Thiếu Niên (12-16t)": [
+        "Chuẩn Hóa Năng Lực Quốc Tế (Cambridge & Pre-IELTS)",
+        "Thuyết Trình Độc Lập & Tranh Biện (Debate & Presentation)"
+      ],
+      "PIL_04: Vinh Danh Học Viên & Tiến Bộ (Top Student)": [
+        "Vinh Danh Định Kỳ Ngày 12 Hàng Tháng (Monthly Recognition)",
+        "Câu Chuyện Tiến Bộ Người Thật Việc Thật (Student Stories)"
+      ],
+      "PIL_05: Góc Phụ Huynh & Đồng Hành Cùng Con (Parenting)": [
+        "Mẹo Tắm Ngôn Ngữ Cùng Con Tại Nhà (Home Learning Tips)",
+        "Giải Đáp Băn Khoăn & Tâm Lý Ngoại Ngữ"
+      ],
+      "PIL_06: Không Gian Lớp Học & Hoạt Động Cơ Sở (Proof of Life)": [
+        "Nhật Ký Lớp Học Hàng Ngày (Classroom Daily Diary)",
+        "Thầy Cô Tận Tâm & Nhận Diện Đồng Phục (Teacher & Brand)",
+        "Sự Kiện Lễ Hội & Lời Mời Học Thử Chân Thành (Events & Trial)"
+      ]
+    };
+
+    let writerSelectedCourseIds = ["K1", "K2", "K3", "K4"]; // Mặc định chọn khối Kid
+
     function initWriterTool() {
+      renderCourseCheckboxList();
+      updateSelectedCourseTagsUI();
+      handleWriterMainPillarChange();
+      handleWriterPlatformChange();
+
+      const ideaInput = document.getElementById("writer-content-idea");
       const textarea = document.getElementById("writer-post-textarea");
       if (textarea && !textarea.value.trim()) {
         applyWriterPreset('bin_story_spark');
       } else {
         handleWriterTextInput();
+      }
+    }
+
+    function toggleCourseDropdown() {
+      const popover = document.getElementById("writer-course-popover");
+      if (popover) {
+        popover.classList.toggle("hidden");
+      }
+    }
+
+    // Đóng popup khi bấm ra ngoài
+    document.addEventListener("click", function(e) {
+      const popover = document.getElementById("writer-course-popover");
+      const btn = document.getElementById("writer-course-dropdown-btn");
+      if (popover && !popover.classList.contains("hidden")) {
+        if (!popover.contains(e.target) && !btn.contains(e.target)) {
+          popover.classList.add("hidden");
+        }
+      }
+    });
+
+    function renderCourseCheckboxList(searchFilter = "") {
+      const container = document.getElementById("writer-course-list-container");
+      if (!container) return;
+
+      const filterLower = searchFilter.toLowerCase().trim();
+      const groups = {};
+
+      WRITER_MASTER_COURSES.forEach(c => {
+        if (filterLower && !c.name.toLowerCase().includes(filterLower) && !c.id.toLowerCase().includes(filterLower) && !c.age.toLowerCase().includes(filterLower)) {
+          return;
+        }
+        if (!groups[c.groupLabel]) groups[c.groupLabel] = [];
+        groups[c.groupLabel].push(c);
+      });
+
+      let html = "";
+      for (const [groupLabel, list] of Object.entries(groups)) {
+        html += `<div class="pt-1.5 pb-0.5">
+          <div class="text-[10.5px] font-black text-slate-500 uppercase tracking-wide bg-slate-100 px-2 py-0.5 rounded flex items-center justify-between">
+            <span>${groupLabel}</span>
+            <span class="text-[9px] text-slate-400 font-normal">${list.length} khóa</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-1 mt-1 pl-1">`;
+        list.forEach(c => {
+          const checked = writerSelectedCourseIds.includes(c.id) ? "checked" : "";
+          html += `<label class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-purple-50/60 cursor-pointer text-[11px] font-medium text-slate-800 transition-colors">
+            <input type="checkbox" value="${c.id}" ${checked} onchange="toggleCourseSelection('${c.id}')" class="rounded text-purple-600 focus:ring-0 w-3.5 h-3.5 border-slate-300">
+            <div class="truncate">
+              <span class="font-bold text-slate-900">${c.name}</span>
+              <span class="text-[10px] text-slate-400 block">${c.age}</span>
+            </div>
+          </label>`;
+        });
+        html += `</div></div>`;
+      }
+
+      if (!html) {
+        html = `<div class="p-3 text-center text-xs text-slate-400">Không tìm thấy khóa học nào phù hợp.</div>`;
+      }
+      container.innerHTML = html;
+    }
+
+    function filterCourseList() {
+      const input = document.getElementById("writer-course-search");
+      renderCourseCheckboxList(input ? input.value : "");
+    }
+
+    function toggleCourseSelection(courseId) {
+      if (writerSelectedCourseIds.includes(courseId)) {
+        writerSelectedCourseIds = writerSelectedCourseIds.filter(id => id !== courseId);
+      } else {
+        writerSelectedCourseIds.push(courseId);
+      }
+      updateSelectedCourseTagsUI();
+    }
+
+    function quickSelectCourseGroup(groupKey) {
+      if (groupKey === 'all') {
+        writerSelectedCourseIds = WRITER_MASTER_COURSES.map(c => c.id);
+      } else {
+        const ids = WRITER_MASTER_COURSES.filter(c => c.group === groupKey).map(c => c.id);
+        // Toggle: nếu đã chọn hết nhóm thì bỏ chọn, ngược lại thì chọn toàn bộ nhóm
+        const allPresent = ids.every(id => writerSelectedCourseIds.includes(id));
+        if (allPresent) {
+          writerSelectedCourseIds = writerSelectedCourseIds.filter(id => !ids.includes(id));
+        } else {
+          ids.forEach(id => {
+            if (!writerSelectedCourseIds.includes(id)) writerSelectedCourseIds.push(id);
+          });
+        }
+      }
+      renderCourseCheckboxList();
+      updateSelectedCourseTagsUI();
+    }
+
+    function clearAllSelectedCourses() {
+      writerSelectedCourseIds = [];
+      renderCourseCheckboxList();
+      updateSelectedCourseTagsUI();
+    }
+
+    function updateSelectedCourseTagsUI() {
+      const badge = document.getElementById("writer-course-count-badge");
+      const btnLabel = document.getElementById("writer-course-btn-label");
+      const container = document.getElementById("writer-course-tags-container");
+
+      const count = writerSelectedCourseIds.length;
+      if (badge) badge.textContent = count;
+
+      const selectedObjects = WRITER_MASTER_COURSES.filter(c => writerSelectedCourseIds.includes(c.id));
+
+      if (btnLabel) {
+        if (count === 0) {
+          btnLabel.textContent = "Chưa chọn khóa học nào (Bấm để chọn)...";
+          btnLabel.className = "truncate text-slate-400 font-normal";
+        } else if (count <= 2) {
+          btnLabel.textContent = `Đã chọn: ${selectedObjects.map(c => c.name).join(", ")}`;
+          btnLabel.className = "truncate font-bold text-slate-800";
+        } else {
+          btnLabel.textContent = `Đã chọn: ${selectedObjects[0].name}, ${selectedObjects[1].name} (+${count - 2} khóa khác)`;
+          btnLabel.className = "truncate font-bold text-slate-800";
+        }
+      }
+
+      if (container) {
+        if (count === 0) {
+          container.innerHTML = `<span class="text-[10.5px] text-slate-400 italic">Gợi ý: Chọn khóa học mục tiêu để AI cá nhân hóa nội dung.</span>`;
+        } else {
+          container.innerHTML = selectedObjects.slice(0, 6).map(c => `
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-purple-50 text-purple-800 border border-purple-200/80 text-[10.5px] font-semibold">
+              <span>${c.name}</span>
+              <button type="button" onclick="toggleCourseSelection('${c.id}')" class="text-purple-400 hover:text-purple-700 font-bold ml-0.5 text-[11px]">&times;</button>
+            </span>
+          `).join("") + (count > 6 ? `<span class="text-[10.5px] text-purple-600 font-bold px-1.5 py-0.5">+${count - 6} khóa khác</span>` : "");
+        }
+      }
+    }
+
+    function handleWriterMainPillarChange() {
+      const select = document.getElementById("writer-main-pillar-select");
+      const subSelect = document.getElementById("writer-sub-pillar-select");
+      const badge = document.getElementById("writer-main-pillar-badge");
+      if (!select || !subSelect) return;
+
+      const val = select.value;
+      const subList = WRITER_SUB_PILLARS[val] || [
+        "Nhật Ký Lớp Học Hàng Ngày",
+        "Tiến Bộ Tự Nhiên & Nỗ Lực Của Con"
+      ];
+
+      subSelect.innerHTML = subList.map((sub, idx) => `
+        <option value="${sub}" ${idx === 0 ? "selected" : ""}>${sub}</option>
+      `).join("");
+
+      if (badge) {
+        if (val.includes("PIL_01") || val.includes("PIL_02")) badge.textContent = "Tỷ trọng: 25%";
+        else if (val.includes("PIL_03") || val.includes("PIL_04")) badge.textContent = "Tỷ trọng: 15%";
+        else badge.textContent = "Tỷ trọng: 10%";
+      }
+    }
+
+    function handleWriterPlatformChange() {
+      const platSelect = document.getElementById("writer-platform-select");
+      const platBadge = document.getElementById("writer-platform-badge");
+      if (!platSelect || !platBadge) return;
+
+      const p = platSelect.value;
+      if (p === 'Facebook Fanpage') {
+        platBadge.textContent = "Micro-copy < 80 từ";
+        platBadge.className = "text-[10px] text-blue-700 font-bold bg-blue-50 px-2 py-0.2 rounded border border-blue-100";
+      } else if (p === 'TikTok') {
+        platBadge.textContent = "Script 15-45s (Hook 3s)";
+        platBadge.className = "text-[10px] text-pink-700 font-bold bg-pink-50 px-2 py-0.2 rounded border border-pink-100";
+      } else if (p === 'Website') {
+        platBadge.textContent = "Chuẩn SEO 1.200 từ";
+        platBadge.className = "text-[10px] text-emerald-700 font-bold bg-emerald-50 px-2 py-0.2 rounded border border-emerald-100";
       }
     }
 
@@ -11625,85 +11821,93 @@
       }
     }
 
-    function applyWriterPreset(presetKey) {
-      const pillarSelect = document.getElementById("writer-pillar-select");
-      const ageSelect = document.getElementById("writer-age-group-select");
-      const noteInput = document.getElementById("writer-student-note");
+        function applyWriterPreset(presetKey) {
+      const platSelect = document.getElementById("writer-platform-select");
+      const branchSelect = document.getElementById("writer-branch-select");
+      const mainPillarSelect = document.getElementById("writer-main-pillar-select");
+      const subPillarSelect = document.getElementById("writer-sub-pillar-select");
+      const ideaInput = document.getElementById("writer-content-idea");
       const textarea = document.getElementById("writer-post-textarea");
 
       if (presetKey === 'bin_story_spark') {
-        if (pillarSelect) pillarSelect.value = "PIL_01";
-        if (ageSelect) ageSelect.value = "friendly_kid";
-        if (noteInput) noteInput.value = "Bé Bin 5 tuổi hoàn thành tranh vẽ My Family và tự tin nói: This is my mom!";
+        if (platSelect) platSelect.value = "Facebook Fanpage";
+        if (branchSelect) branchSelect.value = "Cơ sở 1: 37 Ngô Quyền, P. Phú Cường";
+        if (mainPillarSelect) mainPillarSelect.value = "PIL_01: Story Spark & Tiếng Anh Mầm Non (4-6t)";
+        handleWriterMainPillarChange();
+        if (subPillarSelect) subPillarSelect.value = "Âm Nhạc & Nhập Vai Nhân Vật (Story & Music)";
+        writerSelectedCourseIds = ["K1", "K2"];
+        if (ideaInput) ideaInput.value = "Bé Bin 5 tuổi hoàn thành tranh vẽ My Family sau giờ Story Spark và tự hào nói: This is my mom! She 40 years old and working hard!";
+        
         const p1 = `"This is my mom and me. She 40 years old, and she working very hard. I love her!"\n\nKhoảnh khắc bé Bin 5 tuổi tự hào khoe bức tranh gia đình sau giờ Story Spark khiến cả lớp ngập tràn niềm vui. Không học vẹt, tiếng Anh đến với con tự nhiên như tiếng mẹ đẻ.\n\nMột buổi chiều ấm áp của các bạn nhỏ tại Potato English 🥔❤️\n\n#PotatoEnglish #FriendlyKid #StorySpark #TuTinNoiTiengAnh`;
         const p2 = `Bàn tay nhỏ xíu cầm bút sáp màu nắn nót vẽ từng nét về mẹ. Sau 15 phút nghe kể chuyện Story Spark chiều nay, Bin bỗng ngước lên bảo cô: "Cô ơi, con yêu mẹ nhiều lắm!". Tiếng Anh bắt đầu từ những rung cảm chân thật và bình dị như thế.\n\nChúc các con và ba mẹ luôn có những giờ phút học thật vui bên nhau! 🥔❤️\n\n#PotatoEnglish #HocBangNiemVui #FriendlyKid #StorySpark`;
         const p3 = `Mỗi buổi đọc truyện Story Spark luôn đầy ắp những câu nói ngây ngô nhưng đáng yêu vô cùng. Hôm nay, Bin tự tin giơ bức tranh vẽ mẹ lên trước cả lớp để chia sẻ bằng những từ vựng con vừa học được.\n\nThầy cô luôn tự hào về sự dạn dĩ tự nhiên của con mỗi ngày 🥔❤️\n\n#PotatoEnglish #StorySpark #TuTinMoLoi #MamNon`;
         writerDrafts = [p1, p2, p3];
       } else if (presetKey === 'top_student') {
-        if (pillarSelect) pillarSelect.value = "PIL_03";
-        if (ageSelect) ageSelect.value = "happy_junior";
-        if (noteInput) noteInput.value = "Vinh danh các bạn nhỏ Top Student tháng với sự kiên trì và nụ cười rạng rỡ";
+        if (platSelect) platSelect.value = "Facebook Fanpage";
+        if (branchSelect) branchSelect.value = "Cả 2 cơ sở (Toàn hệ thống)";
+        if (mainPillarSelect) mainPillarSelect.value = "PIL_04: Vinh Danh Học Viên & Tiến Bộ (Top Student)";
+        handleWriterMainPillarChange();
+        if (subPillarSelect) subPillarSelect.value = "Vinh Danh Định Kỳ Ngày 12 Hàng Tháng (Monthly Recognition)";
+        writerSelectedCourseIds = ["J1", "J2", "J3", "J4"];
+        if (ideaInput) ideaInput.value = "Vinh danh các bạn nhỏ Top Student tháng 9 tại 2 cơ sở Phú Cường & Hưng Định, tuyên dương sự kiên trì và nụ cười rạng rỡ";
+        
         const d1 = `NHỮNG NỖ LỰC NHỎ TỎA SÁNG 🥔🏆\n\nNgày 12 hàng tháng là dịp để cùng nhìn lại những nỗ lực bền bỉ của các bạn nhỏ tại cả 2 cơ sở. Từng bước tiến bộ tự nhiên, từ rụt rè đến tự tin mở lời là món quà quý giá nhất.\n\nThầy cô và Potato English vô cùng tự hào về sự kiên trì của các con! 🥔❤️\n\n#PotatoEnglish #TopStudent #TuTinNoiTiengAnh #TienBoMoiNgay`;
         const d2 = `Không có bí quyết nào ngoài sự kiên trì mỗi ngày. Chúc mừng các bạn nhỏ Top Student tháng này đã xuất sắc vượt qua các thử thách thuyết trình và dự án tiếng Anh bằng tất cả niềm hào hứng.\n\nHẹn gặp lại các con trong những hành trình khám phá mới! 🥔❤️\n\n#PotatoEnglish #TopStudent #HappyJunior #NoiDungLamThat`;
         const d3 = `Mỗi chiếc huy hiệu nhỏ trao đi là một lời cảm ơn chân thành gửi đến các bạn nhỏ vì tinh thần học tập hăng say. Nhìn nụ cười rạng rỡ của con khi nhận quà, thầy cô hiểu rằng niềm vui học tập chính là động lực lớn nhất.\n\nChúc mừng các con yêu quý! 🥔❤️\n\n#PotatoEnglish #TopStudent #HocQuaTraiNghiem`;
         writerDrafts = [d1, d2, d3];
       } else if (presetKey === 'leo_ket') {
-        if (pillarSelect) pillarSelect.value = "PIL_02";
-        if (ageSelect) ageSelect.value = "leading_teen";
-        if (noteInput) noteInput.value = "Leo 12 tuổi vượt qua thử thách thuyết trình KET Speaking với phong thái chững chạc";
+        if (platSelect) platSelect.value = "Facebook Fanpage";
+        if (branchSelect) branchSelect.value = "Cơ sở 1: 37 Ngô Quyền, P. Phú Cường";
+        if (mainPillarSelect) mainPillarSelect.value = "PIL_03: Chinh Phục Học Thuật & Thiếu Niên (12-16t)";
+        handleWriterMainPillarChange();
+        if (subPillarSelect) subPillarSelect.value = "Chuẩn Hóa Năng Lực Quốc Tế (Cambridge & Pre-IELTS)";
+        writerSelectedCourseIds = ["T2K", "T3"];
+        if (ideaInput) ideaInput.value = "Leo 12 tuổi vượt qua thử thách thuyết trình KET Speaking với phong thái chững chạc và phản xạ tự tin";
+        
         const d1 = `"Mình là Leo, 12 tuổi. Sau buổi luyện Speaking hôm nay, mình đã sẵn sàng cho kỳ thi KET sắp tới!"\n\nKhông gian học tập thoải mái giúp Leo chủ động làm chủ từ vựng và tự tin thể hiện quan điểm của bản thân mà không hề lo sợ mắc lỗi.\n\nThầy cô luôn sẵn sàng đồng hành cùng các con trong từng kỳ thi quan trọng! 🥔❤️\n\n#PotatoEnglish #LeadingTeen #KET #TuTinMoLoi`;
         const d2 = `Từng ngập ngừng khi gặp các câu hỏi phản xạ nhanh, hôm nay Leo đã tự tin đứng trước máy quay để chia sẻ trọn vẹn chủ đề môi trường bằng tiếng Anh. Một bước tiến chững chạc và đáng khen ngợi của chàng trai 12 tuổi.\n\nCố gắng giữ vững phong độ con nhé! 🥔❤️\n\n#PotatoEnglish #LeadingTeen #SpeakingSkills`;
         const d3 = `Tiếng Anh tuổi thiếu niên không chỉ là ngữ pháp trên trang sách, mà là công cụ để con tự tin bày tỏ chính kiến. Buổi thảo luận nhóm chiều nay tại cơ sở Phú Cường tràn ngập những ý tưởng sắc bén của các bạn nhỏ Leading Teen.\n\nTự hào về các con rất nhiều! 🥔❤️\n\n#PotatoEnglish #LeadingTeen #NoiDungLamThat`;
         writerDrafts = [d1, d2, d3];
       } else if (presetKey === 'parent_tips') {
-        if (pillarSelect) pillarSelect.value = "PIL_04";
-        if (ageSelect) ageSelect.value = "friendly_kid";
-        if (noteInput) noteInput.value = "Tips 10 phút luyện phát âm Phonics nhẹ nhàng cùng con trước khi đi ngủ";
+        if (platSelect) platSelect.value = "Facebook Fanpage";
+        if (branchSelect) branchSelect.value = "Cả 2 cơ sở (Toàn hệ thống)";
+        if (mainPillarSelect) mainPillarSelect.value = "PIL_05: Góc Phụ Huynh & Đồng Hành Cùng Con (Parenting)";
+        handleWriterMainPillarChange();
+        if (subPillarSelect) subPillarSelect.value = "Mẹo Tắm Ngôn Ngữ Cùng Con Tại Nhà (Home Learning Tips)";
+        writerSelectedCourseIds = ["K1", "K2", "J1"];
+        if (ideaInput) ideaInput.value = "Mẹo 10 phút luyện phát âm Phonics nhẹ nhàng cùng con trước khi đi ngủ, không áp lực và tràn ngập tiếng cười";
+        
         const d1 = `10 PHÚT VUI HỌC CÙNG CON TẠI NHÀ 🥔💡\n\nChỉ cần 10 phút mỗi tối lật mở vài trang truyện ngắn hoặc cùng con phát âm vui vẻ một bài hát. Sự kiên nhẫn và nụ cười của ba mẹ chính là lớp học tiếng Anh tuyệt vời nhất của con.\n\nChúc ba mẹ và các con có những giờ phút học thật ấm áp bên nhau! 🥔❤️\n\n#PotatoEnglish #GocPhuHuynh #DongHanhCungCon`;
         const d2 = `Đừng vội sửa lỗi phát âm của con ngay khi con vừa nói. Hãy lắng nghe trọn vẹn và lặp lại câu nói một cách tự nhiên. Trẻ nhỏ học ngôn ngữ bằng sự an tâm và tình yêu thương của cha mẹ hơn là những lời nhắc nhở khắt khe.\n\nThầy cô luôn ở đây để sẻ chia cùng ba mẹ 🥔❤️\n\n#PotatoEnglish #GocPhuHuynh #NuoiDayCon`;
         const d3 = `Mỗi buổi tối trước giờ ngủ, thay vì kiểm tra bài cũ, ba mẹ hãy thử hỏi con: "Hôm nay ở Potato có trò chơi nào vui nhất?". Con sẽ hào hứng kể lại và vô tình sử dụng những từ tiếng Anh vừa học một cách tự nhiên nhất.\n\nChúc gia đình mình một buổi tối an lành! 🥔❤️\n\n#PotatoEnglish #DongHanhCungCon #HocBangNiemVui`;
         writerDrafts = [d1, d2, d3];
       }
 
+      renderCourseCheckboxList();
+      updateSelectedCourseTagsUI();
+      handleWriterPlatformChange();
+
       writerCurrentDraftIndex = 0;
       updateWriterDraftTabsUI();
       if (textarea) textarea.value = writerDrafts[0];
       handleWriterTextInput();
       if (typeof showToast === 'function') {
-        showToast("Đã nạp 3 bản nháp mẫu chuẩn Brand Voice!", "info");
-      }
-    }
-
-    function switchWriterDraft(index) {
-      writerCurrentDraftIndex = index;
-      updateWriterDraftTabsUI();
-      const textarea = document.getElementById("writer-post-textarea");
-      if (textarea && writerDrafts[index]) {
-        textarea.value = writerDrafts[index];
-        handleWriterTextInput();
-      }
-    }
-
-    function updateWriterDraftTabsUI() {
-      for (let i = 0; i < 3; i++) {
-        const tab = document.getElementById(`draft-tab-${i}`);
-        if (tab) {
-          if (i === writerCurrentDraftIndex) {
-            tab.className = "px-3 py-1 rounded-lg text-xs font-bold bg-purple-100 text-purple-800 border border-purple-200 transition-all";
-          } else {
-            tab.className = "px-3 py-1 rounded-lg text-xs font-semibold text-slate-500 hover:bg-slate-100 transition-all";
-          }
-        }
+        showToast("Đã nạp tình huống mẫu và thiết lập đủ 6 thông số đầu vào!", "info");
       }
     }
 
     async function generateWriterContentAI() {
       const btn = document.getElementById("btn-writer-ai-generate");
       const textarea = document.getElementById("writer-post-textarea");
-      const pillarKey = document.getElementById("writer-pillar-select")?.value || "PIL_02";
-      const ageGroup = document.getElementById("writer-age-group-select")?.value || "happy_junior";
-      const branchVal = document.getElementById("writer-branch-select")?.value || "cs1";
-      const studentNote = document.getElementById("writer-student-note")?.value.trim() || "";
+      
+      // 6 Input Parameters
+      const platform = document.getElementById("writer-platform-select")?.value || "Facebook Fanpage";
+      const branch = document.getElementById("writer-branch-select")?.value || "Cơ sở 1: 37 Ngô Quyền, P. Phú Cường";
+      const selectedCourses = WRITER_MASTER_COURSES.filter(c => writerSelectedCourseIds.includes(c.id)).map(c => `${c.name} (${c.age})`);
+      const mainPillar = document.getElementById("writer-main-pillar-select")?.value || "PIL_02: Học Qua Trải Nghiệm & Nền Tảng (6-12t)";
+      const subPillar = document.getElementById("writer-sub-pillar-select")?.value || "Đánh Vần Phonics & Chuẩn Hóa Phát Âm";
+      const contentIdea = document.getElementById("writer-content-idea")?.value.trim() || "";
+
       const modelVal = document.getElementById("writer-ai-model-select")?.value || "gemini-3.8-flash";
       const savedGeminiKey = localStorage.getItem("gemini_api_key") || "";
 
@@ -11718,10 +11922,12 @@
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            pillar: pillarKey,
-            ageGroup: ageGroup,
-            branch: branchVal,
-            studentNote: studentNote,
+            platform: platform,
+            branch: branch,
+            courses: selectedCourses,
+            mainPillar: mainPillar,
+            subPillar: subPillar,
+            contentIdea: contentIdea,
             angle: writerCurrentAngle,
             geminiApiKey: savedGeminiKey
           })
@@ -11734,7 +11940,7 @@
             if (textarea) textarea.value = data.content;
             handleWriterTextInput();
             if (typeof showToast === 'function') {
-              showToast(`Gemini 3.8 Flash đã viết bài theo góc nhìn '${writerCurrentAngle}'!`, "success");
+              showToast(`Gemini 3.8 Flash đã tạo bài viết tự nhiên cho ${platform}!`, "success");
             }
             if (btn) { btn.disabled = false; btn.innerHTML = origHtml; }
             return;
@@ -12441,6 +12647,52 @@
 
       // 6. Render các thẻ thành hàng ngang - Mỗi thẻ là 1 dòng
       listContainer.innerHTML = list.map(c => renderHorizontalCourseRow(c)).join('');
+    }
+
+        function getGroupVisualMeta(group) {
+      if (group === '1. Kid') {
+        return {
+          badgeBg: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+          codeBg: 'bg-emerald-600 text-white',
+          borderHover: 'hover:border-emerald-400',
+          cardAccent: 'from-emerald-500/10 via-transparent to-transparent',
+          icon: 'fa-child-reaching text-emerald-600'
+        };
+      }
+      if (group === '2. Junior') {
+        return {
+          badgeBg: 'bg-sky-100 text-sky-800 border-sky-300',
+          codeBg: 'bg-sky-600 text-white',
+          borderHover: 'hover:border-sky-400',
+          cardAccent: 'from-sky-500/10 via-transparent to-transparent',
+          icon: 'fa-user-graduate text-sky-600'
+        };
+      }
+      if (group === '3. Teen') {
+        return {
+          badgeBg: 'bg-indigo-100 text-indigo-800 border-indigo-300',
+          codeBg: 'bg-indigo-600 text-white',
+          borderHover: 'hover:border-indigo-400',
+          cardAccent: 'from-indigo-500/10 via-transparent to-transparent',
+          icon: 'fa-rocket text-indigo-600'
+        };
+      }
+      if (group === '4. IELTS') {
+        return {
+          badgeBg: 'bg-amber-100 text-amber-800 border-amber-300',
+          codeBg: 'bg-amber-600 text-white',
+          borderHover: 'hover:border-amber-400',
+          cardAccent: 'from-amber-500/10 via-transparent to-transparent',
+          icon: 'fa-award text-amber-600'
+        };
+      }
+      return {
+        badgeBg: 'bg-rose-100 text-rose-800 border-rose-300',
+        codeBg: 'bg-rose-600 text-white',
+        borderHover: 'hover:border-rose-400',
+        cardAccent: 'from-rose-500/10 via-transparent to-transparent',
+        icon: 'fa-gift text-rose-600'
+      };
     }
 
     function renderHorizontalCourseRow(c) {

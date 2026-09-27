@@ -1,4 +1,4 @@
-// Vercel Serverless Function: /api/facebook (Gemini 3.8 Flash Humanized Storytelling)
+// Vercel Serverless Function: /api/facebook (Gemini 3.8 Flash Humanized Storytelling Engine)
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -13,21 +13,27 @@ module.exports = async (req, res) => {
 
   if (url.includes('generate')) {
     const { 
-      pillar = 'PIL_02', 
-      branch = 'cs1', 
-      ageGroup = 'happy_junior', 
-      studentNote = '', 
+      platform = 'Facebook Fanpage',
+      branch = 'Cơ sở 1: 37 Ngô Quyền, P. Phú Cường',
+      courses = [],
+      mainPillar = 'PIL_02: Học Qua Trải Nghiệm & Nền Tảng (6-12t)',
+      subPillar = 'Đánh Vần Phonics & Chuẩn Hóa Phát Âm',
+      contentIdea = '',
+      // Tương thích ngược:
+      pillar = '',
+      studentNote = '',
       angle = 'observer',
       geminiApiKey = '' 
     } = body;
+
+    const effectivePillar = mainPillar || pillar || 'PIL_02';
+    const effectiveIdea = contentIdea || studentNote || 'Buổi học rộn ràng tiếng cười và sự tiến bộ tự nhiên của các bạn nhỏ';
+    const coursesStr = Array.isArray(courses) && courses.length > 0 ? courses.join(', ') : 'Khóa học tiếng Anh trẻ em';
 
     const apiKey = geminiApiKey || process.env.GEMINI_API_KEY;
 
     if (apiKey) {
       try {
-        const branchName = branch === 'cs1' ? 'Cơ sở 1 (37 Ngô Quyền, P. Phú Cường, Thủ Dầu Một)' : 'Cơ sở 2 (9 KP Hưng Phước, P. Hưng Định, Thuận An)';
-        const ageDesc = ageGroup === 'friendly_kid' ? 'Friendly Kid (Mầm non 4-6 tuổi)' : ageGroup === 'leading_teen' ? 'Leading Teen (Thiếu niên 12-16 tuổi)' : 'Happy Junior (Tiểu học 6-12 tuổi)';
-
         const anglePrompts = {
           observer: "GÓC NHÌN: Người quan sát thầm lặng (The Quiet Observer). Ghi lại một khoảnh khắc nhỏ mộc mạc nhưng đắt giá tại lớp học (ánh mắt, bàn tay vẽ, sự hào hứng khi tìm ra từ vựng).",
           dialogue: "GÓC NHÌN: Trích đoạn đối thoại ngây ngô đời thực (Authentic Dialogue). Bắt đầu bằng một câu nói tiếng Anh bập bẹ hoặc câu hỏi hồn nhiên của bé và lời đáp kiên nhẫn của thầy cô.",
@@ -37,23 +43,49 @@ module.exports = async (req, res) => {
 
         const chosenAnglePrompt = anglePrompts[angle] || anglePrompts.observer;
 
-        const systemPrompt = `Bạn là một người thầy/cô giáo tại lớp học tiếng Anh trẻ em Potato English (tại ${branchName}).
+        let channelSpecificGuidance = "";
+        if (platform === 'TikTok') {
+          channelSpecificGuidance = `KÊNH: TIKTOK VIDEO SCRIPT (Thời lượng 15-45 giây).
+- 3 GIÂY ĐẦU (HOOK): Âm thanh, tiếng cười hoặc hành động bất ngờ của bé giữ chân người xem.
+- PHẦN THÂN: Visual (mô tả cảnh quay) + Audio (lời thoại/lồng tiếng mộc mạc).
+- KẾT THÚC: Lời nhắn gửi ấm áp, nhẹ nhàng, không kêu gọi mua hàng.`;
+        } else if (platform === 'Website') {
+          channelSpecificGuidance = `KÊNH: BÀI VIẾT CHUYÊN SÂU CHUẨN SEO WEBSITE (khoảng 800 - 1.200 từ).
+- Tiêu đề hấp dẫn, tự nhiên.
+- Cấu trúc các thẻ H2, H3 rõ ràng (TUYỆT ĐỐI KHÔNG gõ số thứ tự thủ công như '1. ', '2. ' ở đầu thẻ H2/H3 để tránh lỗi trùng lặp mục lục tự động).
+- Phân tích sâu sắc, khoa học nhưng hành văn gần gũi, ấm áp, giải tỏa băn khoăn của phụ huynh.`;
+        } else {
+          channelSpecificGuidance = `KÊNH: FACEBOOK FANPAGE POST (MICRO-COPYWRITING DƯỚI 80 TỪ).
+- ĐỘ DÀI: BẮT BUỘC DƯỚI 80 TỪ. Cực kỳ ngắn gọn, đọc trọn vẹn trong 5 giây mà không cần bấm "Xem thêm".
+- 100% STUDENT-CENTRIC: Tâm điểm duy nhất là bạn nhỏ và nỗ lực của con. Tuyệt đối KHÔNG tự tán dương lớp học, không khoe thành tích.
+- ZERO DIRECTIVE CTA: Tuyệt đối KHÔNG chèn câu kêu gọi giục giã ("Hãy bấm vào ảnh", "Xem ngay", "Đừng bỏ lỡ", "Inbox ngay"). Để phụ huynh tương tác tự nhiên.
+- KẾT THÚC: 1 câu nhắn gửi ấm áp đời thường (Warm sign-off) và 3 đến 4 hashtags tinh gọn (#PotatoEnglish...). BỎ HOÀN TOÀN khối địa chỉ/hotline spam ở cuối bài.`;
+        }
+
+        const systemPrompt = `Bạn là một người thầy/cô giáo tại lớp học tiếng Anh trẻ em Potato English (đang công tác tại ${branch}).
 TÔN CHỈ THƯƠNG HIỆU: Bình dị, chân thật, nói đúng làm thật, gần gũi như gia đình.
 
 NGHIÊM CẤM RẬP KHUÔN:
 - TUYỆT ĐỐI KHÔNG viết theo công thức sáo rỗng: "TIÊU ĐỀ IN HOA GIẬT TÍT + Đoạn quảng cáo chung chung + Lời chúc sáo rỗng + 10 hashtag".
-- Hãy viết như một trang nhật ký lớp học đời thường chân thật (Proof of Life). Ngôn từ mộc mạc, tự nhiên, chạm vào cảm xúc người đọc trong 5 giây lướt feed.
+- Hãy viết như một trang nhật ký lớp học đời thường chân thật (Proof of Life). Ngôn từ mộc mạc, tự nhiên.
 - ${chosenAnglePrompt}
 
-QUY TẮC CỐT LÕI (CHỈ ĐẠO CHIẾN LƯỢC TỪ CHỊ ĐÀO & ANH TRÍ):
-1. ĐỘ DÀI: BẮT BUỘC DƯỚI 80 TỪ. Cực kỳ súc tích, người xem đọc hết mà không cần bấm "Xem thêm".
-2. 100% STUDENT-CENTRIC: Tâm điểm duy nhất là bạn nhỏ và nỗ lực của con. Tuyệt đối KHÔNG tự tán dương lớp học, không khoe thành tích.
-3. ZERO DIRECTIVE CTA: Tuyệt đối KHÔNG chèn câu kêu gọi giục giã ("Hãy bấm vào ảnh", "Xem ngay", "Đừng bỏ lỡ", "Inbox ngay"). Để phụ huynh tương tác tự nhiên.
-4. CẤM từ "trung tâm" (thay bằng "Potato English", "lớp học Potato English", "không gian học tập").
-5. HẠN CHẾ từ "áp lực/không áp lực" (thay bằng "học bằng niềm vui", "thoải mái tự tin", "tiến bộ tự nhiên").
-6. KẾT THÚC: 1 câu nhắn gửi ấm áp đời thường (Warm sign-off) và 3 đến 4 hashtags tinh gọn (#PotatoEnglish...). BỎ HOÀN TOÀN khối địa chỉ/hotline spam ở cuối bài.`;
+${channelSpecificGuidance}
 
-        const userContext = `Trụ cột: ${pillar}. Đối tượng: ${ageDesc}. Ghi chép thực tế từ lớp học: "${studentNote || 'Buổi học rộn ràng tiếng cười và sự tiến bộ tự nhiên của các bạn nhỏ'}". Hãy viết 1 bài micro-copywriting hoàn chỉnh dưới 80 từ.`;
+QUY CHUẨN AN TOÀN THƯƠNG HIỆU (BRAND SAFETY):
+1. CẤM TỪ "trung tâm" (thay bằng "Potato English", "lớp học Potato English", "không gian học tập").
+2. HẠN CHẾ từ "áp lực/không áp lực" (thay bằng "học bằng niềm vui", "thoải mái tự tin", "tiến bộ tự nhiên").`;
+
+        const userContext = `THÔNG SỐ ĐẦU VÀO ĐÃ XÁC ĐỊNH:
+- Kênh phân phối: ${platform}
+- Cơ sở: ${branch}
+- Khóa học liên quan: ${coursesStr}
+- Trụ cột chính: ${effectivePillar}
+- Trụ cột phụ: ${subPillar}
+- Ý tưởng/Ghi chép thô từ thực tế: "${effectiveIdea}"
+- Góc nhìn: ${angle}
+
+Hãy viết một nội dung hoàn chỉnh, tự nhiên và giàu cảm xúc dựa trên các thông số này.`;
 
         const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`;
         const response = await fetch(geminiUrl, {
@@ -63,7 +95,7 @@ QUY TẮC CỐT LÕI (CHỈ ĐẠO CHIẾN LƯỢC TỪ CHỊ ĐÀO & ANH TRÍ):
             contents: [{ parts: [{ text: `${systemPrompt}\n\n${userContext}` }] }],
             generationConfig: {
               temperature: 0.88,
-              maxOutputTokens: 1000
+              maxOutputTokens: platform === 'Website' ? 2500 : 1000
             }
           })
         });
@@ -76,8 +108,9 @@ QUY TẮC CỐT LÕI (CHỈ ĐẠO CHIẾN LƯỢC TỪ CHỊ ĐÀO & ANH TRÍ):
               success: true,
               content: aiText.trim(),
               model: "gemini-3.8-flash",
+              platform: platform,
               angle: angle,
-              pillar: pillar
+              pillar: effectivePillar
             });
           }
         }
@@ -86,7 +119,7 @@ QUY TẮC CỐT LÕI (CHỈ ĐẠO CHIẾN LƯỢC TỪ CHỊ ĐÀO & ANH TRÍ):
       }
     }
 
-    // Dynamic Humanized Fallback (Đa dạng, không cố định 1 khuôn)
+    // Dynamic Humanized Fallback
     const naturalDrafts = [
       `"This is my mom and me. She 40 years old, and she working very hard. I love her!"\n\nBức tranh nhỏ vừa hoàn thành sau giờ Story Spark, con cầm trên tay khoe với đôi mắt lấp lánh niềm vui. Tiếng Anh đến với con mộc mạc và tự nhiên như tiếng mẹ đẻ.\n\nMột buổi chiều ấm áp của các bạn nhỏ tại Potato English 🥔❤️\n\n#PotatoEnglish #FriendlyKid #TuTinNoiTiengAnh #HocQuaTraiNghiem`,
       `Mười phút đầu buổi học, con còn nép nhẹ sau lưng mẹ, ngập ngừng chưa dám bước vào vòng tròn của cô. Vậy mà đến trò chơi tìm từ vựng, con đã chủ động giơ tay xung phong phát âm thật to.\n\nNiềm vui của thầy cô là được chứng kiến từng bước tiến bộ tự nhiên và nụ cười rạng rỡ của con mỗi ngày 🥔❤️\n\n#PotatoEnglish #HappyJunior #TuTinMoLoi #TienBoTuNhien`,
@@ -98,8 +131,9 @@ QUY TẮC CỐT LÕI (CHỈ ĐẠO CHIẾN LƯỢC TỪ CHỊ ĐÀO & ANH TRÍ):
       success: true,
       content: pick,
       model: "humanized-dynamic-engine",
+      platform: platform,
       angle: angle,
-      pillar: pillar
+      pillar: effectivePillar
     });
   }
 
