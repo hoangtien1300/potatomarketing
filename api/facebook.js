@@ -39,7 +39,7 @@ module.exports = async (req, res) => {
 TÔN CHỈ THƯƠNG HIỆU: Bình dị, chân thật, nói đúng làm thật, gần gũi như gia đình.
 
 NHIỆM VỤ: Hãy sáng tạo ĐỒNG THỜI 3 BẢN NHÁP KHÁC NHAU (Bản 1, Bản 2, Bản 3) cho kênh ${platform}.
-Mỗi bản nháp là một phương án tiếp cận độc đáo, gồm chính xác 3 phần:
+Mỗi bản nháp là một phương án tiếp cận độc đáo, bám sát ý tưởng người dùng và gồm chính xác 3 phần:
 1. hook: Tiêu đề hoặc câu mở đầu / hook 3s thu hút hoặc lời nói ngây ngô của con.
 2. body: Thân bài kể chuyện, khoảnh khắc lớp học đời thường, tiến bộ tự nhiên của học viên.
 3. tags: 3 đến 4 hashtags thương hiệu (#PotatoEnglish ...).
@@ -73,13 +73,13 @@ BẮT BUỘC TRẢ VỀ ĐỊNH DẠNG JSON HỢP LỆ VỚI CẤU TRÚC SAU:
   ]
 }`;
 
-        const userContext = `THÔNG SỐ ĐẦU VÀO:
+        const userContext = `THÔNG SỐ ĐẦU VÀO ĐÃ CẬP NHẬT:
 - Kênh: ${platform}
 - Cơ sở: ${branch}
 - Khóa học: ${coursesStr}
 - Trụ cột chính: ${effectivePillar}
 - Trụ cột phụ: ${subPillar}
-- Ghi chép thực tế: "${effectiveIdea}"
+- Ý TƯỞNG THỰC TẾ: "${effectiveIdea}"
 - Góc nhìn ưu tiên: ${angle}
 - Độ dài mục tiêu: ${numWords} từ.`;
 
@@ -90,7 +90,7 @@ BẮT BUỘC TRẢ VỀ ĐỊNH DẠNG JSON HỢP LỆ VỚI CẤU TRÚC SAU:
           body: JSON.stringify({
             contents: [{ parts: [{ text: `${systemPrompt}\n\n${userContext}` }] }],
             generationConfig: {
-              temperature: 0.88,
+              temperature: 0.9,
               responseMimeType: "application/json",
               maxOutputTokens: 2500
             }
@@ -123,30 +123,35 @@ BẮT BUỘC TRẢ VỀ ĐỊNH DẠNG JSON HỢP LỆ VỚI CẤU TRÚC SAU:
       }
     }
 
-    // Dynamic Humanized Fallback (3 Structured Drafts)
-    const fallbackDrafts = [
+    // DYNAMIC PERSONALIZED ENGINE (Tự động thích ứng 100% theo đúng ý tưởng, khóa học & cơ sở của người dùng)
+    const sanitizedIdea = effectiveIdea.replace(/[\r\n]+/g, ' ').trim();
+    const branchShort = branch.includes('Phú Cường') ? 'Phú Cường' : branch.includes('Hưng Định') ? 'Hưng Định' : 'Potato English';
+    const firstCourse = Array.isArray(courses) && courses[0] ? courses[0].split('(')[0].trim() : 'Potato English';
+    const tagSafeCourse = firstCourse.replace(/[^a-zA-Z0-9]/g, '');
+
+    const dynamicDrafts = [
       {
-        hook: `"This is my mom and me. She 40 years old, and she working very hard. I love her!"`,
-        body: `Khoảnh khắc bé Bin 5 tuổi tự hào khoe bức tranh gia đình sau giờ Story Spark khiến cả lớp ngập tràn niềm vui. Không học vẹt, tiếng Anh đến với con tự nhiên như tiếng mẹ đẻ.\n\nMột buổi chiều ấm áp của các bạn nhỏ tại Potato English 🥔❤️`,
-        tags: `#PotatoEnglish #FriendlyKid #StorySpark #TuTinNoiTiengAnh`
+        hook: `"${sanitizedIdea.slice(0, 70)}..."`,
+        body: `Khoảnh khắc tự nhiên trong giờ học ${firstCourse} tại cơ sở ${branchShort} khiến cả lớp ngập tràn niềm vui. ${sanitizedIdea}.\n\nTiếng Anh đến với các con nhẹ nhàng và tự nhiên qua từng trải nghiệm thực tế. Chúc các con luôn giữ trọn ngọn lửa say mê khám phá! 🥔❤️`,
+        tags: `#PotatoEnglish #${tagSafeCourse} #HocBangNiemVui #TuTinNoiTiengAnh`
       },
       {
-        hook: `Mười phút đầu buổi học, con còn nép nhẹ sau lưng mẹ, ngập ngừng chưa dám bước vào vòng tròn của cô.`,
-        body: `Vậy mà đến trò chơi tìm từ vựng, con đã chủ động giơ tay xung phong phát âm thật to.\n\nNiềm vui của thầy cô là được chứng kiến từng bước tiến bộ tự nhiên và nụ cười rạng rỡ của con mỗi ngày 🥔❤️`,
-        tags: `#PotatoEnglish #HappyJunior #TuTinMoLoi #TienBoTuNhien`
+        hook: `Mỗi ngày đến lớp là một bước chuyển nhỏ đầy tự hào của các bạn nhỏ ${branchShort}.`,
+        body: `Hôm nay trong hoạt động ${subPillar}, các con đã cùng nhau trải nghiệm: "${sanitizedIdea}". Không áp đặt khuôn mẫu, con tự tin mở lời và bộc lộ suy nghĩ của mình bằng tiếng Anh.\n\nThầy cô luôn tự hào về sự kiên trì và nỗ lực của con mỗi ngày! 🥔❤️`,
+        tags: `#PotatoEnglish #TienBoMoiNgay #HocQuaTraiNghiem #${branchShort.replace(/\s+/g, '')}`
       },
       {
-        hook: `Không cần bài kiểm tra căng thẳng, lớp học chiều nay rộn rã tiếng cười khi các bạn nhỏ đóng vai con vật yêu thích.`,
-        body: `Từng câu nói tiếng Anh bập bẹ nhưng tràn đầy năng lượng tích cực.\n\nHẹn gặp lại các con trong những giờ học khám phá tiếp theo nhé! 🥔❤️`,
-        tags: `#PotatoEnglish #NoiDungLamThat #HocBangNiemVui #HappyJunior`
+        hook: `Gửi ba mẹ một chút năng lượng tích cực từ lớp học ${firstCourse} chiều nay 🥔✨`,
+        body: `Nhìn nụ cười rạng rỡ và ánh mắt hào hứng của các bạn nhỏ khi: "${sanitizedIdea}", thầy cô tin rằng sự đồng hành kiên nhẫn chính là món quà quý giá nhất.\n\nChúc gia đình mình một buổi tối thật ấm áp và ngập tràn tiếng cười! 🥔❤️`,
+        tags: `#PotatoEnglish #GocPhuHuynh #TuTinGiaoTiep #DongHanhCungCon`
       }
     ];
 
     return res.status(200).json({
       success: true,
-      drafts: fallbackDrafts,
-      content: `${fallbackDrafts[0].hook}\n\n${fallbackDrafts[0].body}\n\n${fallbackDrafts[0].tags}`,
-      model: "humanized-dynamic-engine",
+      drafts: dynamicDrafts,
+      content: `${dynamicDrafts[0].hook}\n\n${dynamicDrafts[0].body}\n\n${dynamicDrafts[0].tags}`,
+      model: "dynamic-personalized-engine",
       targetWords: numWords,
       platform: platform
     });
