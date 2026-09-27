@@ -14224,10 +14224,11 @@
       }
 
       try {
-        const res = await fetch("/api/facebook/generate", {
+        const res = await fetch("/api/facebook?action=generate", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
+            action: "generate",
             platform: platform,
             branch: branch,
             courses: selectedCourses,
