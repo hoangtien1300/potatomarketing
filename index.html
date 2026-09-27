@@ -2210,6 +2210,46 @@
 
               </div>
 
+              <!-- 4. TÙY CHỌN TONE GIỌNG & CẢM XÚC (BRAND VOICE & TONE) -->
+              <div class="space-y-2 pt-2 border-t border-slate-100">
+                <div class="flex items-center justify-between">
+                  <label for="writer-tone-input" class="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                    <i class="fa-solid fa-microphone-lines text-pink-500 text-[11px]"></i>
+                    <span>Tùy chọn Tone giọng & Cảm xúc:</span>
+                  </label>
+                  <span class="text-[10px] text-pink-600 bg-pink-50 px-2 py-0.5 rounded font-extrabold border border-pink-100">
+                    Voice & Tone
+                  </span>
+                </div>
+
+                <!-- Tone Preset Chips -->
+                <div class="flex items-center gap-1.5 flex-wrap">
+                  <button type="button" onclick="selectWriterTone('Gần gũi, ấm áp, chân thật như người nhà', this)" class="writer-tone-chip active px-2.5 py-1.5 rounded-xl bg-pink-50 text-pink-900 border-2 border-pink-500 font-extrabold text-[11px] shadow-2xs transition-all text-left">
+                    🥔 Gần gũi & Ấm áp
+                  </button>
+                  <button type="button" onclick="selectWriterTone('Hài hước, dí dỏm, bắt trọn khoảnh khắc ngây ngô vui tươi', this)" class="writer-tone-chip px-2.5 py-1.5 rounded-xl bg-slate-50 text-slate-600 border border-slate-200 font-semibold text-[11px] hover:border-slate-300 transition-all text-left">
+                    😄 Hài hước & Đáng yêu
+                  </button>
+                  <button type="button" onclick="selectWriterTone('Tự hào, truyền cảm hứng, tôn vinh bước tiến bộ tự nhiên của con', this)" class="writer-tone-chip px-2.5 py-1.5 rounded-xl bg-slate-50 text-slate-600 border border-slate-200 font-semibold text-[11px] hover:border-slate-300 transition-all text-left">
+                    🌟 Tự hào & Cảm hứng
+                  </button>
+                  <button type="button" onclick="selectWriterTone('Tự sự sâu lắng, chạm vào trăn trở và tình yêu thương của cha mẹ', this)" class="writer-tone-chip px-2.5 py-1.5 rounded-xl bg-slate-50 text-slate-600 border border-slate-200 font-semibold text-[11px] hover:border-slate-300 transition-all text-left">
+                    📖 Tự sự sâu lắng
+                  </button>
+                  <button type="button" onclick="selectWriterTone('Gợi mở phương pháp giáo dục tự nhiên, học bằng niềm vui không áp lực', this)" class="writer-tone-chip px-2.5 py-1.5 rounded-xl bg-slate-50 text-slate-600 border border-slate-200 font-semibold text-[11px] hover:border-slate-300 transition-all text-left">
+                    🎓 Gợi mở phương pháp
+                  </button>
+                </div>
+
+                <!-- Ô Nhập Tone Tùy Chỉnh (Freeform Custom Tone) -->
+                <div class="relative">
+                  <input type="text" id="writer-tone-input" value="Gần gũi, ấm áp, chân thật như người nhà" placeholder="Nhập tone giọng tùy chỉnh (VD: Giọng con nít vui nhộn, hào hứng, nhiều icon)..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:border-pink-500 focus:bg-white shadow-2xs">
+                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400">
+                    <i class="fa-solid fa-pen text-[10px]"></i>
+                  </div>
+                </div>
+              </div>
+
             </div>
 
           </div>
@@ -11975,6 +12015,20 @@
       }
     }
 
+    function selectWriterTone(toneText, btn) {
+      const input = document.getElementById("writer-tone-input");
+      if (input) input.value = toneText;
+      const chips = document.querySelectorAll(".writer-tone-chip");
+      chips.forEach(c => {
+        c.classList.remove("active", "border-2", "border-pink-500", "bg-pink-50", "text-pink-900", "font-extrabold", "shadow-2xs");
+        c.classList.add("border", "border-slate-200", "bg-slate-50", "text-slate-600", "font-semibold");
+      });
+      if (btn) {
+        btn.classList.add("active", "border-2", "border-pink-500", "bg-pink-50", "text-pink-900", "font-extrabold", "shadow-2xs");
+        btn.classList.remove("border", "border-slate-200", "bg-slate-50", "text-slate-600", "font-semibold");
+      }
+    }
+
     // -------------------------------------------------------------------------
     // QUẢN LÝ NHÓM TỔNG KHÓA HỌC & MULTI-SELECT CHUẨN MASTER DB
     // -------------------------------------------------------------------------
@@ -12554,6 +12608,7 @@
 
       const modelVal = document.getElementById("writer-ai-model-select")?.value || "gemini-3.8-flash";
       const savedGeminiKey = localStorage.getItem("gemini_api_key") || "";
+      const toneVal = document.getElementById("writer-tone-input")?.value.trim() || "Gần gũi, ấm áp, chân thật như người nhà";
 
       const origHtml = btn ? btn.innerHTML : "";
       if (btn) {
@@ -12574,6 +12629,7 @@
             contentIdea: contentIdea,
             targetWords: writerTargetWords,
             angle: writerCurrentAngle,
+            tone: toneVal,
             geminiApiKey: savedGeminiKey
           })
         });

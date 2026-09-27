@@ -23,6 +23,7 @@ module.exports = async (req, res) => {
       pillar = '',
       studentNote = '',
       angle = 'observer',
+      tone = 'Gần gũi, ấm áp, chân thật như người nhà',
       geminiApiKey = '' 
     } = body;
 
@@ -37,6 +38,7 @@ module.exports = async (req, res) => {
       try {
         const systemPrompt = `Bạn là biên tập viên cao cấp kiêm thầy cô giáo tại Potato English (${branch}).
 TÔN CHỈ THƯƠNG HIỆU: Bình dị, chân thật, nói đúng làm thật, gần gũi như gia đình.
+TONE GIỌNG YÊU CẦU: "${tone}". Hãy thể hiện rõ nét cảm xúc và phong cách này qua từng câu chữ.
 
 NHIỆM VỤ: Hãy sáng tạo ĐỒNG THỜI 3 BẢN NHÁP KHÁC NHAU (Bản 1, Bản 2, Bản 3) cho kênh ${platform}.
 Mỗi bản nháp là một phương án tiếp cận độc đáo, bám sát ý tưởng người dùng và gồm chính xác 3 phần:
@@ -81,6 +83,7 @@ BẮT BUỘC TRẢ VỀ ĐỊNH DẠNG JSON HỢP LỆ VỚI CẤU TRÚC SAU:
 - Trụ cột phụ: ${subPillar}
 - Ý TƯỞNG THỰC TẾ: "${effectiveIdea}"
 - Góc nhìn ưu tiên: ${angle}
+- TONE GIỌNG / PHONG CÁCH: ${tone}
 - Độ dài mục tiêu: ${numWords} từ.`;
 
         const candidateModels = ['gemini-3.8-flash', 'gemini-3.7-flash', 'gemini-2.5-flash'];
