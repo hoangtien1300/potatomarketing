@@ -3,6 +3,14 @@
   "cleanUrls": true,
   "rewrites": [
     {
+      "source": "/api/facebook/(.*)",
+      "destination": "/api/facebook"
+    },
+    {
+      "source": "/api/facebook",
+      "destination": "/api/facebook"
+    },
+    {
       "source": "/api/calendar",
       "destination": "/api/calendar"
     },

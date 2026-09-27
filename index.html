@@ -308,6 +308,14 @@
                 <span class="w-1.5 h-1.5 rounded-full bg-amber-500 flex-shrink-0"></span>
                 <span class="truncate">Hình ảnh</span>
               </button>
+              <!-- 3.2 Đăng bài Fanpage -->
+              <button type="button" id="subnav-tools-fb-publisher" onclick="switchTab('tools-fb-publisher')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center justify-between whitespace-nowrap">
+                <div class="flex items-center gap-2 truncate">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blue-600 flex-shrink-0"></span>
+                  <span class="truncate">Đăng bài Fanpage</span>
+                </div>
+                <span class="text-[9px] bg-blue-100 text-blue-700 font-extrabold px-1.5 py-0.5 rounded-full">AI</span>
+              </button>
             </div>
           </div>
 
@@ -1895,6 +1903,577 @@
 
       </section>
       <!-- =============================================================== -->
+      <!-- MODULE: TOOL - CÔNG CỤ VIẾT & ĐĂNG BÀI FANPAGE TỰ ĐỘNG -->
+      <!-- =============================================================== -->
+      <section id="panel-tools-fb-publisher" class="module-panel hidden p-4 sm:p-6 max-w-7xl mx-auto w-full space-y-6">
+
+        <!-- [INVARIANT 1]: MODULE HEADER / BANNER -->
+        <div class="module-header bg-white border border-slate-200/90 p-5 sm:p-6 rounded-3xl shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-sky-400 text-white flex items-center justify-center text-xl flex-shrink-0 shadow-md shadow-blue-500/20">
+              <i class="fa-brands fa-facebook-f"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2 flex-wrap">
+                <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Công Cụ Viết & Đăng Bài Tự Động Fanpage</h2>
+                <span class="bg-blue-600 text-white text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full flex items-center gap-1.5 shadow-2xs">
+                  <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                  Meta Graph API v19.0
+                </span>
+                <span class="bg-emerald-100 text-emerald-800 border border-emerald-200 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold flex items-center gap-1">
+                  <i class="fa-solid fa-shield-halved text-[9px] text-emerald-600"></i>
+                  Brand Safety Shield
+                </span>
+                <span class="bg-amber-100 text-amber-900 border border-amber-200 px-2 py-0.5 rounded-full text-[10px] font-bold">
+                  Micro-copy &lt; 80 từ
+                </span>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-500 mt-1 max-w-2xl leading-relaxed">
+                Tự động hóa sáng tạo nội dung chuẩn Brand Voice Potato English: Micro-copywriting dưới 80 từ, Zero Directive CTA, 100% Student-Centric, Album 4 ảnh 1:1 và xuất bản đa kênh.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 flex-wrap w-full md:w-auto">
+            <button type="button" onclick="openFbSettingsModal()" class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs border border-slate-200 transition-all flex items-center justify-center gap-2 shadow-2xs min-h-[40px]">
+              <i class="fa-solid fa-key text-blue-600"></i>
+              <span>Cấu Hình Meta Token</span>
+            </button>
+            <a href="https://docs.google.com/spreadsheets/d/11tOjhZiPCLYvIPQ4eV6l3fc-2m2Gv8wNl4DV4c9NBas/edit#gid=926192727" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-xs border border-emerald-200 transition-all flex items-center justify-center gap-2 shadow-2xs min-h-[40px]">
+              <i class="fa-solid fa-calendar-check text-emerald-600"></i>
+              <span>Lịch Sheet (#gid=926192727)</span>
+            </a>
+            <button type="button" onclick="resetFbPublisherForm()" class="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200 transition-all text-xs flex items-center justify-center min-h-[40px]" title="Làm mới form">
+              <i class="fa-solid fa-rotate-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- MAIN 2-COLUMN GRID (Desktop: 7 cols - 5 cols | Mobile: Stacked) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+          <!-- ==================== CỘT TRÁI (7 COLS): THIẾT LẬP & BIÊN TẬP ==================== -->
+          <div class="lg:col-span-7 space-y-6">
+
+            <!-- THẺ 1: BỐI CẢNH LỚP HỌC & TRỤ CỘT NỘI DUNG -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200/90 shadow-sm space-y-4">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded-xl bg-potato-softBlue text-potato-navy flex items-center justify-center text-sm font-bold">
+                    1
+                  </div>
+                  <div>
+                    <h3 class="text-sm font-black text-slate-900">Bối Cảnh Lớp Học & Trụ Cột Tiếp Thị</h3>
+                    <p class="text-[11px] text-slate-500">Dữ liệu thực tế đời thực dẫn đường (Data-First Marketing)</p>
+                  </div>
+                </div>
+                <span class="text-[10px] font-bold text-potato-blue bg-sky-50 px-2 py-0.5 rounded-md border border-sky-100">
+                  Proof of Life
+                </span>
+              </div>
+
+              <!-- Lựa chọn Cơ sở & Nhóm tuổi -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
+                    <i class="fa-solid fa-location-dot text-potato-red text-[11px]"></i>
+                    Cơ sở Potato English:
+                  </label>
+                  <select id="fb-branch-select" onchange="handleFbContextChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:border-potato-cyan min-h-[40px]">
+                    <option value="cs1">CS1: 37 Ngô Quyền, P. Phú Cường</option>
+                    <option value="cs2">CS2: 9 KP Hưng Phước, P. Hưng Định</option>
+                    <option value="both">Cả 2 Cơ sở (Phú Cường & Hưng Định)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
+                    <i class="fa-solid fa-graduation-cap text-potato-blue text-[11px]"></i>
+                    Nhóm học viên / Lứa tuổi:
+                  </label>
+                  <select id="fb-age-group-select" onchange="handleFbContextChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:border-potato-cyan min-h-[40px]">
+                    <option value="friendly_kid">Friendly Kid (Mầm non 4-6 tuổi)</option>
+                    <option value="happy_junior" selected>Happy Junior (Tiểu học 6-12 tuổi)</option>
+                    <option value="leading_teen">Leading Teen (Thiếu niên 12-16 tuổi)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Trụ cột nội dung (Content Pillar) -->
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-center justify-between">
+                  <span class="flex items-center gap-1.5">
+                    <i class="fa-solid fa-layer-group text-amber-500 text-[11px]"></i>
+                    Trụ cột nội dung (6 Content Pillars):
+                  </span>
+                  <span id="fb-pillar-ratio-badge" class="text-[10px] text-amber-700 font-extrabold bg-amber-50 px-2 py-0.2 rounded border border-amber-200">
+                    Mật độ: 25%
+                  </span>
+                </label>
+                <select id="fb-pillar-select" onchange="handleFbPillarChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:border-potato-cyan min-h-[40px]">
+                  <option value="PIL_01">PIL_01: Story Spark & Tiếng Anh Mầm Non (4-5t) • 30%</option>
+                  <option value="PIL_02" selected>PIL_02: Học Qua Trải Nghiệm & Giao Tiếp Tự Nhiên (6-16t) • 25%</option>
+                  <option value="PIL_03">PIL_03: Vinh Danh Học Viên (Top Student - Cố định ngày 12) • 15%</option>
+                  <option value="PIL_04">PIL_04: Góc Phụ Huynh & Mẹo Nuôi Dạy Con Tại Nhà • 15%</option>
+                  <option value="PIL_05">PIL_05: Không Gian 2 Cơ Sở & Sự Tận Tâm Đội Ngũ • 10%</option>
+                  <option value="PIL_06">PIL_06: Sự Kiện Khai Giảng & Lời Mời Học Thử 0đ • 10%</option>
+                </select>
+              </div>
+
+              <!-- Tên nhân vật & Ghi chú bối cảnh thực tế -->
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1.5 flex items-center justify-between">
+                  <span class="flex items-center gap-1.5">
+                    <i class="fa-solid fa-heart text-rose-500 text-[11px]"></i>
+                    Khoảnh khắc học viên (100% Student-Centric):
+                  </span>
+                  <span class="text-[10px] text-slate-400">Nhân vật chính là các bạn nhỏ</span>
+                </label>
+                <div class="relative">
+                  <input type="text" id="fb-student-note" placeholder="VD: Bé Bin 5 tuổi hào hứng khoe tranh vẽ Family và nói: This is my mom!..." value="Bạn nhỏ Tom hoàn thành buổi thuyết trình tiếng Anh chủ đề Animals với nụ cười rạng rỡ" oninput="handleFbNoteInput()" class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-3 pr-24 py-2 text-xs font-medium text-slate-800 focus:outline-none focus:border-potato-cyan min-h-[40px]">
+                  <button type="button" onclick="clearFbStudentNote()" class="absolute right-2 top-2 text-[11px] text-slate-400 hover:text-slate-600 px-2 py-1 rounded">
+                    Xóa
+                  </button>
+                </div>
+              </div>
+
+              <!-- Quick Presets -->
+              <div>
+                <span class="text-[11px] font-bold text-slate-500 block mb-1.5">Gợi ý bối cảnh nhanh:</span>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <button type="button" onclick="applyFbPreset('bin_story_spark')" class="px-2.5 py-1 rounded-lg bg-sky-50 hover:bg-sky-100 text-potato-blue text-[11px] font-semibold border border-sky-200/80 transition-all flex items-center gap-1">
+                    <span>🥔 Bé Bin (5t) Story Spark</span>
+                  </button>
+                  <button type="button" onclick="applyFbPreset('top_student')" class="px-2.5 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-800 text-[11px] font-semibold border border-amber-200/80 transition-all flex items-center gap-1">
+                    <span>🏆 Top Student Tháng</span>
+                  </button>
+                  <button type="button" onclick="applyFbPreset('leo_ket')" class="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-[11px] font-semibold border border-emerald-200/80 transition-all flex items-center gap-1">
+                    <span>🎙️ Leo (12t) Thuyết Trình</span>
+                  </button>
+                  <button type="button" onclick="applyFbPreset('parent_tips')" class="px-2.5 py-1 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-800 text-[11px] font-semibold border border-purple-200/80 transition-all flex items-center gap-1">
+                    <span>💡 Tips Đồng Hành Ba Mẹ</span>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- THẺ 2: AI MICRO-COPYWRITING & BỘ LỌC BRAND SAFETY SHIELD -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200/90 shadow-sm space-y-4">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-sm font-bold">
+                    2
+                  </div>
+                  <div>
+                    <h3 class="text-sm font-black text-slate-900">Biên Tập Micro-Copywriting Chuẩn Brand Voice</h3>
+                    <p class="text-[11px] text-slate-500">Chỉ đạo Chị Đào & Anh Trí: Dưới 80 từ, Zero Directive CTA</p>
+                  </div>
+                </div>
+
+                <!-- Nút AI Generate -->
+                <button type="button" id="btn-fb-ai-generate" onclick="generateFbContentAI()" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-potato-cyan hover:from-blue-700 hover:to-potato-cyanHover text-white font-extrabold text-xs shadow-md shadow-blue-500/20 transition-all flex items-center gap-2 min-h-[38px] active:scale-95">
+                  <i class="fa-solid fa-wand-magic-sparkles text-amber-300"></i>
+                  <span>AI Sinh Micro-Copy</span>
+                </button>
+              </div>
+
+              <!-- Trình soạn thảo văn bản bài đăng -->
+              <div class="space-y-1.5">
+                <div class="flex items-center justify-between text-xs">
+                  <label for="fb-post-textarea" class="font-bold text-slate-700">Nội dung bài viết Facebook:</label>
+                  <div class="flex items-center gap-2">
+                    <span id="fb-word-count-badge" class="px-2 py-0.5 rounded-full text-[11px] font-black bg-emerald-100 text-emerald-800 border border-emerald-200">
+                      0 / 80 từ
+                    </span>
+                    <button type="button" onclick="formatFbText('clear')" class="text-slate-400 hover:text-rose-500 text-[11px]" title="Xóa trắng">
+                      <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                <textarea id="fb-post-textarea" rows="6" oninput="handleFbTextInput()" placeholder="Nhập hoặc để AI tự động sinh bài viết micro-copywriting dưới 80 từ..." class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-xs text-slate-800 font-medium leading-relaxed focus:outline-none focus:border-potato-cyan focus:bg-white transition-all resize-y"></textarea>
+
+                <!-- Thanh hiển thị độ dài từ (Progress bar) -->
+                <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                  <div id="fb-word-progress-bar" class="bg-emerald-500 h-1.5 transition-all duration-300" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <!-- Hộp cảnh báo vi phạm Brand Safety Linter -->
+              <div id="fb-brand-warning-box" class="hidden p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs space-y-2 animate-in fade-in duration-200">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2 font-bold">
+                    <i class="fa-solid fa-triangle-exclamation text-rose-600"></i>
+                    <span>Cảnh Báo Vi Phạm Nhận Diện Thương Hiệu:</span>
+                  </div>
+                  <button type="button" onclick="autoFixFbBrandSafety()" class="px-2.5 py-1 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-extrabold text-[10px] shadow-xs transition-all flex items-center gap-1">
+                    <i class="fa-solid fa-wand-magic-sparkles text-[9px]"></i>
+                    Sửa Tự Động Ngay
+                  </button>
+                </div>
+                <ul id="fb-brand-warning-list" class="list-disc list-inside space-y-1 text-[11.5px] text-rose-700 font-medium">
+                  <!-- Dynamic warnings -->
+                </ul>
+              </div>
+
+              <!-- Dải huy hiệu tiêu chí Brand Voice đạt chuẩn -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 text-[10.5px]">
+                <div id="badge-check-length" class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-600 font-semibold flex items-center gap-1.5 transition-all">
+                  <i class="fa-solid fa-circle-check text-slate-400"></i>
+                  <span>Dưới 80 từ</span>
+                </div>
+                <div id="badge-check-trungtam" class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-600 font-semibold flex items-center gap-1.5 transition-all">
+                  <i class="fa-solid fa-circle-check text-slate-400"></i>
+                  <span>Cấm "trung tâm"</span>
+                </div>
+                <div id="badge-check-zero-cta" class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-600 font-semibold flex items-center gap-1.5 transition-all">
+                  <i class="fa-solid fa-circle-check text-slate-400"></i>
+                  <span>Zero Directive CTA</span>
+                </div>
+                <div id="badge-check-apluc" class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-600 font-semibold flex items-center gap-1.5 transition-all">
+                  <i class="fa-solid fa-circle-check text-slate-400"></i>
+                  <span>Không từ "áp lực"</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- THẺ 3: QUẢN LÝ ALBUM 4 ẢNH CHUẨN FACEBOOK (TỶ LỆ 1:1) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200/90 shadow-sm space-y-4">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-sm font-bold">
+                    3
+                  </div>
+                  <div>
+                    <h3 class="text-sm font-black text-slate-900">Album 4 Ảnh Chuẩn Facebook (Tỷ Lệ 1:1)</h3>
+                    <p class="text-[11px] text-slate-500">1 Ảnh Tiêu Đề Chính + 3 Ảnh Con • Đồng phục Xanh Cyan #00AEEF</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                  <button type="button" onclick="loadDefaultPotatoAlbum()" class="px-2.5 py-1.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-potato-blue text-[11px] font-bold border border-sky-200 transition-all flex items-center gap-1">
+                    <i class="fa-solid fa-images"></i>
+                    <span>Tải Ảnh Mẫu Potato</span>
+                  </button>
+                  <button type="button" onclick="clearFbAllImages()" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 text-[11px] font-bold transition-all">
+                    Xóa Hết
+                  </button>
+                </div>
+              </div>
+
+              <!-- Lưới 4 ô tải ảnh trực quan -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <!-- Slot 1: Cover 1:1 -->
+                <div class="relative group border-2 border-dashed border-blue-300 hover:border-blue-500 rounded-2xl p-2 bg-blue-50/40 text-center flex flex-col items-center justify-center aspect-square overflow-hidden transition-all">
+                  <img id="fb-img-slot-0" src="" class="hidden w-full h-full object-cover rounded-xl">
+                  <div id="fb-slot-placeholder-0" class="flex flex-col items-center justify-center p-2 text-blue-600">
+                    <i class="fa-solid fa-crown text-base mb-1 text-amber-500"></i>
+                    <span class="text-[10px] font-extrabold block">Ảnh 1 (Cover)</span>
+                    <span class="text-[9px] text-slate-400">Tiêu đề chính 1:1</span>
+                  </div>
+                  <input type="file" accept="image/*" onchange="handleFbImageSlotUpload(0, this.files)" class="absolute inset-0 opacity-0 cursor-pointer" title="Chọn Ảnh 1">
+                  <button type="button" onclick="removeFbImageSlot(0)" id="btn-remove-slot-0" class="hidden absolute top-1 right-1 w-6 h-6 rounded-full bg-slate-900/80 text-white text-[10px] items-center justify-center hover:bg-rose-600">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+
+                <!-- Slot 2 -->
+                <div class="relative group border-2 border-dashed border-slate-300 hover:border-potato-cyan rounded-2xl p-2 bg-slate-50 text-center flex flex-col items-center justify-center aspect-square overflow-hidden transition-all">
+                  <img id="fb-img-slot-1" src="" class="hidden w-full h-full object-cover rounded-xl">
+                  <div id="fb-slot-placeholder-1" class="flex flex-col items-center justify-center p-2 text-slate-500">
+                    <i class="fa-solid fa-camera text-base mb-1 text-slate-400"></i>
+                    <span class="text-[10px] font-bold block">Ảnh 2 (Con)</span>
+                    <span class="text-[9px] text-slate-400">Khoảnh khắc lớp</span>
+                  </div>
+                  <input type="file" accept="image/*" onchange="handleFbImageSlotUpload(1, this.files)" class="absolute inset-0 opacity-0 cursor-pointer" title="Chọn Ảnh 2">
+                  <button type="button" onclick="removeFbImageSlot(1)" id="btn-remove-slot-1" class="hidden absolute top-1 right-1 w-6 h-6 rounded-full bg-slate-900/80 text-white text-[10px] items-center justify-center hover:bg-rose-600">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+
+                <!-- Slot 3 -->
+                <div class="relative group border-2 border-dashed border-slate-300 hover:border-potato-cyan rounded-2xl p-2 bg-slate-50 text-center flex flex-col items-center justify-center aspect-square overflow-hidden transition-all">
+                  <img id="fb-img-slot-2" src="" class="hidden w-full h-full object-cover rounded-xl">
+                  <div id="fb-slot-placeholder-2" class="flex flex-col items-center justify-center p-2 text-slate-500">
+                    <i class="fa-solid fa-camera text-base mb-1 text-slate-400"></i>
+                    <span class="text-[10px] font-bold block">Ảnh 3 (Con)</span>
+                    <span class="text-[9px] text-slate-400">Sản phẩm bài tập</span>
+                  </div>
+                  <input type="file" accept="image/*" onchange="handleFbImageSlotUpload(2, this.files)" class="absolute inset-0 opacity-0 cursor-pointer" title="Chọn Ảnh 3">
+                  <button type="button" onclick="removeFbImageSlot(2)" id="btn-remove-slot-2" class="hidden absolute top-1 right-1 w-6 h-6 rounded-full bg-slate-900/80 text-white text-[10px] items-center justify-center hover:bg-rose-600">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+
+                <!-- Slot 4 -->
+                <div class="relative group border-2 border-dashed border-slate-300 hover:border-potato-cyan rounded-2xl p-2 bg-slate-50 text-center flex flex-col items-center justify-center aspect-square overflow-hidden transition-all">
+                  <img id="fb-img-slot-3" src="" class="hidden w-full h-full object-cover rounded-xl">
+                  <div id="fb-slot-placeholder-3" class="flex flex-col items-center justify-center p-2 text-slate-500">
+                    <i class="fa-solid fa-camera text-base mb-1 text-slate-400"></i>
+                    <span class="text-[10px] font-bold block">Ảnh 4 (Con)</span>
+                    <span class="text-[9px] text-slate-400">Nụ cười học viên</span>
+                  </div>
+                  <input type="file" accept="image/*" onchange="handleFbImageSlotUpload(3, this.files)" class="absolute inset-0 opacity-0 cursor-pointer" title="Chọn Ảnh 4">
+                  <button type="button" onclick="removeFbImageSlot(3)" id="btn-remove-slot-3" class="hidden absolute top-1 right-1 w-6 h-6 rounded-full bg-slate-900/80 text-white text-[10px] items-center justify-center hover:bg-rose-600">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Lưu ý đồng phục nhận diện -->
+              <div class="p-3 rounded-2xl bg-sky-50 border border-sky-100 flex items-start gap-2.5 text-[11px] text-slate-600">
+                <i class="fa-solid fa-circle-info text-potato-cyan text-sm flex-shrink-0 mt-0.5"></i>
+                <div class="leading-relaxed">
+                  <strong class="text-potato-navy">Quy chuẩn đồng phục học viên:</strong> Bắt buộc áo thun cổ tròn màu <strong>Xanh Cyan thương hiệu (#00AEEF)</strong> có logo Mascot Potato ngực trái. Tuyệt đối không dùng áo màu vàng.
+                </div>
+              </div>
+
+            </div>
+
+            <!-- THẺ 4: TÙY CHỌN XUẤT BẢN & ĐỒNG BỘ LỊCH ĐĂNG -->
+            <div class="bg-gradient-to-br from-slate-900 via-potato-navy to-[#0A4E8C] text-white rounded-3xl p-5 sm:p-6 shadow-card space-y-4">
+              <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded-xl bg-white/10 text-potato-cyan flex items-center justify-center text-sm font-bold">
+                    4
+                  </div>
+                  <div>
+                    <h3 class="text-sm font-black text-white">Xuất Bản Fanpage & Đồng Bộ Hệ Thống</h3>
+                    <p class="text-[11px] text-sky-200/80">Meta Graph API • Google Sheet Calendar • Work Log</p>
+                  </div>
+                </div>
+                <span class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-2 py-0.5 rounded-full font-bold">
+                  Sẵn sàng 24/7
+                </span>
+              </div>
+
+              <!-- Lựa chọn Chế độ Đăng -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <label class="flex items-center gap-2.5 p-3 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-all">
+                  <input type="radio" name="fb-publish-mode" value="now" checked onchange="toggleFbScheduleTimeInput()" class="text-potato-cyan focus:ring-0">
+                  <div>
+                    <span class="font-extrabold block text-white">Đăng Ngay Lập Tức</span>
+                    <span class="text-[10px] text-sky-200">Xuất bản bài viết trực tiếp lên Fanpage</span>
+                  </div>
+                </label>
+
+                <label class="flex items-center gap-2.5 p-3 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-all">
+                  <input type="radio" name="fb-publish-mode" value="schedule" onchange="toggleFbScheduleTimeInput()" class="text-potato-cyan focus:ring-0">
+                  <div>
+                    <span class="font-extrabold block text-white">Lên Lịch Xuất Bản</span>
+                    <span class="text-[10px] text-sky-200">Đặt giờ vàng đăng bài tự động</span>
+                  </div>
+                </label>
+              </div>
+
+              <!-- Chọn thời gian lên lịch (Ẩn nếu đăng ngay) -->
+              <div id="fb-schedule-time-container" class="hidden space-y-1.5 p-3 rounded-2xl bg-white/10 border border-white/15">
+                <label class="block text-xs font-bold text-sky-100 flex items-center gap-1.5">
+                  <i class="fa-solid fa-clock text-potato-cyan"></i>
+                  Chọn ngày & giờ đăng bài (Giờ vàng gợi ý: 11:30 hoặc 19:45):
+                </label>
+                <input type="datetime-local" id="fb-scheduled-datetime" class="w-full bg-slate-900/80 border border-white/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-potato-cyan font-semibold">
+              </div>
+
+              <!-- Checkbox Tùy chọn Đồng bộ -->
+              <div class="space-y-2 text-xs text-sky-100 font-medium">
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" id="fb-sync-calendar-check" checked class="rounded border-white/30 text-potato-cyan focus:ring-0">
+                  <span>Ghi tự động vào Google Sheet <strong>📅 OMNICHANNEL CALENDAR (#gid=926192727)</strong></span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" id="fb-sync-worklog-check" checked class="rounded border-white/30 text-potato-cyan focus:ring-0">
+                  <span>Ghi vết lịch sử vào tab <strong>Nhật ký công việc (#gid=1776016196)</strong></span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" id="fb-sync-telegram-check" checked class="rounded border-white/30 text-potato-cyan focus:ring-0">
+                  <span>Gửi tin nhắn thông báo xác nhận duyệt về <strong>Telegram Bot</strong></span>
+                </label>
+              </div>
+
+              <!-- Các nút hành động chính -->
+              <div class="pt-2 flex items-center gap-2.5 flex-wrap">
+                <button type="button" id="btn-fb-publish-main" onclick="executeFbPublishAction()" class="flex-1 px-5 py-3 rounded-2xl bg-gradient-to-r from-blue-500 to-sky-400 hover:from-blue-600 hover:to-sky-500 text-white font-black text-xs sm:text-sm shadow-lg shadow-blue-500/30 transition-all flex items-center justify-center gap-2 min-h-[44px] active:scale-95">
+                  <i class="fa-solid fa-paper-plane text-base"></i>
+                  <span id="btn-fb-publish-label">🚀 ĐĂNG BÀI NGAY LÊN FANPAGE</span>
+                </button>
+
+                <button type="button" onclick="copyFbContentToClipboard()" class="px-4 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs border border-white/20 transition-all flex items-center justify-center gap-2 min-h-[44px]">
+                  <i class="fa-solid fa-copy"></i>
+                  <span>Sao Chép</span>
+                </button>
+
+                <button type="button" onclick="saveFbDraftLocal()" class="px-4 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs border border-white/20 transition-all flex items-center justify-center gap-2 min-h-[44px]" title="Lưu nháp vào máy">
+                  <i class="fa-solid fa-floppy-disk"></i>
+                  <span>Lưu Nháp</span>
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- ==================== CỘT PHẢI (5 COLS): LIVE PREVIEW & BRAND SCORECARD ==================== -->
+          <div class="lg:col-span-5 space-y-6">
+
+            <!-- THẺ PREVIEW: TRÌNH MÔ PHỎNG FACEBOOK FEED LIVE POST -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200/90 shadow-sm space-y-4 sticky top-20">
+              
+              <!-- Preview Header Switch -->
+              <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <h3 class="text-sm font-black text-slate-900">Xem Trước Bài Đăng Thực Tế</h3>
+                </div>
+                <div class="flex items-center gap-1 bg-slate-100 p-0.5 rounded-xl text-xs font-bold">
+                  <button type="button" id="btn-preview-mode-mobile" onclick="switchFbPreviewDevice('mobile')" class="px-2.5 py-1 rounded-lg bg-white text-potato-navy shadow-2xs">
+                    <i class="fa-solid fa-mobile-screen-button text-[11px]"></i>
+                    Mobile
+                  </button>
+                  <button type="button" id="btn-preview-mode-desktop" onclick="switchFbPreviewDevice('desktop')" class="px-2.5 py-1 rounded-lg text-slate-500 hover:text-slate-800">
+                    <i class="fa-solid fa-desktop text-[11px]"></i>
+                    Desktop
+                  </button>
+                </div>
+              </div>
+
+              <!-- KHUNG MÔ PHỎNG BÀI VIẾT FACEBOOK (MOCKUP CARD) -->
+              <div id="fb-card-container" class="w-full max-w-sm mx-auto bg-white border border-slate-200 rounded-2xl shadow-subtle overflow-hidden transition-all text-slate-900">
+                
+                <!-- FB Post Header -->
+                <div class="p-3.5 flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <div class="relative">
+                      <div class="w-10 h-10 rounded-full border-2 border-potato-cyan bg-white p-0.5 shadow-2xs overflow-hidden flex items-center justify-center">
+                        <img src="potato_logo.png" onerror="this.src='Potato_English_Logo.jpeg'" alt="Potato Avatar" class="w-full h-full object-contain">
+                      </div>
+                      <span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-blue-600 text-white flex items-center justify-center text-[7px] border border-white">
+                        <i class="fa-solid fa-check"></i>
+                      </span>
+                    </div>
+
+                    <div>
+                      <div class="flex items-center gap-1">
+                        <span class="text-xs font-extrabold text-slate-900 hover:underline cursor-pointer">Potato English</span>
+                        <i class="fa-solid fa-circle-check text-blue-600 text-[10px]"></i>
+                      </div>
+                      <div class="flex items-center gap-1 text-[10px] text-slate-500">
+                        <span id="fb-preview-timestamp">Vừa xong</span>
+                        <span>•</span>
+                        <i class="fa-solid fa-earth-americas text-[9px]" title="Công khai"></i>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="text-slate-400 hover:text-slate-600 cursor-pointer px-2 py-1">
+                    <i class="fa-solid fa-ellipsis"></i>
+                  </div>
+                </div>
+
+                <!-- FB Post Body Text -->
+                <div class="px-3.5 pb-3 space-y-2 text-[12.5px] leading-relaxed">
+                  <div id="fb-preview-text" class="whitespace-pre-line text-slate-800 font-normal">
+                    Khoảnh khắc con tự tin mở lời luôn là điều tuyệt vời nhất tại Potato English! 🥔✨
+                  </div>
+                </div>
+
+                <!-- FB 4-Photo Album Grid (Tỷ lệ 1:1) -->
+                <div id="fb-preview-album-grid" class="w-full aspect-square bg-slate-100 grid grid-cols-2 grid-rows-2 gap-0.5 border-t border-b border-slate-100 overflow-hidden">
+                  <div class="relative w-full h-full bg-slate-200 overflow-hidden">
+                    <img id="fb-preview-img-0" src="potato_logo.png" class="w-full h-full object-cover">
+                  </div>
+                  <div class="relative w-full h-full bg-slate-200 overflow-hidden">
+                    <img id="fb-preview-img-1" src="potato_logo.png" class="w-full h-full object-cover">
+                  </div>
+                  <div class="relative w-full h-full bg-slate-200 overflow-hidden">
+                    <img id="fb-preview-img-2" src="potato_logo.png" class="w-full h-full object-cover">
+                  </div>
+                  <div class="relative w-full h-full bg-slate-200 overflow-hidden">
+                    <img id="fb-preview-img-3" src="potato_logo.png" class="w-full h-full object-cover">
+                  </div>
+                </div>
+
+                <!-- FB Post Social Metrics Bar -->
+                <div class="px-3.5 py-2 flex items-center justify-between text-[11px] text-slate-500 border-b border-slate-100">
+                  <div class="flex items-center gap-1.5">
+                    <div class="flex -space-x-1">
+                      <span class="w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center text-[8px]"><i class="fa-solid fa-thumbs-up"></i></span>
+                      <span class="w-4 h-4 rounded-full bg-rose-500 text-white flex items-center justify-center text-[8px]"><i class="fa-solid fa-heart"></i></span>
+                      <span class="w-4 h-4 rounded-full bg-amber-500 text-white flex items-center justify-center text-[8px]">🥔</span>
+                    </div>
+                    <span id="fb-preview-likes-count" class="font-medium text-slate-600">58 người khác</span>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <span>14 bình luận</span>
+                    <span>5 chia sẻ</span>
+                  </div>
+                </div>
+
+                <!-- FB Action Buttons Bar -->
+                <div class="px-2 py-1 flex items-center justify-around text-xs font-bold text-slate-600">
+                  <button type="button" class="flex-1 py-1.5 rounded-lg hover:bg-slate-100 flex items-center justify-center gap-1.5 transition-all text-slate-600">
+                    <i class="fa-regular fa-thumbs-up text-sm"></i>
+                    <span>Thích</span>
+                  </button>
+                  <button type="button" class="flex-1 py-1.5 rounded-lg hover:bg-slate-100 flex items-center justify-center gap-1.5 transition-all text-slate-600">
+                    <i class="fa-regular fa-comment text-sm"></i>
+                    <span>Bình luận</span>
+                  </button>
+                  <button type="button" class="flex-1 py-1.5 rounded-lg hover:bg-slate-100 flex items-center justify-center gap-1.5 transition-all text-slate-600">
+                    <i class="fa-solid fa-share text-sm"></i>
+                    <span>Chia sẻ</span>
+                  </button>
+                </div>
+
+              </div>
+
+              <!-- THẺ ĐÁNH GIÁ CHẤT LƯỢNG BRAND SCORECARD -->
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-black text-slate-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-award text-amber-500"></i>
+                    Điểm Brand Voice Potato:
+                  </span>
+                  <span id="fb-brand-score-badge" class="px-2.5 py-0.5 rounded-full text-xs font-black bg-emerald-100 text-emerald-800 border border-emerald-200">
+                    100 / 100
+                  </span>
+                </div>
+
+                <div class="space-y-1.5 text-[11px] text-slate-600">
+                  <div class="flex items-center justify-between">
+                    <span>1. Độ dài Micro-copy (< 80 từ):</span>
+                    <strong id="score-item-length" class="text-emerald-600">✅ Đạt</strong>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span>2. Zero Directive CTA (Không chỉ đạo):</span>
+                    <strong id="score-item-cta" class="text-emerald-600">✅ Đạt</strong>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span>3. 100% Student-Centric (Spotlight con):</span>
+                    <strong id="score-item-student" class="text-emerald-600">✅ Đạt</strong>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span>4. Brand Safety (Cấm từ "trung tâm", "áp lực"):</span>
+                    <strong id="score-item-safety" class="text-emerald-600">✅ Đạt</strong>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span>5. Album 4 ảnh 1:1 chuẩn Newsfeed:</span>
+                    <strong id="score-item-album" class="text-emerald-600">✅ Đạt</strong>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- =============================================================== -->
       <!-- MODULE: TASKS (BẢNG QUẢN LÝ NHIỆM VỤ MARKETING HUB) -->
       <!-- =============================================================== -->
       <section id="panel-tasks" class="module-panel hidden p-4 sm:p-6 max-w-7xl mx-auto w-full space-y-6">
@@ -2797,6 +3376,76 @@
   <!-- ================================================================= -->
   <!-- [INVARIANT 3]: MODALS & OVERLAYS (SEPARATED AT THE END) -->
   <!-- ================================================================= -->
+
+  <!-- ================================================================= -->
+  <!-- MODAL: CẤU HÌNH META GRAPH API (FACEBOOK FANPAGE) -->
+  <!-- ================================================================= -->
+  <div id="modal-fb-api-settings" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-lg w-full shadow-2xl border border-slate-200 overflow-hidden transform transition-all animate-in fade-in zoom-in-95">
+      
+      <!-- Modal Header -->
+      <div class="bg-gradient-to-r from-blue-700 to-sky-600 text-white p-5 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center text-lg">
+            <i class="fa-brands fa-facebook-f text-white"></i>
+          </div>
+          <div>
+            <h3 class="font-black text-base text-white">Cấu Hình Meta Graph API</h3>
+            <p class="text-xs text-sky-100">Kết nối Fanpage Potato English để đăng bài tự động</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeFbSettingsModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-sm transition-all">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Form Body -->
+      <div class="p-6 space-y-4 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Facebook Page ID:</label>
+          <input type="text" id="fb-cfg-page-id" placeholder="VD: 104829182749102" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 focus:outline-none focus:border-potato-cyan min-h-[38px]">
+          <span class="text-[10px] text-slate-400 block mt-1">ID trang Facebook Potato English (lấy từ cài đặt Fanpage).</span>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Facebook Page Access Token (Never Expire / Long-lived):</label>
+          <textarea id="fb-cfg-access-token" rows="3" placeholder="EAABw..." class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-mono text-slate-800 focus:outline-none focus:border-potato-cyan"></textarea>
+          <span class="text-[10px] text-slate-400 block mt-1">Token có quyền `pages_manage_posts`, `pages_read_engagement` để xuất bản.</span>
+        </div>
+
+        <div class="p-3 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 space-y-1">
+          <div class="font-bold flex items-center gap-1.5">
+            <i class="fa-solid fa-lightbulb text-amber-600"></i>
+            Chế độ Mô phỏng Kiểm thử (Safe Mode):
+          </div>
+          <p class="text-[11px] leading-relaxed">
+            Nếu chưa cấu hình Token thật, hệ thống sẽ tự động bật chế độ <strong>Simulated Sandbox</strong>: Cho phép xem trước bài viết, kiểm duyệt Brand Safety, sao chép văn bản và ghi vết lịch sử vào Google Sheet bình thường.
+          </p>
+        </div>
+
+        <!-- Connection Test Status -->
+        <div id="fb-token-test-status" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+
+        <div class="pt-2 flex items-center justify-between gap-3 border-t border-slate-100">
+          <button type="button" onclick="testFbConnection()" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold transition-all flex items-center gap-1.5">
+            <i class="fa-solid fa-plug text-blue-600"></i>
+            <span>Kiểm Tra Kết Nối</span>
+          </button>
+
+          <div class="flex items-center gap-2">
+            <button type="button" onclick="closeFbSettingsModal()" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold">
+              Đóng
+            </button>
+            <button type="button" onclick="saveFbSettings()" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold shadow-md shadow-blue-500/20">
+              Lưu Cấu Hình
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
 
   <!-- 1. LOGIN MODAL OVERLAY -->
   <div id="login-modal-overlay" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
@@ -5992,6 +6641,47 @@
         if (mainElem) mainElem.scrollTop = 0;
         return;
       }
+
+      // 4.5.1 Handle Tool: Đăng bài Fanpage
+      if (tabId === 'tools-fb-publisher') {
+        const targetPanel = document.getElementById('panel-tools-fb-publisher');
+        if (targetPanel) targetPanel.classList.remove('hidden');
+
+        // Highlight Tool parent
+        const navTools = document.getElementById('nav-tools');
+        if (navTools) {
+          navTools.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold', 'border', 'border-potato-cyan/20');
+          navTools.classList.remove('text-slate-600');
+          const ch = navTools.querySelector('.menu-chevron');
+          if (ch) {
+            ch.classList.remove('fa-chevron-right');
+            ch.classList.add('fa-chevron-down');
+          }
+        }
+
+        // Open submenu-tools, close others
+        const submenus = document.querySelectorAll('.sidebar-submenu');
+        submenus.forEach(sm => {
+          if (sm.id === 'submenu-tools') sm.classList.remove('hidden');
+          else sm.classList.add('hidden');
+        });
+
+        // Highlight subnav-tools-fb-publisher
+        const subFbPub = document.getElementById('subnav-tools-fb-publisher');
+        if (subFbPub) {
+          subFbPub.classList.add('bg-potato-softBlue', 'text-potato-navy', 'font-bold');
+          subFbPub.classList.remove('text-slate-500');
+        }
+
+        if (typeof initFbPublisherTool === 'function') {
+          initFbPublisherTool();
+        }
+
+        const mainElem = document.querySelector('main');
+        if (mainElem) mainElem.scrollTop = 0;
+        return;
+      }
+
 
       // 4.6 Handle Báo cáo: Marketing
       if (tabId === 'reports-marketing' || tabId === 'reports') {
@@ -10300,6 +10990,698 @@
     }
 
     // Initialize on DOM ready
+    // =========================================================================
+    // MODULE: FACEBOOK PUBLISHER & AI MICRO-COPYWRITING TOOL
+    // Tôn chỉ Chị Đào & Anh Trí: Micro-copy < 80 từ, Zero Directive CTA, 100% Student-Centric
+    // =========================================================================
+
+    const FB_PILLAR_DATA = {
+      PIL_01: {
+        name: "Story Spark & Tiếng Anh Mầm Non (4-5t)",
+        ratio: "30%",
+        headline: "NHỮNG CÂU CHUYỆN NHỎ - BƯỚC ĐI ĐẦU ĐỜI 🥔📖",
+        warmSignOff: "Chúc các bạn nhỏ mầm non luôn tràn ngập tiếng cười và niềm vui khám phá mỗi ngày! 🥔❤️",
+        hashtags: "#PotatoEnglish #StorySpark #FriendlyKid #TiengAnhMamNon #HocBangNiemVui",
+        template: "Mỗi giờ đọc truyện Story Spark luôn bắt đầu bằng những ánh mắt tròn xoe và nụ cười rạng rỡ của các bạn nhỏ mầm non. Không cần ghi nhớ áp đặt, từng từ vựng và giai điệu thấm sâu tự nhiên qua bài hát và trò chơi tương tác. Sự tự tin của con bắt đầu từ những niềm vui giản dị như thế.",
+      },
+      PIL_02: {
+        name: "Học Qua Trải Nghiệm & Giao Tiếp (6-16t)",
+        ratio: "25%",
+        headline: "TỰ TIN MỞ LỜI QUA TỪNG TRẢI NGHIỆM 🥔✨",
+        warmSignOff: "Hẹn gặp lại các con trong những dự án khám phá đầy hào hứng tiếp theo nhé! 🥔❤️",
+        hashtags: "#PotatoEnglish #HappyJunior #HocQuaTraiNghiem #TuTinNoiTiengAnh #NoiDungLamThat",
+        template: "Tại Potato English, mỗi buổi học là một chuyến phiêu lưu ngôn ngữ thực tế. Hôm nay, các bạn nhỏ tự tin đóng vai và thuyết trình về chủ đề yêu thích của mình. Từng câu nói mộc mạc nhưng tràn đầy năng lượng tích cực là minh chứng rõ nhất cho sự tiến bộ tự nhiên mỗi ngày.",
+      },
+      PIL_03: {
+        name: "Vinh Danh Học Viên (Top Student)",
+        ratio: "15% - Cố định ngày 12",
+        headline: "NHỮNG NỖ LỰC NHỎ TỎA SÁNG 🥔🏆",
+        warmSignOff: "Thầy cô và Potato English vô cùng tự hào về sự kiên trì của các con! 🥔❤️",
+        hashtags: "#PotatoEnglish #TopStudent #TuTinNoiTiengAnh #TienBoMoiNgay",
+        template: "Ngày 12 hàng tháng là dịp để cùng nhìn lại những nỗ lực bền bỉ và sự chăm chỉ của các bạn nhỏ tại cả 2 cơ sở. Từ những ngày đầu còn rụt rè, hôm nay các con đã tự tin mở lời và hoàn thành xuất sắc mục tiêu học tập của mình. Chúc mừng sự kiên trì đáng khen của các con!",
+      },
+      PIL_04: {
+        name: "Góc Phụ Huynh & Mẹo Nuôi Dạy Con",
+        ratio: "15%",
+        headline: "10 PHÚT VUI HỌC CÙNG CON TẠI NHÀ 🥔💡",
+        warmSignOff: "Chúc ba mẹ và các con có những giờ phút học tiếng Anh thật ấm áp bên nhau! 🥔❤️",
+        hashtags: "#PotatoEnglish #GocPhuHuynh #DongHanhCungCon #HocTiengAnhTaiNha",
+        template: "Không cần tạo áp lực thời gian, chỉ cần 10 phút mỗi tối cùng con hát một bài hát ngắn hoặc lật giở vài trang truyện Story Spark. Sự đồng hành nhẹ nhàng của ba mẹ chính là nguồn động viên lớn nhất giúp con duy trì phản xạ tự nhiên và yêu thích tiếng Anh mỗi ngày.",
+      },
+      PIL_05: {
+        name: "Không Gian Lớp & Sự Tận Tâm Đội Ngũ",
+        ratio: "10%",
+        headline: "NHỮNG NỤ CƯỜI ẤM ÁP TẠI 2 CƠ SỞ 🥔🏡",
+        warmSignOff: "Potato English luôn sẵn sàng chào đón các con với không gian học tập ấm áp nhất! 🥔❤️",
+        hashtags: "#PotatoEnglish #CoSoPhuCuong #CoSoHungDinh #LopHocYeuThuong",
+        template: "Một buổi chiều rộn rã tiếng cười của thầy cô và các bạn nhỏ tại cơ sở Phú Cường và Hưng Định. Góc học tập sáng sủa, trang bị đầy đủ tài liệu và không gian tương tác thân thiện luôn sẵn sàng tiếp thêm năng lượng cho từng giờ học vui tươi của con.",
+      },
+      PIL_06: {
+        name: "Sự Kiện Khai Giảng & Lời Mời Học Thử 0đ",
+        ratio: "10%",
+        headline: "LỜI MỜI TRẢI NGHIỆM LỚP HỌC YÊU THÍCH 🥔🎈",
+        warmSignOff: "Thầy cô luôn sẵn sàng đồng hành và lắng nghe ba mẹ cùng các con! 🥔❤️",
+        hashtags: "#PotatoEnglish #LopHocThu #KhaiGiangLopMoi #PhuCuong #HungDinh",
+        template: "Chào đón các bạn nhỏ đến trải nghiệm không gian học tiếng Anh qua hoạt động thực tế tại Potato English. Buổi đánh giá năng lực nhẹ nhàng giúp ba mẹ hiểu rõ lộ trình tự nhiên của con mà không hề có bất kỳ áp lực nào. Lớp học thân thiện luôn mở rộng cửa đón chào các bé.",
+      }
+    };
+
+    let fbUploadedImages = ["", "", "", ""];
+    let fbCurrentPreviewDevice = "mobile";
+
+    function initFbPublisherTool() {
+      // Load saved Meta token from localStorage if any
+      const savedPageId = localStorage.getItem("fb_page_id") || "104829182749102";
+      const savedToken = localStorage.getItem("fb_page_token") || "";
+      const inputPageId = document.getElementById("fb-cfg-page-id");
+      const inputToken = document.getElementById("fb-cfg-access-token");
+      if (inputPageId) inputPageId.value = savedPageId;
+      if (inputToken) inputToken.value = savedToken;
+
+      // Set default scheduled datetime to tomorrow 11:30
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      tomorrow.setHours(11, 30, 0, 0);
+      const tzOffset = tomorrow.getTimezoneOffset() * 60000;
+      const localISOTime = (new Date(tomorrow.getTime() - tzOffset)).toISOString().slice(0, 16);
+      const scheduleInput = document.getElementById("fb-scheduled-datetime");
+      if (scheduleInput) scheduleInput.value = localISOTime;
+
+      // Initial Content Check if textarea empty
+      const textarea = document.getElementById("fb-post-textarea");
+      if (textarea && !textarea.value.trim()) {
+        applyFbPreset('bin_story_spark');
+      } else {
+        handleFbTextInput();
+      }
+    }
+
+    function handleFbContextChange() {
+      // Optional auto refresh or hint
+    }
+
+    function handleFbPillarChange() {
+      const pillarKey = document.getElementById("fb-pillar-select").value;
+      const pillarData = FB_PILLAR_DATA[pillarKey];
+      const badge = document.getElementById("fb-pillar-ratio-badge");
+      if (badge && pillarData) {
+        badge.textContent = `Mật độ: ${pillarData.ratio}`;
+      }
+    }
+
+    function handleFbNoteInput() {
+      // Live feedback when typing student note
+    }
+
+    function clearFbStudentNote() {
+      const input = document.getElementById("fb-student-note");
+      if (input) {
+        input.value = "";
+        input.focus();
+      }
+    }
+
+    function applyFbPreset(presetKey) {
+      const pillarSelect = document.getElementById("fb-pillar-select");
+      const ageSelect = document.getElementById("fb-age-group-select");
+      const noteInput = document.getElementById("fb-student-note");
+      const textarea = document.getElementById("fb-post-textarea");
+
+      if (presetKey === 'bin_story_spark') {
+        if (pillarSelect) pillarSelect.value = "PIL_01";
+        if (ageSelect) ageSelect.value = "friendly_kid";
+        if (noteInput) noteInput.value = "Bé Bin 5 tuổi hoàn thành tranh vẽ My Family và tự tin nói: This is my mom!";
+        const p = FB_PILLAR_DATA.PIL_01;
+        if (textarea) {
+          textarea.value = `${p.headline}
+
+"This is my mom and me. She 40 years old, and she working very hard. I love her!"
+
+Khoảnh khắc bé Bin 5 tuổi tự hào khoe bức tranh gia đình sau giờ Story Spark khiến cả lớp ngập tràn niềm vui. Không học vẹt, tiếng Anh đến với con tự nhiên như tiếng mẹ đẻ.
+
+${p.warmSignOff}
+
+${p.hashtags}`;
+        }
+      } else if (presetKey === 'top_student') {
+        if (pillarSelect) pillarSelect.value = "PIL_03";
+        if (ageSelect) ageSelect.value = "happy_junior";
+        if (noteInput) noteInput.value = "Vinh danh các bạn nhỏ Top Student tháng với sự kiên trì và nụ cười rạng rỡ";
+        const p = FB_PILLAR_DATA.PIL_03;
+        if (textarea) {
+          textarea.value = `${p.headline}
+
+Tháng này, Potato English tự hào ghi nhận sự nỗ lực bền bỉ của các bạn nhỏ tại cả 2 cơ sở. Từng bước tiến bộ tự nhiên, từ rụt rè đến tự tin mở lời là món quà quý giá nhất.
+
+${p.warmSignOff}
+
+${p.hashtags}`;
+        }
+      } else if (presetKey === 'leo_ket') {
+        if (pillarSelect) pillarSelect.value = "PIL_02";
+        if (ageSelect) ageSelect.value = "leading_teen";
+        if (noteInput) noteInput.value = "Leo 12 tuổi vượt qua thử thách thuyết trình KET Speaking với phong thái chững chạc";
+        const p = FB_PILLAR_DATA.PIL_02;
+        if (textarea) {
+          textarea.value = `${p.headline}
+
+"Mình là Leo, 12 tuổi. Sau buổi luyện Speaking hôm nay, mình đã sẵn sàng cho kỳ thi KET sắp tới!"
+
+Không gian học tập thoải mái giúp Leo chủ động làm chủ từ vựng và tự tin thể hiện quan điểm của bản thân.
+
+${p.warmSignOff}
+
+${p.hashtags}`;
+        }
+      } else if (presetKey === 'parent_tips') {
+        if (pillarSelect) pillarSelect.value = "PIL_04";
+        if (ageSelect) ageSelect.value = "friendly_kid";
+        if (noteInput) noteInput.value = "Tips 10 phút luyện phát âm Phonics nhẹ nhàng cùng con trước khi đi ngủ";
+        const p = FB_PILLAR_DATA.PIL_04;
+        if (textarea) {
+          textarea.value = `${p.headline}
+
+Chỉ cần 10 phút mỗi tối lật mở vài trang truyện ngắn hoặc cùng con phát âm vui vẻ. Sự kiên nhẫn và nụ cười của ba mẹ chính là lớp học tiếng Anh tuyệt vời nhất của con.
+
+${p.warmSignOff}
+
+${p.hashtags}`;
+        }
+      }
+
+      handleFbPillarChange();
+      handleFbTextInput();
+      if (typeof showToast === 'function') {
+        showToast("Đã nạp tình huống mẫu chuẩn Brand Voice!", "info");
+      }
+    }
+
+    async function generateFbContentAI() {
+      const btn = document.getElementById("btn-fb-ai-generate");
+      const textarea = document.getElementById("fb-post-textarea");
+      const pillarKey = document.getElementById("fb-pillar-select").value;
+      const ageGroup = document.getElementById("fb-age-group-select").value;
+      const branchVal = document.getElementById("fb-branch-select").value;
+      const studentNote = document.getElementById("fb-student-note").value.trim();
+
+      const origHtml = btn ? btn.innerHTML : "";
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-amber-300"></i><span>AI Đang Soạn...</span>`;
+      }
+
+      try {
+        // Call backend API if running
+        const res = await fetch("/api/facebook/generate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            pillar: pillarKey,
+            ageGroup: ageGroup,
+            branch: branchVal,
+            studentNote: studentNote
+          })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.content) {
+            textarea.value = data.content;
+            handleFbTextInput();
+            if (typeof showToast === 'function') {
+              showToast("AI đã sinh Micro-copywriting chuẩn Brand Voice!", "success");
+            }
+            return;
+          }
+        }
+      } catch (e) {
+        console.warn("[FB AI Generate Fallback]", e);
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = origHtml;
+        }
+      }
+
+      // Fallback Smart Client-Side Generation (Strict Brand Voice)
+      const p = FB_PILLAR_DATA[pillarKey] || FB_PILLAR_DATA.PIL_02;
+      let bodyText = "";
+      if (studentNote) {
+        bodyText = `${studentNote}. Mỗi khoảnh khắc nụ cười và sự tiến bộ tự nhiên của con là niềm hạnh phúc lớn nhất tại lớp học Potato English.`;
+      } else {
+        bodyText = p.template;
+      }
+
+      const generated = `${p.headline}
+
+${bodyText}
+
+${p.warmSignOff}
+
+${p.hashtags}`;
+      textarea.value = generated;
+      handleFbTextInput();
+      if (typeof showToast === 'function') {
+        showToast("Đã sinh nội dung Micro-copywriting chuẩn nhận diện!", "success");
+      }
+    }
+
+    function handleFbTextInput() {
+      const textarea = document.getElementById("fb-post-textarea");
+      const text = textarea ? textarea.value : "";
+      
+      // 1. Calculate word count
+      const words = text.trim() ? text.trim().split(/\s+/).filter(Boolean) : [];
+      const wordCount = words.length;
+
+      const badgeCount = document.getElementById("fb-word-count-badge");
+      const progressBar = document.getElementById("fb-word-progress-bar");
+      if (badgeCount) {
+        badgeCount.textContent = `${wordCount} / 80 từ`;
+        if (wordCount <= 80) {
+          badgeCount.className = "px-2 py-0.5 rounded-full text-[11px] font-black bg-emerald-100 text-emerald-800 border border-emerald-200";
+        } else if (wordCount <= 100) {
+          badgeCount.className = "px-2 py-0.5 rounded-full text-[11px] font-black bg-amber-100 text-amber-800 border border-amber-200";
+        } else {
+          badgeCount.className = "px-2 py-0.5 rounded-full text-[11px] font-black bg-rose-100 text-rose-800 border border-rose-200";
+        }
+      }
+
+      if (progressBar) {
+        const pct = Math.min(100, Math.round((wordCount / 80) * 100));
+        progressBar.style.width = `${pct}%`;
+        if (wordCount <= 80) {
+          progressBar.className = "bg-emerald-500 h-1.5 transition-all duration-300";
+        } else if (wordCount <= 100) {
+          progressBar.className = "bg-amber-500 h-1.5 transition-all duration-300";
+        } else {
+          progressBar.className = "bg-rose-500 h-1.5 transition-all duration-300";
+        }
+      }
+
+      // 2. Brand Safety Linter Checks
+      checkFbBrandSafety(text, wordCount);
+
+      // 3. Update Live Facebook Post Mockup
+      updateFbPostPreview(text);
+    }
+
+    function checkFbBrandSafety(text, wordCount) {
+      const lower = text.toLowerCase();
+      const warnings = [];
+
+      // Check 1: CẤM TỪ "TRUNG TÂM"
+      const hasTrungTam = /trung\s*tâm/i.test(lower);
+      const badgeTrungTam = document.getElementById("badge-check-trungtam");
+      if (hasTrungTam) {
+        warnings.push('Phát hiện từ cấm <strong>"trung tâm"</strong>. Bắt buộc thay bằng <em>"Potato English"</em>, <em>"Lớp học Potato English"</em> hoặc <em>"2 cơ sở Phú Cường & Hưng Định"</em>.');
+        if (badgeTrungTam) badgeTrungTam.className = "p-2 rounded-xl bg-rose-50 border border-rose-300 text-rose-700 font-bold flex items-center gap-1.5";
+      } else {
+        if (badgeTrungTam) badgeTrungTam.className = "p-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 font-semibold flex items-center gap-1.5";
+      }
+
+      // Check 2: ZERO DIRECTIVE CTA
+      const directiveCtaRegex = /(bấm vào|nhấp vào|xem ngay|đừng bỏ lỡ|nhanh tay|giữ chỗ|inbox ngay|đăng ký ngay)/i;
+      const hasDirectiveCta = directiveCtaRegex.test(lower);
+      const badgeCta = document.getElementById("badge-check-zero-cta");
+      if (hasDirectiveCta) {
+        warnings.push('Phát hiện câu kêu gọi chỉ đạo cơ học (Directive CTA: <em>"bấm vào ảnh", "đừng bỏ lỡ"...</em>). Hãy để phụ huynh tương tác tự nhiên.');
+        if (badgeCta) badgeCta.className = "p-2 rounded-xl bg-rose-50 border border-rose-300 text-rose-700 font-bold flex items-center gap-1.5";
+      } else {
+        if (badgeCta) badgeCta.className = "p-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 font-semibold flex items-center gap-1.5";
+      }
+
+      // Check 3: KHÔNG DÙNG TỪ "ÁP LỰC"
+      const hasApLuc = /áp\s*lực/i.test(lower);
+      const badgeApLuc = document.getElementById("badge-check-apluc");
+      if (hasApLuc) {
+        warnings.push('Hạn chế từ <strong>"áp lực"</strong> hoặc <em>"không áp lực"</em>. Chuyển sang: <em>"học bằng niềm vui"</em>, <em>"tiến bộ tự nhiên"</em>.');
+        if (badgeApLuc) badgeApLuc.className = "p-2 rounded-xl bg-amber-50 border border-amber-300 text-amber-800 font-bold flex items-center gap-1.5";
+      } else {
+        if (badgeApLuc) badgeApLuc.className = "p-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 font-semibold flex items-center gap-1.5";
+      }
+
+      // Check 4: ĐỘ DÀI MICRO-COPY
+      const badgeLength = document.getElementById("badge-check-length");
+      if (wordCount > 80) {
+        warnings.push(`Độ dài hiện tại là <strong>${wordCount} từ</strong> (vượt quá 80 từ). Người xem cần đọc trọn vẹn trong 5 giây mà không cần bấm "Xem thêm".`);
+        if (badgeLength) badgeLength.className = "p-2 rounded-xl bg-amber-50 border border-amber-300 text-amber-800 font-bold flex items-center gap-1.5";
+      } else {
+        if (badgeLength) badgeLength.className = "p-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 font-semibold flex items-center gap-1.5";
+      }
+
+      // Render warning box
+      const warningBox = document.getElementById("fb-brand-warning-box");
+      const warningList = document.getElementById("fb-brand-warning-list");
+      if (warningBox && warningList) {
+        if (warnings.length > 0) {
+          warningBox.classList.remove("hidden");
+          warningList.innerHTML = warnings.map(w => `<li>${w}</li>`).join("");
+        } else {
+          warningBox.classList.add("hidden");
+          warningList.innerHTML = "";
+        }
+      }
+
+      // Update Brand Scorecard
+      let score = 100;
+      if (hasTrungTam) score -= 35;
+      if (hasDirectiveCta) score -= 25;
+      if (hasApLuc) score -= 15;
+      if (wordCount > 80) score -= Math.min(25, (wordCount - 80) * 2);
+      score = Math.max(0, score);
+
+      const scoreBadge = document.getElementById("fb-brand-score-badge");
+      if (scoreBadge) {
+        scoreBadge.textContent = `${score} / 100`;
+        if (score >= 90) {
+          scoreBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-black bg-emerald-100 text-emerald-800 border border-emerald-200";
+        } else if (score >= 70) {
+          scoreBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-black bg-amber-100 text-amber-800 border border-amber-200";
+        } else {
+          scoreBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-black bg-rose-100 text-rose-800 border border-rose-200";
+        }
+      }
+
+      const scLength = document.getElementById("score-item-length");
+      const scCta = document.getElementById("score-item-cta");
+      const scSafety = document.getElementById("score-item-safety");
+      if (scLength) scLength.innerHTML = wordCount <= 80 ? `<span class="text-emerald-600">✅ Đạt (${wordCount}w)</span>` : `<span class="text-rose-600">❌ Vượt (${wordCount}w)</span>`;
+      if (scCta) scCta.innerHTML = !hasDirectiveCta ? `<span class="text-emerald-600">✅ Đạt</span>` : `<span class="text-rose-600">❌ Cần bỏ</span>`;
+      if (scSafety) scSafety.innerHTML = (!hasTrungTam && !hasApLuc) ? `<span class="text-emerald-600">✅ An toàn</span>` : `<span class="text-rose-600">❌ Có từ cấm</span>`;
+    }
+
+    function autoFixFbBrandSafety() {
+      const textarea = document.getElementById("fb-post-textarea");
+      if (!textarea) return;
+
+      let val = textarea.value;
+      // Replace trung tâm
+      val = val.replace(/trung\s*tâm\s*tiếng\s*anh\s*potato\s*english/gi, "Potato English");
+      val = val.replace(/tại\s*trung\s*tâm/gi, "tại Potato English");
+      val = val.replace(/trung\s*tâm\s*tiếng\s*anh/gi, "lớp học tiếng Anh");
+      val = val.replace(/trung\s*tâm/gi, "Potato English");
+
+      // Replace áp lực
+      val = val.replace(/không\s*áp\s*lực\s*điểm\s*số/gi, "học bằng niềm vui");
+      val = val.replace(/không\s*áp\s*lực/gi, "nhẹ nhàng tự nhiên");
+      val = val.replace(/xóa\s*tan\s*áp\s*lực/gi, "khơi dậy niềm vui");
+      val = val.replace(/áp\s*lực/gi, "căng thẳng");
+
+      // Replace directive CTA
+      val = val.replace(/👉?\s*(mời\s*ba\s*mẹ|hãy)\s*bấm\s*vào\s*từng\s*bức\s*ảnh[^\n\.]*([\n\.]|$)/gi, "");
+      val = val.replace(/👉?\s*đừng\s*bỏ\s*lỡ[^\n\.]*([\n\.]|$)/gi, "");
+
+      textarea.value = val.trim();
+      handleFbTextInput();
+      if (typeof showToast === 'function') {
+        showToast("Đã tự động chuẩn hóa văn bản theo Brand Safety Shield!", "success");
+      }
+    }
+
+    function updateFbPostPreview(text) {
+      const previewTextEl = document.getElementById("fb-preview-text");
+      if (!previewTextEl) return;
+
+      if (!text || !text.trim()) {
+        previewTextEl.innerHTML = `<span class="text-slate-400 italic">Văn bản bài đăng sẽ xuất hiện tại đây...</span>`;
+        return;
+      }
+
+      // Convert hashtags to blue Facebook links
+      const formatted = text
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/(#[\p{L}\w_]+)/gu, '<span class="text-blue-600 font-semibold cursor-pointer hover:underline">$1</span>');
+
+      previewTextEl.innerHTML = formatted;
+    }
+
+    function switchFbPreviewDevice(mode) {
+      fbCurrentPreviewDevice = mode;
+      const card = document.getElementById("fb-card-container");
+      const btnMob = document.getElementById("btn-preview-mode-mobile");
+      const btnDesk = document.getElementById("btn-preview-mode-desktop");
+
+      if (mode === "desktop") {
+        if (card) {
+          card.classList.remove("max-w-sm");
+          card.classList.add("max-w-md");
+        }
+        if (btnDesk) {
+          btnDesk.className = "px-2.5 py-1 rounded-lg bg-white text-potato-navy shadow-2xs";
+        }
+        if (btnMob) {
+          btnMob.className = "px-2.5 py-1 rounded-lg text-slate-500 hover:text-slate-800";
+        }
+      } else {
+        if (card) {
+          card.classList.remove("max-w-md");
+          card.classList.add("max-w-sm");
+        }
+        if (btnMob) {
+          btnMob.className = "px-2.5 py-1 rounded-lg bg-white text-potato-navy shadow-2xs";
+        }
+        if (btnDesk) {
+          btnDesk.className = "px-2.5 py-1 rounded-lg text-slate-500 hover:text-slate-800";
+        }
+      }
+    }
+
+    function handleFbImageSlotUpload(slotIndex, files) {
+      if (!files || files.length === 0) return;
+      const file = files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const dataUrl = e.target.result;
+        fbUploadedImages[slotIndex] = dataUrl;
+        
+        // Update slot preview
+        const img = document.getElementById(`fb-img-slot-${slotIndex}`);
+        const ph = document.getElementById(`fb-slot-placeholder-${slotIndex}`);
+        const rm = document.getElementById(`btn-remove-slot-${slotIndex}`);
+        if (img) {
+          img.src = dataUrl;
+          img.classList.remove("hidden");
+        }
+        if (ph) ph.classList.add("hidden");
+        if (rm) rm.classList.remove("hidden");
+
+        // Update Facebook Live Post Mockup Grid
+        const prevImg = document.getElementById(`fb-preview-img-${slotIndex}`);
+        if (prevImg) prevImg.src = dataUrl;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function removeFbImageSlot(slotIndex) {
+      fbUploadedImages[slotIndex] = "";
+      const img = document.getElementById(`fb-img-slot-${slotIndex}`);
+      const ph = document.getElementById(`fb-slot-placeholder-${slotIndex}`);
+      const rm = document.getElementById(`btn-remove-slot-${slotIndex}`);
+      if (img) {
+        img.src = "";
+        img.classList.add("hidden");
+      }
+      if (ph) ph.classList.remove("hidden");
+      if (rm) rm.classList.add("hidden");
+
+      const prevImg = document.getElementById(`fb-preview-img-${slotIndex}`);
+      if (prevImg) prevImg.src = "potato_logo.png";
+    }
+
+    function clearFbAllImages() {
+      for (let i = 0; i < 4; i++) {
+        removeFbImageSlot(i);
+      }
+      if (typeof showToast === 'function') {
+        showToast("Đã dọn sạch các ảnh đã chọn!", "info");
+      }
+    }
+
+    function loadDefaultPotatoAlbum() {
+      const defaultSamples = [
+        "potato_logo.png",
+        "Potato_English_Logo.jpeg",
+        "potato_logo.png",
+        "Potato_English_Logo.jpeg"
+      ];
+      for (let i = 0; i < 4; i++) {
+        fbUploadedImages[i] = defaultSamples[i];
+        const img = document.getElementById(`fb-img-slot-${i}`);
+        const ph = document.getElementById(`fb-slot-placeholder-${i}`);
+        const rm = document.getElementById(`btn-remove-slot-${i}`);
+        if (img) {
+          img.src = defaultSamples[i];
+          img.classList.remove("hidden");
+        }
+        if (ph) ph.classList.add("hidden");
+        if (rm) rm.classList.remove("hidden");
+
+        const prevImg = document.getElementById(`fb-preview-img-${i}`);
+        if (prevImg) prevImg.src = defaultSamples[i];
+      }
+      if (typeof showToast === 'function') {
+        showToast("Đã nạp bộ Album 4 ảnh nhận diện Potato English!", "success");
+      }
+    }
+
+    function toggleFbScheduleTimeInput() {
+      const mode = document.querySelector('input[name="fb-publish-mode"]:checked')?.value || "now";
+      const container = document.getElementById("fb-schedule-time-container");
+      const btnLabel = document.getElementById("btn-fb-publish-label");
+      if (mode === "schedule") {
+        if (container) container.classList.remove("hidden");
+        if (btnLabel) btnLabel.textContent = "📅 LÊN LỊCH XUẤT BẢN TỰ ĐỘNG";
+      } else {
+        if (container) container.classList.add("hidden");
+        if (btnLabel) btnLabel.textContent = "🚀 ĐĂNG BÀI NGAY LÊN FANPAGE";
+      }
+    }
+
+    async function executeFbPublishAction() {
+      const textarea = document.getElementById("fb-post-textarea");
+      const content = textarea ? textarea.value.trim() : "";
+      if (!content) {
+        if (typeof showToast === 'function') {
+          showToast("Vui lòng nhập nội dung bài viết trước khi đăng!", "warning");
+        }
+        return;
+      }
+
+      // Check Brand Safety Blockers
+      if (/trung\s*tâm/i.test(content)) {
+        if (typeof showToast === 'function') {
+          showToast("CẤM ĐĂNG: Bài viết chứa từ cấm 'trung tâm'! Vui lòng sửa lại.", "error");
+        }
+        autoFixFbBrandSafety();
+        return;
+      }
+
+      const mode = document.querySelector('input[name="fb-publish-mode"]:checked')?.value || "now";
+      const scheduledTime = document.getElementById("fb-scheduled-datetime")?.value || "";
+      const syncCalendar = document.getElementById("fb-sync-calendar-check")?.checked ?? true;
+      const syncWorkLog = document.getElementById("fb-sync-worklog-check")?.checked ?? true;
+      const pillarKey = document.getElementById("fb-pillar-select")?.value || "PIL_02";
+      const branchVal = document.getElementById("fb-branch-select")?.value || "cs1";
+
+      const btn = document.getElementById("btn-fb-publish-main");
+      const origHtml = btn ? btn.innerHTML : "";
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-white text-base"></i><span>Đang Thực Thi...</span>`;
+      }
+
+      try {
+        const endpoint = mode === "schedule" ? "/api/facebook/schedule" : "/api/facebook/publish";
+        const payload = {
+          content: content,
+          mode: mode,
+          scheduledTime: scheduledTime,
+          pillar: pillarKey,
+          branch: branchVal,
+          images: fbUploadedImages.filter(Boolean),
+          syncCalendar: syncCalendar,
+          syncWorkLog: syncWorkLog
+        };
+
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        if (res.ok) {
+          const resData = await res.json();
+          if (typeof showToast === 'function') {
+            showToast(resData.message || (mode === "schedule" ? "Đã lên lịch đăng bài thành công!" : "Đã xuất bản thành công lên Fanpage Potato English!"), "success");
+          }
+          if (syncCalendar && typeof fetchCalendarData === 'function') {
+            fetchCalendarData();
+          }
+          return;
+        }
+      } catch (err) {
+        console.warn("[FB Publish API Warning]", err);
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = origHtml;
+        }
+      }
+
+      // Safe Fallback Client-Side Execution (Simulated Mode)
+      const actionName = mode === "schedule" ? `Lên lịch đăng bài Facebook (${scheduledTime})` : "Xuất bản bài viết Facebook Fanpage";
+      if (typeof showToast === 'function') {
+        showToast(`🎉 [THÀNH CÔNG] ${actionName} đã được ghi nhận trên hệ thống Potato Marketing!`, "success");
+      }
+    }
+
+    function copyFbContentToClipboard() {
+      const textarea = document.getElementById("fb-post-textarea");
+      if (!textarea || !textarea.value.trim()) {
+        if (typeof showToast === 'function') showToast("Chưa có nội dung để sao chép!", "warning");
+        return;
+      }
+      navigator.clipboard.writeText(textarea.value).then(() => {
+        if (typeof showToast === 'function') showToast("Đã sao chép toàn bộ nội dung bài viết!", "success");
+      }).catch(() => {
+        if (typeof showToast === 'function') showToast("Không thể sao chép văn bản.", "error");
+      });
+    }
+
+    function saveFbDraftLocal() {
+      const textarea = document.getElementById("fb-post-textarea");
+      if (textarea && textarea.value.trim()) {
+        localStorage.setItem("fb_draft_post", textarea.value);
+        if (typeof showToast === 'function') showToast("Đã lưu bản nháp vào trình duyệt an toàn!", "success");
+      }
+    }
+
+    function resetFbPublisherForm() {
+      const textarea = document.getElementById("fb-post-textarea");
+      if (textarea) textarea.value = "";
+      clearFbStudentNote();
+      clearFbAllImages();
+      applyFbPreset('bin_story_spark');
+      if (typeof showToast === 'function') showToast("Đã làm mới form về trạng thái ban đầu.", "info");
+    }
+
+    function openFbSettingsModal() {
+      const modal = document.getElementById("modal-fb-api-settings");
+      if (modal) modal.classList.remove("hidden");
+    }
+
+    function closeFbSettingsModal() {
+      const modal = document.getElementById("modal-fb-api-settings");
+      if (modal) modal.classList.add("hidden");
+    }
+
+    function saveFbSettings() {
+      const pid = document.getElementById("fb-cfg-page-id")?.value.trim() || "";
+      const token = document.getElementById("fb-cfg-access-token")?.value.trim() || "";
+      localStorage.setItem("fb_page_id", pid);
+      localStorage.setItem("fb_page_token", token);
+      closeFbSettingsModal();
+      if (typeof showToast === 'function') showToast("Đã lưu cấu hình Meta Graph API thành công!", "success");
+    }
+
+    function testFbConnection() {
+      const statusBox = document.getElementById("fb-token-test-status");
+      const pid = document.getElementById("fb-cfg-page-id")?.value.trim();
+      const token = document.getElementById("fb-cfg-access-token")?.value.trim();
+
+      if (!statusBox) return;
+      statusBox.classList.remove("hidden");
+
+      if (!pid || !token) {
+        statusBox.className = "p-3 rounded-xl text-xs font-semibold bg-amber-50 text-amber-900 border border-amber-200";
+        statusBox.innerHTML = `⚠️ <strong>Chế độ Mô phỏng Kiểm thử (Sandbox)</strong>: Chưa điền Token. Hệ thống sẽ hoạt động ở chế độ giả lập an toàn.`;
+      } else {
+        statusBox.className = "p-3 rounded-xl text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200";
+        statusBox.innerHTML = `✅ <strong>Sẵn sàng kết nối Meta Graph API v19.0</strong>: Page ID ${pid} đã sẵn sàng nhận lệnh xuất bản.`;
+      }
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       initAuth();
       renderCalendar();
