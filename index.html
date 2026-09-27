@@ -3765,9 +3765,9 @@
       <span class="text-[10px]">Tasks</span>
     </button>
 
-    <button onclick="switchTab('tools-image')" id="mobile-nav-tools-image" class="flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-potato-navy w-16 py-1 transition-all">
-      <i class="fa-solid fa-toolbox text-base"></i>
-      <span class="text-[10px]">Tool Ảnh</span>
+    <button onclick="switchTab('tools-writer')" id="mobile-nav-tools-writer" class="flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-potato-navy w-16 py-1 transition-all">
+      <i class="fa-solid fa-pen-nib text-base"></i>
+      <span class="text-[10px]">Viết bài AI</span>
     </button>
 
     <button onclick="switchTab('settings-intro')" id="mobile-nav-settings" class="flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-potato-navy w-20 py-1 transition-all">
@@ -7161,9 +7161,11 @@
       });
       const activeMobileBtn = (tabId.startsWith('settings-') || tabId === 'about')
         ? document.getElementById('mobile-nav-settings')
-        : (tabId.startsWith('tools-') || tabId === 'tools')
-          ? document.getElementById('mobile-nav-tools-image')
-          : document.getElementById(`mobile-nav-${tabId}`);
+        : (tabId === 'tools-writer')
+          ? document.getElementById('mobile-nav-tools-writer')
+          : (tabId.startsWith('tools-') || tabId === 'tools')
+            ? document.getElementById('mobile-nav-tools-writer')
+            : document.getElementById(`mobile-nav-${tabId}`);
       if (activeMobileBtn) {
         activeMobileBtn.classList.remove('text-slate-500');
         activeMobileBtn.classList.add('text-potato-cyan', 'font-bold');
