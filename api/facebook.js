@@ -83,43 +83,53 @@ BẮT BUỘC TRẢ VỀ ĐỊNH DẠNG JSON HỢP LỆ VỚI CẤU TRÚC SAU:
 - Góc nhìn ưu tiên: ${angle}
 - Độ dài mục tiêu: ${numWords} từ.`;
 
-        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`;
-        const response = await fetch(geminiUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: `${systemPrompt}\n\n${userContext}` }] }],
-            generationConfig: {
-              temperature: 0.9,
-              responseMimeType: "application/json",
-              maxOutputTokens: 2500
-            }
-          })
-        });
+        const candidateModels = ['gemini-3.8-flash', 'gemini-3.7-flash', 'gemini-2.5-flash'];
+        for (const modelName of candidateModels) {
+          try {
+            const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
+            const response = await fetch(geminiUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                contents: [{ parts: [{ text: `${systemPrompt}\n\n${userContext}` }] }],
+                generationConfig: {
+                  temperature: 0.9,
+                  responseMimeType: "application/json",
+                  maxOutputTokens: 2500
+                }
+              })
+            });
 
-        if (response.ok) {
-          const data = await response.json();
-          const aiJsonText = data.candidates?.[0]?.content?.parts?.[0]?.text;
-          if (aiJsonText) {
-            try {
-              const parsed = JSON.parse(aiJsonText);
-              if (parsed.drafts && Array.isArray(parsed.drafts) && parsed.drafts.length >= 3) {
-                return res.status(200).json({
-                  success: true,
-                  drafts: parsed.drafts,
-                  content: `${parsed.drafts[0].hook}\n\n${parsed.drafts[0].body}\n\n${parsed.drafts[0].tags}`,
-                  model: "gemini-3.8-flash",
-                  targetWords: numWords,
-                  platform: platform
-                });
+            if (response.ok) {
+              const data = await response.json();
+              const aiJsonText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+              if (aiJsonText) {
+                try {
+                  const parsed = JSON.parse(aiJsonText);
+                  if (parsed.drafts && Array.isArray(parsed.drafts) && parsed.drafts.length >= 3) {
+                    return res.status(200).json({
+                      success: true,
+                      drafts: parsed.drafts,
+                      content: `${parsed.drafts[0].hook}\n\n${parsed.drafts[0].body}\n\n${parsed.drafts[0].tags}`,
+                      model: modelName,
+                      targetWords: numWords,
+                      platform: platform
+                    });
+                  }
+                } catch (e) {
+                  console.warn(`[JSON parse failed for ${modelName}]`, e);
+                }
               }
-            } catch (e) {
-              console.warn("[JSON parse failed]", e);
+            } else {
+              const errData = await response.json().catch(() => ({}));
+              console.warn(`[${modelName} returned status ${response.status}]`, errData);
             }
+          } catch (modelErr) {
+            console.warn(`[Call to ${modelName} failed]`, modelErr);
           }
         }
       } catch (err) {
-        console.warn("[Gemini 3.8 Call Failed]", err);
+        console.warn("[Gemini API Execution Error]", err);
       }
     }
 
