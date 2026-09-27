@@ -1609,28 +1609,45 @@
                 </div>
               </div>
 
-              <!-- ================= TASK 1: WATERMARK SETTINGS ================= -->
+              <!-- ================= TASK 1: WATERMARK SETTINGS & STUDIO ================= -->
               <div id="settings-group-watermark" class="task-settings-pane space-y-4">
+                
+                <!-- 1. Top Controls: Watermark Type, 9-Point Position, Sliders & Export Format -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <!-- Watermark Type -->
-                  <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200/70 space-y-2">
+                  <!-- Watermark Type & Custom Logo Upload -->
+                  <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200/70 space-y-2.5">
                     <label class="block text-xs font-bold text-slate-700">1. Kiểu Watermark</label>
                     <div class="space-y-1.5 text-xs">
-                      <label class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-white cursor-pointer font-medium">
+                      <label class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-white cursor-pointer font-medium transition-all">
                         <input type="radio" name="wm-type" value="logo" checked onchange="updateWatermarkSettings()" class="text-potato-cyan focus:ring-potato-cyan">
                         <span>Logo Potato Chuẩn (PNG)</span>
                       </label>
-                      <label class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-white cursor-pointer font-medium">
+                      <label class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-white cursor-pointer font-medium transition-all">
                         <input type="radio" name="wm-type" value="text" onchange="updateWatermarkSettings()" class="text-potato-cyan focus:ring-potato-cyan">
                         <span>Text Slogan Đỏ</span>
                       </label>
-                      <label class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-white cursor-pointer font-medium">
+                      <label class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-white cursor-pointer font-medium transition-all">
                         <input type="radio" name="wm-type" value="custom" onchange="updateWatermarkSettings()" class="text-potato-cyan focus:ring-potato-cyan">
-                        <span>Tải logo khác...</span>
+                        <span>Tải logo riêng từ máy...</span>
                       </label>
                     </div>
-                    <div id="wm-custom-upload-box" class="hidden pt-1">
-                      <input type="file" id="wm-custom-file" accept="image/*" onchange="handleCustomWatermarkUpload(event)" class="text-[11px] text-slate-500 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-[11px] file:font-bold file:bg-slate-200 file:text-slate-700">
+
+                    <!-- Custom Logo Upload Box -->
+                    <div id="wm-custom-upload-box" class="hidden pt-2 border-t border-slate-200/80 space-y-2">
+                      <div class="flex items-center gap-2">
+                        <label for="wm-custom-file" class="cursor-pointer px-3 py-1.5 rounded-xl bg-potato-cyan hover:bg-potato-cyanHover text-white text-[11px] font-bold transition-all shadow-2xs flex items-center gap-1.5 active:scale-95">
+                          <i class="fa-solid fa-upload"></i>
+                          <span>Chọn File Logo</span>
+                        </label>
+                        <input type="file" id="wm-custom-file" accept="image/*" onchange="handleCustomWatermarkUpload(event)" class="hidden">
+                        <button type="button" onclick="clearCustomWatermark()" id="btn-clear-custom-logo" class="hidden px-2.5 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-600 text-[11px] font-bold transition-all" title="Xóa logo tùy biến">
+                          <i class="fa-solid fa-trash-can mr-1"></i>Xóa
+                        </button>
+                      </div>
+                      <div id="wm-custom-logo-preview" class="hidden flex items-center gap-2 p-1.5 bg-white rounded-xl border border-slate-200">
+                        <img id="wm-custom-logo-thumb" src="" alt="Custom Logo" class="w-8 h-8 rounded-lg object-contain bg-slate-100 border border-slate-200">
+                        <span id="wm-custom-logo-name" class="text-[10px] text-slate-600 truncate font-semibold">logo.png</span>
+                      </div>
                     </div>
                   </div>
 
@@ -1638,37 +1655,46 @@
                   <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200/70 space-y-2">
                     <label class="block text-xs font-bold text-slate-700 flex items-center justify-between">
                       <span>2. Vị trí đóng dấu</span>
-                      <span id="wm-pos-name" class="text-[10px] text-potato-cyan font-bold">Góc dưới phải</span>
+                      <span id="wm-pos-name" class="text-[10px] text-potato-cyan font-black bg-sky-50 px-2 py-0.5 rounded-md border border-potato-cyan/30">Góc dưới phải</span>
                     </label>
-                    <div class="grid grid-cols-3 gap-1.5 max-w-[140px] mx-auto pt-1">
-                      <button type="button" onclick="setWatermarkPosition('top-left')" data-pos="top-left" class="wm-pos-btn w-9 h-8 rounded-lg border border-slate-300 text-xs font-bold hover:bg-slate-200 transition-all">↖</button>
-                      <button type="button" onclick="setWatermarkPosition('top-center')" data-pos="top-center" class="wm-pos-btn w-9 h-8 rounded-lg border border-slate-300 text-xs font-bold hover:bg-slate-200 transition-all">↑</button>
-                      <button type="button" onclick="setWatermarkPosition('top-right')" data-pos="top-right" class="wm-pos-btn w-9 h-8 rounded-lg border border-slate-300 text-xs font-bold hover:bg-slate-200 transition-all">↗</button>
-                      <button type="button" onclick="setWatermarkPosition('mid-left')" data-pos="mid-left" class="wm-pos-btn w-9 h-8 rounded-lg border border-slate-300 text-xs font-bold hover:bg-slate-200 transition-all">←</button>
-                      <button type="button" onclick="setWatermarkPosition('center')" data-pos="center" class="wm-pos-btn w-9 h-8 rounded-lg border border-slate-300 text-xs font-bold hover:bg-slate-200 transition-all">●</button>
-                      <button type="button" onclick="setWatermarkPosition('mid-right')" data-pos="mid-right" class="wm-pos-btn w-9 h-8 rounded-lg border border-slate-300 text-xs font-bold hover:bg-slate-200 transition-all">→</button>
-                      <button type="button" onclick="setWatermarkPosition('bottom-left')" data-pos="bottom-left" class="wm-pos-btn w-9 h-8 rounded-lg border border-slate-300 text-xs font-bold hover:bg-slate-200 transition-all">↙</button>
-                      <button type="button" onclick="setWatermarkPosition('bottom-center')" data-pos="bottom-center" class="wm-pos-btn w-9 h-8 rounded-lg border border-slate-300 text-xs font-bold hover:bg-slate-200 transition-all">↓</button>
-                      <button type="button" onclick="setWatermarkPosition('bottom-right')" data-pos="bottom-right" class="wm-pos-btn w-9 h-8 rounded-lg border border-potato-cyan bg-potato-cyan text-white text-xs font-bold shadow-2xs">↘</button>
+                    <div class="grid grid-cols-3 gap-1.5 max-w-[150px] mx-auto pt-1">
+                      <button type="button" onclick="setWatermarkPosition('top-left')" data-pos="top-left" class="wm-pos-btn w-10 h-8 rounded-xl border border-slate-300 text-xs font-bold hover:bg-slate-200 transition-all shadow-2xs">↖</button>
+                      <button type="button" onclick="setWatermarkPosition('top-center')" data-pos="top-center" class="wm-pos-btn w-10 h-8 rounded-xl border border-slate-300 text-xs font-bold hover:bg-slate-200 transition-all shadow-2xs">↑</button>
+                      <button type="button" onclick="setWatermarkPosition('top-right')" data-pos="top-right" class="wm-pos-btn w-10 h-8 rounded-xl border border-slate-300 text-xs font-bold hover:bg-slate-200 transition-all shadow-2xs">↗</button>
+                      <button type="button" onclick="setWatermarkPosition('mid-left')" data-pos="mid-left" class="wm-pos-btn w-10 h-8 rounded-xl border border-slate-300 text-xs font-bold hover:bg-slate-200 transition-all shadow-2xs">←</button>
+                      <button type="button" onclick="setWatermarkPosition('center')" data-pos="center" class="wm-pos-btn w-10 h-8 rounded-xl border border-slate-300 text-xs font-bold hover:bg-slate-200 transition-all shadow-2xs">●</button>
+                      <button type="button" onclick="setWatermarkPosition('mid-right')" data-pos="mid-right" class="wm-pos-btn w-10 h-8 rounded-xl border border-slate-300 text-xs font-bold hover:bg-slate-200 transition-all shadow-2xs">→</button>
+                      <button type="button" onclick="setWatermarkPosition('bottom-left')" data-pos="bottom-left" class="wm-pos-btn w-10 h-8 rounded-xl border border-slate-300 text-xs font-bold hover:bg-slate-200 transition-all shadow-2xs">↙</button>
+                      <button type="button" onclick="setWatermarkPosition('bottom-center')" data-pos="bottom-center" class="wm-pos-btn w-10 h-8 rounded-xl border border-slate-300 text-xs font-bold hover:bg-slate-200 transition-all shadow-2xs">↓</button>
+                      <button type="button" onclick="setWatermarkPosition('bottom-right')" data-pos="bottom-right" class="wm-pos-btn w-10 h-8 rounded-xl border border-potato-cyan bg-potato-cyan text-white text-xs font-bold shadow-2xs">↘</button>
                     </div>
                   </div>
 
-                  <!-- Sliders: Size, Opacity, Padding -->
-                  <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200/70 space-y-2.5">
+                  <!-- Sliders: Size, Opacity, Padding & Quick Size Chips -->
+                  <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200/70 space-y-2">
                     <div>
                       <div class="flex justify-between text-xs font-bold text-slate-700">
                         <span>Kích thước logo:</span>
                         <span id="wm-scale-val" class="text-potato-navy font-black">15% (Chuẩn)</span>
                       </div>
                       <input type="range" id="wm-scale-slider" min="8" max="40" value="15" oninput="updateWatermarkSettings()" class="w-full accent-potato-cyan h-1.5 bg-slate-200 rounded-lg cursor-pointer mt-1">
+                      <!-- Quick Size Chips -->
+                      <div class="flex items-center gap-1 pt-1 flex-wrap">
+                        <button type="button" onclick="setWatermarkScalePreset(10)" class="wm-scale-chip px-2 py-0.5 rounded-md bg-white border border-slate-200 hover:border-potato-cyan text-[10px] font-bold text-slate-600 transition-all">10% Nhỏ</button>
+                        <button type="button" onclick="setWatermarkScalePreset(15)" class="wm-scale-chip px-2 py-0.5 rounded-md bg-sky-50 border border-potato-cyan text-[10px] font-bold text-potato-navy transition-all">15% Chuẩn</button>
+                        <button type="button" onclick="setWatermarkScalePreset(22)" class="wm-scale-chip px-2 py-0.5 rounded-md bg-white border border-slate-200 hover:border-potato-cyan text-[10px] font-bold text-slate-600 transition-all">22% Vừa</button>
+                        <button type="button" onclick="setWatermarkScalePreset(30)" class="wm-scale-chip px-2 py-0.5 rounded-md bg-white border border-slate-200 hover:border-potato-cyan text-[10px] font-bold text-slate-600 transition-all">30% Lớn</button>
+                      </div>
                     </div>
-                    <div>
+
+                    <div class="pt-1">
                       <div class="flex justify-between text-xs font-bold text-slate-700">
                         <span>Độ rõ nét (Opacity):</span>
                         <span id="wm-opacity-val" class="text-potato-navy font-black">100%</span>
                       </div>
                       <input type="range" id="wm-opacity-slider" min="20" max="100" value="100" oninput="updateWatermarkSettings()" class="w-full accent-potato-cyan h-1.5 bg-slate-200 rounded-lg cursor-pointer mt-1">
                     </div>
+
                     <div>
                       <div class="flex justify-between text-xs font-bold text-slate-700">
                         <span>Khoảng cách lề:</span>
@@ -1677,6 +1703,107 @@
                       <input type="range" id="wm-padding-slider" min="1" max="10" value="3" oninput="updateWatermarkSettings()" class="w-full accent-potato-cyan h-1.5 bg-slate-200 rounded-lg cursor-pointer mt-1">
                     </div>
                   </div>
+                </div>
+
+                <!-- 2. Export Format & Quality Bar for Watermark -->
+                <div class="p-3 bg-white rounded-2xl border border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+                  <div class="flex items-center gap-2 w-full sm:w-auto">
+                    <span class="font-bold text-slate-700 whitespace-nowrap">Định dạng & Chất lượng tải:</span>
+                    <select id="wm-export-format" onchange="onWatermarkFormatOrQualityChange()" class="px-3 py-1.5 text-xs border border-slate-200 rounded-xl focus:outline-none focus:border-potato-cyan font-bold text-slate-800 bg-slate-50">
+                      <option value="image/jpeg" selected>JPG (.jpg) - Khuyên dùng</option>
+                      <option value="image/png">PNG (.png) - Không nén</option>
+                      <option value="image/webp">WebP (.webp) - Siêu nhẹ</option>
+                    </select>
+                    <select id="wm-export-quality" onchange="onWatermarkFormatOrQualityChange()" class="px-2.5 py-1.5 text-xs border border-slate-200 rounded-xl focus:outline-none focus:border-potato-cyan font-semibold text-slate-800 bg-slate-50">
+                      <option value="1.0">100% Nét căng</option>
+                      <option value="0.92" selected>92% Đẹp</option>
+                      <option value="0.8">80% Nhẹ</option>
+                    </select>
+                  </div>
+
+                  <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+                    <label for="img-tool-file-input" class="cursor-pointer px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs border border-slate-200 transition-all flex items-center gap-1.5 active:scale-95 shadow-2xs">
+                      <i class="fa-solid fa-plus text-potato-cyan"></i>
+                      <span>Chọn Thêm Ảnh</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- 3. LIVE INTERACTIVE WATERMARK STUDIO STAGE -->
+                <div class="bg-slate-900/5 rounded-3xl border border-slate-200/90 overflow-hidden shadow-xs space-y-0">
+                  
+                  <!-- Stage Header Toolbar -->
+                  <div class="bg-white px-3 sm:px-4 py-2.5 border-b border-slate-200/80 flex items-center justify-between gap-2 flex-wrap">
+                    <div class="flex items-center gap-2 text-xs">
+                      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                      <span class="font-extrabold text-slate-800">Bàn Làm Việc Gắn Watermark Trực Tiếp</span>
+                    </div>
+
+                    <div class="flex items-center gap-2 text-xs">
+                      <span id="wm-live-metrics" class="font-mono text-slate-700 font-bold bg-slate-100 border border-slate-200/80 px-2.5 py-1 rounded-lg shadow-2xs">
+                        Ảnh: -- × -- px • Logo: -- px
+                      </span>
+                    </div>
+                  </div>
+
+                  <!-- Canvas Stage Container -->
+                  <div class="relative w-full h-[360px] sm:h-[480px] bg-slate-950/5 flex items-center justify-center overflow-hidden" id="wm-stage-wrapper">
+                    <!-- Real Canvas -->
+                    <div id="wm-canvas-container" class="w-full h-full flex items-center justify-center p-3 hidden">
+                      <canvas id="wm-interactive-canvas" class="max-w-full max-h-full object-contain rounded-2xl shadow-lg"></canvas>
+                    </div>
+
+                    <!-- Placeholder when empty -->
+                    <div id="wm-empty-state" class="text-center p-8 text-slate-400 space-y-3">
+                      <div class="w-16 h-16 rounded-3xl bg-white shadow-sm border border-slate-200 flex items-center justify-center text-3xl text-potato-cyan mx-auto">
+                        <i class="fa-solid fa-stamp"></i>
+                      </div>
+                      <div>
+                        <h4 class="font-black text-sm text-slate-700">Chưa có hình ảnh nào được nạp vào bàn đóng dấu</h4>
+                        <p class="text-xs text-slate-400 mt-1 max-w-sm mx-auto leading-relaxed">
+                          Tải ảnh từ máy tính hoặc bấm chọn một ảnh trong danh sách hàng đợi bên dưới để xem trước và tải ảnh đã gắn logo.
+                        </p>
+                      </div>
+                      <label for="img-tool-file-input" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-potato-cyan hover:bg-potato-cyanHover text-white text-xs font-black shadow-md shadow-potato-cyan/25 transition-all cursor-pointer active:scale-95">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span>Tải Ảnh Cần Gắn Watermark Lên Ngay</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- Thumbnail bar to switch between images -->
+                  <div id="wm-queue-thumbs" class="bg-white p-2.5 border-t border-slate-200/80 flex items-center gap-2 overflow-x-auto custom-scrollbar hidden">
+                    <span class="text-[11px] font-bold text-slate-500 whitespace-nowrap pl-1">Chọn ảnh khác:</span>
+                    <div id="wm-thumbs-list" class="flex items-center gap-2"></div>
+                  </div>
+
+                  <!-- Direct Download Action Bar -->
+                  <div class="bg-white p-3.5 sm:p-4 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <div class="text-xs text-slate-500 flex items-center gap-2 w-full sm:w-auto">
+                      <i class="fa-solid fa-circle-check text-emerald-500"></i>
+                      <span id="wm-download-hint">
+                        Ảnh đóng dấu logo bản quyền chất lượng cao sẵn sàng để tải về máy.
+                      </span>
+                    </div>
+
+                    <div class="flex items-center gap-2.5 w-full sm:w-auto flex-wrap">
+                      <button type="button" onclick="previewWatermarkResult()" id="btn-preview-wm" class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs border border-slate-200 transition-all flex items-center justify-center gap-2 active:scale-95 shadow-2xs">
+                        <i class="fa-regular fa-eye"></i>
+                        <span>Xem Trước Kết Quả</span>
+                      </button>
+
+                      <button type="button" onclick="applyWatermarkToQueue()" id="btn-save-wm-queue" class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-potato-navy font-bold text-xs border border-potato-cyan/40 transition-all flex items-center justify-center gap-2 active:scale-95 shadow-2xs">
+                        <i class="fa-solid fa-plus text-potato-cyan"></i>
+                        <span>Lưu Vào Hàng Đợi</span>
+                      </button>
+
+                      <button type="button" onclick="downloadWatermarkedImage()" id="btn-download-wm-direct" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-potato-cyan to-blue-600 hover:from-potato-cyanHover hover:to-blue-700 text-white font-extrabold text-xs shadow-md shadow-potato-cyan/25 transition-all flex items-center justify-center gap-2 active:scale-95 min-h-[42px]">
+                        <i class="fa-solid fa-download text-sm"></i>
+                        <span id="btn-download-wm-text">Gắn Watermark & Tải Ảnh Ngay (.JPG)</span>
+                      </button>
+                    </div>
+                  </div>
+
                 </div>
 
                 <!-- Google Drive n8n Cloud Pipeline Info Card -->
@@ -4799,6 +4926,71 @@
             <span>Lưu Vào Hàng Đợi</span>
           </button>
           <button type="button" onclick="downloadCroppedImageFromModal()" class="flex-1 sm:flex-none px-5 py-2.5 rounded-xl bg-gradient-to-r from-potato-cyan to-blue-600 hover:from-potato-cyanHover hover:to-blue-700 text-white font-extrabold text-xs shadow-md shadow-potato-cyan/20 transition-all flex items-center justify-center gap-2 active:scale-95">
+            <i class="fa-solid fa-download"></i>
+            <span>Tải Về Máy Ngay</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5.2. WATERMARKED IMAGE PREVIEW & DIRECT DOWNLOAD MODAL -->
+  <div id="modal-watermark-preview" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-5 hidden">
+    <div class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl border border-slate-200 overflow-hidden transform transition-all animate-in fade-in zoom-in-95 flex flex-col max-h-[92vh]">
+      <!-- Header -->
+      <div class="bg-gradient-to-r from-blue-700 to-potato-cyan text-white px-5 py-4 flex items-center justify-between flex-shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-white/15 flex items-center justify-center text-lg text-white">
+            <i class="fa-solid fa-stamp"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-sm sm:text-base text-white">Xem Trước Ảnh Đã Gắn Watermark</h3>
+            <p id="wm-preview-modal-sub" class="text-[11px] text-sky-100">Bản quyền Potato English • Sẵn sàng tải về</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeWatermarkPreviewModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-sm transition-all" title="Đóng">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Preview Image Body -->
+      <div class="p-4 sm:p-6 overflow-y-auto custom-scrollbar space-y-4 flex-1">
+        <div class="relative bg-slate-950/5 rounded-2xl border border-slate-200 p-2 flex items-center justify-center min-h-[220px] max-h-[380px] overflow-hidden">
+          <img id="wm-preview-modal-img" src="" alt="Watermark Preview" class="max-w-full max-h-[360px] object-contain rounded-xl shadow-md">
+        </div>
+
+        <!-- Meta info pills -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+          <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-200">
+            <span class="block text-[10px] text-slate-400 font-bold uppercase">Kiểu Watermark:</span>
+            <span id="wm-preview-meta-type" class="font-extrabold text-potato-navy truncate block">Logo Potato</span>
+          </div>
+          <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-200">
+            <span class="block text-[10px] text-slate-400 font-bold uppercase">Vị trí đóng dấu:</span>
+            <span id="wm-preview-meta-pos" class="font-extrabold text-slate-800">Góc dưới phải</span>
+          </div>
+          <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-200">
+            <span class="block text-[10px] text-slate-400 font-bold uppercase">Kích thước ảnh:</span>
+            <span id="wm-preview-meta-dims" class="font-extrabold text-slate-800">-- × -- px</span>
+          </div>
+          <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-200">
+            <span class="block text-[10px] text-slate-400 font-bold uppercase">Dung lượng ước tính:</span>
+            <span id="wm-preview-meta-size" class="font-extrabold text-emerald-600">-- KB</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Buttons -->
+      <div class="p-4 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-2.5 flex-shrink-0">
+        <button type="button" onclick="closeWatermarkPreviewModal()" class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs border border-slate-200 transition-all">
+          Đóng & Chỉnh Lại
+        </button>
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+          <button type="button" onclick="applyWatermarkToQueue(); closeWatermarkPreviewModal();" class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-potato-navy font-bold text-xs border border-potato-cyan/40 transition-all flex items-center justify-center gap-1.5 active:scale-95">
+            <i class="fa-solid fa-plus text-potato-cyan"></i>
+            <span>Lưu Vào Hàng Đợi</span>
+          </button>
+          <button type="button" onclick="downloadWatermarkedImageFromModal()" class="flex-1 sm:flex-none px-5 py-2.5 rounded-xl bg-gradient-to-r from-potato-cyan to-blue-600 hover:from-potato-cyanHover hover:to-blue-700 text-white font-extrabold text-xs shadow-md shadow-potato-cyan/20 transition-all flex items-center justify-center gap-2 active:scale-95">
             <i class="fa-solid fa-download"></i>
             <span>Tải Về Máy Ngay</span>
           </button>
@@ -9739,7 +9931,9 @@
         scale: 15,    // % of image width (chuẩn 15%)
         opacity: 100, // % (sắc nét 100%)
         padding: 3,   // % of image width (chuẩn lề 3%)
-        text: 'POTATO ENGLISH • NEVER STOP LEARNING'
+        text: 'POTATO ENGLISH • NEVER STOP LEARNING',
+        format: 'image/jpeg',
+        quality: 0.92
       },
       resize: {
         width: 1200,
@@ -9809,9 +10003,9 @@
       const descElem = document.getElementById('image-task-desc');
       const taskMeta = {
         watermark: {
-          title: 'Gắn Watermark Logo Hàng Loạt',
+          title: 'Gắn Watermark Logo Bản Quyền & Tải Trực Tiếp',
           icon: 'fa-stamp',
-          desc: 'Đóng dấu bản quyền Logo Potato English hoặc Slogan lên hàng loạt ảnh học viên, tùy chỉnh vị trí, kích thước và độ mờ.'
+          desc: 'Đóng dấu bản quyền Logo Potato English hoặc Slogan lên ảnh học viên, tùy chỉnh vị trí 9 điểm, tỷ lệ, độ mờ và tải về trực tiếp chất lượng cao.'
         },
         crop: {
           title: 'Cắt Ảnh Trực Tiếp (Visual Social Cropper)',
@@ -9847,6 +10041,9 @@
 
       if (taskKey === 'crop') {
         initCropStudio();
+      } else if (taskKey === 'watermark') {
+        initWatermarkStudio();
+        renderLivePreview();
       } else {
         renderLivePreview();
       }
@@ -9918,12 +10115,379 @@
       reader.onload = (event) => {
         customWatermarkImg = new Image();
         customWatermarkImg.onload = () => {
+          const prevBox = document.getElementById('wm-custom-logo-preview');
+          const thumb = document.getElementById('wm-custom-logo-thumb');
+          const nameLabel = document.getElementById('wm-custom-logo-name');
+          const clearBtn = document.getElementById('btn-clear-custom-logo');
+          if (prevBox) prevBox.classList.remove('hidden');
+          if (thumb) thumb.src = event.target.result;
+          if (nameLabel) nameLabel.textContent = file.name;
+          if (clearBtn) clearBtn.classList.remove('hidden');
+
+          const customRadio = document.querySelector('input[name="wm-type"][value="custom"]');
+          if (customRadio) {
+            customRadio.checked = true;
+            imageToolSettings.watermark.type = 'custom';
+          }
+
           renderLivePreview();
-          showToast('✓ Đã tải watermark tùy biến thành công!', 'success');
+          if (activeImageToolTask === 'watermark') initWatermarkStudio();
+          showToast(`✓ Đã tải logo watermark "${file.name}" thành công!`, 'success');
         };
         customWatermarkImg.src = event.target.result;
       };
       reader.readAsDataURL(file);
+    }
+
+    // ===================================================================
+    // INTERACTIVE WATERMARK STUDIO CONTROLLER & DIRECT DOWNLOAD
+    // ===================================================================
+    let currentWatermarkItemIndex = 0;
+    let cachedWatermarkBlob = null;
+    let cachedWatermarkFileName = '';
+
+    function initWatermarkStudio() {
+      const emptyState = document.getElementById('wm-empty-state');
+      const canvasContainer = document.getElementById('wm-canvas-container');
+      const thumbsBar = document.getElementById('wm-queue-thumbs');
+      const metrics = document.getElementById('wm-live-metrics');
+      const hint = document.getElementById('wm-download-hint');
+
+      if (imageToolFiles.length === 0) {
+        if (emptyState) emptyState.classList.remove('hidden');
+        if (canvasContainer) canvasContainer.classList.add('hidden');
+        if (thumbsBar) thumbsBar.classList.add('hidden');
+        if (metrics) metrics.textContent = 'Ảnh: -- × -- px • Logo: -- px';
+        if (hint) hint.textContent = 'Chưa có ảnh nào được nạp vào bàn đóng dấu.';
+        return;
+      }
+
+      if (currentWatermarkItemIndex >= imageToolFiles.length) {
+        currentWatermarkItemIndex = 0;
+      }
+
+      if (emptyState) emptyState.classList.add('hidden');
+      if (canvasContainer) canvasContainer.classList.remove('hidden');
+
+      renderWatermarkQueueThumbs();
+      loadWatermarkImage(currentWatermarkItemIndex);
+    }
+
+    function renderWatermarkQueueThumbs() {
+      const thumbsBar = document.getElementById('wm-queue-thumbs');
+      const thumbsList = document.getElementById('wm-thumbs-list');
+      if (!thumbsBar || !thumbsList) return;
+
+      if (imageToolFiles.length <= 1) {
+        thumbsBar.classList.add('hidden');
+        return;
+      }
+
+      thumbsBar.classList.remove('hidden');
+      thumbsList.innerHTML = imageToolFiles.map((item, idx) => {
+        const isActive = idx === currentWatermarkItemIndex;
+        const activeClass = isActive 
+          ? 'ring-2 ring-potato-cyan border-potato-cyan scale-105 shadow-sm' 
+          : 'opacity-70 hover:opacity-100 border-slate-200';
+        return `
+          <button type="button" onclick="loadWatermarkImage(${idx})" class="flex-shrink-0 flex items-center gap-1.5 p-1 rounded-xl bg-white border ${activeClass} transition-all active:scale-95" title="${item.name}">
+            <img src="${item.dataUrl}" alt="${item.name}" class="w-8 h-8 rounded-lg object-cover">
+            <span class="text-[11px] font-bold text-slate-700 max-w-[80px] truncate pr-1">#${idx + 1}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function loadWatermarkImage(index) {
+      if (!imageToolFiles[index]) return;
+      currentWatermarkItemIndex = index;
+      renderWatermarkQueueThumbs();
+
+      const item = imageToolFiles[index];
+      const canvas = document.getElementById('wm-interactive-canvas');
+      if (canvas && item.imgElem) {
+        drawTransformedImageOnCanvas(canvas, item.imgElem, true);
+
+        const metrics = document.getElementById('wm-live-metrics');
+        if (metrics) {
+          const scalePct = (imageToolSettings.watermark.scale || 15) / 100;
+          const logoPx = Math.round(canvas.width * scalePct);
+          const posNames = {
+            'top-left': 'Góc trên trái',
+            'top-center': 'Cạnh trên giữa',
+            'top-right': 'Góc trên phải',
+            'mid-left': 'Cạnh giữa trái',
+            'center': 'Chính giữa ảnh',
+            'mid-right': 'Cạnh giữa phải',
+            'bottom-left': 'Góc dưới trái',
+            'bottom-center': 'Cạnh dưới giữa',
+            'bottom-right': 'Góc dưới phải'
+          };
+          const posName = posNames[imageToolSettings.watermark.position] || 'Góc dưới phải';
+          metrics.textContent = `Ảnh: ${canvas.width} × ${canvas.height} px • Logo: ~${logoPx} px (${posName})`;
+        }
+
+        const hint = document.getElementById('wm-download-hint');
+        if (hint) {
+          hint.textContent = `Đang gắn watermark: "${item.name}" (${canvas.width} × ${canvas.height} px)`;
+        }
+      }
+    }
+
+    function setWatermarkScalePreset(pct) {
+      imageToolSettings.watermark.scale = pct;
+      const slider = document.getElementById('wm-scale-slider');
+      if (slider) slider.value = pct;
+      const label = document.getElementById('wm-scale-val');
+      if (label) label.textContent = `${pct}%`;
+
+      const chips = document.querySelectorAll('.wm-scale-chip');
+      chips.forEach(c => {
+        c.className = 'wm-scale-chip px-2 py-0.5 rounded-md bg-white border border-slate-200 hover:border-potato-cyan text-[10px] font-bold text-slate-600 transition-all';
+      });
+
+      renderLivePreview();
+      if (activeImageToolTask === 'watermark') initWatermarkStudio();
+    }
+
+    function onWatermarkFormatOrQualityChange() {
+      const formatSelect = document.getElementById('wm-export-format');
+      const qualitySelect = document.getElementById('wm-export-quality');
+      if (formatSelect) imageToolSettings.watermark.format = formatSelect.value;
+      if (qualitySelect) imageToolSettings.watermark.quality = parseFloat(qualitySelect.value) || 0.92;
+      updateWatermarkDownloadButtonText();
+    }
+
+    function updateWatermarkDownloadButtonText() {
+      const btnText = document.getElementById('btn-download-wm-text');
+      if (!btnText) return;
+      const format = imageToolSettings.watermark.format || 'image/jpeg';
+      let ext = 'JPG';
+      if (format === 'image/png') ext = 'PNG';
+      if (format === 'image/webp') ext = 'WebP';
+      btnText.textContent = `Gắn Watermark & Tải Ảnh Ngay (.${ext})`;
+    }
+
+    function clearCustomWatermark() {
+      customWatermarkImg = null;
+      const prevBox = document.getElementById('wm-custom-logo-preview');
+      const clearBtn = document.getElementById('btn-clear-custom-logo');
+      const fileInput = document.getElementById('wm-custom-file');
+      if (prevBox) prevBox.classList.add('hidden');
+      if (clearBtn) clearBtn.classList.add('hidden');
+      if (fileInput) fileInput.value = '';
+
+      const logoRadio = document.querySelector('input[name="wm-type"][value="logo"]');
+      if (logoRadio) {
+        logoRadio.checked = true;
+        imageToolSettings.watermark.type = 'logo';
+      }
+      renderLivePreview();
+      if (activeImageToolTask === 'watermark') initWatermarkStudio();
+      showToast('Đã quay về Logo Potato English mặc định!', 'info');
+    }
+
+    async function downloadWatermarkedImage() {
+      if (imageToolFiles.length === 0 || !imageToolFiles[currentWatermarkItemIndex]) {
+        showToast('Vui lòng chọn hoặc nạp ảnh vào trước khi tải!', 'warning');
+        return;
+      }
+
+      const item = imageToolFiles[currentWatermarkItemIndex];
+      const offscreenCanvas = document.createElement('canvas');
+      drawTransformedImageOnCanvas(offscreenCanvas, item.imgElem, false);
+
+      const format = imageToolSettings.watermark.format || 'image/jpeg';
+      const quality = imageToolSettings.watermark.quality || 0.92;
+      let ext = 'jpg';
+      if (format === 'image/png') ext = 'png';
+      else if (format === 'image/webp') ext = 'webp';
+
+      const baseName = item.name.replace(/\.[^/.]+$/, '');
+      const pos = imageToolSettings.watermark.position || 'bottom-right';
+      const filename = `potato_wm_${pos}_${baseName}.${ext}`;
+
+      showToast('Đang tạo và tải ảnh đã gắn logo...', 'info');
+
+      offscreenCanvas.toBlob((blob) => {
+        if (!blob) {
+          showToast('Lỗi khi xuất ảnh, vui lòng thử lại!', 'error');
+          return;
+        }
+
+        if (typeof saveAs !== 'undefined') {
+          saveAs(blob, filename);
+        } else {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = filename;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        }
+
+        showToast(`✓ Đã tải thành công ảnh đóng dấu (${offscreenCanvas.width}×${offscreenCanvas.height} px, ${formatBytes(blob.size)})!`, 'success');
+      }, format, quality);
+    }
+
+    async function previewWatermarkResult() {
+      if (imageToolFiles.length === 0 || !imageToolFiles[currentWatermarkItemIndex]) {
+        showToast('Chưa có ảnh nào trên bàn làm việc!', 'warning');
+        return;
+      }
+
+      const item = imageToolFiles[currentWatermarkItemIndex];
+      const offscreenCanvas = document.createElement('canvas');
+      drawTransformedImageOnCanvas(offscreenCanvas, item.imgElem, false);
+
+      const format = imageToolSettings.watermark.format || 'image/jpeg';
+      const quality = imageToolSettings.watermark.quality || 0.92;
+      let formatText = 'JPG (92%)';
+      if (format === 'image/png') formatText = 'PNG (Lossless)';
+      if (format === 'image/webp') formatText = `WebP (${Math.round(quality * 100)}%)`;
+
+      const posNames = {
+        'top-left': 'Góc trên trái',
+        'top-center': 'Cạnh trên giữa',
+        'top-right': 'Góc trên phải',
+        'mid-left': 'Cạnh giữa trái',
+        'center': 'Chính giữa ảnh',
+        'mid-right': 'Cạnh giữa phải',
+        'bottom-left': 'Góc dưới trái',
+        'bottom-center': 'Cạnh dưới giữa',
+        'bottom-right': 'Góc dưới phải'
+      };
+      const pos = imageToolSettings.watermark.position || 'bottom-right';
+      const posName = posNames[pos] || 'Góc dưới phải';
+
+      let typeName = 'Logo Potato Chuẩn (PNG)';
+      if (imageToolSettings.watermark.type === 'text') typeName = 'Text Slogan Đỏ';
+      else if (imageToolSettings.watermark.type === 'custom') typeName = 'Logo Riêng Tùy Biến';
+
+      offscreenCanvas.toBlob((blob) => {
+        if (!blob) return;
+        cachedWatermarkBlob = blob;
+        const baseName = item.name.replace(/\.[^/.]+$/, '');
+        let ext = format === 'image/png' ? 'png' : (format === 'image/webp' ? 'webp' : 'jpg');
+        cachedWatermarkFileName = `potato_wm_${pos}_${baseName}.${ext}`;
+
+        const previewImg = document.getElementById('wm-preview-modal-img');
+        if (previewImg) previewImg.src = URL.createObjectURL(blob);
+
+        const metaType = document.getElementById('wm-preview-meta-type');
+        if (metaType) metaType.textContent = typeName;
+
+        const metaPos = document.getElementById('wm-preview-meta-pos');
+        if (metaPos) metaPos.textContent = `${posName} (${imageToolSettings.watermark.scale}%)`;
+
+        const metaDims = document.getElementById('wm-preview-meta-dims');
+        if (metaDims) metaDims.textContent = `${offscreenCanvas.width} × ${offscreenCanvas.height} px`;
+
+        const metaFormat = document.getElementById('wm-preview-meta-format');
+        if (metaFormat) metaFormat.textContent = formatText;
+
+        const metaSize = document.getElementById('wm-preview-meta-size');
+        if (metaSize) metaSize.textContent = formatBytes(blob.size);
+
+        const subTitle = document.getElementById('wm-preview-modal-sub');
+        if (subTitle) subTitle.textContent = `Vị trí: ${posName} • Kích cỡ: ${imageToolSettings.watermark.scale}% • Độ rõ nét: ${imageToolSettings.watermark.opacity}%`;
+
+        const modal = document.getElementById('modal-watermark-preview');
+        if (modal) modal.classList.remove('hidden');
+      }, format, quality);
+    }
+
+    function closeWatermarkPreviewModal() {
+      const modal = document.getElementById('modal-watermark-preview');
+      if (modal) modal.classList.add('hidden');
+      const previewImg = document.getElementById('wm-preview-modal-img');
+      if (previewImg && previewImg.src.startsWith('blob:')) {
+        URL.revokeObjectURL(previewImg.src);
+      }
+    }
+
+    function downloadWatermarkedImageFromModal() {
+      if (!cachedWatermarkBlob) {
+        downloadWatermarkedImage();
+        return;
+      }
+      if (typeof saveAs !== 'undefined') {
+        saveAs(cachedWatermarkBlob, cachedWatermarkFileName);
+      } else {
+        const url = URL.createObjectURL(cachedWatermarkBlob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = cachedWatermarkFileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+      showToast(`✓ Đã tải ảnh xuống thành công (${formatBytes(cachedWatermarkBlob.size)})!`, 'success');
+      closeWatermarkPreviewModal();
+    }
+
+    async function applyWatermarkToQueue() {
+      if (imageToolFiles.length === 0 || !imageToolFiles[currentWatermarkItemIndex]) {
+        showToast('Chưa có ảnh nào trên bàn làm việc!', 'warning');
+        return;
+      }
+
+      const item = imageToolFiles[currentWatermarkItemIndex];
+      const offscreenCanvas = document.createElement('canvas');
+      drawTransformedImageOnCanvas(offscreenCanvas, item.imgElem, false);
+
+      const format = imageToolSettings.watermark.format || 'image/jpeg';
+      const quality = imageToolSettings.watermark.quality || 0.92;
+      let ext = format === 'image/png' ? 'png' : (format === 'image/webp' ? 'webp' : 'jpg');
+
+      const baseName = item.name.replace(/\.[^/.]+$/, '');
+      const pos = imageToolSettings.watermark.position || 'bottom-right';
+      const newName = `${baseName}_wm_${pos}.${ext}`;
+
+      offscreenCanvas.toBlob((blob) => {
+        if (!blob) return;
+        const dataUrl = offscreenCanvas.toDataURL(format, quality);
+        const img = new Image();
+        img.onload = () => {
+          const newItem = {
+            id: 'img_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
+            file: blob,
+            name: newName,
+            originalSize: blob.size,
+            width: offscreenCanvas.width,
+            height: offscreenCanvas.height,
+            imgElem: img,
+            dataUrl: dataUrl,
+            processedBlob: blob,
+            processedUrl: URL.createObjectURL(blob),
+            processedSize: blob.size,
+            targetExt: ext,
+            status: 'completed'
+          };
+          imageToolFiles.unshift(newItem);
+          currentWatermarkItemIndex = 0;
+          updateImageToolStats();
+          renderQueueList();
+          renderWatermarkQueueThumbs();
+          showToast(`✓ Đã thêm "${newName}" vào danh sách hàng đợi xử lý!`, 'success');
+        };
+        img.src = dataUrl;
+      }, format, quality);
+    }
+
+    function selectImageForWatermark(id) {
+      const idx = imageToolFiles.findIndex(item => item.id === id);
+      if (idx === -1) return;
+      currentWatermarkItemIndex = idx;
+      switchImageToolTask('watermark');
+      initWatermarkStudio();
+      const wmPane = document.getElementById('settings-group-watermark');
+      if (wmPane) {
+        wmPane.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
 
     function setResizePreset(w, h, btnElem) {
@@ -10794,6 +11358,8 @@
               renderLivePreview();
               if (activeImageToolTask === 'crop') {
                 initCropStudio();
+              } else if (activeImageToolTask === 'watermark') {
+                initWatermarkStudio();
               }
               showToast(`✓ Đã nạp thành công ${addedCount} ảnh vào công cụ!`, 'success');
             }
@@ -10850,6 +11416,7 @@
       renderQueueList();
       destroyCropper();
       initCropStudio();
+      initWatermarkStudio();
 
       const canvas = document.getElementById('img-tool-preview-canvas');
       const placeholder = document.getElementById('preview-placeholder');
@@ -10879,11 +11446,16 @@
         if (currentCropItemIndex >= imageToolFiles.length) {
           currentCropItemIndex = Math.max(0, imageToolFiles.length - 1);
         }
+        if (currentWatermarkItemIndex >= imageToolFiles.length) {
+          currentWatermarkItemIndex = Math.max(0, imageToolFiles.length - 1);
+        }
         updateImageToolStats();
         renderQueueList();
         renderLivePreview();
         if (activeImageToolTask === 'crop') {
           initCropStudio();
+        } else if (activeImageToolTask === 'watermark') {
+          initWatermarkStudio();
         }
       }
     }
@@ -10917,7 +11489,7 @@
         if (isDone && item.processedSize > 0) {
           const diffPct = Math.round((1 - item.processedSize / item.originalSize) * 100);
           const pctClass = diffPct > 0 ? 'text-emerald-600' : 'text-slate-500';
-          sizeDiffText = `<span class="text-[10px] font-bold ${pctClass}">→ ${formatBytes(item.processedSize)} (${diffPct > 0 ? '-' + diffPct + '%' : 'chuẩn'})</span>`;
+          sizeDiffText = `<span class="text-[10px] font-bold ${pctClass}"> → ${formatBytes(item.processedSize)} (${diffPct > 0 ? '-' + diffPct + '%' : 'chuẩn'})</span>`;
         }
 
         const thumbSrc = item.processedUrl || item.dataUrl;
@@ -10944,6 +11516,10 @@
               <button type="button" onclick="selectImageForCropping('${item.id}')" class="px-2 py-1.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-potato-navy hover:text-potato-cyan text-xs font-bold transition-all flex items-center gap-1 border border-potato-cyan/30 active:scale-95" title="Cắt ảnh này với Cropper trực tiếp">
                 <i class="fa-solid fa-crop-simple text-potato-cyan"></i>
                 <span class="text-[11px]">Cắt</span>
+              </button>
+              <button type="button" onclick="selectImageForWatermark('${item.id}')" class="px-2 py-1.5 rounded-lg bg-cyan-50 hover:bg-cyan-100 text-potato-navy hover:text-potato-cyan text-xs font-bold transition-all flex items-center gap-1 border border-potato-cyan/30 active:scale-95" title="Gán watermark logo trực tiếp cho ảnh này">
+                <i class="fa-solid fa-stamp text-potato-cyan"></i>
+                <span class="text-[11px]">Logo</span>
               </button>
               ${isDone && item.processedUrl ? `
                 <a href="${item.processedUrl}" download="potato_${item.name.replace(/\.[^/.]+$/, '')}.${item.targetExt || 'webp'}" class="p-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-600 text-xs font-bold transition-all" title="Tải ảnh này về">
