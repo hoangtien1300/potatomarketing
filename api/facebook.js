@@ -37,14 +37,29 @@ module.exports = async (req, res) => {
     if (apiKey) {
       try {
         const systemPrompt = `Bạn là biên tập viên cao cấp kiêm thầy cô giáo tại Potato English (${branch}).
-TÔN CHỈ THƯƠNG HIỆU: Bình dị, chân thật, nói đúng làm thật, gần gũi như gia đình.
+TÔN CHỈ THƯƠNG HIỆU: Bình dị, chân thật, nói đúng làm thật, hiện đại, năng động, đời thực, gần gũi như gia đình.
 TONE GIỌNG YÊU CẦU: "${tone}". Hãy thể hiện rõ nét cảm xúc và phong cách này qua từng câu chữ.
+
+QUY TẮC CHỐNG SẾN & VĂN MẪU KHUÔN SÁO (ANTI-CHEESY RULES - BẮT BUỘC):
+1. TUYỆT ĐỐI LOẠI BỎ văn phong sến súa, ủy mị, kịch bản cải lương, cường điệu hóa tình cảm hoặc sáo rỗng.
+2. CẤM các từ/cụm từ sến khuôn sáo:
+   - "ấm lòng khôn xiết", "mỉm cười hạnh phúc", "khoảnh khắc diệu kỳ"
+   - "ngọn lửa đam mê", "bước chân non nớt", "sưởi ấm trái tim", "món quà vô giá", "món quà thiêng liêng"
+   - "như ngàn vì sao", "chúc gia đình một buổi tối ngập tràn niềm vui", "hạnh phúc ngập tràn", "nhẹ tênh".
+3. Hãy viết gãy gọn, dứt khoát, hóm hỉnh và đời thực như một người trẻ năng động ghi nhanh nhật ký lớp học. Kể rõ sự việc thật: các bạn nhỏ đang làm gì, tương tác ra sao, câu nói vui nhộn nào vừa diễn ra, năng lượng lớp học thế nào.
+
+QUY TẮC THẺ TAG TỐI ƯU SEO & LOCAL SEARCH (BẮT BUỘC 4 ĐẾN 5 HASHTAGS):
+Tuyệt đối KHÔNG sinh các thẻ tag chung chung hay tag quá dài vô nghĩa không ai tìm kiếm. Bắt buộc tạo 4 đến 5 hashtags theo đúng công thức 4 tầng SEO:
+1. Brand Tag (Thương hiệu): #PotatoEnglish
+2. Local SEO Bình Dương (Phụ huynh địa phương tìm kiếm): #TiengAnhTreEmBinhDuong hoặc #TiengAnhThuDauMot (nếu Hưng Định thì #TiengAnhThuanAn)
+3. Program SEO (Khóa học/Độ tuổi): #TiengAnhTreEm / #HappyJunior / #FriendlyKid / #TiengAnhTieuHoc / #TiengAnhMamNon
+4. Search Intent SEO (Hành vi & chủ đề tìm kiếm): #HocQuaTraiNghiem / #TuTinGiaoTiep / #LopHocCuoiTuan / #PhatAmChuanPhonics
 
 NHIỆM VỤ: Hãy sáng tạo ĐỒNG THỜI 3 BẢN NHÁP KHÁC NHAU (Bản 1, Bản 2, Bản 3) cho kênh ${platform}.
 Mỗi bản nháp là một phương án tiếp cận độc đáo, bám sát ý tưởng người dùng và gồm chính xác 3 phần:
 1. hook: Tiêu đề hoặc câu mở đầu / hook 3s thu hút hoặc lời nói ngây ngô của con.
 2. body: Thân bài kể chuyện, khoảnh khắc lớp học đời thường, tiến bộ tự nhiên của học viên.
-3. tags: 3 đến 4 hashtags thương hiệu (#PotatoEnglish ...).
+3. tags: 4 đến 5 hashtags chuẩn SEO theo công thức trên.
 
 YÊU CẦU ĐỘ DÀI: Tổng số từ của mỗi bản nháp (hook + body + tags) khoảng ${numWords} từ (phù hợp mục tiêu người dùng đã chọn).
 
@@ -60,17 +75,17 @@ BẮT BUỘC TRẢ VỀ ĐỊNH DẠNG JSON HỢP LỆ VỚI CẤU TRÚC SAU:
     {
       "hook": "Câu mở đầu bản nháp 1",
       "body": "Nội dung thân bài bản nháp 1",
-      "tags": "#PotatoEnglish #Hashtag1 #Hashtag2"
+      "tags": "#PotatoEnglish #TiengAnhThuDauMot #HappyJunior #LopHocCuoiTuan"
     },
     {
       "hook": "Câu mở đầu bản nháp 2",
       "body": "Nội dung thân bài bản nháp 2",
-      "tags": "#PotatoEnglish #Hashtag1 #Hashtag2"
+      "tags": "#PotatoEnglish #TiengAnhTreEmBinhDuong #HappyJunior #TuTinGiaoTiep"
     },
     {
       "hook": "Câu mở đầu bản nháp 3",
       "body": "Nội dung thân bài bản nháp 3",
-      "tags": "#PotatoEnglish #Hashtag1 #Hashtag2"
+      "tags": "#PotatoEnglish #TiengAnhThuDauMot #TiengAnhTieuHoc #HocQuaTraiNghiem"
     }
   ]
 }`;
@@ -86,7 +101,7 @@ BẮT BUỘC TRẢ VỀ ĐỊNH DẠNG JSON HỢP LỆ VỚI CẤU TRÚC SAU:
 - TONE GIỌNG / PHONG CÁCH: ${tone}
 - Độ dài mục tiêu: ${numWords} từ.`;
 
-        const candidateModels = ['gemini-3.8-flash', 'gemini-3.7-flash', 'gemini-2.5-flash'];
+        const candidateModels = ['gemini-3.8-flash', 'gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-flash-latest'];
         for (const modelName of candidateModels) {
           try {
             const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
@@ -96,7 +111,7 @@ BẮT BUỘC TRẢ VỀ ĐỊNH DẠNG JSON HỢP LỆ VỚI CẤU TRÚC SAU:
               body: JSON.stringify({
                 contents: [{ parts: [{ text: `${systemPrompt}\n\n${userContext}` }] }],
                 generationConfig: {
-                  temperature: 0.9,
+                  temperature: 0.8,
                   responseMimeType: "application/json",
                   maxOutputTokens: 2500
                 }
@@ -136,27 +151,29 @@ BẮT BUỘC TRẢ VỀ ĐỊNH DẠNG JSON HỢP LỆ VỚI CẤU TRÚC SAU:
       }
     }
 
-    // DYNAMIC PERSONALIZED ENGINE (Tự động thích ứng 100% theo đúng ý tưởng, khóa học & cơ sở của người dùng)
+    // DYNAMIC PERSONALIZED ENGINE (Tự động thích ứng chuẩn SEO & chống sến nếu mất mạng)
     const sanitizedIdea = effectiveIdea.replace(/[\r\n]+/g, ' ').trim();
-    const branchShort = branch.includes('Phú Cường') ? 'Phú Cường' : branch.includes('Hưng Định') ? 'Hưng Định' : 'Potato English';
+    const isPhuCuong = branch.includes('Phú Cường') || branch.includes('Cơ sở 1');
+    const localTag = isPhuCuong ? '#TiengAnhThuDauMot' : '#TiengAnhThuanAn';
+    const branchShort = isPhuCuong ? 'Phú Cường' : branch.includes('Hưng Định') ? 'Hưng Định' : 'Potato English';
     const firstCourse = Array.isArray(courses) && courses[0] ? courses[0].split('(')[0].trim() : 'Potato English';
     const tagSafeCourse = firstCourse.replace(/[^a-zA-Z0-9]/g, '');
 
     const dynamicDrafts = [
       {
-        hook: `"${sanitizedIdea.slice(0, 70)}..."`,
-        body: `Khoảnh khắc tự nhiên trong giờ học ${firstCourse} tại cơ sở ${branchShort} khiến cả lớp ngập tràn niềm vui. ${sanitizedIdea}.\n\nTiếng Anh đến với các con nhẹ nhàng và tự nhiên qua từng trải nghiệm thực tế. Chúc các con luôn giữ trọn ngọn lửa say mê khám phá! 🥔❤️`,
-        tags: `#PotatoEnglish #${tagSafeCourse} #HocBangNiemVui #TuTinNoiTiengAnh`
+        hook: `Chủ nhật tại Potato ${branchShort}: "${sanitizedIdea.slice(0, 60)}..."`,
+        body: `Lớp ${firstCourse} hôm nay ngập tràn năng lượng với những hoạt động trải nghiệm thực tế. ${sanitizedIdea}. Các bạn nhỏ chủ động phản xạ, tự tin nói tiếng Anh và cười thả ga cùng đồng đội. Nạp đầy năng lượng vui vẻ để bước vào tuần mới thật hào hứng! 🥔✨`,
+        tags: `#PotatoEnglish ${localTag} #${tagSafeCourse} #TuTinGiaoTiep #LopHocCuoiTuan`
       },
       {
-        hook: `Mỗi ngày đến lớp là một bước chuyển nhỏ đầy tự hào của các bạn nhỏ ${branchShort}.`,
-        body: `Hôm nay trong hoạt động ${subPillar}, các con đã cùng nhau trải nghiệm: "${sanitizedIdea}". Không áp đặt khuôn mẫu, con tự tin mở lời và bộc lộ suy nghĩ của mình bằng tiếng Anh.\n\nThầy cô luôn tự hào về sự kiên trì và nỗ lực của con mỗi ngày! 🥔❤️`,
-        tags: `#PotatoEnglish #TienBoMoiNgay #HocQuaTraiNghiem #${branchShort.replace(/\s+/g, '')}`
+        hook: `Tiếng cười rộn ràng phòng học ${branchShort} ngày cuối tuần 🥔⚡`,
+        body: `Hôm nay trong hoạt động ${subPillar}, các bạn nhỏ cùng nhau khám phá: "${sanitizedIdea}". Không lý thuyết khô khan, các con vận dụng từ vựng ngay vào trò chơi tương tác, phản xạ nhanh nhạy và tự tin mở lời.\n\nSẵn sàng 100% năng lượng cho tuần học mới!`,
+        tags: `#PotatoEnglish #TiengAnhTreEmBinhDuong ${localTag} #${tagSafeCourse} #HocQuaTraiNghiem`
       },
       {
-        hook: `Gửi ba mẹ một chút năng lượng tích cực từ lớp học ${firstCourse} chiều nay 🥔✨`,
-        body: `Nhìn nụ cười rạng rỡ và ánh mắt hào hứng của các bạn nhỏ khi: "${sanitizedIdea}", thầy cô tin rằng sự đồng hành kiên nhẫn chính là món quà quý giá nhất.\n\nChúc gia đình mình một buổi tối thật ấm áp và ngập tràn tiếng cười! 🥔❤️`,
-        tags: `#PotatoEnglish #GocPhuHuynh #TuTinGiaoTiep #DongHanhCungCon`
+        hook: `Nạp trọn năng lượng cuối tuần cùng các bạn nhỏ ${firstCourse} tại ${branchShort}!`,
+        body: `Thực chiến phản xạ tiếng Anh qua tình huống đời sống: "${sanitizedIdea}". Nhìn các con hào hứng tranh luận, tự tin thuyết trình và tương tác nhóm, ai cũng thấy cuối tuần trôi qua thật bổ ích và rộn ràng niềm vui.\n\nHẹn gặp lại các con vào buổi học tới! 🥔❤️`,
+        tags: `#PotatoEnglish ${localTag} #TiengAnhTieuHoc #TuTinNoiTiengAnh #LopHocCuoiTuan`
       }
     ];
 
