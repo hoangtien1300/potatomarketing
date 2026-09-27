@@ -2201,7 +2201,7 @@
           <!-- ==================== CỘT PHẢI (6 COLS): TRÌNH BIÊN TẬP & BẢN NHÁP ==================== -->
           <div class="lg:col-span-6 space-y-6">
 
-            <!-- THẺ 2: AI STUDIO & BIÊN TẬP NỘI DUNG -->
+            <!-- THẺ 2: AI STUDIO & BIÊN TẬP NỘI DUNG (3 BẢN NHÁP VỚI HOOK, NỘI DUNG & TAG) -->
             <div class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200/90 shadow-sm space-y-4">
               
               <!-- Header Thẻ Biên Tập -->
@@ -2221,50 +2221,129 @@
                   <!-- Nút Generate lớn -->
                   <button type="button" id="btn-writer-ai-generate" onclick="generateWriterContentAI()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-extrabold text-xs shadow-md shadow-purple-500/20 transition-all flex items-center gap-2 min-h-[38px] active:scale-95">
                     <i class="fa-solid fa-wand-magic-sparkles text-amber-300"></i>
-                    <span>AI Sinh Bài Viết</span>
+                    <span>AI Sinh 3 Bản Nháp</span>
                   </button>
                 </div>
               </div>
 
-              <!-- Tabs Bản Nháp Độc Bản (Draft 1, 2, 3) -->
-              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                <div class="flex items-center gap-1.5" id="writer-draft-tabs">
-                  <button type="button" onclick="switchWriterDraft(0)" id="draft-tab-0" class="px-3 py-1 rounded-lg text-xs font-bold bg-purple-100 text-purple-800 border border-purple-200 transition-all">
-                    Bản nháp 1
+              <!-- 3. THANH KÉO SỐ LƯỢNG TỪ / KÝ TỰ & CÁC OPTION LỰA CHỌN -->
+              <div class="bg-slate-50/90 border border-slate-200/90 rounded-2xl p-3.5 space-y-2.5">
+                <div class="flex items-center justify-between flex-wrap gap-2">
+                  <div class="flex items-center gap-1.5 text-xs font-bold text-slate-800">
+                    <i class="fa-solid fa-sliders text-purple-600"></i>
+                    <span>Số Lượng Từ & Ký Tự Mục Tiêu:</span>
+                  </div>
+                  <span id="writer-target-word-display" class="text-[11px] font-black text-purple-800 bg-purple-100 border border-purple-200 px-2.5 py-0.5 rounded-full">
+                    Mục tiêu: 80 từ (~480 ký tự)
+                  </span>
+                </div>
+
+                <!-- Thanh kéo Slider (30 - 300 từ) -->
+                <div class="flex items-center gap-3">
+                  <span class="text-[10px] font-bold text-slate-400">30 từ</span>
+                  <input type="range" id="writer-target-word-slider" min="30" max="300" step="5" value="80" oninput="handleWriterTargetWordSlider(this.value)" class="w-full accent-purple-600 cursor-pointer h-1.5 bg-slate-200 rounded-lg">
+                  <span class="text-[10px] font-bold text-slate-400">300 từ</span>
+                </div>
+
+                <!-- 4 Options lựa chọn nhanh độ dài phù hợp -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 text-[10.5px]">
+                  <button type="button" onclick="setWriterTargetWords(45)" id="target-opt-45" class="writer-target-btn px-2 py-1 rounded-lg bg-white border border-slate-200 text-slate-600 hover:border-purple-300 font-bold transition-all text-center">
+                    ⚡ Cực ngắn (45 từ)
                   </button>
-                  <button type="button" onclick="switchWriterDraft(1)" id="draft-tab-1" class="px-3 py-1 rounded-lg text-xs font-semibold text-slate-500 hover:bg-slate-100 transition-all">
-                    Bản nháp 2
+                  <button type="button" onclick="setWriterTargetWords(80)" id="target-opt-80" class="writer-target-btn active px-2 py-1 rounded-lg bg-purple-50 border-2 border-purple-500 text-purple-800 font-black transition-all text-center shadow-2xs">
+                    🥔 Chuẩn &lt;80 từ
                   </button>
-                  <button type="button" onclick="switchWriterDraft(2)" id="draft-tab-2" class="px-3 py-1 rounded-lg text-xs font-semibold text-slate-500 hover:bg-slate-100 transition-all">
-                    Bản nháp 3
+                  <button type="button" onclick="setWriterTargetWords(130)" id="target-opt-130" class="writer-target-btn px-2 py-1 rounded-lg bg-white border border-slate-200 text-slate-600 hover:border-purple-300 font-bold transition-all text-center">
+                    📖 Vừa phải (130 từ)
+                  </button>
+                  <button type="button" onclick="setWriterTargetWords(250)" id="target-opt-250" class="writer-target-btn px-2 py-1 rounded-lg bg-white border border-slate-200 text-slate-600 hover:border-purple-300 font-bold transition-all text-center">
+                    📑 Dài / SEO (250 từ)
                   </button>
                 </div>
-                <button type="button" onclick="generateWriterContentAI()" class="text-[11px] text-purple-600 hover:text-purple-800 font-bold flex items-center gap-1" title="Tạo biến thể mới">
+              </div>
+
+              <!-- 1. 3 TABS BẢN NHÁP ĐỘC LẬP TƯƠNG ỨNG VỚI 3 KẾT QUẢ ĐỂ LỰA CHỌN -->
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <div class="flex items-center gap-1.5" id="writer-draft-tabs">
+                  <button type="button" onclick="switchWriterDraft(0)" id="draft-tab-0" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-purple-100 text-purple-800 border border-purple-200 transition-all flex items-center gap-1.5 shadow-2xs">
+                    <span class="w-1.5 h-1.5 rounded-full bg-purple-600"></span>
+                    <span>Bản nháp 1</span>
+                  </button>
+                  <button type="button" onclick="switchWriterDraft(1)" id="draft-tab-1" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-500 hover:bg-slate-100 border border-transparent transition-all flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+                    <span>Bản nháp 2</span>
+                  </button>
+                  <button type="button" onclick="switchWriterDraft(2)" id="draft-tab-2" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-500 hover:bg-slate-100 border border-transparent transition-all flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+                    <span>Bản nháp 3</span>
+                  </button>
+                </div>
+                <button type="button" onclick="generateWriterContentAI()" class="text-[11px] text-purple-600 hover:text-purple-800 font-bold flex items-center gap-1" title="Tạo lại 3 bản mới">
                   <i class="fa-solid fa-rotate text-[10px]"></i>
-                  <span>Đổi bản khác</span>
+                  <span>Sinh lại 3 bản</span>
                 </button>
               </div>
 
-              <!-- Trình soạn thảo văn bản -->
-              <div class="space-y-1.5">
-                <div class="flex items-center justify-between text-xs">
-                  <label for="writer-post-textarea" class="font-bold text-slate-700">Văn bản bài viết:</label>
-                  <div class="flex items-center gap-2">
-                    <span id="writer-word-count-badge" class="px-2 py-0.5 rounded-full text-[11px] font-black bg-emerald-100 text-emerald-800 border border-emerald-200">
-                      0 / 80 từ
+              <!-- 2. TRONG MỖI TAB BẢN NHÁP CÓ 3 TRƯỜNG: CAPTION/HOOK - NỘI DUNG - TAG -->
+              <div class="space-y-3.5">
+                
+                <!-- TRƯỜNG 1: CAPTION / HOOK -->
+                <div>
+                  <div class="flex items-center justify-between mb-1">
+                    <label for="writer-post-hook" class="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                      <i class="fa-solid fa-bolt text-amber-500 text-[11px]"></i>
+                      <span>Caption / Hook (Tiêu đề mở đầu / Hook 3s):</span>
+                    </label>
+                    <span id="writer-hook-stats" class="text-[10px] text-slate-400 font-medium">0 từ • 0 ký tự</span>
+                  </div>
+                  <textarea id="writer-post-hook" rows="2" oninput="handleWriterFieldsInput()" placeholder="VD: 'This is my mom and me. She 40 years old, and she working very hard. I love her!'..." class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs font-bold text-slate-900 focus:outline-none focus:border-purple-500 focus:bg-white shadow-2xs leading-snug"></textarea>
+                </div>
+
+                <!-- TRƯỜNG 2: NỘI DUNG (BODY) -->
+                <div>
+                  <div class="flex items-center justify-between mb-1">
+                    <label for="writer-post-body" class="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                      <i class="fa-solid fa-align-left text-purple-600 text-[11px]"></i>
+                      <span>Nội dung bài viết (Thân bài & Storytelling):</span>
+                    </label>
+                    <span id="writer-body-stats" class="text-[10px] text-slate-400 font-medium">0 từ • 0 ký tự</span>
+                  </div>
+                  <textarea id="writer-post-body" rows="6" oninput="handleWriterFieldsInput()" placeholder="Nhập thân bài hoặc nhấp 'AI Sinh 3 Bản Nháp' để tạo nội dung tự nhiên..." class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-medium text-slate-800 focus:outline-none focus:border-purple-500 focus:bg-white shadow-2xs leading-relaxed resize-y"></textarea>
+                </div>
+
+                <!-- TRƯỜNG 3: TAG (HASHTAGS) -->
+                <div>
+                  <div class="flex items-center justify-between mb-1">
+                    <label for="writer-post-tags" class="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                      <i class="fa-solid fa-hashtag text-potato-blue text-[11px]"></i>
+                      <span>Tag (Hashtags thương hiệu & chủ đề):</span>
+                    </label>
+                    <span id="writer-tags-stats" class="text-[10px] text-slate-400 font-medium">0 tags</span>
+                  </div>
+                  <input type="text" id="writer-post-tags" oninput="handleWriterFieldsInput()" placeholder="#PotatoEnglish #FriendlyKid #StorySpark #TuTinNoiTiengAnh" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-purple-700 focus:outline-none focus:border-purple-500 focus:bg-white shadow-2xs">
+                </div>
+
+                <!-- TỔNG HỢP THỐNG KÊ ĐỘ DÀI & THANH TIẾN ĐỘ TỪ -->
+                <div class="pt-1 space-y-1">
+                  <div class="flex items-center justify-between text-xs">
+                    <span class="font-bold text-slate-600 flex items-center gap-1">
+                      <i class="fa-solid fa-chart-simple text-[11px] text-slate-400"></i>
+                      <span>Tổng độ dài bản nháp:</span>
                     </span>
-                    <button type="button" onclick="formatWriterText('clear')" class="text-slate-400 hover:text-rose-500 text-[11px]" title="Xóa trắng">
-                      <i class="fa-solid fa-trash-can"></i>
-                    </button>
+                    <div class="flex items-center gap-2">
+                      <span id="writer-word-count-badge" class="px-2.5 py-0.5 rounded-full text-[11px] font-black bg-emerald-100 text-emerald-800 border border-emerald-200">
+                        0 / 80 từ (0 ký tự)
+                      </span>
+                      <button type="button" onclick="clearCurrentDraftFields()" class="text-slate-400 hover:text-rose-500 text-[11px]" title="Xóa trắng bản này">
+                        <i class="fa-solid fa-trash-can"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                    <div id="writer-word-progress-bar" class="bg-emerald-500 h-1.5 transition-all duration-300" style="width: 0%;"></div>
                   </div>
                 </div>
 
-                <textarea id="writer-post-textarea" rows="8" oninput="handleWriterTextInput()" placeholder="Nhấp 'AI Sinh Bài Viết' để Gemini 3.8 Flash sáng tạo bài viết tự nhiên dưới 80 từ..." class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs text-slate-800 font-medium leading-relaxed focus:outline-none focus:border-purple-500 focus:bg-white transition-all resize-y shadow-2xs"></textarea>
-
-                <!-- Thanh độ dài từ -->
-                <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
-                  <div id="writer-word-progress-bar" class="bg-emerald-500 h-1.5 transition-all duration-300" style="width: 0%;"></div>
-                </div>
               </div>
 
               <!-- Hộp cảnh báo vi phạm Brand Safety Linter -->
@@ -2286,7 +2365,7 @@
               <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 text-[10.5px]">
                 <div id="w-badge-check-length" class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-600 font-semibold flex items-center gap-1.5 transition-all">
                   <i class="fa-solid fa-circle-check text-slate-400"></i>
-                  <span>Dưới 80 từ</span>
+                  <span id="w-badge-check-length-text">Dưới 80 từ</span>
                 </div>
                 <div id="w-badge-check-trungtam" class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-600 font-semibold flex items-center gap-1.5 transition-all">
                   <i class="fa-solid fa-circle-check text-slate-400"></i>
@@ -2328,7 +2407,7 @@
 
       </section>
 
-<!-- =============================================================== -->
+      <!-- =============================================================== -->
       <!-- MODULE: TOOL 2 - CÔNG CỤ ĐĂNG BÀI FANPAGE (FACEBOOK PUBLISHER) -->
       <!-- =============================================================== -->
       <section id="panel-tools-publisher" class="module-panel hidden p-4 sm:p-6 max-w-7xl mx-auto w-full space-y-6">
@@ -11821,13 +11900,380 @@
       }
     }
 
-        function applyWriterPreset(presetKey) {
+            // -------------------------------------------------------------------------
+    // QUẢN LÝ 3 BẢN NHÁP (HOOK, NỘI DUNG, TAGS) & MỤC TIÊU SỐ LƯỢNG TỪ / KÝ TỰ
+    // -------------------------------------------------------------------------
+    let writerDraftObjects = [
+      { hook: "", body: "", tags: "" },
+      { hook: "", body: "", tags: "" },
+      { hook: "", body: "", tags: "" }
+    ];
+    let writerCurrentDraftIndex = 0;
+    let writerTargetWords = 80;
+
+    function handleWriterTargetWordSlider(val) {
+      val = parseInt(val, 10);
+      writerTargetWords = val;
+      updateWriterTargetDisplay();
+    }
+
+    function setWriterTargetWords(val) {
+      writerTargetWords = val;
+      const slider = document.getElementById("writer-target-word-slider");
+      if (slider) slider.value = val;
+      updateWriterTargetDisplay();
+    }
+
+    function updateWriterTargetDisplay() {
+      const display = document.getElementById("writer-target-word-display");
+      const estChars = Math.round(writerTargetWords * 6.2);
+      if (display) {
+        display.textContent = `Mục tiêu: ${writerTargetWords} từ (~${estChars} ký tự)`;
+      }
+
+      // Update button highlights
+      [45, 80, 130, 250].forEach(w => {
+        const btn = document.getElementById(`target-opt-${w}`);
+        if (btn) {
+          if (w === writerTargetWords) {
+            btn.className = "writer-target-btn active px-2 py-1 rounded-lg bg-purple-50 border-2 border-purple-500 text-purple-800 font-black transition-all text-center shadow-2xs";
+          } else {
+            btn.className = "writer-target-btn px-2 py-1 rounded-lg bg-white border border-slate-200 text-slate-600 hover:border-purple-300 font-bold transition-all text-center";
+          }
+        }
+      });
+
+      const lengthBadgeText = document.getElementById("w-badge-check-length-text");
+      if (lengthBadgeText) {
+        lengthBadgeText.textContent = `Dưới ${writerTargetWords} từ`;
+      }
+
+      handleWriterFieldsInput();
+    }
+
+    function switchWriterDraft(index) {
+      writerCurrentDraftIndex = index;
+      updateWriterDraftTabsUI();
+      populateDraftFieldsUI(index);
+    }
+
+    function updateWriterDraftTabsUI() {
+      for (let i = 0; i < 3; i++) {
+        const tab = document.getElementById(`draft-tab-${i}`);
+        if (tab) {
+          if (i === writerCurrentDraftIndex) {
+            tab.className = "px-3.5 py-1.5 rounded-xl text-xs font-bold bg-purple-100 text-purple-800 border border-purple-200 transition-all flex items-center gap-1.5 shadow-2xs";
+            tab.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-purple-600"></span><span>Bản nháp ${i + 1}</span>`;
+          } else {
+            tab.className = "px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-500 hover:bg-slate-100 border border-transparent transition-all flex items-center gap-1.5";
+            tab.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span><span>Bản nháp ${i + 1}</span>`;
+          }
+        }
+      }
+    }
+
+    function populateDraftFieldsUI(index) {
+      const draft = writerDraftObjects[index] || { hook: "", body: "", tags: "" };
+      const hookInput = document.getElementById("writer-post-hook");
+      const bodyInput = document.getElementById("writer-post-body");
+      const tagsInput = document.getElementById("writer-post-tags");
+
+      if (hookInput) hookInput.value = draft.hook || "";
+      if (bodyInput) bodyInput.value = draft.body || "";
+      if (tagsInput) tagsInput.value = draft.tags || "";
+
+      handleWriterFieldsInput();
+    }
+
+    function handleWriterFieldsInput() {
+      const hookInput = document.getElementById("writer-post-hook");
+      const bodyInput = document.getElementById("writer-post-body");
+      const tagsInput = document.getElementById("writer-post-tags");
+
+      const hookText = hookInput ? hookInput.value : "";
+      const bodyText = bodyInput ? bodyInput.value : "";
+      const tagsText = tagsInput ? tagsInput.value : "";
+
+      // Lưu vào draft object hiện tại
+      writerDraftObjects[writerCurrentDraftIndex] = {
+        hook: hookText,
+        body: bodyText,
+        tags: tagsText
+      };
+
+      // Thống kê từng trường
+      const hookWords = hookText.trim() ? hookText.trim().split(/\s+/).filter(Boolean).length : 0;
+      const hookStats = document.getElementById("writer-hook-stats");
+      if (hookStats) hookStats.textContent = `${hookWords} từ • ${hookText.length} ký tự`;
+
+      const bodyWords = bodyText.trim() ? bodyText.trim().split(/\s+/).filter(Boolean).length : 0;
+      const bodyStats = document.getElementById("writer-body-stats");
+      if (bodyStats) bodyStats.textContent = `${bodyWords} từ • ${bodyText.length} ký tự`;
+
+      const tagCount = tagsText.trim() ? (tagsText.match(/#[^\s#]+/g) || []).length : 0;
+      const tagsStats = document.getElementById("writer-tags-stats");
+      if (tagsStats) tagsStats.textContent = `${tagCount} tags`;
+
+      // Tổng hợp toàn bài
+      const fullText = [hookText.trim(), bodyText.trim(), tagsText.trim()].filter(Boolean).join("\n\n");
+      const totalWords = fullText.trim() ? fullText.trim().split(/\s+/).filter(Boolean).length : 0;
+      const totalChars = fullText.length;
+
+      const badgeCount = document.getElementById("writer-word-count-badge");
+      const progressBar = document.getElementById("writer-word-progress-bar");
+
+      if (badgeCount) {
+        badgeCount.textContent = `${totalWords} / ${writerTargetWords} từ (${totalChars} ký tự)`;
+        if (totalWords <= writerTargetWords) {
+          badgeCount.className = "px-2.5 py-0.5 rounded-full text-[11px] font-black bg-emerald-100 text-emerald-800 border border-emerald-200";
+        } else if (totalWords <= writerTargetWords * 1.2) {
+          badgeCount.className = "px-2.5 py-0.5 rounded-full text-[11px] font-black bg-amber-100 text-amber-800 border border-amber-200";
+        } else {
+          badgeCount.className = "px-2.5 py-0.5 rounded-full text-[11px] font-black bg-rose-100 text-rose-800 border border-rose-200";
+        }
+      }
+
+      if (progressBar) {
+        const pct = Math.min(100, Math.round((totalWords / writerTargetWords) * 100));
+        progressBar.style.width = `${pct}%`;
+        if (totalWords <= writerTargetWords) progressBar.className = "bg-emerald-500 h-1.5 transition-all duration-300";
+        else if (totalWords <= writerTargetWords * 1.2) progressBar.className = "bg-amber-500 h-1.5 transition-all duration-300";
+        else progressBar.className = "bg-rose-500 h-1.5 transition-all duration-300";
+      }
+
+      checkWriterBrandSafety(fullText, totalWords);
+    }
+
+    function clearCurrentDraftFields() {
+      const hookInput = document.getElementById("writer-post-hook");
+      const bodyInput = document.getElementById("writer-post-body");
+      const tagsInput = document.getElementById("writer-post-tags");
+      if (hookInput) hookInput.value = "";
+      if (bodyInput) bodyInput.value = "";
+      if (tagsInput) tagsInput.value = "";
+      handleWriterFieldsInput();
+      if (typeof showToast === 'function') showToast(`Đã làm sạch Bản nháp ${writerCurrentDraftIndex + 1}`, "info");
+    }
+
+    // Helper phân rã text thô thành 3 trường hook, body, tags
+    function parseTextToDraftSections(rawText) {
+      if (!rawText || !rawText.trim()) return { hook: "", body: "", tags: "" };
+      const lines = rawText.trim().split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+      const tagLines = [];
+      const contentLines = [];
+
+      for (const line of lines) {
+        if (line.startsWith("#") || line.includes("#Potato")) {
+          tagLines.push(line);
+        } else {
+          contentLines.push(line);
+        }
+      }
+
+      const tags = tagLines.join(" ");
+
+      if (contentLines.length === 0) {
+        return { hook: "", body: "", tags: tags };
+      } else if (contentLines.length === 1) {
+        return { hook: contentLines[0], body: "", tags: tags };
+      } else {
+        const hook = contentLines[0];
+        const body = contentLines.slice(1).join("\n\n");
+        return { hook: hook, body: body, tags: tags };
+      }
+    }
+
+
+        // -------------------------------------------------------------------------
+    // QUẢN LÝ 3 BẢN NHÁP (HOOK, NỘI DUNG, TAGS) & MỤC TIÊU SỐ LƯỢNG TỪ / KÝ TỰ
+    // -------------------------------------------------------------------------
+    let writerDraftObjects = [
+      { hook: "", body: "", tags: "" },
+      { hook: "", body: "", tags: "" },
+      { hook: "", body: "", tags: "" }
+    ];
+    let writerCurrentDraftIndex = 0;
+    let writerTargetWords = 80;
+
+    function handleWriterTargetWordSlider(val) {
+      val = parseInt(val, 10);
+      writerTargetWords = val;
+      updateWriterTargetDisplay();
+    }
+
+    function setWriterTargetWords(val) {
+      writerTargetWords = val;
+      const slider = document.getElementById("writer-target-word-slider");
+      if (slider) slider.value = val;
+      updateWriterTargetDisplay();
+    }
+
+    function updateWriterTargetDisplay() {
+      const display = document.getElementById("writer-target-word-display");
+      const estChars = Math.round(writerTargetWords * 6.2);
+      if (display) {
+        display.textContent = `Mục tiêu: ${writerTargetWords} từ (~${estChars} ký tự)`;
+      }
+
+      // Update button highlights
+      [45, 80, 130, 250].forEach(w => {
+        const btn = document.getElementById(`target-opt-${w}`);
+        if (btn) {
+          if (w === writerTargetWords) {
+            btn.className = "writer-target-btn active px-2 py-1 rounded-lg bg-purple-50 border-2 border-purple-500 text-purple-800 font-black transition-all text-center shadow-2xs";
+          } else {
+            btn.className = "writer-target-btn px-2 py-1 rounded-lg bg-white border border-slate-200 text-slate-600 hover:border-purple-300 font-bold transition-all text-center";
+          }
+        }
+      });
+
+      const lengthBadgeText = document.getElementById("w-badge-check-length-text");
+      if (lengthBadgeText) {
+        lengthBadgeText.textContent = `Dưới ${writerTargetWords} từ`;
+      }
+
+      handleWriterFieldsInput();
+    }
+
+    function switchWriterDraft(index) {
+      writerCurrentDraftIndex = index;
+      updateWriterDraftTabsUI();
+      populateDraftFieldsUI(index);
+    }
+
+    function updateWriterDraftTabsUI() {
+      for (let i = 0; i < 3; i++) {
+        const tab = document.getElementById(`draft-tab-${i}`);
+        if (tab) {
+          if (i === writerCurrentDraftIndex) {
+            tab.className = "px-3.5 py-1.5 rounded-xl text-xs font-bold bg-purple-100 text-purple-800 border border-purple-200 transition-all flex items-center gap-1.5 shadow-2xs";
+            tab.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-purple-600"></span><span>Bản nháp ${i + 1}</span>`;
+          } else {
+            tab.className = "px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-500 hover:bg-slate-100 border border-transparent transition-all flex items-center gap-1.5";
+            tab.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span><span>Bản nháp ${i + 1}</span>`;
+          }
+        }
+      }
+    }
+
+    function populateDraftFieldsUI(index) {
+      const draft = writerDraftObjects[index] || { hook: "", body: "", tags: "" };
+      const hookInput = document.getElementById("writer-post-hook");
+      const bodyInput = document.getElementById("writer-post-body");
+      const tagsInput = document.getElementById("writer-post-tags");
+
+      if (hookInput) hookInput.value = draft.hook || "";
+      if (bodyInput) bodyInput.value = draft.body || "";
+      if (tagsInput) tagsInput.value = draft.tags || "";
+
+      handleWriterFieldsInput();
+    }
+
+    function handleWriterFieldsInput() {
+      const hookInput = document.getElementById("writer-post-hook");
+      const bodyInput = document.getElementById("writer-post-body");
+      const tagsInput = document.getElementById("writer-post-tags");
+
+      const hookText = hookInput ? hookInput.value : "";
+      const bodyText = bodyInput ? bodyInput.value : "";
+      const tagsText = tagsInput ? tagsInput.value : "";
+
+      // Lưu vào draft object hiện tại
+      writerDraftObjects[writerCurrentDraftIndex] = {
+        hook: hookText,
+        body: bodyText,
+        tags: tagsText
+      };
+
+      // Thống kê từng trường
+      const hookWords = hookText.trim() ? hookText.trim().split(/\s+/).filter(Boolean).length : 0;
+      const hookStats = document.getElementById("writer-hook-stats");
+      if (hookStats) hookStats.textContent = `${hookWords} từ • ${hookText.length} ký tự`;
+
+      const bodyWords = bodyText.trim() ? bodyText.trim().split(/\s+/).filter(Boolean).length : 0;
+      const bodyStats = document.getElementById("writer-body-stats");
+      if (bodyStats) bodyStats.textContent = `${bodyWords} từ • ${bodyText.length} ký tự`;
+
+      const tagCount = tagsText.trim() ? (tagsText.match(/#[^\s#]+/g) || []).length : 0;
+      const tagsStats = document.getElementById("writer-tags-stats");
+      if (tagsStats) tagsStats.textContent = `${tagCount} tags`;
+
+      // Tổng hợp toàn bài
+      const fullText = [hookText.trim(), bodyText.trim(), tagsText.trim()].filter(Boolean).join("\n\n");
+      const totalWords = fullText.trim() ? fullText.trim().split(/\s+/).filter(Boolean).length : 0;
+      const totalChars = fullText.length;
+
+      const badgeCount = document.getElementById("writer-word-count-badge");
+      const progressBar = document.getElementById("writer-word-progress-bar");
+
+      if (badgeCount) {
+        badgeCount.textContent = `${totalWords} / ${writerTargetWords} từ (${totalChars} ký tự)`;
+        if (totalWords <= writerTargetWords) {
+          badgeCount.className = "px-2.5 py-0.5 rounded-full text-[11px] font-black bg-emerald-100 text-emerald-800 border border-emerald-200";
+        } else if (totalWords <= writerTargetWords * 1.2) {
+          badgeCount.className = "px-2.5 py-0.5 rounded-full text-[11px] font-black bg-amber-100 text-amber-800 border border-amber-200";
+        } else {
+          badgeCount.className = "px-2.5 py-0.5 rounded-full text-[11px] font-black bg-rose-100 text-rose-800 border border-rose-200";
+        }
+      }
+
+      if (progressBar) {
+        const pct = Math.min(100, Math.round((totalWords / writerTargetWords) * 100));
+        progressBar.style.width = `${pct}%`;
+        if (totalWords <= writerTargetWords) progressBar.className = "bg-emerald-500 h-1.5 transition-all duration-300";
+        else if (totalWords <= writerTargetWords * 1.2) progressBar.className = "bg-amber-500 h-1.5 transition-all duration-300";
+        else progressBar.className = "bg-rose-500 h-1.5 transition-all duration-300";
+      }
+
+      checkWriterBrandSafety(fullText, totalWords);
+    }
+
+    function clearCurrentDraftFields() {
+      const hookInput = document.getElementById("writer-post-hook");
+      const bodyInput = document.getElementById("writer-post-body");
+      const tagsInput = document.getElementById("writer-post-tags");
+      if (hookInput) hookInput.value = "";
+      if (bodyInput) bodyInput.value = "";
+      if (tagsInput) tagsInput.value = "";
+      handleWriterFieldsInput();
+      if (typeof showToast === 'function') showToast(`Đã làm sạch Bản nháp ${writerCurrentDraftIndex + 1}`, "info");
+    }
+
+    // Helper phân rã text thô thành 3 trường hook, body, tags
+    function parseTextToDraftSections(rawText) {
+      if (!rawText || !rawText.trim()) return { hook: "", body: "", tags: "" };
+      const lines = rawText.trim().split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+      const tagLines = [];
+      const contentLines = [];
+
+      for (const line of lines) {
+        if (line.startsWith("#") || line.includes("#Potato")) {
+          tagLines.push(line);
+        } else {
+          contentLines.push(line);
+        }
+      }
+
+      const tags = tagLines.join(" ");
+
+      if (contentLines.length === 0) {
+        return { hook: "", body: "", tags: tags };
+      } else if (contentLines.length === 1) {
+        return { hook: contentLines[0], body: "", tags: tags };
+      } else {
+        const hook = contentLines[0];
+        const body = contentLines.slice(1).join("\n\n");
+        return { hook: hook, body: body, tags: tags };
+      }
+    }
+
+
+    function applyWriterPreset(presetKey) {
       const platSelect = document.getElementById("writer-platform-select");
       const branchSelect = document.getElementById("writer-branch-select");
       const mainPillarSelect = document.getElementById("writer-main-pillar-select");
       const subPillarSelect = document.getElementById("writer-sub-pillar-select");
       const ideaInput = document.getElementById("writer-content-idea");
-      const textarea = document.getElementById("writer-post-textarea");
 
       if (presetKey === 'bin_story_spark') {
         if (platSelect) platSelect.value = "Facebook Fanpage";
@@ -11838,10 +12284,23 @@
         writerSelectedCourseIds = ["K1", "K2"];
         if (ideaInput) ideaInput.value = "Bé Bin 5 tuổi hoàn thành tranh vẽ My Family sau giờ Story Spark và tự hào nói: This is my mom! She 40 years old and working hard!";
         
-        const p1 = `"This is my mom and me. She 40 years old, and she working very hard. I love her!"\n\nKhoảnh khắc bé Bin 5 tuổi tự hào khoe bức tranh gia đình sau giờ Story Spark khiến cả lớp ngập tràn niềm vui. Không học vẹt, tiếng Anh đến với con tự nhiên như tiếng mẹ đẻ.\n\nMột buổi chiều ấm áp của các bạn nhỏ tại Potato English 🥔❤️\n\n#PotatoEnglish #FriendlyKid #StorySpark #TuTinNoiTiengAnh`;
-        const p2 = `Bàn tay nhỏ xíu cầm bút sáp màu nắn nót vẽ từng nét về mẹ. Sau 15 phút nghe kể chuyện Story Spark chiều nay, Bin bỗng ngước lên bảo cô: "Cô ơi, con yêu mẹ nhiều lắm!". Tiếng Anh bắt đầu từ những rung cảm chân thật và bình dị như thế.\n\nChúc các con và ba mẹ luôn có những giờ phút học thật vui bên nhau! 🥔❤️\n\n#PotatoEnglish #HocBangNiemVui #FriendlyKid #StorySpark`;
-        const p3 = `Mỗi buổi đọc truyện Story Spark luôn đầy ắp những câu nói ngây ngô nhưng đáng yêu vô cùng. Hôm nay, Bin tự tin giơ bức tranh vẽ mẹ lên trước cả lớp để chia sẻ bằng những từ vựng con vừa học được.\n\nThầy cô luôn tự hào về sự dạn dĩ tự nhiên của con mỗi ngày 🥔❤️\n\n#PotatoEnglish #StorySpark #TuTinMoLoi #MamNon`;
-        writerDrafts = [p1, p2, p3];
+        writerDraftObjects = [
+          {
+            hook: `"This is my mom and me. She 40 years old, and she working very hard. I love her!"`,
+            body: `Khoảnh khắc bé Bin 5 tuổi tự hào khoe bức tranh gia đình sau giờ Story Spark khiến cả lớp ngập tràn niềm vui. Không học vẹt, tiếng Anh đến với con tự nhiên như tiếng mẹ đẻ.\n\nMột buổi chiều ấm áp của các bạn nhỏ tại Potato English 🥔❤️`,
+            tags: `#PotatoEnglish #FriendlyKid #StorySpark #TuTinNoiTiengAnh`
+          },
+          {
+            hook: `Bàn tay nhỏ xíu cầm bút sáp màu nắn nót vẽ từng nét về mẹ.`,
+            body: `Sau 15 phút nghe kể chuyện Story Spark chiều nay, Bin bỗng ngước lên bảo cô: "Cô ơi, con yêu mẹ nhiều lắm!". Tiếng Anh bắt đầu từ những rung cảm chân thật và bình dị như thế.\n\nChúc các con và ba mẹ luôn có những giờ phút học thật vui bên nhau! 🥔❤️`,
+            tags: `#PotatoEnglish #HocBangNiemVui #FriendlyKid #StorySpark`
+          },
+          {
+            hook: `Mỗi buổi đọc truyện Story Spark luôn đầy ắp những câu nói ngây ngô nhưng đáng yêu vô cùng.`,
+            body: `Hôm nay, Bin tự tin giơ bức tranh vẽ mẹ lên trước cả lớp để chia sẻ bằng những từ vựng con vừa học được.\n\nThầy cô luôn tự hào về sự dạn dĩ tự nhiên của con mỗi ngày 🥔❤️`,
+            tags: `#PotatoEnglish #StorySpark #TuTinMoLoi #MamNon`
+          }
+        ];
       } else if (presetKey === 'top_student') {
         if (platSelect) platSelect.value = "Facebook Fanpage";
         if (branchSelect) branchSelect.value = "Cả 2 cơ sở (Toàn hệ thống)";
@@ -11851,10 +12310,23 @@
         writerSelectedCourseIds = ["J1", "J2", "J3", "J4"];
         if (ideaInput) ideaInput.value = "Vinh danh các bạn nhỏ Top Student tháng 9 tại 2 cơ sở Phú Cường & Hưng Định, tuyên dương sự kiên trì và nụ cười rạng rỡ";
         
-        const d1 = `NHỮNG NỖ LỰC NHỎ TỎA SÁNG 🥔🏆\n\nNgày 12 hàng tháng là dịp để cùng nhìn lại những nỗ lực bền bỉ của các bạn nhỏ tại cả 2 cơ sở. Từng bước tiến bộ tự nhiên, từ rụt rè đến tự tin mở lời là món quà quý giá nhất.\n\nThầy cô và Potato English vô cùng tự hào về sự kiên trì của các con! 🥔❤️\n\n#PotatoEnglish #TopStudent #TuTinNoiTiengAnh #TienBoMoiNgay`;
-        const d2 = `Không có bí quyết nào ngoài sự kiên trì mỗi ngày. Chúc mừng các bạn nhỏ Top Student tháng này đã xuất sắc vượt qua các thử thách thuyết trình và dự án tiếng Anh bằng tất cả niềm hào hứng.\n\nHẹn gặp lại các con trong những hành trình khám phá mới! 🥔❤️\n\n#PotatoEnglish #TopStudent #HappyJunior #NoiDungLamThat`;
-        const d3 = `Mỗi chiếc huy hiệu nhỏ trao đi là một lời cảm ơn chân thành gửi đến các bạn nhỏ vì tinh thần học tập hăng say. Nhìn nụ cười rạng rỡ của con khi nhận quà, thầy cô hiểu rằng niềm vui học tập chính là động lực lớn nhất.\n\nChúc mừng các con yêu quý! 🥔❤️\n\n#PotatoEnglish #TopStudent #HocQuaTraiNghiem`;
-        writerDrafts = [d1, d2, d3];
+        writerDraftObjects = [
+          {
+            hook: `NHỮNG NỖ LỰC NHỎ TỎA SÁNG 🥔🏆`,
+            body: `Ngày 12 hàng tháng là dịp để cùng nhìn lại những nỗ lực bền bỉ của các bạn nhỏ tại cả 2 cơ sở. Từng bước tiến bộ tự nhiên, từ rụt rè đến tự tin mở lời là món quà quý giá nhất.\n\nThầy cô và Potato English vô cùng tự hào về sự kiên trì của các con! 🥔❤️`,
+            tags: `#PotatoEnglish #TopStudent #TuTinNoiTiengAnh #TienBoMoiNgay`
+          },
+          {
+            hook: `Không có bí quyết nào ngoài sự kiên trì mỗi ngày.`,
+            body: `Chúc mừng các bạn nhỏ Top Student tháng này đã xuất sắc vượt qua các thử thách thuyết trình và dự án tiếng Anh bằng tất cả niềm hào hứng.\n\nHẹn gặp lại các con trong những hành trình khám phá mới! 🥔❤️`,
+            tags: `#PotatoEnglish #TopStudent #HappyJunior #NoiDungLamThat`
+          },
+          {
+            hook: `Mỗi chiếc huy hiệu nhỏ trao đi là một lời cảm ơn chân thành gửi đến các bạn nhỏ vì tinh thần học tập hăng say.`,
+            body: `Nhìn nụ cười rạng rỡ của con khi nhận quà tuyên dương, thầy cô hiểu rằng niềm vui học tập chính là động lực lớn nhất.\n\nChúc mừng các con yêu quý! 🥔❤️`,
+            tags: `#PotatoEnglish #TopStudent #HocQuaTraiNghiem #TuyenDuong`
+          }
+        ];
       } else if (presetKey === 'leo_ket') {
         if (platSelect) platSelect.value = "Facebook Fanpage";
         if (branchSelect) branchSelect.value = "Cơ sở 1: 37 Ngô Quyền, P. Phú Cường";
@@ -11864,10 +12336,23 @@
         writerSelectedCourseIds = ["T2K", "T3"];
         if (ideaInput) ideaInput.value = "Leo 12 tuổi vượt qua thử thách thuyết trình KET Speaking với phong thái chững chạc và phản xạ tự tin";
         
-        const d1 = `"Mình là Leo, 12 tuổi. Sau buổi luyện Speaking hôm nay, mình đã sẵn sàng cho kỳ thi KET sắp tới!"\n\nKhông gian học tập thoải mái giúp Leo chủ động làm chủ từ vựng và tự tin thể hiện quan điểm của bản thân mà không hề lo sợ mắc lỗi.\n\nThầy cô luôn sẵn sàng đồng hành cùng các con trong từng kỳ thi quan trọng! 🥔❤️\n\n#PotatoEnglish #LeadingTeen #KET #TuTinMoLoi`;
-        const d2 = `Từng ngập ngừng khi gặp các câu hỏi phản xạ nhanh, hôm nay Leo đã tự tin đứng trước máy quay để chia sẻ trọn vẹn chủ đề môi trường bằng tiếng Anh. Một bước tiến chững chạc và đáng khen ngợi của chàng trai 12 tuổi.\n\nCố gắng giữ vững phong độ con nhé! 🥔❤️\n\n#PotatoEnglish #LeadingTeen #SpeakingSkills`;
-        const d3 = `Tiếng Anh tuổi thiếu niên không chỉ là ngữ pháp trên trang sách, mà là công cụ để con tự tin bày tỏ chính kiến. Buổi thảo luận nhóm chiều nay tại cơ sở Phú Cường tràn ngập những ý tưởng sắc bén của các bạn nhỏ Leading Teen.\n\nTự hào về các con rất nhiều! 🥔❤️\n\n#PotatoEnglish #LeadingTeen #NoiDungLamThat`;
-        writerDrafts = [d1, d2, d3];
+        writerDraftObjects = [
+          {
+            hook: `"Mình là Leo, 12 tuổi. Sau buổi luyện Speaking hôm nay, mình đã sẵn sàng cho kỳ thi KET sắp tới!"`,
+            body: `Không gian học tập thoải mái giúp Leo chủ động làm chủ từ vựng và tự tin thể hiện quan điểm của bản thân mà không hề lo sợ mắc lỗi.\n\nThầy cô luôn sẵn sàng đồng hành cùng các con trong từng kỳ thi quan trọng! 🥔❤️`,
+            tags: `#PotatoEnglish #LeadingTeen #KET #TuTinMoLoi`
+          },
+          {
+            hook: `Từng ngập ngừng khi gặp các câu hỏi phản xạ nhanh, hôm nay Leo đã tự tin đứng trước máy quay.`,
+            body: `Một bước tiến chững chạc và đáng khen ngợi của chàng trai 12 tuổi khi chia sẻ trọn vẹn chủ đề môi trường bằng tiếng Anh.\n\nCố gắng giữ vững phong độ con nhé! 🥔❤️`,
+            tags: `#PotatoEnglish #LeadingTeen #SpeakingSkills #TuTinGiaoTiep`
+          },
+          {
+            hook: `Tiếng Anh tuổi thiếu niên không chỉ là ngữ pháp trên trang sách, mà là công cụ để con tự tin bày tỏ chính kiến.`,
+            body: `Buổi thảo luận nhóm chiều nay tại cơ sở Phú Cường tràn ngập những ý tưởng sắc bén của các bạn nhỏ Leading Teen.\n\nTự hào về các con rất nhiều! 🥔❤️`,
+            tags: `#PotatoEnglish #LeadingTeen #NoiDungLamThat #HocThuat`
+          }
+        ];
       } else if (presetKey === 'parent_tips') {
         if (platSelect) platSelect.value = "Facebook Fanpage";
         if (branchSelect) branchSelect.value = "Cả 2 cơ sở (Toàn hệ thống)";
@@ -11877,10 +12362,23 @@
         writerSelectedCourseIds = ["K1", "K2", "J1"];
         if (ideaInput) ideaInput.value = "Mẹo 10 phút luyện phát âm Phonics nhẹ nhàng cùng con trước khi đi ngủ, không áp lực và tràn ngập tiếng cười";
         
-        const d1 = `10 PHÚT VUI HỌC CÙNG CON TẠI NHÀ 🥔💡\n\nChỉ cần 10 phút mỗi tối lật mở vài trang truyện ngắn hoặc cùng con phát âm vui vẻ một bài hát. Sự kiên nhẫn và nụ cười của ba mẹ chính là lớp học tiếng Anh tuyệt vời nhất của con.\n\nChúc ba mẹ và các con có những giờ phút học thật ấm áp bên nhau! 🥔❤️\n\n#PotatoEnglish #GocPhuHuynh #DongHanhCungCon`;
-        const d2 = `Đừng vội sửa lỗi phát âm của con ngay khi con vừa nói. Hãy lắng nghe trọn vẹn và lặp lại câu nói một cách tự nhiên. Trẻ nhỏ học ngôn ngữ bằng sự an tâm và tình yêu thương của cha mẹ hơn là những lời nhắc nhở khắt khe.\n\nThầy cô luôn ở đây để sẻ chia cùng ba mẹ 🥔❤️\n\n#PotatoEnglish #GocPhuHuynh #NuoiDayCon`;
-        const d3 = `Mỗi buổi tối trước giờ ngủ, thay vì kiểm tra bài cũ, ba mẹ hãy thử hỏi con: "Hôm nay ở Potato có trò chơi nào vui nhất?". Con sẽ hào hứng kể lại và vô tình sử dụng những từ tiếng Anh vừa học một cách tự nhiên nhất.\n\nChúc gia đình mình một buổi tối an lành! 🥔❤️\n\n#PotatoEnglish #DongHanhCungCon #HocBangNiemVui`;
-        writerDrafts = [d1, d2, d3];
+        writerDraftObjects = [
+          {
+            hook: `10 PHÚT VUI HỌC CÙNG CON TẠI NHÀ 🥔💡`,
+            body: `Chỉ cần 10 phút mỗi tối lật mở vài trang truyện ngắn hoặc cùng con phát âm vui vẻ một bài hát. Sự kiên nhẫn và nụ cười của ba mẹ chính là lớp học tiếng Anh tuyệt vời nhất của con.\n\nChúc ba mẹ và các con có những giờ phút học thật ấm áp bên nhau! 🥔❤️`,
+            tags: `#PotatoEnglish #GocPhuHuynh #DongHanhCungCon #HocTiengAnhTaiNha`
+          },
+          {
+            hook: `Đừng vội sửa lỗi phát âm của con ngay khi con vừa nói.`,
+            body: `Hãy lắng nghe trọn vẹn và lặp lại câu nói một cách tự nhiên. Trẻ nhỏ học ngôn ngữ bằng sự an tâm và tình yêu thương của cha mẹ hơn là những lời nhắc nhở khắt khe.\n\nThầy cô luôn ở đây để sẻ chia cùng ba mẹ 🥔❤️`,
+            tags: `#PotatoEnglish #GocPhuHuynh #NuoiDayCon #PhuongPhapTuNhien`
+          },
+          {
+            hook: `Mỗi buổi tối trước giờ ngủ, thay vì kiểm tra bài cũ, ba mẹ hãy thử hỏi con: "Hôm nay ở Potato có trò chơi nào vui nhất?".`,
+            body: `Con sẽ hào hứng kể lại và vô tình sử dụng những từ tiếng Anh vừa học một cách tự nhiên nhất.\n\nChúc gia đình mình một buổi tối an lành! 🥔❤️`,
+            tags: `#PotatoEnglish #DongHanhCungCon #HocBangNiemVui #GiaDinh`
+          }
+        ];
       }
 
       renderCourseCheckboxList();
@@ -11889,18 +12387,16 @@
 
       writerCurrentDraftIndex = 0;
       updateWriterDraftTabsUI();
-      if (textarea) textarea.value = writerDrafts[0];
-      handleWriterTextInput();
+      populateDraftFieldsUI(0);
+
       if (typeof showToast === 'function') {
-        showToast("Đã nạp tình huống mẫu và thiết lập đủ 6 thông số đầu vào!", "info");
+        showToast("Đã nạp 3 bản nháp mẫu đầy đủ Hook, Thân bài & Tag!", "info");
       }
     }
 
     async function generateWriterContentAI() {
       const btn = document.getElementById("btn-writer-ai-generate");
-      const textarea = document.getElementById("writer-post-textarea");
       
-      // 6 Input Parameters
       const platform = document.getElementById("writer-platform-select")?.value || "Facebook Fanpage";
       const branch = document.getElementById("writer-branch-select")?.value || "Cơ sở 1: 37 Ngô Quyền, P. Phú Cường";
       const selectedCourses = WRITER_MASTER_COURSES.filter(c => writerSelectedCourseIds.includes(c.id)).map(c => `${c.name} (${c.age})`);
@@ -11914,7 +12410,7 @@
       const origHtml = btn ? btn.innerHTML : "";
       if (btn) {
         btn.disabled = true;
-        btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-amber-300"></i><span>Gemini 3.8 Đang Viết...</span>`;
+        btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-amber-300"></i><span>Gemini Đang Viết 3 Bản...</span>`;
       }
 
       try {
@@ -11928,6 +12424,7 @@
             mainPillar: mainPillar,
             subPillar: subPillar,
             contentIdea: contentIdea,
+            targetWords: writerTargetWords,
             angle: writerCurrentAngle,
             geminiApiKey: savedGeminiKey
           })
@@ -11935,16 +12432,24 @@
 
         if (res.ok) {
           const data = await res.json();
-          if (data && data.content) {
-            writerDrafts[writerCurrentDraftIndex] = data.content;
-            if (textarea) textarea.value = data.content;
-            handleWriterTextInput();
-            if (typeof showToast === 'function') {
-              showToast(`Gemini 3.8 Flash đã tạo bài viết tự nhiên cho ${platform}!`, "success");
-            }
-            if (btn) { btn.disabled = false; btn.innerHTML = origHtml; }
-            return;
+          if (data && data.drafts && Array.isArray(data.drafts) && data.drafts.length >= 3) {
+            writerDraftObjects = data.drafts.map(d => ({
+              hook: d.hook || "",
+              body: d.body || "",
+              tags: d.tags || ""
+            }));
+          } else if (data && data.content) {
+            // Fallback nếu API trả về single content
+            const parsed = parseTextToDraftSections(data.content);
+            writerDraftObjects[writerCurrentDraftIndex] = parsed;
           }
+
+          populateDraftFieldsUI(writerCurrentDraftIndex);
+          if (typeof showToast === 'function') {
+            showToast(`Gemini 3.8 Flash đã tạo thành công 3 bản nháp cho ${platform}!`, "success");
+          }
+          if (btn) { btn.disabled = false; btn.innerHTML = origHtml; }
+          return;
         }
       } catch (err) {
         console.warn("[Writer AI Fetch Error]", err);
@@ -11956,138 +12461,59 @@
       }
     }
 
-    function handleWriterTextInput() {
-      const textarea = document.getElementById("writer-post-textarea");
-      const text = textarea ? textarea.value : "";
-      writerDrafts[writerCurrentDraftIndex] = text;
-
-      const words = text.trim() ? text.trim().split(/\s+/).filter(Boolean) : [];
-      const wordCount = words.length;
-
-      const badgeCount = document.getElementById("writer-word-count-badge");
-      const progressBar = document.getElementById("writer-word-progress-bar");
-      if (badgeCount) {
-        badgeCount.textContent = `${wordCount} / 80 từ`;
-        if (wordCount <= 80) badgeCount.className = "px-2 py-0.5 rounded-full text-[11px] font-black bg-emerald-100 text-emerald-800 border border-emerald-200";
-        else if (wordCount <= 100) badgeCount.className = "px-2 py-0.5 rounded-full text-[11px] font-black bg-amber-100 text-amber-800 border border-amber-200";
-        else badgeCount.className = "px-2 py-0.5 rounded-full text-[11px] font-black bg-rose-100 text-rose-800 border border-rose-200";
-      }
-
-      if (progressBar) {
-        const pct = Math.min(100, Math.round((wordCount / 80) * 100));
-        progressBar.style.width = `${pct}%`;
-        if (wordCount <= 80) progressBar.className = "bg-emerald-500 h-1.5 transition-all duration-300";
-        else if (wordCount <= 100) progressBar.className = "bg-amber-500 h-1.5 transition-all duration-300";
-        else progressBar.className = "bg-rose-500 h-1.5 transition-all duration-300";
-      }
-
-      checkWriterBrandSafety(text, wordCount);
-    }
-
-    function checkWriterBrandSafety(text, wordCount) {
-      const lower = text.toLowerCase();
-      const warnings = [];
-
-      const hasTrungTam = /trung\s*tâm/i.test(lower);
-      const bTrungTam = document.getElementById("w-badge-check-trungtam");
-      if (hasTrungTam) {
-        warnings.push('Phát hiện từ cấm <strong>"trung tâm"</strong>. Thay bằng <em>"Potato English"</em> hoặc <em>"Lớp học Potato English"</em>.');
-        if (bTrungTam) bTrungTam.className = "p-2 rounded-xl bg-rose-50 border border-rose-300 text-rose-700 font-bold flex items-center gap-1.5";
-      } else if (bTrungTam) {
-        bTrungTam.className = "p-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 font-semibold flex items-center gap-1.5";
-      }
-
-      const directiveCtaRegex = /(bấm vào|nhấp vào|xem ngay|đừng bỏ lỡ|nhanh tay|giữ chỗ|inbox ngay|đăng ký ngay)/i;
-      const hasDirectiveCta = directiveCtaRegex.test(lower);
-      const bCta = document.getElementById("w-badge-check-zero-cta");
-      if (hasDirectiveCta) {
-        warnings.push('Phát hiện câu chỉ đạo (Directive CTA: <em>"bấm vào ảnh", "đừng bỏ lỡ"...</em>). Hãy để tương tác tự nhiên.');
-        if (bCta) bCta.className = "p-2 rounded-xl bg-rose-50 border border-rose-300 text-rose-700 font-bold flex items-center gap-1.5";
-      } else if (bCta) {
-        bCta.className = "p-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 font-semibold flex items-center gap-1.5";
-      }
-
-      const hasApLuc = /áp\s*lực/i.test(lower);
-      const bApLuc = document.getElementById("w-badge-check-apluc");
-      if (hasApLuc) {
-        warnings.push('Hạn chế từ <strong>"áp lực"</strong>. Chuyển sang: <em>"học bằng niềm vui"</em>, <em>"tiến bộ tự nhiên"</em>.');
-        if (bApLuc) bApLuc.className = "p-2 rounded-xl bg-amber-50 border border-amber-300 text-amber-800 font-bold flex items-center gap-1.5";
-      } else if (bApLuc) {
-        bApLuc.className = "p-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 font-semibold flex items-center gap-1.5";
-      }
-
-      const bLength = document.getElementById("w-badge-check-length");
-      if (wordCount > 80) {
-        warnings.push(`Độ dài hiện tại là <strong>${wordCount} từ</strong> (vượt quá 80 từ). Cần rút gọn để đọc hết trong 5s lướt feed.`);
-        if (bLength) bLength.className = "p-2 rounded-xl bg-amber-50 border border-amber-300 text-amber-800 font-bold flex items-center gap-1.5";
-      } else if (bLength) {
-        bLength.className = "p-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 font-semibold flex items-center gap-1.5";
-      }
-
-      const warningBox = document.getElementById("writer-brand-warning-box");
-      const warningList = document.getElementById("writer-brand-warning-list");
-      if (warningBox && warningList) {
-        if (warnings.length > 0) {
-          warningBox.classList.remove("hidden");
-          warningList.innerHTML = warnings.map(w => `<li>${w}</li>`).join("");
-        } else {
-          warningBox.classList.add("hidden");
-          warningList.innerHTML = "";
-        }
-      }
-    }
-
     function autoFixWriterBrandSafety() {
-      const textarea = document.getElementById("writer-post-textarea");
-      if (!textarea) return;
-      let val = textarea.value;
-      val = val.replace(/trung\s*tâm\s*tiếng\s*anh\s*potato\s*english/gi, "Potato English");
-      val = val.replace(/tại\s*trung\s*tâm/gi, "tại Potato English");
-      val = val.replace(/trung\s*tâm\s*tiếng\s*anh/gi, "lớp học tiếng Anh");
-      val = val.replace(/trung\s*tâm/gi, "Potato English");
-      val = val.replace(/không\s*áp\s*lực\s*điểm\s*số/gi, "học bằng niềm vui");
-      val = val.replace(/không\s*áp\s*lực/gi, "nhẹ nhàng tự nhiên");
-      val = val.replace(/xóa\s*tan\s*áp\s*lực/gi, "khơi dậy niềm vui");
-      val = val.replace(/áp\s*lực/gi, "căng thẳng");
-      val = val.replace(/👉?\s*(mời\s*ba\s*mẹ|hãy)\s*bấm\s*vào\s*từng\s*bức\s*ảnh[^\n\.]*([\n\.]|$)/gi, "");
-      val = val.replace(/👉?\s*đừng\s*bỏ\s*lỡ[^\n\.]*([\n\.]|$)/gi, "");
-      textarea.value = val.trim();
-      handleWriterTextInput();
+      const hookInput = document.getElementById("writer-post-hook");
+      const bodyInput = document.getElementById("writer-post-body");
+      const tagsInput = document.getElementById("writer-post-tags");
+
+      function cleanText(val) {
+        if (!val) return "";
+        val = val.replace(/trung\s*tâm\s*tiếng\s*anh\s*potato\s*english/gi, "Potato English");
+        val = val.replace(/tại\s*trung\s*tâm/gi, "tại Potato English");
+        val = val.replace(/trung\s*tâm\s*tiếng\s*anh/gi, "lớp học tiếng Anh");
+        val = val.replace(/trung\s*tâm/gi, "Potato English");
+        val = val.replace(/không\s*áp\s*lực\s*điểm\s*số/gi, "học bằng niềm vui");
+        val = val.replace(/không\s*áp\s*lực/gi, "nhẹ nhàng tự nhiên");
+        val = val.replace(/xóa\s*tan\s*áp\s*lực/gi, "khơi dậy niềm vui");
+        val = val.replace(/áp\s*lực/gi, "căng thẳng");
+        val = val.replace(/👉?\s*(mời\s*ba\s*mẹ|hãy)\s*bấm\s*vào\s*từng\s*bức\s*ảnh[^\n\.]*([\n\.]|$)/gi, "");
+        val = val.replace(/👉?\s*đừng\s*bỏ\s*lỡ[^\n\.]*([\n\.]|$)/gi, "");
+        return val.trim();
+      }
+
+      if (hookInput) hookInput.value = cleanText(hookInput.value);
+      if (bodyInput) bodyInput.value = cleanText(bodyInput.value);
+      if (tagsInput) tagsInput.value = cleanText(tagsInput.value);
+
+      handleWriterFieldsInput();
       if (typeof showToast === 'function') {
         showToast("Đã tự động chuẩn hóa văn bản theo Brand Voice!", "success");
       }
     }
 
     function copyWriterContentToClipboard() {
-      const textarea = document.getElementById("writer-post-textarea");
-      if (!textarea || !textarea.value.trim()) {
+      const current = writerDraftObjects[writerCurrentDraftIndex] || { hook: "", body: "", tags: "" };
+      const parts = [current.hook.trim(), current.body.trim(), current.tags.trim()].filter(Boolean);
+      const content = parts.join("\n\n");
+      if (!content) {
         if (typeof showToast === 'function') showToast("Chưa có nội dung để sao chép!", "warning");
         return;
       }
-      navigator.clipboard.writeText(textarea.value).then(() => {
-        if (typeof showToast === 'function') showToast("Đã sao chép nội dung bài viết!", "success");
+      navigator.clipboard.writeText(content).then(() => {
+        if (typeof showToast === 'function') showToast(`Đã sao chép trọn vẹn Bản nháp ${writerCurrentDraftIndex + 1}!`, "success");
       });
     }
 
     function saveWriterDraftLocal() {
-      const textarea = document.getElementById("writer-post-textarea");
-      if (textarea && textarea.value.trim()) {
-        localStorage.setItem("writer_draft_post", textarea.value);
-        if (typeof showToast === 'function') showToast("Đã lưu bản nháp an toàn vào trình duyệt!", "success");
-      }
+      localStorage.setItem("writer_draft_objects", JSON.stringify(writerDraftObjects));
+      if (typeof showToast === 'function') showToast("Đã lưu cả 3 bản nháp an toàn vào trình duyệt!", "success");
     }
 
-    function resetWriterForm() {
-      applyWriterPreset('bin_story_spark');
-      if (typeof showToast === 'function') showToast("Đã làm mới Form Viết bài.", "info");
-    }
-
-    // -------------------------------------------------------------------------
-    // B. TÍNH NĂNG LIÊN KẾT: CHUYỂN TỪ TOOL VIẾT SANG TOOL ĐĂNG BÀI
-    // -------------------------------------------------------------------------
     function transferContentToPublisher() {
-      const textarea = document.getElementById("writer-post-textarea");
-      const content = textarea ? textarea.value.trim() : "";
+      const current = writerDraftObjects[writerCurrentDraftIndex] || { hook: "", body: "", tags: "" };
+      const parts = [current.hook.trim(), current.body.trim(), current.tags.trim()].filter(Boolean);
+      const content = parts.join("\n\n");
+
       if (!content) {
         if (typeof showToast === 'function') showToast("Vui lòng viết hoặc sinh nội dung trước khi chuyển!", "warning");
         return;
@@ -12107,18 +12533,9 @@
       }
 
       if (typeof showToast === 'function') {
-        showToast("🚀 Đã chuyển nội dung sang Tool Đăng Bài thành công!", "success");
+        showToast(`Đã chuyển toàn bộ Bản nháp ${writerCurrentDraftIndex + 1} (Hook, Nội dung & Tag) sang Tool Đăng Bài!`, "success");
       }
-    }
-
-    function loadContentFromWriter() {
-      const saved = localStorage.getItem("active_published_content");
-      const pubTextarea = document.getElementById("pub-post-textarea");
-      if (saved && pubTextarea) {
-        pubTextarea.value = saved;
-        handlePublisherTextInput();
-        if (typeof showToast === 'function') showToast("Đã nạp lại nội dung từ Tool Viết Bài!", "success");
-      } else {
+    } else {
         if (typeof showToast === 'function') showToast("Chưa có nội dung từ Tool Viết Bài.", "warning");
       }
     }

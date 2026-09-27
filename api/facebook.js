@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
       mainPillar = 'PIL_02: Học Qua Trải Nghiệm & Nền Tảng (6-12t)',
       subPillar = 'Đánh Vần Phonics & Chuẩn Hóa Phát Âm',
       contentIdea = '',
-      // Tương thích ngược:
+      targetWords = 80,
       pillar = '',
       studentNote = '',
       angle = 'observer',
@@ -29,63 +29,59 @@ module.exports = async (req, res) => {
     const effectivePillar = mainPillar || pillar || 'PIL_02';
     const effectiveIdea = contentIdea || studentNote || 'Buổi học rộn ràng tiếng cười và sự tiến bộ tự nhiên của các bạn nhỏ';
     const coursesStr = Array.isArray(courses) && courses.length > 0 ? courses.join(', ') : 'Khóa học tiếng Anh trẻ em';
+    const numWords = parseInt(targetWords, 10) || 80;
 
     const apiKey = geminiApiKey || process.env.GEMINI_API_KEY;
 
     if (apiKey) {
       try {
-        const anglePrompts = {
-          observer: "GÓC NHÌN: Người quan sát thầm lặng (The Quiet Observer). Ghi lại một khoảnh khắc nhỏ mộc mạc nhưng đắt giá tại lớp học (ánh mắt, bàn tay vẽ, sự hào hứng khi tìm ra từ vựng).",
-          dialogue: "GÓC NHÌN: Trích đoạn đối thoại ngây ngô đời thực (Authentic Dialogue). Bắt đầu bằng một câu nói tiếng Anh bập bẹ hoặc câu hỏi hồn nhiên của bé và lời đáp kiên nhẫn của thầy cô.",
-          progress: "GÓC NHÌN: Bước chuyển tâm lý nhỏ (Micro-Transformation). Từ những phút đầu còn rụt rè, bẽn lẽn đến khoảnh khắc con tự tin mở lời và nở nụ cười rạng rỡ.",
-          empathy: "GÓC NHÌN: Tâm tình sẻ chia cùng ba mẹ (Parent Heart-to-Heart). Đồng cảm sâu sắc với nỗi lo của cha mẹ khi con mới bắt đầu học ngoại ngữ, chia sẻ kinh nghiệm đồng hành nhẹ nhàng."
-        };
-
-        const chosenAnglePrompt = anglePrompts[angle] || anglePrompts.observer;
-
-        let channelSpecificGuidance = "";
-        if (platform === 'TikTok') {
-          channelSpecificGuidance = `KÊNH: TIKTOK VIDEO SCRIPT (Thời lượng 15-45 giây).
-- 3 GIÂY ĐẦU (HOOK): Âm thanh, tiếng cười hoặc hành động bất ngờ của bé giữ chân người xem.
-- PHẦN THÂN: Visual (mô tả cảnh quay) + Audio (lời thoại/lồng tiếng mộc mạc).
-- KẾT THÚC: Lời nhắn gửi ấm áp, nhẹ nhàng, không kêu gọi mua hàng.`;
-        } else if (platform === 'Website') {
-          channelSpecificGuidance = `KÊNH: BÀI VIẾT CHUYÊN SÂU CHUẨN SEO WEBSITE (khoảng 800 - 1.200 từ).
-- Tiêu đề hấp dẫn, tự nhiên.
-- Cấu trúc các thẻ H2, H3 rõ ràng (TUYỆT ĐỐI KHÔNG gõ số thứ tự thủ công như '1. ', '2. ' ở đầu thẻ H2/H3 để tránh lỗi trùng lặp mục lục tự động).
-- Phân tích sâu sắc, khoa học nhưng hành văn gần gũi, ấm áp, giải tỏa băn khoăn của phụ huynh.`;
-        } else {
-          channelSpecificGuidance = `KÊNH: FACEBOOK FANPAGE POST (MICRO-COPYWRITING DƯỚI 80 TỪ).
-- ĐỘ DÀI: BẮT BUỘC DƯỚI 80 TỪ. Cực kỳ ngắn gọn, đọc trọn vẹn trong 5 giây mà không cần bấm "Xem thêm".
-- 100% STUDENT-CENTRIC: Tâm điểm duy nhất là bạn nhỏ và nỗ lực của con. Tuyệt đối KHÔNG tự tán dương lớp học, không khoe thành tích.
-- ZERO DIRECTIVE CTA: Tuyệt đối KHÔNG chèn câu kêu gọi giục giã ("Hãy bấm vào ảnh", "Xem ngay", "Đừng bỏ lỡ", "Inbox ngay"). Để phụ huynh tương tác tự nhiên.
-- KẾT THÚC: 1 câu nhắn gửi ấm áp đời thường (Warm sign-off) và 3 đến 4 hashtags tinh gọn (#PotatoEnglish...). BỎ HOÀN TOÀN khối địa chỉ/hotline spam ở cuối bài.`;
-        }
-
-        const systemPrompt = `Bạn là một người thầy/cô giáo tại lớp học tiếng Anh trẻ em Potato English (đang công tác tại ${branch}).
+        const systemPrompt = `Bạn là biên tập viên cao cấp kiêm thầy cô giáo tại Potato English (${branch}).
 TÔN CHỈ THƯƠNG HIỆU: Bình dị, chân thật, nói đúng làm thật, gần gũi như gia đình.
 
-NGHIÊM CẤM RẬP KHUÔN:
-- TUYỆT ĐỐI KHÔNG viết theo công thức sáo rỗng: "TIÊU ĐỀ IN HOA GIẬT TÍT + Đoạn quảng cáo chung chung + Lời chúc sáo rỗng + 10 hashtag".
-- Hãy viết như một trang nhật ký lớp học đời thường chân thật (Proof of Life). Ngôn từ mộc mạc, tự nhiên.
-- ${chosenAnglePrompt}
+NHIỆM VỤ: Hãy sáng tạo ĐỒNG THỜI 3 BẢN NHÁP KHÁC NHAU (Bản 1, Bản 2, Bản 3) cho kênh ${platform}.
+Mỗi bản nháp là một phương án tiếp cận độc đáo, gồm chính xác 3 phần:
+1. hook: Tiêu đề hoặc câu mở đầu / hook 3s thu hút hoặc lời nói ngây ngô của con.
+2. body: Thân bài kể chuyện, khoảnh khắc lớp học đời thường, tiến bộ tự nhiên của học viên.
+3. tags: 3 đến 4 hashtags thương hiệu (#PotatoEnglish ...).
 
-${channelSpecificGuidance}
+YÊU CẦU ĐỘ DÀI: Tổng số từ của mỗi bản nháp (hook + body + tags) khoảng ${numWords} từ (phù hợp mục tiêu người dùng đã chọn).
 
-QUY CHUẨN AN TOÀN THƯƠNG HIỆU (BRAND SAFETY):
-1. CẤM TỪ "trung tâm" (thay bằng "Potato English", "lớp học Potato English", "không gian học tập").
-2. HẠN CHẾ từ "áp lực/không áp lực" (thay bằng "học bằng niềm vui", "thoải mái tự tin", "tiến bộ tự nhiên").`;
+QUY CHUẨN AN TOÀN THƯƠNG HIỆU:
+1. 100% Student-Centric: Tâm điểm là học viên, KHÔNG khoe khoang cơ sở.
+2. Zero Directive CTA: KHÔNG dùng câu chỉ đạo giục giã ("bấm vào ảnh", "xem ngay", "đừng bỏ lỡ").
+3. CẤM từ "trung tâm" (thay bằng "Potato English", "lớp học Potato English").
+4. HẠN CHẾ từ "áp lực" (thay bằng "học bằng niềm vui", "thoải mái tự tin").
 
-        const userContext = `THÔNG SỐ ĐẦU VÀO ĐÃ XÁC ĐỊNH:
-- Kênh phân phối: ${platform}
+BẮT BUỘC TRẢ VỀ ĐỊNH DẠNG JSON HỢP LỆ VỚI CẤU TRÚC SAU:
+{
+  "drafts": [
+    {
+      "hook": "Câu mở đầu bản nháp 1",
+      "body": "Nội dung thân bài bản nháp 1",
+      "tags": "#PotatoEnglish #Hashtag1 #Hashtag2"
+    },
+    {
+      "hook": "Câu mở đầu bản nháp 2",
+      "body": "Nội dung thân bài bản nháp 2",
+      "tags": "#PotatoEnglish #Hashtag1 #Hashtag2"
+    },
+    {
+      "hook": "Câu mở đầu bản nháp 3",
+      "body": "Nội dung thân bài bản nháp 3",
+      "tags": "#PotatoEnglish #Hashtag1 #Hashtag2"
+    }
+  ]
+}`;
+
+        const userContext = `THÔNG SỐ ĐẦU VÀO:
+- Kênh: ${platform}
 - Cơ sở: ${branch}
-- Khóa học liên quan: ${coursesStr}
+- Khóa học: ${coursesStr}
 - Trụ cột chính: ${effectivePillar}
 - Trụ cột phụ: ${subPillar}
-- Ý tưởng/Ghi chép thô từ thực tế: "${effectiveIdea}"
-- Góc nhìn: ${angle}
-
-Hãy viết một nội dung hoàn chỉnh, tự nhiên và giàu cảm xúc dựa trên các thông số này.`;
+- Ghi chép thực tế: "${effectiveIdea}"
+- Góc nhìn ưu tiên: ${angle}
+- Độ dài mục tiêu: ${numWords} từ.`;
 
         const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`;
         const response = await fetch(geminiUrl, {
@@ -95,23 +91,31 @@ Hãy viết một nội dung hoàn chỉnh, tự nhiên và giàu cảm xúc d�
             contents: [{ parts: [{ text: `${systemPrompt}\n\n${userContext}` }] }],
             generationConfig: {
               temperature: 0.88,
-              maxOutputTokens: platform === 'Website' ? 2500 : 1000
+              responseMimeType: "application/json",
+              maxOutputTokens: 2500
             }
           })
         });
 
         if (response.ok) {
           const data = await response.json();
-          const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text;
-          if (aiText) {
-            return res.status(200).json({
-              success: true,
-              content: aiText.trim(),
-              model: "gemini-3.8-flash",
-              platform: platform,
-              angle: angle,
-              pillar: effectivePillar
-            });
+          const aiJsonText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (aiJsonText) {
+            try {
+              const parsed = JSON.parse(aiJsonText);
+              if (parsed.drafts && Array.isArray(parsed.drafts) && parsed.drafts.length >= 3) {
+                return res.status(200).json({
+                  success: true,
+                  drafts: parsed.drafts,
+                  content: `${parsed.drafts[0].hook}\n\n${parsed.drafts[0].body}\n\n${parsed.drafts[0].tags}`,
+                  model: "gemini-3.8-flash",
+                  targetWords: numWords,
+                  platform: platform
+                });
+              }
+            } catch (e) {
+              console.warn("[JSON parse failed]", e);
+            }
           }
         }
       } catch (err) {
@@ -119,21 +123,32 @@ Hãy viết một nội dung hoàn chỉnh, tự nhiên và giàu cảm xúc d�
       }
     }
 
-    // Dynamic Humanized Fallback
-    const naturalDrafts = [
-      `"This is my mom and me. She 40 years old, and she working very hard. I love her!"\n\nBức tranh nhỏ vừa hoàn thành sau giờ Story Spark, con cầm trên tay khoe với đôi mắt lấp lánh niềm vui. Tiếng Anh đến với con mộc mạc và tự nhiên như tiếng mẹ đẻ.\n\nMột buổi chiều ấm áp của các bạn nhỏ tại Potato English 🥔❤️\n\n#PotatoEnglish #FriendlyKid #TuTinNoiTiengAnh #HocQuaTraiNghiem`,
-      `Mười phút đầu buổi học, con còn nép nhẹ sau lưng mẹ, ngập ngừng chưa dám bước vào vòng tròn của cô. Vậy mà đến trò chơi tìm từ vựng, con đã chủ động giơ tay xung phong phát âm thật to.\n\nNiềm vui của thầy cô là được chứng kiến từng bước tiến bộ tự nhiên và nụ cười rạng rỡ của con mỗi ngày 🥔❤️\n\n#PotatoEnglish #HappyJunior #TuTinMoLoi #TienBoTuNhien`,
-      `Không cần áp đặt những bài kiểm tra căng thẳng, lớp học chiều nay rộn rã khi các bạn nhỏ tự tin đóng vai và kể về con vật yêu thích của mình. Từng câu nói mộc mạc nhưng tràn đầy năng lượng tích cực.\n\nHẹn gặp lại các con trong những giờ học khám phá tiếp theo nhé! 🥔❤️\n\n#PotatoEnglish #NoiDungLamThat #HocBangNiemVui #HappyJunior`
+    // Dynamic Humanized Fallback (3 Structured Drafts)
+    const fallbackDrafts = [
+      {
+        hook: `"This is my mom and me. She 40 years old, and she working very hard. I love her!"`,
+        body: `Khoảnh khắc bé Bin 5 tuổi tự hào khoe bức tranh gia đình sau giờ Story Spark khiến cả lớp ngập tràn niềm vui. Không học vẹt, tiếng Anh đến với con tự nhiên như tiếng mẹ đẻ.\n\nMột buổi chiều ấm áp của các bạn nhỏ tại Potato English 🥔❤️`,
+        tags: `#PotatoEnglish #FriendlyKid #StorySpark #TuTinNoiTiengAnh`
+      },
+      {
+        hook: `Mười phút đầu buổi học, con còn nép nhẹ sau lưng mẹ, ngập ngừng chưa dám bước vào vòng tròn của cô.`,
+        body: `Vậy mà đến trò chơi tìm từ vựng, con đã chủ động giơ tay xung phong phát âm thật to.\n\nNiềm vui của thầy cô là được chứng kiến từng bước tiến bộ tự nhiên và nụ cười rạng rỡ của con mỗi ngày 🥔❤️`,
+        tags: `#PotatoEnglish #HappyJunior #TuTinMoLoi #TienBoTuNhien`
+      },
+      {
+        hook: `Không cần bài kiểm tra căng thẳng, lớp học chiều nay rộn rã tiếng cười khi các bạn nhỏ đóng vai con vật yêu thích.`,
+        body: `Từng câu nói tiếng Anh bập bẹ nhưng tràn đầy năng lượng tích cực.\n\nHẹn gặp lại các con trong những giờ học khám phá tiếp theo nhé! 🥔❤️`,
+        tags: `#PotatoEnglish #NoiDungLamThat #HocBangNiemVui #HappyJunior`
+      }
     ];
 
-    const pick = naturalDrafts[Math.floor(Math.random() * naturalDrafts.length)];
     return res.status(200).json({
       success: true,
-      content: pick,
+      drafts: fallbackDrafts,
+      content: `${fallbackDrafts[0].hook}\n\n${fallbackDrafts[0].body}\n\n${fallbackDrafts[0].tags}`,
       model: "humanized-dynamic-engine",
-      platform: platform,
-      angle: angle,
-      pillar: effectivePillar
+      targetWords: numWords,
+      platform: platform
     });
   }
 
