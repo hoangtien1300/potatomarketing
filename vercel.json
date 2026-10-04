@@ -79,7 +79,7 @@
       "destination": "/index.html"
     },
     {
-      "source": "/bao-cao/(.*)",
+      "source": "/bao-cao/:match*",
       "destination": "/index.html"
     },
     {
@@ -87,7 +87,7 @@
       "destination": "/index.html"
     },
     {
-      "source": "/cai-dat/(.*)",
+      "source": "/cai-dat/:match*",
       "destination": "/index.html"
     },
     {
@@ -95,7 +95,15 @@
       "destination": "/index.html"
     },
     {
-      "source": "/cong-cu/(.*)",
+      "source": "/cong-cu/:match*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/tool",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/tool/:match*",
       "destination": "/index.html"
     },
     {
@@ -103,7 +111,7 @@
       "destination": "/index.html"
     },
     {
-      "source": "/lich-dang-bai/(.*)",
+      "source": "/lich-dang-bai/:match*",
       "destination": "/index.html"
     },
     {
@@ -111,7 +119,19 @@
       "destination": "/index.html"
     },
     {
-      "source": "/((?!api/|assets/|.*\\.[\\w]+$).*)",
+      "source": "/nhiem-vu/:match*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/tasks",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/tasks/:match*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/dashboard",
       "destination": "/index.html"
     }
   ],
