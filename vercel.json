@@ -1,5 +1,4 @@
 {
-  "version": 2,
   "cleanUrls": true,
   "rewrites": [
     {
@@ -79,7 +78,7 @@
       "destination": "/index.html"
     },
     {
-      "source": "/bao-cao/:match*",
+      "source": "/bao-cao/(.*)",
       "destination": "/index.html"
     },
     {
@@ -87,7 +86,7 @@
       "destination": "/index.html"
     },
     {
-      "source": "/cai-dat/:match*",
+      "source": "/cai-dat/(.*)",
       "destination": "/index.html"
     },
     {
@@ -95,7 +94,7 @@
       "destination": "/index.html"
     },
     {
-      "source": "/cong-cu/:match*",
+      "source": "/cong-cu/(.*)",
       "destination": "/index.html"
     },
     {
@@ -103,7 +102,7 @@
       "destination": "/index.html"
     },
     {
-      "source": "/tool/:match*",
+      "source": "/tool/(.*)",
       "destination": "/index.html"
     },
     {
@@ -111,7 +110,7 @@
       "destination": "/index.html"
     },
     {
-      "source": "/lich-dang-bai/:match*",
+      "source": "/lich-dang-bai/(.*)",
       "destination": "/index.html"
     },
     {
@@ -119,7 +118,7 @@
       "destination": "/index.html"
     },
     {
-      "source": "/nhiem-vu/:match*",
+      "source": "/nhiem-vu/(.*)",
       "destination": "/index.html"
     },
     {
@@ -127,11 +126,15 @@
       "destination": "/index.html"
     },
     {
-      "source": "/tasks/:match*",
+      "source": "/tasks/(.*)",
       "destination": "/index.html"
     },
     {
       "source": "/dashboard",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/dashboard/(.*)",
       "destination": "/index.html"
     }
   ],
