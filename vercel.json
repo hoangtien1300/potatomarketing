@@ -51,91 +51,91 @@
     },
     {
       "source": "/score",
-      "destination": "/score.html"
+      "destination": "/score"
     },
     {
       "source": "/score/(.*)",
-      "destination": "/score.html"
+      "destination": "/score"
     },
     {
       "source": "/bang-diem",
-      "destination": "/score.html"
+      "destination": "/score"
     },
     {
       "source": "/bang-diem/(.*)",
-      "destination": "/score.html"
+      "destination": "/score"
     },
     {
       "source": "/survey",
-      "destination": "/survey.html"
+      "destination": "/survey"
     },
     {
       "source": "/khao-sat",
-      "destination": "/survey.html"
+      "destination": "/survey"
     },
     {
       "source": "/bao-cao",
-      "destination": "/index.html"
+      "destination": "/index"
     },
     {
       "source": "/bao-cao/(.*)",
-      "destination": "/index.html"
+      "destination": "/index"
     },
     {
       "source": "/cai-dat",
-      "destination": "/index.html"
+      "destination": "/index"
     },
     {
       "source": "/cai-dat/(.*)",
-      "destination": "/index.html"
+      "destination": "/index"
     },
     {
       "source": "/cong-cu",
-      "destination": "/index.html"
+      "destination": "/index"
     },
     {
       "source": "/cong-cu/(.*)",
-      "destination": "/index.html"
+      "destination": "/index"
     },
     {
       "source": "/tool",
-      "destination": "/index.html"
+      "destination": "/index"
     },
     {
       "source": "/tool/(.*)",
-      "destination": "/index.html"
+      "destination": "/index"
     },
     {
       "source": "/lich-dang-bai",
-      "destination": "/index.html"
+      "destination": "/index"
     },
     {
       "source": "/lich-dang-bai/(.*)",
-      "destination": "/index.html"
+      "destination": "/index"
     },
     {
       "source": "/nhiem-vu",
-      "destination": "/index.html"
+      "destination": "/index"
     },
     {
       "source": "/nhiem-vu/(.*)",
-      "destination": "/index.html"
+      "destination": "/index"
     },
     {
       "source": "/tasks",
-      "destination": "/index.html"
+      "destination": "/index"
     },
     {
       "source": "/tasks/(.*)",
-      "destination": "/index.html"
+      "destination": "/index"
     },
     {
       "source": "/dashboard",
-      "destination": "/index.html"
+      "destination": "/index"
     },
     {
       "source": "/dashboard/(.*)",
-      "destination": "/index.html"
+      "destination": "/index"
     }
   ],
   "headers": [
