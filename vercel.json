@@ -73,6 +73,46 @@
     {
       "source": "/khao-sat",
       "destination": "/survey.html"
+    },
+    {
+      "source": "/bao-cao",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/bao-cao/(.*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/cai-dat",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/cai-dat/(.*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/cong-cu",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/cong-cu/(.*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/lich-dang-bai",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/lich-dang-bai/(.*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/nhiem-vu",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/((?!api/|assets/|.*\\.[\\w]+$).*)",
+      "destination": "/index.html"
     }
   ],
   "headers": [

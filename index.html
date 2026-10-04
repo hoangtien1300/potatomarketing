@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="/">
   <title>Potato English | Marketing Command Hub</title>
   
   <!-- Tailwind CSS CDN -->
@@ -198,7 +199,7 @@
           
           <!-- 0. Trang Chủ (Dashboard & Nhật Ký Công Việc) -->
           <div class="sidebar-group">
-            <button onclick="switchTab('dashboard')" id="nav-dashboard" class="sidebar-item nav-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl bg-potato-softBlue text-potato-navy font-bold border border-potato-cyan/20 transition-all whitespace-nowrap">
+            <button onclick="PotatoRouter.navigateTo('/')" id="nav-dashboard" class="sidebar-item nav-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl bg-potato-softBlue text-potato-navy font-bold border border-potato-cyan/20 transition-all whitespace-nowrap">
               <div class="flex items-center gap-2 min-w-0">
                 <i class="fa-solid fa-house text-sm w-4 text-center text-potato-cyan flex-shrink-0"></i>
                 <span class="sidebar-label font-bold text-xs whitespace-nowrap truncate">Trang chủ</span>
@@ -208,7 +209,7 @@
 
           <!-- 1. Lịch Đăng Đa Kênh -->
           <div class="sidebar-group">
-            <button onclick="switchTab('calendar')" id="nav-calendar" class="sidebar-item nav-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-potato-navy transition-all whitespace-nowrap">
+            <button onclick="PotatoRouter.navigateTo('/lich-dang-bai')" id="nav-calendar" class="sidebar-item nav-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-potato-navy transition-all whitespace-nowrap">
               <div class="flex items-center gap-2 min-w-0">
                 <i class="fa-solid fa-calendar-days text-sm w-4 text-center text-potato-blue flex-shrink-0"></i>
                 <span class="sidebar-label font-bold text-xs whitespace-nowrap truncate">Lịch đăng đa kênh</span>
@@ -216,36 +217,36 @@
               <i class="menu-chevron fa-solid fa-chevron-right text-[9px] text-slate-400 transition-transform flex-shrink-0 ml-1"></i>
             </button>
             <div id="submenu-calendar" class="sidebar-submenu hidden pl-6 pr-1 py-1 space-y-0.5">
-              <button type="button" onclick="switchCalendarSubView('day', this)" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
+              <button type="button" onclick="PotatoRouter.navigateTo('/lich-dang-bai/ngay')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
                 <span class="w-1.5 h-1.5 rounded-full bg-potato-cyan flex-shrink-0"></span>
                 <span class="truncate">Lịch theo ngày</span>
               </button>
-              <button type="button" onclick="switchCalendarSubView('three-days', this)" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
+              <button type="button" onclick="PotatoRouter.navigateTo('/lich-dang-bai/3-ngay')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
                 <span class="w-1.5 h-1.5 rounded-full bg-potato-tan flex-shrink-0"></span>
                 <span class="truncate">Lịch 3 ngày</span>
               </button>
-              <button type="button" onclick="switchCalendarSubView('week', this)" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
+              <button type="button" onclick="PotatoRouter.navigateTo('/lich-dang-bai/tuan')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
                 <span class="w-1.5 h-1.5 rounded-full bg-potato-blue flex-shrink-0"></span>
                 <span class="truncate">Lịch tuần</span>
               </button>
-              <button type="button" onclick="switchCalendarSubView('month', this)" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
+              <button type="button" onclick="PotatoRouter.navigateTo('/lich-dang-bai/thang')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
                 <span class="w-1.5 h-1.5 rounded-full bg-purple-500 flex-shrink-0"></span>
                 <span class="truncate">Lịch tháng</span>
               </button>
-              <button type="button" onclick="switchCalendarSubView('list', this)" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
+              <button type="button" onclick="PotatoRouter.navigateTo('/lich-dang-bai/danh-sach')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
                 <span class="w-1.5 h-1.5 rounded-full bg-slate-400 flex-shrink-0"></span>
                 <span class="truncate">Danh sách bài</span>
               </button>
               <div class="border-t border-slate-100 my-1"></div>
-              <button type="button" onclick="filterChannelSub('facebook', this)" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
+              <button type="button" onclick="PotatoRouter.navigateTo('/lich-dang-bai/facebook')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
                 <span class="w-1.5 h-1.5 rounded-full bg-blue-600 flex-shrink-0"></span>
                 <span class="truncate">Kênh Facebook</span>
               </button>
-              <button type="button" onclick="filterChannelSub('tiktok', this)" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
+              <button type="button" onclick="PotatoRouter.navigateTo('/lich-dang-bai/tiktok')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
                 <span class="w-1.5 h-1.5 rounded-full bg-slate-900 flex-shrink-0"></span>
                 <span class="truncate">Kênh TikTok</span>
               </button>
-              <button type="button" onclick="filterChannelSub('seo', this)" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
+              <button type="button" onclick="PotatoRouter.navigateTo('/lich-dang-bai/website')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 flex-shrink-0"></span>
                 <span class="truncate">Kênh Website</span>
               </button>
@@ -254,7 +255,7 @@
 
           <!-- 2. Báo Cáo (Level 1) -->
           <div class="sidebar-group">
-            <button onclick="switchTab('reports-marketing')" id="nav-reports" class="sidebar-item nav-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-potato-navy transition-all whitespace-nowrap">
+            <button onclick="PotatoRouter.navigateTo('/bao-cao')" id="nav-reports" class="sidebar-item nav-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-potato-navy transition-all whitespace-nowrap">
               <div class="flex items-center gap-2 min-w-0">
                 <i class="fa-solid fa-chart-pie text-sm w-4 text-center text-potato-cyan flex-shrink-0"></i>
                 <span class="sidebar-label font-bold text-xs whitespace-nowrap truncate">Báo cáo</span>
@@ -263,28 +264,28 @@
             </button>
             <div id="submenu-reports" class="sidebar-submenu hidden pl-6 pr-1 py-1 space-y-0.5">
               <!-- 2.1 Báo cáo Marketing -->
-              <button type="button" id="subnav-reports-marketing" onclick="switchTab('reports-marketing')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
+              <button type="button" id="subnav-reports-marketing" onclick="PotatoRouter.navigateTo('/bao-cao/marketing')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
                 <span class="w-1.5 h-1.5 rounded-full bg-potato-cyan flex-shrink-0"></span>
                 <span class="truncate">Báo cáo Marketing</span>
               </button>
               <div class="border-t border-slate-100 my-1"></div>
               <!-- 2.2 Chỉ số Fanpage -->
-              <button type="button" onclick="switchTab('reports-marketing'); filterReportContentChannel('facebook');" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
+              <button type="button" onclick="PotatoRouter.navigateTo('/bao-cao/facebook')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
                 <span class="w-1.5 h-1.5 rounded-full bg-blue-600 flex-shrink-0"></span>
                 <span class="truncate">Chỉ số Fanpage</span>
               </button>
               <!-- 2.3 Website GSC & GA4 -->
-              <button type="button" onclick="switchTab('reports-marketing'); filterReportContentChannel('website');" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
+              <button type="button" onclick="PotatoRouter.navigateTo('/bao-cao/website')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 flex-shrink-0"></span>
                 <span class="truncate">Website GSC & GA4</span>
               </button>
               <!-- 2.4 Kênh TikTok -->
-              <button type="button" onclick="switchTab('reports-marketing'); filterReportContentChannel('tiktok');" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
+              <button type="button" onclick="PotatoRouter.navigateTo('/bao-cao/tiktok')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
                 <span class="w-1.5 h-1.5 rounded-full bg-slate-900 flex-shrink-0"></span>
                 <span class="truncate">Kênh TikTok</span>
               </button>
               <!-- 2.5 Kênh YouTube -->
-              <button type="button" onclick="switchTab('reports-marketing'); filterReportContentChannel('youtube');" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
+              <button type="button" onclick="PotatoRouter.navigateTo('/bao-cao/youtube')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
                 <span class="w-1.5 h-1.5 rounded-full bg-red-600 flex-shrink-0"></span>
                 <span class="truncate">Kênh YouTube</span>
               </button>
@@ -293,7 +294,7 @@
 
           <!-- 3. Tasks (Nhiệm Vụ Marketing Hub) -->
           <div class="sidebar-group">
-            <button onclick="switchTab('tasks')" id="nav-tasks" class="sidebar-item nav-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-potato-navy transition-all whitespace-nowrap">
+            <button onclick="PotatoRouter.navigateTo('/nhiem-vu')" id="nav-tasks" class="sidebar-item nav-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-potato-navy transition-all whitespace-nowrap">
               <div class="flex items-center gap-2 min-w-0">
                 <i class="fa-solid fa-list-check text-sm w-4 text-center text-indigo-500 flex-shrink-0"></i>
                 <span class="sidebar-label font-bold text-xs whitespace-nowrap truncate">Tasks</span>
@@ -304,7 +305,7 @@
 
           <!-- 3. Cài Đặt (Level 1) -->
           <div class="sidebar-group">
-            <button onclick="switchTab('settings-intro')" id="nav-about" class="sidebar-item nav-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-potato-navy transition-all whitespace-nowrap">
+            <button onclick="PotatoRouter.navigateTo('/cai-dat/gioi-thieu')" id="nav-about" class="sidebar-item nav-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-potato-navy transition-all whitespace-nowrap">
               <div class="flex items-center gap-2 min-w-0">
                 <i class="fa-solid fa-sliders text-sm w-4 text-center text-emerald-600 flex-shrink-0"></i>
                 <span class="sidebar-label font-bold text-xs whitespace-nowrap truncate">Cài đặt</span>
@@ -313,12 +314,12 @@
             </button>
             <div id="submenu-about" class="sidebar-submenu hidden pl-6 pr-1 py-1 space-y-0.5">
               <!-- 1.1 Giới thiệu -->
-              <button type="button" id="subnav-settings-intro" onclick="switchTab('settings-intro')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
+              <button type="button" id="subnav-settings-intro" onclick="PotatoRouter.navigateTo('/cai-dat/gioi-thieu')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
                 <span class="w-1.5 h-1.5 rounded-full bg-blue-600 flex-shrink-0"></span>
                 <span class="truncate">Giới thiệu</span>
               </button>
               <!-- 1.2 Nội dung -->
-              <button type="button" id="subnav-settings-content" onclick="switchTab('settings-content')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
+              <button type="button" id="subnav-settings-content" onclick="PotatoRouter.navigateTo('/cai-dat/noi-dung')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
                 <span class="w-1.5 h-1.5 rounded-full bg-rose-600 flex-shrink-0"></span>
                 <span class="truncate">Nội dung</span>
               </button>
@@ -327,7 +328,7 @@
 
           <!-- 3. Tool (Level 1) -->
           <div class="sidebar-group">
-            <button onclick="switchTab('tools-image')" id="nav-tools" class="sidebar-item nav-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-potato-navy transition-all whitespace-nowrap">
+            <button onclick="PotatoRouter.navigateTo('/cong-cu/hinh-anh')" id="nav-tools" class="sidebar-item nav-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-potato-navy transition-all whitespace-nowrap">
               <div class="flex items-center gap-2 min-w-0">
                 <i class="fa-solid fa-toolbox text-sm w-4 text-center text-amber-500 flex-shrink-0"></i>
                 <span class="sidebar-label font-bold text-xs whitespace-nowrap truncate">Tool</span>
@@ -336,13 +337,13 @@
             </button>
             <div id="submenu-tools" class="sidebar-submenu hidden pl-6 pr-1 py-1 space-y-0.5">
               <!-- 3.1 Hình ảnh -->
-              <button type="button" id="subnav-tools-image" onclick="switchTab('tools-image')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
+              <button type="button" id="subnav-tools-image" onclick="PotatoRouter.navigateTo('/cong-cu/hinh-anh')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center gap-2 whitespace-nowrap">
                 <span class="w-1.5 h-1.5 rounded-full bg-amber-500 flex-shrink-0"></span>
                 <span class="truncate">Hình ảnh</span>
               </button>
 
               <!-- 3.2 Viết bài AI -->
-              <button type="button" id="subnav-tools-writer" onclick="switchTab('tools-writer')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center justify-between whitespace-nowrap">
+              <button type="button" id="subnav-tools-writer" onclick="PotatoRouter.navigateTo('/cong-cu/viet-bai')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center justify-between whitespace-nowrap">
                 <div class="flex items-center gap-2 truncate">
                   <span class="w-1.5 h-1.5 rounded-full bg-purple-600 flex-shrink-0"></span>
                   <span class="truncate">Viết bài AI</span>
@@ -351,7 +352,7 @@
               </button>
 
               <!-- 3.3 Đăng bài Fanpage -->
-              <button type="button" id="subnav-tools-publisher" onclick="switchTab('tools-publisher')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center justify-between whitespace-nowrap">
+              <button type="button" id="subnav-tools-publisher" onclick="PotatoRouter.navigateTo('/cong-cu/dang-bai')" class="submenu-item w-full text-left py-1.5 px-2 rounded-lg text-slate-500 hover:text-potato-navy hover:bg-slate-100 text-[11.5px] font-medium transition-all flex items-center justify-between whitespace-nowrap">
                 <div class="flex items-center gap-2 truncate">
                   <span class="w-1.5 h-1.5 rounded-full bg-blue-600 flex-shrink-0"></span>
                   <span class="truncate">Đăng bài Fanpage</span>
@@ -382,20 +383,33 @@
       <!-- TOP GLOBAL TOPBAR (COMPACT & CLEAN) -->
       <header class="h-14 border-b border-slate-200/90 px-4 sm:px-6 flex items-center justify-between flex-shrink-0 bg-white sticky top-0 z-20 shadow-xs">
         
-        <!-- Left: Mobile Menu Toggle & Only "Potato Hub v2.0" -->
-        <div class="flex items-center gap-2.5 sm:gap-3">
-          <button onclick="toggleSidebarMobile()" class="lg:hidden w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 flex items-center justify-center transition-all shadow-2xs" aria-label="Mở menu điều hướng">
+        <!-- Left: Mobile Menu Toggle, Brand Badge & Breadcrumbs -->
+        <div class="flex items-center gap-2 sm:gap-3 min-w-0 flex-1 mr-2">
+          <button onclick="toggleSidebarMobile()" class="lg:hidden w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 flex items-center justify-center transition-all shadow-2xs flex-shrink-0" aria-label="Mở menu điều hướng">
             <i class="fa-solid fa-bars text-sm"></i>
           </button>
 
-          <span class="text-[11px] sm:text-xs font-extrabold text-potato-navy bg-potato-softBlue border border-potato-cyan/30 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl flex items-center gap-2 shadow-2xs">
-            <span class="w-2 h-2 rounded-full bg-potato-cyan animate-ping"></span>
-            Potato Hub v2.0
-          </span>
+          <a href="/" onclick="event.preventDefault(); PotatoRouter.navigateTo('/');" class="flex items-center gap-2 flex-shrink-0 cursor-pointer group" title="Trang chủ Potato Hub">
+            <span class="text-[11px] sm:text-xs font-extrabold text-potato-navy bg-potato-softBlue border border-potato-cyan/30 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl flex items-center gap-2 shadow-2xs group-hover:border-potato-cyan transition-all">
+              <span class="w-2 h-2 rounded-full bg-potato-cyan animate-ping"></span>
+              Potato Hub v2.0
+            </span>
+          </a>
+
+          <!-- Breadcrumb Divider (Desktop) -->
+          <span class="text-slate-300 hidden md:inline-flex flex-shrink-0 select-none">/</span>
+
+          <!-- Desktop Global Breadcrumb Trail -->
+          <nav id="desktop-breadcrumbs" aria-label="Breadcrumb" class="hidden md:flex items-center gap-1.5 text-xs text-slate-500 overflow-x-auto no-scrollbar py-0.5 min-w-0">
+            <span class="font-bold text-potato-navy flex items-center gap-1.5 bg-slate-100/90 text-slate-800 px-2 py-0.5 rounded-lg border border-slate-200/70 shadow-2xs whitespace-nowrap">
+              <i class="fa-solid fa-house text-[11px] text-potato-cyan"></i>
+              <span>Trang chủ</span>
+            </span>
+          </nav>
         </div>
 
         <!-- Right: Logged in User Profile Box (Moved from Sidebar) -->
-        <div class="relative">
+        <div class="relative flex-shrink-0">
           <div class="flex items-center gap-2">
             <!-- User Profile Box Dropdown Button -->
             <button onclick="toggleUserDropdown()" id="topbar-user-btn" class="flex items-center gap-2.5 p-1.5 pr-2 sm:pr-3 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200/80 transition-all shadow-2xs">
@@ -440,6 +454,14 @@
         </div>
 
       </header>
+
+      <!-- Mobile / Tablet Breadcrumbs Bar (Chỉ hiển thị trên mobile/tablet < 768px để trải nghiệm điều hướng thuận tiện) -->
+      <div id="mobile-breadcrumbs-bar" class="md:hidden bg-white/95 backdrop-blur-xs border-b border-slate-200/80 px-4 py-2 flex items-center gap-1.5 text-[11px] text-slate-500 overflow-x-auto no-scrollbar sticky top-14 z-10 shadow-2xs">
+        <span class="font-bold text-potato-navy bg-potato-softBlue text-slate-800 px-2 py-0.5 rounded-md border border-potato-cyan/20 flex items-center gap-1">
+          <i class="fa-solid fa-house text-[10px] text-potato-cyan"></i>
+          <span>Trang chủ</span>
+        </span>
+      </div>
 
                   <!-- =============================================================== -->
       <!-- MODULE 0: GIỚI THIỆU & CƠ SỞ DỮ LIỆU THƯƠNG HIỆU (RANK MATH STYLE WIDGET) -->
@@ -4148,27 +4170,27 @@
   <!-- [INVARIANT 4]: MOBILE-FIRST SAFE BOTTOM NAVIGATION -->
   <!-- ================================================================= -->
   <nav id="mobile-bottom-nav" class="lg:hidden fixed bottom-0 left-0 right-0 h-16 bg-white/95 backdrop-blur-md border-t border-slate-200/90 z-40 flex items-center justify-around px-2 shadow-float">
-    <button onclick="switchTab('dashboard')" id="mobile-nav-dashboard" class="flex flex-col items-center justify-center gap-1 text-potato-cyan font-bold w-14 py-1 transition-all">
+    <button onclick="PotatoRouter.navigateTo('/')" id="mobile-nav-dashboard" class="flex flex-col items-center justify-center gap-1 text-potato-cyan font-bold w-14 py-1 transition-all">
       <i class="fa-solid fa-house text-base"></i>
       <span class="text-[10px]">Trang chủ</span>
     </button>
 
-    <button onclick="switchTab('calendar')" id="mobile-nav-calendar" class="flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-potato-navy w-14 py-1 transition-all">
+    <button onclick="PotatoRouter.navigateTo('/lich-dang-bai')" id="mobile-nav-calendar" class="flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-potato-navy w-14 py-1 transition-all">
       <i class="fa-solid fa-calendar-days text-base"></i>
       <span class="text-[10px]">Lịch đăng</span>
     </button>
 
-    <button onclick="switchTab('tasks')" id="mobile-nav-tasks" class="flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-potato-navy w-16 py-1 transition-all">
-      <i class="fa-solid fa-list-check text-base"></i>
-      <span class="text-[10px]">Tasks</span>
+    <button onclick="PotatoRouter.navigateTo('/bao-cao')" id="mobile-nav-reports" class="flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-potato-navy w-14 py-1 transition-all">
+      <i class="fa-solid fa-chart-pie text-base"></i>
+      <span class="text-[10px]">Báo cáo</span>
     </button>
 
-    <button onclick="switchTab('tools-writer')" id="mobile-nav-tools-writer" class="flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-potato-navy w-16 py-1 transition-all">
+    <button onclick="PotatoRouter.navigateTo('/cong-cu/viet-bai')" id="mobile-nav-tools-writer" class="flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-potato-navy w-16 py-1 transition-all">
       <i class="fa-solid fa-pen-nib text-base"></i>
       <span class="text-[10px]">Viết bài AI</span>
     </button>
 
-    <button onclick="switchTab('settings-intro')" id="mobile-nav-settings" class="flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-potato-navy w-20 py-1 transition-all">
+    <button onclick="PotatoRouter.navigateTo('/cai-dat/gioi-thieu')" id="mobile-nav-settings" class="flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-potato-navy w-16 py-1 transition-all">
       <i class="fa-solid fa-sliders text-base"></i>
       <span class="text-[10px]">Cài đặt</span>
     </button>
@@ -7560,18 +7582,475 @@
     }
 
     // ===================================================================
+    // 4. ROUTER & BREADCRUMB SYSTEM (POTATO ROUTER v2.0)
+    // ===================================================================
+    const PotatoRouter = {
+      isNavigating: false,
+      routes: {
+        '/': {
+          tabId: 'dashboard',
+          title: 'Trang Chủ',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' }
+          ]
+        },
+        '/dashboard': { redirectTo: '/' },
+        '/tong-quan': { redirectTo: '/' },
+
+        // 1. LỊCH ĐĂNG ĐA KÊNH
+        '/lich-dang-bai': {
+          tabId: 'calendar',
+          calendarSub: 'month',
+          title: 'Lịch Đăng Đa Kênh',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Lịch đăng đa kênh', icon: 'fa-solid fa-calendar-days', path: '/lich-dang-bai' }
+          ]
+        },
+        '/lich-noi-dung': { redirectTo: '/lich-dang-bai' },
+        '/calendar': { redirectTo: '/lich-dang-bai' },
+        '/lich-dang-bai/ngay': {
+          tabId: 'calendar',
+          calendarSub: 'day',
+          title: 'Lịch Theo Ngày',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Lịch đăng đa kênh', icon: 'fa-solid fa-calendar-days', path: '/lich-dang-bai' },
+            { label: 'Lịch theo ngày', path: '/lich-dang-bai/ngay' }
+          ]
+        },
+        '/lich-dang-bai/3-ngay': {
+          tabId: 'calendar',
+          calendarSub: 'three-days',
+          title: 'Lịch 3 Ngày',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Lịch đăng đa kênh', icon: 'fa-solid fa-calendar-days', path: '/lich-dang-bai' },
+            { label: 'Lịch 3 ngày', path: '/lich-dang-bai/3-ngay' }
+          ]
+        },
+        '/lich-dang-bai/tuan': {
+          tabId: 'calendar',
+          calendarSub: 'week',
+          title: 'Lịch Tuần',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Lịch đăng đa kênh', icon: 'fa-solid fa-calendar-days', path: '/lich-dang-bai' },
+            { label: 'Lịch tuần', path: '/lich-dang-bai/tuan' }
+          ]
+        },
+        '/lich-dang-bai/thang': {
+          tabId: 'calendar',
+          calendarSub: 'month',
+          title: 'Lịch Tháng',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Lịch đăng đa kênh', icon: 'fa-solid fa-calendar-days', path: '/lich-dang-bai' },
+            { label: 'Lịch tháng', path: '/lich-dang-bai/thang' }
+          ]
+        },
+        '/lich-dang-bai/danh-sach': {
+          tabId: 'calendar',
+          calendarSub: 'list',
+          title: 'Danh Sách Bài Đăng',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Lịch đăng đa kênh', icon: 'fa-solid fa-calendar-days', path: '/lich-dang-bai' },
+            { label: 'Danh sách bài', path: '/lich-dang-bai/danh-sach' }
+          ]
+        },
+        '/lich-dang-bai/facebook': {
+          tabId: 'calendar',
+          calendarChannel: 'facebook',
+          title: 'Lịch Kênh Facebook',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Lịch đăng đa kênh', icon: 'fa-solid fa-calendar-days', path: '/lich-dang-bai' },
+            { label: 'Kênh Facebook', path: '/lich-dang-bai/facebook' }
+          ]
+        },
+        '/lich-dang-bai/tiktok': {
+          tabId: 'calendar',
+          calendarChannel: 'tiktok',
+          title: 'Lịch Kênh TikTok',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Lịch đăng đa kênh', icon: 'fa-solid fa-calendar-days', path: '/lich-dang-bai' },
+            { label: 'Kênh TikTok', path: '/lich-dang-bai/tiktok' }
+          ]
+        },
+        '/lich-dang-bai/website': {
+          tabId: 'calendar',
+          calendarChannel: 'seo',
+          title: 'Lịch Kênh Website',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Lịch đăng đa kênh', icon: 'fa-solid fa-calendar-days', path: '/lich-dang-bai' },
+            { label: 'Kênh Website', path: '/lich-dang-bai/website' }
+          ]
+        },
+
+        // 2. BÁO CÁO (Đề bài: Mục Báo cáo => https://potatomarketing.vercel.app/bao-cao)
+        '/bao-cao': {
+          tabId: 'reports-marketing',
+          reportChannel: 'all',
+          title: 'Báo Cáo Marketing',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Báo cáo', icon: 'fa-solid fa-chart-pie', path: '/bao-cao' }
+          ]
+        },
+        '/reports': { redirectTo: '/bao-cao' },
+        '/reports-marketing': { redirectTo: '/bao-cao' },
+        '/bao-cao/marketing': {
+          tabId: 'reports-marketing',
+          reportChannel: 'all',
+          title: 'Báo Cáo Marketing Đa Kênh',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Báo cáo', icon: 'fa-solid fa-chart-pie', path: '/bao-cao' },
+            { label: 'Báo cáo Marketing', path: '/bao-cao/marketing' }
+          ]
+        },
+        '/bao-cao/facebook': {
+          tabId: 'reports-marketing',
+          reportChannel: 'facebook',
+          title: 'Chỉ Số Fanpage',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Báo cáo', icon: 'fa-solid fa-chart-pie', path: '/bao-cao' },
+            { label: 'Chỉ số Fanpage', path: '/bao-cao/facebook' }
+          ]
+        },
+        '/bao-cao/website': {
+          tabId: 'reports-marketing',
+          reportChannel: 'website',
+          title: 'Website GSC & GA4',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Báo cáo', icon: 'fa-solid fa-chart-pie', path: '/bao-cao' },
+            { label: 'Website GSC & GA4', path: '/bao-cao/website' }
+          ]
+        },
+        '/bao-cao/tiktok': {
+          tabId: 'reports-marketing',
+          reportChannel: 'tiktok',
+          title: 'Chỉ Số Kênh TikTok',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Báo cáo', icon: 'fa-solid fa-chart-pie', path: '/bao-cao' },
+            { label: 'Kênh TikTok', path: '/bao-cao/tiktok' }
+          ]
+        },
+        '/bao-cao/youtube': {
+          tabId: 'reports-marketing',
+          reportChannel: 'youtube',
+          title: 'Chỉ Số Kênh YouTube',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Báo cáo', icon: 'fa-solid fa-chart-pie', path: '/bao-cao' },
+            { label: 'Kênh YouTube', path: '/bao-cao/youtube' }
+          ]
+        },
+
+        // 3. TASKS
+        '/nhiem-vu': {
+          tabId: 'tasks',
+          title: 'Tasks (Nhiệm Vụ)',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Tasks', icon: 'fa-solid fa-list-check', path: '/nhiem-vu' }
+          ]
+        },
+        '/tasks': { redirectTo: '/nhiem-vu' },
+
+        // 4. CÀI ĐẶT: GIỚI THIỆU (Đề bài: Mục giới thiệu trong cai dat thì sẽ là https://potatomarketing.vercel.app/cai-dat/gioi-thieu)
+        '/cai-dat': { redirectTo: '/cai-dat/gioi-thieu' },
+        '/settings': { redirectTo: '/cai-dat/gioi-thieu' },
+        '/about': { redirectTo: '/cai-dat/gioi-thieu' },
+        '/cai-dat/gioi-thieu': {
+          tabId: 'settings-intro',
+          introSub: 'general',
+          title: 'Cài Đặt Giới Thiệu Thương Hiệu',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Cài đặt', icon: 'fa-solid fa-sliders', path: '/cai-dat/gioi-thieu' },
+            { label: 'Giới thiệu', path: '/cai-dat/gioi-thieu' }
+          ]
+        },
+        '/cai-dat/gioi-thieu/tong-quan': {
+          tabId: 'settings-intro',
+          introSub: 'general',
+          title: 'Giới Thiệu Tổng Quan & Pháp Lý',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Cài đặt', icon: 'fa-solid fa-sliders', path: '/cai-dat/gioi-thieu' },
+            { label: 'Giới thiệu', path: '/cai-dat/gioi-thieu' },
+            { label: 'Tổng quan & Pháp lý', path: '/cai-dat/gioi-thieu/tong-quan' }
+          ]
+        },
+        '/cai-dat/gioi-thieu/lien-he': {
+          tabId: 'settings-intro',
+          introSub: 'contact',
+          title: 'Thông Tin Liên Hệ & Cơ Sở',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Cài đặt', icon: 'fa-solid fa-sliders', path: '/cai-dat/gioi-thieu' },
+            { label: 'Giới thiệu', path: '/cai-dat/gioi-thieu' },
+            { label: 'Liên hệ & Cơ sở', path: '/cai-dat/gioi-thieu/lien-he' }
+          ]
+        },
+        '/cai-dat/gioi-thieu/khoa-hoc': {
+          tabId: 'settings-intro',
+          introSub: 'courses',
+          title: 'Chương Trình Học (Courses)',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Cài đặt', icon: 'fa-solid fa-sliders', path: '/cai-dat/gioi-thieu' },
+            { label: 'Giới thiệu', path: '/cai-dat/gioi-thieu' },
+            { label: 'Chương trình học', path: '/cai-dat/gioi-thieu/khoa-hoc' }
+          ]
+        },
+
+        // 5. CÀI ĐẶT: NỘI DUNG
+        '/cai-dat/noi-dung': {
+          tabId: 'settings-content',
+          contentSub: 'voice',
+          title: 'Cài Đặt Nội Dung Thương Hiệu',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Cài đặt', icon: 'fa-solid fa-sliders', path: '/cai-dat/gioi-thieu' },
+            { label: 'Nội dung', path: '/cai-dat/noi-dung' }
+          ]
+        },
+        '/cai-dat/noi-dung/giong-dieu': {
+          tabId: 'settings-content',
+          contentSub: 'voice',
+          title: 'Tone of Voice Thương Hiệu',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Cài đặt', icon: 'fa-solid fa-sliders', path: '/cai-dat/gioi-thieu' },
+            { label: 'Nội dung', path: '/cai-dat/noi-dung' },
+            { label: 'Tone of Voice', path: '/cai-dat/noi-dung/giong-dieu' }
+          ]
+        },
+        '/cai-dat/noi-dung/tone-of-voice': { redirectTo: '/cai-dat/noi-dung/giong-dieu' },
+        '/cai-dat/noi-dung/quy-chuan': {
+          tabId: 'settings-content',
+          contentSub: 'specs',
+          title: 'Quy Chuẩn Nội Dung & Xuất Bản',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Cài đặt', icon: 'fa-solid fa-sliders', path: '/cai-dat/gioi-thieu' },
+            { label: 'Nội dung', path: '/cai-dat/noi-dung' },
+            { label: 'Quy chuẩn nội dung', path: '/cai-dat/noi-dung/quy-chuan' }
+          ]
+        },
+
+        // 6. TOOL / CÔNG CỤ
+        '/cong-cu': { redirectTo: '/cong-cu/hinh-anh' },
+        '/tool': { redirectTo: '/cong-cu/hinh-anh' },
+        '/cong-cu/hinh-anh': {
+          tabId: 'tools-image',
+          title: 'Thiết Kế Hình Ảnh',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Tool', icon: 'fa-solid fa-toolbox', path: '/cong-cu/hinh-anh' },
+            { label: 'Hình ảnh', path: '/cong-cu/hinh-anh' }
+          ]
+        },
+        '/tool/hinh-anh': { redirectTo: '/cong-cu/hinh-anh' },
+        '/cong-cu/viet-bai': {
+          tabId: 'tools-writer',
+          title: 'Viết Bài AI Studio',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Tool', icon: 'fa-solid fa-toolbox', path: '/cong-cu/hinh-anh' },
+            { label: 'Viết bài AI', path: '/cong-cu/viet-bai' }
+          ]
+        },
+        '/tool/viet-bai': { redirectTo: '/cong-cu/viet-bai' },
+        '/cong-cu/dang-bai': {
+          tabId: 'tools-publisher',
+          title: 'Đăng Bài Fanpage Auto',
+          breadcrumbs: [
+            { label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' },
+            { label: 'Tool', icon: 'fa-solid fa-toolbox', path: '/cong-cu/hinh-anh' },
+            { label: 'Đăng bài Fanpage', path: '/cong-cu/dang-bai' }
+          ]
+        },
+        '/tool/dang-bai': { redirectTo: '/cong-cu/dang-bai' }
+      },
+
+      normalizePath(path) {
+        if (!path) return '/';
+        let p = path.split('?')[0].split('#')[0].trim().toLowerCase();
+        if (p.length > 1 && p.endsWith('/')) {
+          p = p.slice(0, -1);
+        }
+        return p || '/';
+      },
+
+      matchRoute(path) {
+        const clean = this.normalizePath(path);
+        if (this.routes[clean]) {
+          if (this.routes[clean].redirectTo) {
+            return this.matchRoute(this.routes[clean].redirectTo);
+          }
+          return { ...this.routes[clean], resolvedPath: clean };
+        }
+
+        // Prefix match logic
+        if (clean.startsWith('/bao-cao')) return { ...this.routes['/bao-cao'], resolvedPath: '/bao-cao' };
+        if (clean.startsWith('/cai-dat/gioi-thieu')) return { ...this.routes['/cai-dat/gioi-thieu'], resolvedPath: '/cai-dat/gioi-thieu' };
+        if (clean.startsWith('/cai-dat/noi-dung')) return { ...this.routes['/cai-dat/noi-dung'], resolvedPath: '/cai-dat/noi-dung' };
+        if (clean.startsWith('/cai-dat')) return { ...this.routes['/cai-dat/gioi-thieu'], resolvedPath: '/cai-dat/gioi-thieu' };
+        if (clean.startsWith('/lich')) return { ...this.routes['/lich-dang-bai'], resolvedPath: '/lich-dang-bai' };
+        if (clean.startsWith('/cong-cu') || clean.startsWith('/tool')) {
+          if (clean.includes('viet-bai') || clean.includes('writer')) return { ...this.routes['/cong-cu/viet-bai'], resolvedPath: '/cong-cu/viet-bai' };
+          if (clean.includes('dang-bai') || clean.includes('pub')) return { ...this.routes['/cong-cu/dang-bai'], resolvedPath: '/cong-cu/dang-bai' };
+          return { ...this.routes['/cong-cu/hinh-anh'], resolvedPath: '/cong-cu/hinh-anh' };
+        }
+        if (clean.startsWith('/nhiem-vu') || clean.startsWith('/task')) return { ...this.routes['/nhiem-vu'], resolvedPath: '/nhiem-vu' };
+
+        return { ...this.routes['/'], resolvedPath: '/' };
+      },
+
+      navigateTo(rawPath, pushState = true) {
+        const route = this.matchRoute(rawPath);
+        if (!route) return;
+
+        this.isNavigating = true;
+
+        const targetUrl = route.resolvedPath;
+        if (pushState && window.location.pathname !== targetUrl) {
+          window.history.pushState({ path: targetUrl }, '', targetUrl);
+        }
+
+        if (route.title) {
+          document.title = `${route.title} • Potato Marketing Hub`;
+        }
+
+        // 1. Switch Module Tab
+        if (typeof switchTab === 'function') {
+          switchTab(route.tabId, false);
+        }
+
+        // 2. Handle subviews
+        if (route.introSub && typeof switchIntroSubPage === 'function') {
+          switchIntroSubPage(route.introSub, null, false);
+        } else if (route.contentSub && typeof switchContentSubPage === 'function') {
+          switchContentSubPage(route.contentSub, null, false);
+        } else if (route.reportChannel && typeof filterReportContentChannel === 'function') {
+          filterReportContentChannel(route.reportChannel, null, false);
+        } else if (route.calendarSub && typeof switchCalendarSubView === 'function') {
+          switchCalendarSubView(route.calendarSub, null, false);
+        } else if (route.calendarChannel && typeof filterChannelSub === 'function') {
+          filterChannelSub(route.calendarChannel, null, false);
+        }
+
+        // 3. Render Breadcrumbs
+        this.renderBreadcrumbs(route.breadcrumbs || []);
+
+        this.isNavigating = false;
+      },
+
+      renderBreadcrumbs(trail) {
+        if (!Array.isArray(trail) || trail.length === 0) {
+          trail = [{ label: 'Trang chủ', icon: 'fa-solid fa-house', path: '/' }];
+        }
+
+        const desktopContainer = document.getElementById('desktop-breadcrumbs');
+        const mobileContainer = document.getElementById('mobile-breadcrumbs-bar');
+
+        const desktopHtml = trail.map((item, idx) => {
+          const isLast = idx === trail.length - 1;
+          if (isLast) {
+            return `
+              <span class="font-bold text-potato-navy flex items-center gap-1.5 bg-slate-100/90 text-slate-800 px-2 py-0.5 rounded-lg border border-slate-200/70 shadow-2xs whitespace-nowrap">
+                ${item.icon ? `<i class="${item.icon} text-[11px] text-potato-cyan"></i>` : ''}
+                <span>${item.label}</span>
+              </span>
+            `;
+          }
+          return `
+            <a href="${item.path}" onclick="event.preventDefault(); PotatoRouter.navigateTo('${item.path}');" class="hover:text-potato-navy font-semibold flex items-center gap-1.5 text-slate-500 hover:bg-slate-100/60 px-1.5 py-0.5 rounded-md transition-all group whitespace-nowrap">
+              ${item.icon ? `<i class="${item.icon} text-[11px] text-slate-400 group-hover:text-potato-cyan transition-colors"></i>` : ''}
+              <span>${item.label}</span>
+            </a>
+            <i class="fa-solid fa-chevron-right text-[8px] text-slate-300 mx-0.5 flex-shrink-0 select-none"></i>
+          `;
+        }).join('');
+
+        const mobileHtml = `
+          <div class="flex items-center gap-1.5 flex-nowrap whitespace-nowrap text-[11px] w-full">
+            <i class="fa-solid fa-location-dot text-[10px] text-potato-cyan mr-0.5 flex-shrink-0"></i>
+            ${trail.map((item, idx) => {
+              const isLast = idx === trail.length - 1;
+              if (isLast) {
+                return `
+                  <span class="font-bold text-potato-navy bg-potato-softBlue text-slate-800 px-2 py-0.5 rounded-md border border-potato-cyan/20">
+                    ${item.label}
+                  </span>
+                `;
+              }
+              return `
+                <a href="${item.path}" onclick="event.preventDefault(); PotatoRouter.navigateTo('${item.path}');" class="text-slate-600 font-semibold active:text-potato-navy hover:underline">
+                  ${item.label}
+                </a>
+                <i class="fa-solid fa-chevron-right text-[8px] text-slate-300 mx-0.5 flex-shrink-0 select-none"></i>
+              `;
+            }).join('')}
+          </div>
+        `;
+
+        if (desktopContainer) desktopContainer.innerHTML = desktopHtml;
+        if (mobileContainer) mobileContainer.innerHTML = mobileHtml;
+      },
+
+      init() {
+        window.addEventListener('popstate', (e) => {
+          this.navigateTo(window.location.pathname, false);
+        });
+
+        const initialPath = window.location.pathname || '/';
+        this.navigateTo(initialPath, false);
+      }
+    };
+
+    // ===================================================================
     // 4. NAVIGATION & TAB SWITCHING
     // ===================================================================
-    function switchCalendarSubView(mode, btn) {
-      switchTab('calendar');
+    function switchCalendarSubView(mode, btn, updateRoute = true) {
+      if (updateRoute && typeof PotatoRouter !== 'undefined' && !PotatoRouter.isNavigating) {
+        const modePathMap = {
+          'day': '/lich-dang-bai/ngay',
+          'three-days': '/lich-dang-bai/3-ngay',
+          'week': '/lich-dang-bai/tuan',
+          'month': '/lich-dang-bai/thang',
+          'list': '/lich-dang-bai/danh-sach'
+        };
+        PotatoRouter.navigateTo(modePathMap[mode] || '/lich-dang-bai', true);
+        return;
+      }
+      switchTab('calendar', false);
       if (typeof switchViewMode === 'function') {
         switchViewMode(mode);
       }
       highlightSubItem(btn);
     }
 
-    function filterChannelSub(channel, btn) {
-      switchTab('calendar');
+    function filterChannelSub(channel, btn, updateRoute = true) {
+      if (updateRoute && typeof PotatoRouter !== 'undefined' && !PotatoRouter.isNavigating) {
+        const chanPathMap = {
+          'facebook': '/lich-dang-bai/facebook',
+          'tiktok': '/lich-dang-bai/tiktok',
+          'seo': '/lich-dang-bai/website'
+        };
+        PotatoRouter.navigateTo(chanPathMap[channel] || '/lich-dang-bai', true);
+        return;
+      }
+      switchTab('calendar', false);
       if (typeof filterChannel === 'function') {
         filterChannel(channel);
       }
@@ -7643,7 +8122,7 @@
       }
     }
 
-    function switchTab(tabId) {
+    function switchTab(tabId, updateRoute = true) {
       // Alias legacy 'about' to 'settings-intro'
       if (tabId === 'about') {
         tabId = 'settings-intro';
@@ -7651,6 +8130,24 @@
       if (tabId === 'settings-course') {
         tabId = 'settings-intro';
         setTimeout(() => switchIntroSubPage('courses'), 0);
+      }
+
+      const tabToRouteMap = {
+        'dashboard': '/',
+        'calendar': '/lich-dang-bai',
+        'reports-marketing': '/bao-cao',
+        'tasks': '/nhiem-vu',
+        'settings-intro': '/cai-dat/gioi-thieu',
+        'settings-content': '/cai-dat/noi-dung',
+        'tools-image': '/cong-cu/hinh-anh',
+        'tools-writer': '/cong-cu/viet-bai',
+        'tools-publisher': '/cong-cu/dang-bai'
+      };
+
+      if (updateRoute && typeof PotatoRouter !== 'undefined' && !PotatoRouter.isNavigating) {
+        const targetRoute = tabToRouteMap[tabId] || '/';
+        PotatoRouter.navigateTo(targetRoute, true);
+        return;
       }
 
       currentTab = tabId;
@@ -7730,7 +8227,7 @@
           subIntro.classList.remove('text-slate-500');
         }
 
-        switchIntroSubPage(activeIntroPageKey || 'general');
+        switchIntroSubPage(activeIntroPageKey || 'general', null, false);
         const mainElem = document.querySelector('main');
         if (mainElem) mainElem.scrollTop = 0;
         return;
@@ -7767,7 +8264,7 @@
           subContent.classList.remove('text-slate-500');
         }
 
-        switchContentSubPage(activeContentPageKey || 'voice');
+        switchContentSubPage(activeContentPageKey || 'voice', null, false);
         const mainElem = document.querySelector('main');
         if (mainElem) mainElem.scrollTop = 0;
         return;
@@ -9512,7 +10009,16 @@
       }
     };
 
-    function switchIntroSubPage(pageKey, btnElem) {
+    function switchIntroSubPage(pageKey, btnElem, updateRoute = true) {
+      if (updateRoute && typeof PotatoRouter !== 'undefined' && !PotatoRouter.isNavigating) {
+        const introMap = {
+          'general': '/cai-dat/gioi-thieu/tong-quan',
+          'contact': '/cai-dat/gioi-thieu/lien-he',
+          'courses': '/cai-dat/gioi-thieu/khoa-hoc'
+        };
+        PotatoRouter.navigateTo(introMap[pageKey] || '/cai-dat/gioi-thieu', true);
+        return;
+      }
       activeIntroPageKey = pageKey;
       const config = INTRO_SUBPAGES[pageKey];
       if (!config) return;
@@ -9541,7 +10047,15 @@
       renderIntroSettings();
     }
 
-    function switchContentSubPage(pageKey, btnElem) {
+    function switchContentSubPage(pageKey, btnElem, updateRoute = true) {
+      if (updateRoute && typeof PotatoRouter !== 'undefined' && !PotatoRouter.isNavigating) {
+        const contentMap = {
+          'voice': '/cai-dat/noi-dung/giong-dieu',
+          'specs': '/cai-dat/noi-dung/quy-chuan'
+        };
+        PotatoRouter.navigateTo(contentMap[pageKey] || '/cai-dat/noi-dung', true);
+        return;
+      }
       activeContentPageKey = pageKey;
       const config = CONTENT_SUBPAGES[pageKey];
       if (!config) return;
@@ -13258,16 +13772,28 @@
       }
     }
 
-    function filterReportContentChannel(channel, btn) {
+    function filterReportContentChannel(channel, btn, updateRoute = true) {
+      if (updateRoute && typeof PotatoRouter !== 'undefined' && !PotatoRouter.isNavigating) {
+        const reportMap = {
+          'facebook': '/bao-cao/facebook',
+          'website': '/bao-cao/website',
+          'tiktok': '/bao-cao/tiktok',
+          'youtube': '/bao-cao/youtube',
+          'all': '/bao-cao/marketing'
+        };
+        PotatoRouter.navigateTo(reportMap[channel] || '/bao-cao', true);
+        return;
+      }
       currentContentChannelFilter = channel;
       const btns = document.querySelectorAll('#report-content-channel-tabs .content-tab-btn');
       btns.forEach(b => {
         b.classList.remove('active', 'bg-white', 'text-potato-navy', 'shadow-xs', 'font-bold');
         b.classList.add('text-slate-600', 'font-semibold');
       });
-      if (btn) {
-        btn.classList.add('active', 'bg-white', 'text-potato-navy', 'shadow-xs', 'font-bold');
-        btn.classList.remove('text-slate-600', 'font-semibold');
+      const activeBtn = btn || (channel === 'all' ? btns[0] : document.querySelector(`#report-content-channel-tabs .content-tab-btn[onclick*="${channel}"]`));
+      if (activeBtn) {
+        activeBtn.classList.add('active', 'bg-white', 'text-potato-navy', 'shadow-xs', 'font-bold');
+        activeBtn.classList.remove('text-slate-600', 'font-semibold');
       }
 
       const data = MARKETING_REPORT_DATA[currentReportTimeframe] || MARKETING_REPORT_DATA.week;
@@ -14631,8 +15157,12 @@
       if (typeof loadTasks === 'function') {
         loadTasks();
       }
-      // Default view is dashboard (Trang chủ • Nhật ký công việc)
-      switchTab('dashboard');
+      // Khởi tạo hệ thống SPA Router & Breadcrumb theo Clean URL
+      if (typeof PotatoRouter !== 'undefined') {
+        PotatoRouter.init();
+      } else {
+        switchTab('dashboard');
+      }
     });
   
 
